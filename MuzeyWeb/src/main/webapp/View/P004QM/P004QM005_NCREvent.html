@@ -1,0 +1,46 @@
+﻿<div class="top_search_bar" style="padding-bottom: 0;" id="searchValidate">
+    <date-input-double caption="创建日期" width="344" datefrom="searchParameter.DateStart" dateto="searchParameter.DateEnd"></date-input-double>
+    <combbox caption="NCR分类" ng-model="searchParameter.NCRType" list="ncrTypeList" width="200"></combbox>
+    <combbox caption="状态" ng-model="searchParameter.Status" list="statusList" width="200"></combbox>
+    <text-box-normal caption="NCR序号" ng-model="searchParameter.NCRNo" width="200"></text-box-normal>
+    <combbox caption="当前组" ng-model="searchParameter.CurrentGroupID" list="currentGroupList" width="200"></combbox>
+    <br />
+    <br />
+    <text-box-normal caption="物料编码" ng-model="searchParameter.MaterialCode" width="350"></text-box-normal>
+    <text-box-normal caption="产品名称" ng-model="searchParameter.AssemblyDesc" width="200"></text-box-normal>
+    <text-box-normal caption="物料序列号" ng-model="searchParameter.MaterialSN" width="200"></text-box-normal>
+    <text-box-normal caption="红签号" ng-model="searchParameter.RedNo" width="200"></text-box-normal>
+    <text-box-normal caption="供应商" ng-model="searchParameter.SupplierEnglish" width="200"></text-box-normal>
+    <br />
+    <br />
+    <text-box-normal caption="操作描述" ng-model="searchParameter.Comments" width="350"></text-box-normal>
+    <text-box-normal caption="库位" ng-model="searchParameter.Location" width="200"></text-box-normal>
+    <combbox caption="缺陷代码" ng-model="searchParameter.ErrorCode" list="errorCodeList" width="200"></combbox>
+    <combbox caption="影响FPY通过率" ng-model="searchParameter.KPIFlag" list="kpiFlagList" width="200"></combbox>
+    <text-box-normal caption="产品序列号" ng-model="searchParameter.ProductSerialNo" width="200"></text-box-normal>
+    <br />
+    <br />
+    <button type="button" class="btn bg-blue float_left" ng-click="onResearch()"><i class="fa fa-search"></i>&nbsp;检索</button>
+    <button type="button" class="btn bg-green float_left" ng-click="clear()" style="margin-left:10px;"><i class="fa fa-trash"></i>&nbsp;清空</button>
+    <br />
+    <div style="clear:both;"></div>
+</div>
+<div>
+    <pagegridview config="config"
+                  list="ncrEventList"
+                  refresh="refresh()"
+                  add="add()"
+                  edit="edit(item)"
+                  fixed="true"
+                  canselect="true"
+                  btnicon4="fa-anchor"
+                  btnclick4="batch()"
+                  btnicon2="fa-files-o"
+                  btnclick2="copy()"
+                  btnicon5="fa-file-excel-o"
+                  btnclick5="export()"
+                  pagechange="onPageChange(val)"
+                  rowcount="{{size}}"
+                  totalrowcount="totalCount"
+                  ng-disabled="false"></pagegridview>
+</div>

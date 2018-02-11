@@ -1,0 +1,28 @@
+﻿<div class="navbar-custom-menu userMenu">
+    <ul class="nav navbar-nav">
+        <!-- User Account: style can be found in dropdown.less -->
+        <li class="dropdown user user-menu open">
+            <!--<a class="dropdown-toggle" data-toggle="dropdown">-->
+            <a class="dropdown-toggle user-menu-opened user_menu_opened" ng-click="showUserMenu()" ng-class="{'user-menu-opened':isShowUserMenu}">
+                <span class="user_menu_opened user-image"><i class="fa fa-user-circle-o fa-2x"></i><span class="label label-danger user_menu_opened" ng-if="false">{{userInfo.messageCount}}</span></span>
+                <span class="hidden-xs user_menu_opened">{{userInfo.userName}}</span>
+            </a>
+            <ul class="dropdown-menu" id="dropdown_menu" ng-if="userInfo.isLogin" ng-show="isShowUserMenu">
+                <!-- User image -->
+                <li class="user-header user-menu-opened" ng-click="goUserRegister()" style="cursor: pointer">
+                    <img src="Resource/Image/System/user_96px.png" class="img-circle" alt="User Image">
+                    <p>{{userInfo.userName}}</p>
+                </li>
+                <!-- Menu Body -->
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                    <div class="pull-left">
+                    </div>
+                    <div class="pull-right">
+                        <button class="btn btn-default btn-flat" ng-click="logout()"><i class="fa fa-sign-out fa-1x"></i>注销</button>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

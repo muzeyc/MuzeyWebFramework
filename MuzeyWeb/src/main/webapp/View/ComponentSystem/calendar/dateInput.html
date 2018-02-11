@@ -1,0 +1,14 @@
+﻿<div class="control_container" style="width: {{width}}px">
+    <div class="dateInputFrame">
+        <div class="input-group">
+            <span class="input-group-addon" ng-class="{mustInputCaption:mustinput}" ng-if="caption&&caption.length>0">{{caption}}</span>
+            <input ng-disabled="ngDisabled" type="text" class="dateInputAction hxInput form-control value" ng-class="{required:mustinput}">
+            <div class="dateInputCalCon" tabindex="-1" ng-blur="onBlur()">
+                <img class="dateInputImg" ng-click="toggleCal()" src="../../../Resource/Image/System/news_dateinput.png" alt="">
+                <div class="dateInputCal">
+                    <calendar-single show="show" on-select-month="selectMonth(month)" on-select-day="selectDay(day)" month-only="monthOnly" from-now="fromNow" value-change="changeValue()"></calendar-single>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

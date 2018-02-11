@@ -1,0 +1,8 @@
+﻿<div class="pager-col">
+    <span class="pager-func-btn" ng-click="pageChange(1)"><i class="fa fa-angle-double-left fa-1x"></i></span>
+    <span class="pager-func-btn" ng-click="pageChange(currentPage)"><i class="fa fa-angle-left fa-1x"></i></span>
+    <span class="paper-btn" ng-class="{'pager-btn-selected':currentPage==pageNo-1}" ng-repeat="pageNo in pageList" ng-click="pageChange(pageNo)">{{pageNo}}</span>
+    <span class="pager-func-btn" ng-click="pageChange(currentPage+2)"><i class="fa fa-angle-right fa-1x"></i></span>
+    <span class="pager-func-btn" ng-click="pageChange(totalpagecount)"><i class="fa fa-angle-double-right fa-1x"></i></span>
+    <label>共{{totalpagecount}}页</label>
+</div>

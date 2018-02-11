@@ -1,0 +1,14 @@
+﻿<div class="top_search_bar" id="selvalidate">
+    <combbox caption="产线" ng-model="condition.productLine" list="productLineList" width="300"></combbox>
+    <text-box-normal caption="产品号" width="200" ng-model="condition.assemblyItem"></text-box-normal>
+    <text-box-normal caption="产品名称" width="200" ng-model="condition.assemblyDesc"></text-box-normal>
+    <button type="button" ng-click="onResearch()" class="btn bg-green" style="margin-right:10px">查询</button> 
+    <file-upload-button caption="导入" url="uploadUrl" beforeload="beforeLoad()" style="margin-right:10px"></file-upload-button>
+    <button type="button" class="btn bg-maroon" style="margin-right:10px" ng-click="export()"><i class="fa fa-cloud-download"></i>导出</button>
+    <button type="button" class="btn bg-maroon" style="margin-right:10px" ng-click="downTemplateFile()"><i class="fa fa-cloud-download"></i>下载模板</button>
+</div>
+<div>
+    <pagegridview config="config" list="assemblyList" refresh="refresh()" edit="edit(item)" add="add()" pagechange="onPageChange(val)"
+                  remove="onDelete(items)"rowcount="{{more.size}}" totalrowcount="totalCount"></pagegridview>
+</div>
+<assembly-edit after-commit="afterCommit(res)"></assembly-edit>

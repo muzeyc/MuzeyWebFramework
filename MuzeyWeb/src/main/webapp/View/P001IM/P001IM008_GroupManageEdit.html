@@ -1,0 +1,18 @@
+﻿<popup width="600" height="500" title="操作组编辑" show="show">
+    <div class="modal-body" id="selvalidate">      
+        <div class="inputBar">
+            <text-box-normal caption="操作组名称" ng-model="opk.GroupName" width="300" mustinput="true" maxlength="20"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <combbox caption="上一级操作组" ng-model="opk.ParentID" list="groupList" width="300" ></combbox>
+        </div>        
+        <div class="inputBar">
+            <text-box-normal caption="备注" ng-model="opk.Remark" width="300" ></text-box-normal>
+        </div>       
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>
+

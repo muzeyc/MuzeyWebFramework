@@ -1,0 +1,9 @@
+﻿<section class="content-header">
+    <div class="openedPageList">
+        <ul>
+            <li class="active_page">首页</li>
+            <li ng-repeat="subMenu in openedPageList" ng-class="{'active_page': subMenu.opened}"><i class="fa {{subMenu.IconName}}"></i>&nbsp;{{subMenu.MenuTitle}}</li>
+        </ul>
+    </div>
+    <div style="clear: both;"></div>
+</section>

@@ -1,0 +1,60 @@
+﻿<div style="min-height: 1000px;">
+    <div>
+        <date-input caption="日期控件" width="200" ng-model="dateModel"></date-input>
+        <div style="clear: both"></div>
+    </div>
+    <br />
+    <div>
+        <text-box-normal caption="普通文本框" width="200" placeholder="普通文本框" ng-model="textboxModel" onchange="onchange(val)"></text-box-normal>
+        <text-box-normal caption="普通文本框" width="260" placeholder="普通文本框-必须输入" mustinput="true" ng-model="textboxModel"></text-box-normal>
+        <text-box-normal caption="普通文本框" width="260" placeholder="普通文本框-只读" disabled="true" ng-model="textboxModel"></text-box-normal>
+        <div style="clear: both"></div>
+    </div>
+    <br />
+    <div>
+        <text-box-date caption="日期文本框" width="200" placeholder="日期文本框" ng-model="textboxModel"></text-box-date>
+        <div style="clear: both"></div>
+    </div>
+    <br />
+    <div>
+        <text-box-number caption="数字文本框" width="200" placeholder="数字文本框" ng-model="textboxModel"></text-box-number>
+        <div style="clear: both"></div>
+    </div>
+    <br />
+    <div>
+        <radio-btn-list caption="单选按钮" width="400" ng-model="radioModel" itemlist="itemlist"></radio-btn-list>
+        <div style="clear: both"></div>
+    </div>
+    <br />
+    <div>
+        <control-container width="400" caption="复选按钮">
+            <check-box ng-model="checkBoxModel1" checkedvalue="1" name="选项1"></check-box>
+            <check-box ng-model="checkBoxModel2" checkedvalue="2" name="选项2"></check-box>
+            <check-box ng-model="checkBoxModel3" checkedvalue="3" name="选项3"></check-box>
+        </control-container>
+        <div style="clear: both"></div>
+    </div>
+    <br />
+    <div>
+        <search-combbox caption="查询下拉" width="400" list="searchCombboxList" input-change="searchCombboxInputChange(value)" on-change="searchCombboxChange(item)"></search-combbox>
+        <div style="clear: both"></div>
+    </div>
+    <br />
+    <div id="validate">
+        <text-box-normal caption="普通文本框" width="260" placeholder="普通文本框-必须输入" mustinput="true" ng-model="textboxModel"></text-box-normal>
+        <text-box-normal caption="普通文本框" width="200" placeholder="普通文本框" ng-model="textboxModel"></text-box-normal>
+        <date-input caption="日期控件" width="200" mustinput="true" ng-model="dateModel"></date-input>
+        <date-input caption="日期控件" width="200" mustinput="true" monthonly="true"></date-input>
+        <radio-btn-list caption="单选按钮1" width="400" mustinput="true" ng-model="validateRadioModel" itemlist="itemlist1"></radio-btn-list>
+        <br />
+        <search-combbox caption="查询下拉" width="400" list="searchCombboxList" mustinput="true"></search-combbox>
+        <text-box-number caption="数字文本框" width="200" mustinput="true" placeholder="数字文本框" ng-model="textboxModel"></text-box-number>
+        <button class="btn bg-blue" ng-click="validateClick()">测试</button>
+        <div style="clear: both"></div>
+    </div>
+    <br/>
+    <div>
+        <attachment list="attachList"></attachment>
+        <div style="clear: both"></div>
+    </div>
+</div>

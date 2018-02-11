@@ -1,0 +1,476 @@
+﻿/*
+作者：张明铭
+版本：2.0
+版本日期：2017-7-31
+声明：该框架的使用权归作者个人所有，未经作者允许不得用于任何商业用途。
+*/
+.radioBtn, .checkBox {
+    display:inline-block;
+    height: 100%;
+    margin-right: 10px;
+    cursor: pointer;
+    line-height: 32px;
+}
+
+.radioBtnIcon {
+    float:left;
+    display:inline-block;
+    width: 22px;
+    height: 100%;
+    /*background: url("../../../Resource/Image/System/green.png") no-repeat -132px 0px;*/
+    margin-right: 5px;
+}
+
+.radioBtn .fa,.checkBox .fa  {
+    /*color: #1C86EE !important;*/
+    font-size: 18px !important;
+}
+.radioBtnIconSelected {
+    /*background: url("../../../Resource/Image/System/green.png") no-repeat -110px 0px;*/
+}
+
+.radioItemName, .checkBoxName {
+    display:inline-block;
+    height: 100%;
+    float:left;
+    /*line-height: 20px;*/
+    margin-right: 20px;
+}
+
+/*.checkBoxIcon {
+    float:left;
+    display:inline-block;
+    width: 22px;
+    height: 22px;
+    background: url("../../../Resource/Image/System/green.png") no-repeat -44px 0px;
+    margin-right: 5px;
+}
+
+.checkBoxIconSelected {
+    background: url("../../../Resource/Image/System/green.png") no-repeat -22px 0px;
+}*/
+
+.required_noinput {
+    background-color: #f0caca;
+}
+
+/*searchCombbox*/
+.searchCombbox .displayBar {
+    cursor: pointer;
+    border-bottom-right-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+    width: 100%;
+}
+
+.searchCombbox .listBar {
+    max-height: 300px;
+    background: #FFFFFF;
+    border: 1px solid #d2d6de;
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    overflow-y:auto;
+    border-bottom-right-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
+
+.searchCombbox .inputBar {
+    text-align: center;
+    padding: 10px;
+    height: 50px !important;
+    margin-bottom: 10px;
+}
+
+.searchCombbox .listBar li {
+    height: 30px;
+    cursor: pointer;
+}
+
+.searchCombbox .listBar li span {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    line-height: 25px;
+    text-align: left;
+    padding: 3px 0 3px 10px;
+}
+
+.searchCombbox .listBar li:hover {
+    background-color:#3c8dbc;
+    color: #FFFFFF;
+}
+
+.searchCombbox .txtFilter {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.searchCombbox .selected {
+    background-color:#d2d6de;
+    color: #FFFFFF;
+}
+
+.searchCombbox .selected:hover {
+    background-color:#d2d6de !important;
+    color: #FFFFFF;
+}
+
+.searchCombbox .btnClear {
+    float: right;
+}
+/*searchCombbox*/
+
+/*attachment*/
+
+.attachment_border {
+    background: #ffffff;
+}
+
+.attachment_border .btn_file_add {
+    height: 120px;
+    width: 120px;
+    border: 1px dashed #d2d6de;
+    background: url("../../../Resource/Image/System/new_contact.png") no-repeat center center;
+    float: left;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.attachment_border .btn_file_add:hover {
+    border: 1px dashed #3bc0c3;
+    background: url("../../../Resource/Image/System/new_contact_pressed.png") no-repeat center center;
+}
+
+.attachment_border .file_card {
+    float: left;
+    margin: 5px;
+    height: 120px;
+    width: 120px;
+    border: 1px solid #d2d6de;
+    background: url("../../../Resource/Image/System/icon_attachment.fw.png") no-repeat center center #f6f8f8;
+    cursor: pointer;
+    position: relative;
+}
+
+.attachment_border .file_card .btn_remove {
+    display: none;
+}
+.attachment_border .file_card .attach_info {
+    height: 48px;
+    padding: 0 5px;
+    line-height: 16px;
+    font-size: 12px;
+    word-break: break-all;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+    white-space: normal;
+    position: absolute;
+    transition: top 500ms;
+    -webkit-transition: top 500ms;
+    -moz-transition: top 500ms;
+    -o-transition:top 500ms;
+    top: 65px;
+}
+
+.attachment_border .file_card .attach_info .filename {
+    height: 100%;
+    overflow: hidden;
+    margin: 0 !important;
+
+}
+
+.attachment_border .file_card:hover {
+    height: 120px;
+    width: 120px;
+    border: 1px solid rgba(59, 192, 195, 0.8);
+    background-color: rgba(59, 192, 195, 0.8);
+}
+
+.attachment_border .file_card:hover .btn_remove {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background: #f475a6;
+    color: #ffffff;
+    text-align: center;
+    line-height: 15px;
+}
+
+.attachment_border .file_card:hover .attach_info {
+    top: 40px;
+}
+
+.attachment_border .file_card:hover .attach_info .filename {
+    color: #ffffff;
+}
+/*attachment*/
+
+/*pager*/
+
+.pager-col {
+    float: left;
+    text-align: left;
+    padding-left: 10px;
+    margin-top: 15px;
+}
+
+.pager-col span {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+    float: left;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+.pager-col label {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    float: left;
+    margin: 0 2px;
+    font-weight: normal;
+}
+
+.pager-func-btn {
+    background: #1C86EE;
+    color: #fff;
+}
+
+.pager-func-btn:hover {
+    background: #1E90FF;
+}
+
+.paper-btn {
+    border: 1px solid #1C86EE;
+    background: #fff;
+}
+
+.pager-btn-selected {
+    border: 1px solid #3CB371;
+    background: #3CB371;
+    color: #fff;
+}
+
+.paper-btn:hover {
+    background: #E0FFFF;
+    color: #333;
+}
+
+.pager-btn-selected:hover {
+    border: 1px solid #3CB371;
+    background: #3CB371;
+    color: #fff;
+}
+
+
+
+/*pager*/
+
+/*gridview*/
+.gridview .checkBoxName {
+    margin-right: 0;
+}
+
+.gridview th {
+    height: 30px !important;
+    background: #3b3b3b;
+    color: #fff;
+}
+
+.gridview td {
+    height: 35px !important;
+    padding: 0px 5px !important;
+}
+
+.load-more {
+    display: inline-block;
+    height: 35px;
+    line-height: 35px;
+    cursor: pointer;
+    color: #999;
+}
+
+.fixed-table {
+    table-layout: fixed !important;
+}
+/*gridview*/
+
+
+/*dateInputDouble*/
+.dateInputDouble table {
+    width: 100%;
+}
+
+.dateInputDouble .control_container {
+    margin: 0;
+}
+
+.dateInputDouble .marker {
+    text-align: center;
+    padding: 0 10px;
+}
+
+/*icon-scan*/
+.icon-scan {
+    display: inline-block;
+    height: 45px;
+    width: 45px;
+    line-height: 62px;
+    color: #ccc;
+    padding: 0;
+}
+
+/*camera-view*/
+.camera-view {
+    display: inline-block;
+    width: 180px; 
+    height: 180px; 
+    color: #999;
+    text-align: center;
+}
+
+.camera-button {
+    display: inline-block;
+    width: 180px; 
+    height: 180px; 
+    line-height: 200px;
+    background: #ccc;
+}
+
+.camera-button:hover {
+    background: #ccb;
+}
+
+.camera-view img {
+    width: 180px; 
+    height: 180px; 
+}
+
+/*textBoxScan*/
+.textBoxScanBorder {
+    background: #fff; 
+    width: 100%; 
+    display: inline-block; 
+    vertical-align: middle;
+    height: 50px;
+    padding: 3px;
+}
+
+.textBoxScanBorder input{
+    height: 100%; 
+    border: 0;
+    width: 80px;
+    float: left;
+    padding-left: 3px;
+}
+
+.scanBox {
+    display: inline-block;
+    float: right;
+    height: 100%;
+    width: 50px;
+    line-height: 63px;
+    color: #999;
+    border: 1px solid #999;
+    text-align: center;
+    background: #ccc;
+}
+
+.scanBox:hover {
+    background-color: #ccb;
+}
+
+/*pictureList*/
+
+.attachment_border .picture_card {
+    float: left;
+    margin: 5px;
+    height: 120px;
+    width: 120px;
+    border: 1px solid #d2d6de;
+    cursor: pointer;
+    position: relative;
+}
+
+.attachment_border .picture_card img{
+    height: 120px;
+    width: 120px;
+    border: 1px solid #d2d6de;
+}
+
+.attachment_border .picture_card .btn_remove {
+    display: none;
+}
+
+.attachment_border .picture_card:hover .btn_remove {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background: #f475a6;
+    color: #ffffff;
+    text-align: center;
+    line-height: 15px;
+}
+/*pictureList*/
+
+/*textArea*/
+.textArea {
+    width: 100%;
+}
+
+.textArea textarea{
+    width: 100%;
+}
+.textArea-caption {
+    height: 28px;
+    line-height: 28px;
+}
+
+.textArea .mustInputCaption {
+    padding-left: 12px;
+}
+/*textArea*/
+
+
+/*pdfvView*/
+
+.pdf-view .bg {
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+}
+
+.close-button-big {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    color: #fff;
+    font-size: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #EE5C42;
+    z-index:100;
+    text-align: center;
+}
+.close-button-big:hover {
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.8;
+    -khtml-opacity:  0.8;
+    opacity:  0.8;
+}
+/*pdfvView*/

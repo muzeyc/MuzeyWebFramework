@@ -1,0 +1,62 @@
+﻿<style>
+    .skill {
+        border-top: 0;
+        background: #fff;
+        table-layout: fixed;
+        width: 100%;
+    }
+
+        .skill th {
+            height: 30px;
+            border: 1px solid #3b3b3b;
+            background: #3b3b3b;
+            color: #fff;
+            text-align: center;
+            border-top: 2px solid #3b3b3b;
+        }
+
+        .skill td {
+            border: 1px solid #3b3b3b;
+            border-top: 0;
+            font-size: 10px;
+            text-align: center;
+            line-height: 15px;
+            padding: 5px;
+        }
+
+        .skill .warning {
+            background: #EE3A8C !important;
+            color: #fff !important;
+        }
+</style>
+<div class="top_search_bar" id="validate">
+    <text-box-normal caption="SSO编号" ng-model="searchParameters.sso" width="200"></text-box-normal>
+    <text-box-normal caption="员工姓名" ng-model="searchParameters.name" width="200"></text-box-normal>
+    <button type="button" class="btn bg-blue" ng-click="search()"><i class="fa fa-search"></i>&nbsp;检索</button>
+    <button type="button" class="btn bg-maroon" style="margin-right:10px" ng-click="export()"><i class="fa fa-cloud-download"></i>&nbsp;导出</button>
+    <div style="clear:both;"></div>
+</div>
+<div ng-if="list && list.length>0" style="overflow-x: auto">
+    <table class="skill">
+        <thead>
+            <tr>
+                <th style="width: 40px;">序号</th>
+                <th style="width: 80px;">SSO</th>
+                <th style="width: 80px;">员工</th>
+                <th style="width: 130px;" ng-repeat="op in opList track by $index">{{op}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="data in list" ng-class="{'select-row': selectedIndex == mainIndex}"
+                ng-init="mainIndex=$index">
+                <td style="background-color: #96CDCD;">{{mainIndex + 1}}</td>
+                <td style="background-color: #96CDCD;">{{data.SSO}}</td>
+                <td style="background-color: #96CDCD;">{{data.UserName}}</td>
+                <td ng-repeat="skill in data.skillList track by $index" ng-class="{'warning':skill&&skill.Day>90}">
+                    <span ng-if="skill">{{skill.Point}}分<br />离岗时间：{{skill.Day}}天</span>
+                    <span ng-if="!skill">--</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

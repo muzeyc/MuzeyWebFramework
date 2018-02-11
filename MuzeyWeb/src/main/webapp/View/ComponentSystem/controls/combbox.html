@@ -1,0 +1,9 @@
+﻿<div class="control_container" style="width: {{width}}px">
+    <div class="input-group">
+        <span class="input-group-addon" ng-class="{mustInputCaption:mustinput}">{{caption}}</span>
+        <select class="form-control value" ng-model="ngModel" 
+                ng-class="{required:mustinput}" ng-change="selectChange()" ng-disabled="ngDisabled">
+            <option value="{{obj.subId}}" ng-repeat="obj in list">{{obj.name}}</option>
+        </select>
+    </div>
+</div>

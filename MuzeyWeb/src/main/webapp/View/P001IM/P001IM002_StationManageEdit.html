@@ -1,0 +1,25 @@
+﻿<popup width="500" height="500" title="岗位编辑" show="show">
+    <div class="modal-body" id="validateStation">
+        <div class="inputBar">
+            <combbox caption="产线" ng-model="station.ProductLine" list="productLineList" mustinput="true" ng-disabled="true"></combbox>
+        </div>
+        <div class="inputBar">
+            <text-box-number caption="岗位编号" ng-model="station.StationCode" mustinput="true"></text-box-number>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="岗位名称" ng-model="station.StationName" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <combbox caption="岗位类型" ng-model="station.StationType" list="stationTypeList" mustinput="true"></combbox>
+        </div>
+        <div class="inputBar">
+            <!--岗位描述<br />
+            <textarea ng-model="station.StationDesc" rows="5" style="width:100%"></textarea>-->
+            <text-area caption="岗位描述" ng-model="station.StationDesc" rows="5"></text-area>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

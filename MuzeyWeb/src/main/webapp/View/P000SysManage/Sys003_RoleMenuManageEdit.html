@@ -1,0 +1,43 @@
+﻿<popup width="1000" height="600" title="角色菜单权限管理" show="show">
+    <div class="modal-body">
+        <div class="list_bar" style="float: left; width: 430px; height: 100%; overflow-y: auto;">
+            <table class="table table-striped table-hover table-condensed" style="margin-bottom: 0;">
+                <thead>
+                    <tr>
+                        <th class="bg-blue">未启用菜单</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="menu in roleForbidMenuList | orderBy:['ParentId','SeqNo']">
+                        <td><check-box ng-model="menu.selected" checkedvalue="1" uncheckedvalue="0"></check-box>{{menu.MenuTitle}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="float: left; height: 100%; width: 110px; text-align: center; padding-top: 150px;">
+            <button type="button" class="btn bg-green" ng-click="toRightAll()">>></button><br /><br />
+            <button type="button" class="btn bg-green" ng-click="toRight()" style="width: 44px;">></button><br /><br />
+            <button type="button" class="btn bg-green" ng-click="toLeft()" style="width: 44px;"><</button><br /><br />
+            <button type="button" class="btn bg-green" ng-click="toLeftAll()"><<</button>
+        </div>
+        <div class="list_bar" style="float: right; width: 430px; height: 100%; overflow-y: auto;">
+            <table class="table table-striped table-hover table-condensed" style="margin-bottom: 0;">
+                <thead>
+                    <tr>
+                        <th class="bg-blue">已启用菜单</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="menu in roleMenuList | orderBy:['ParentId','SeqNo']">
+                        <td><check-box ng-model="menu.selected" checkedvalue="1" uncheckedvalue="0"></check-box>{{menu.MenuTitle}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

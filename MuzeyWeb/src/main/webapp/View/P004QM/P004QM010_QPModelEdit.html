@@ -1,0 +1,37 @@
+﻿<popup width="700" height="530" title="QP新增/编辑" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <combbox caption="产品名称" ng-model="qp.AssemblyItem" list="assemblyList" width="300" mustinput="true"></combbox>
+            <text-box-normal caption="模板名称" ng-model="qp.ModelName" maxlength="50" width="300" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="图号&版本" ng-model="qp.PN_REV" maxlength="50" width="300" mustinput="true"></text-box-normal>
+            <text-box-normal caption="零件号&版本" ng-model="qp.DrawingNo_REV" maxlength="50" width="300" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="毛坯号&版本" ng-model="qp.RMN_REV" maxlength="50" width="300" mustinput="true"></text-box-normal>
+            <combbox caption="流水号类型" ng-model="qp.QPSNType" list="qpntypeList" width="300" mustinput="true"></combbox>
+        </div>
+        <div class="inputBar">
+            <combbox caption="状态" ng-model="qp.Status" list="statusList" width="300" mustinput="true"></combbox>
+            <text-box-number caption="PO号" ng-model="qp.POTop4" width="300"></text-box-number>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="RoutingSheet模板" ng-model="qp.AttachmentID" maxlength="255" width="620"></text-box-normal><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            请确保文件服务器上已上传带钢印图片的Excel文件（按RoutingSheet格式）。此处仅输入文件服务器上的模板名称即可。
+
+        </div>
+        <div class="inputBar">
+            描述<br />
+            <text-area id="textarea" ng-model="qp.Description" maxlength="255" rows="3" style="width:93%"></text-area>
+        </div>
+        <div class="inputBar">
+            备注<br />
+            <text-area id="textarea" ng-model="qp.Remark" maxlength="255" rows="3" style="width:93%"></text-area>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

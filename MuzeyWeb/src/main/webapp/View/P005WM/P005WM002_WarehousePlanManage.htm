@@ -1,0 +1,10 @@
+﻿<div class="top_search_bar">
+    <button type="button" class="btn bg-blue" ng-click="onImport()"><i class="fa fa-cloud-upload"></i>&nbsp;导入计划</button>
+</div>
+<div>
+    <pagegridview config="config" list="list" add="add()" edit="edit(item)"
+                  refresh="refresh()"
+                  pagechange="onPageMain(val)" rowcount="{{more.size}}" totalrowcount="totalrowcount"></pagegridview>
+</div>
+<warehouse-plan-edit></warehouse-plan-edit>
+<file-upload show="showImport" attachlist="attachList" import="import()" cancel="cancelImport()"></file-upload>

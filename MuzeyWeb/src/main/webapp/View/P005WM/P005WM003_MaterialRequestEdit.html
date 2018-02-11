@@ -1,0 +1,40 @@
+﻿<popup width="700" height="485" title="领料单" show="show">
+   
+        <div class="modal-body" id="validate">
+            <div class="inputBar">
+                <text-box-normal caption="产品名称" ng-model="obj.AssemblyDesc" width="250" ng-disabled="true"></text-box-normal>
+            </div>
+            <div class="inputBar">
+                <text-box-normal caption="工单" ng-model="obj.JobNo" width="250" ng-disabled="true"></text-box-normal>
+                <text-box-normal caption="加工序列号" ng-model="obj.SerialNo" width="250" ng-disabled="true"></text-box-normal>
+            </div>
+            <div class="inputBar">
+                <text-box-normal caption="工序" ng-model="obj.OpNo" width="250" ng-disabled="true"></text-box-normal>
+            </div>
+            <div class="inputBar">
+                <text-box-normal caption="物料名称" ng-model="obj.MaterialName" width="250" ng-disabled="true"></text-box-normal>
+                <text-box-normal caption="数量" ng-model="obj.Count" width="250" ng-disabled="true"></text-box-normal>
+            </div>
+            <div class="inputBar">               
+                <text-box-normal caption="实际领料" ng-model="obj.ActualCount" width="250"></text-box-normal>
+            </div>
+            <div class="inputBar" style="margin-bottom: 0;">
+                <span>备注</span>
+                <br />
+                <textarea style="height: 60px; width: 100%;" ng-model="obj.Comment" ng-disabled="obj.DeleteFlag"></textarea>
+            </div>
+            <div class="inputBar" style="margin-bottom: 0;">
+                <!--<control-container width="150" caption="已处理">
+                    <check-box ng-model="obj.Status" checkedvalue="1" uncheckedvalue="0"></check-box>
+                </control-container>-->
+                <combbox caption="处理状态" ng-model="obj.Status" list="statusList" width="150"></combbox>
+            </div>
+        </div>
+       
+        
+    
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

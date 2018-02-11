@@ -1,0 +1,52 @@
+﻿<div class="top_search_bar" id="validate">
+    <date-input-double caption="时间范围" datefrom="searchParameters.dateFrom" dateto="searchParameters.dateTo"></date-input-double>   
+    <combbox caption="Andon类型" ng-model="searchParameters.AndonType" width="300" list="andonTypeList"></combbox>    
+    <button type="button" class="btn bg-blue" ng-click="search()"><i class="fa fa-search"></i>&nbsp;检索</button>
+    <button type="button" class="btn bg-maroon" style="margin-right:10px" ng-click="export()"><i class="fa fa-cloud-download"></i>&nbsp;导出</button>
+    <div style="clear:both;"></div>
+</div>
+<div ng-if="list && list.length>0">
+    <div class="box box-primary">
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+            <!--<div class="mailbox-controls">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm" ng-click="export()"><i class="fa fa-file-excel-o"></i></button>
+                </div>
+            </div>-->
+            <div class="table-responsive mailbox-messages">
+                <table class="table table-hover table-striped gridview" style="table-layout: fixed;">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px">序号</th>
+                            <th style="width: 100px">Andon故障类型</th>
+                            <th style="width: 100px">故障数量</th>
+                            <th style="width: 100px">故障持续时长</th>                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in list" ng-class="{'select-row': selectedIndex == mainIndex}" ng-init="mainIndex=$index">
+                            <td>{{mainIndex + 1}}</td>
+                            <td>{{item.Type}}</td>
+                            <td>{{item.Count}}</td>
+                            <td>{{item.Use_time}}</td>                           
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--<div class="box-footer no-padding">
+            <div class="mailbox-controls">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm" ng-click="exportExcel()"><i class="fa fa-file-excel-o"></i></button>
+                    <button type="button" class="btn btn-default btn-sm" ng-click="search()"><i class="fa fa-refresh"></i></button>
+                </div>
+                <div class="pull-right">
+                    <div class="load-more text-center" ng-click="onPageChange(val)" ng-disabled="!hasMore">
+                        {{hasMoreDisp}}&nbsp;[{{currentPage + 1}}/{{totalpagecount}}]
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+</div>

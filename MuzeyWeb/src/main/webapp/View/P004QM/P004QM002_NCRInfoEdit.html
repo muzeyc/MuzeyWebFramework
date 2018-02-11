@@ -1,0 +1,28 @@
+﻿<popup width="600" height="500" title="新增/编辑" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <combbox caption="NCR分类" ng-model="ncr.NCRType" list="ncrTypeList" width="300" mustinput="true"></combbox>
+        </div>
+        <div class="inputBar">
+            <combbox caption="操作属性" ng-model="ncr.ActionAttribute" list="actionAttributeList" width="300" mustinput="true" ></combbox>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="操作流名称" maxlength="30" ng-model="ncr.Name" width="300" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <combbox caption="操作是否需要输入数量" ng-model="ncr.ValueFlag" list="valueflagList" width="300" mustinput="true">
+            </combbox>
+        </div>
+        <div class="inputBar">
+            <combbox caption="选择操作组" ng-model="ncr.GroupID" list="groupList" width="300"></combbox>
+        </div>       
+        <div class="inputBar">
+            备注<br />
+            <text-area id="textarea" ng-model="ncr.Remark" rows="3" style="width:100%"></text-area>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

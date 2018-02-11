@@ -1,0 +1,10 @@
+﻿<div class="top_search_bar" id="validate">
+    <date-input-double caption="时间区间" datefrom="condition.dateFrom" dateto="condition.dateTo" width="350"></date-input-double>
+    <button type="button" class="btn bg-blue" ng-click="search()"><i class="fa fa-search"></i>&nbsp;检索</button>
+    <div style="clear:both;"></div>
+</div>
+<div ng-if="model.dataList&&model.dataList.length>0">
+    <div style="width: 100%; padding-right: 5px; float: left;">
+        <stackedchart height="600" ng-model="model"></stackedchart>
+    </div>   
+</div>

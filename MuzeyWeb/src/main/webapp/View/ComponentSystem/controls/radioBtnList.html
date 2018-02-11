@@ -1,0 +1,12 @@
+﻿<div class="control_container" style="width: {{width}}px">
+    <div class="input-group">
+        <span class="input-group-addon" ng-class="{mustInputCaption:mustinput}" ng-if="caption&&caption.length>0">{{caption}}</span>
+        <span class="form-control">
+            <span class="radioBtn" ng-repeat="item in itemlist track by $index" ng-click="itemClick(item, $index)">
+                <i class="fa fa-2x" ng-class="{'fa-dot-circle-o': item.selected, 'fa-circle-o':!item.selected}"></i>
+                &nbsp;{{item.name}}
+            </span>
+            <input class="value" ng-class="{required:mustinput}" type="hidden" value="{{ngModel}}" placeholder="{{placeholder}}" />
+        </span>
+    </div>
+</div>

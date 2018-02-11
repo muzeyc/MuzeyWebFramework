@@ -1,0 +1,54 @@
+﻿<div>
+    <div ng-if="$ctrl.showDay">
+        <div class="hxCalTitle">
+            <div class="toleft" ng-click="$ctrl.toleft()">
+            </div>
+            <div class="cur" ng-click="$ctrl.changeMonth()">{{$ctrl.cur.getFullYear()}}-{{$ctrl.cur.getMonth()+1}}</div>
+            <div class="toright" ng-click="$ctrl.toright()">
+            </div>
+        </div>
+        <div class="hxCalBody">
+            <div class="hxCalCell">日</div>
+            <div class="hxCalCell">一</div>
+            <div class="hxCalCell">二</div>
+            <div class="hxCalCell">三</div>
+            <div class="hxCalCell">四</div>
+            <div class="hxCalCell">五</div>
+            <div class="hxCalCell">六</div>
+            <div ng-repeat="day in $ctrl.days" class="hxCalCell " ng-click="$ctrl.selectDay(day)" ng-class="{'activeDay':$ctrl.isEqual($ctrl.now,day,'day'),'lessDay':day.lessDay}">
+                {{day.getDate()}}
+                <!--<div style="clear: both"></div>-->
+            </div>
+        </div>
+    </div>
+    <div ng-if="$ctrl.showMonth">
+        <div class="hxCalTitle">
+            <div class="toleft" ng-click="$ctrl.toYearLeft()">
+            </div>
+            <div class="cur" ng-click="$ctrl.changeYear()">{{$ctrl.cur.getFullYear()}}</div>
+            <div class="toright" ng-click="$ctrl.toYearRight()">
+            </div>
+        </div>
+        <div class="wyMonth">
+            <div ng-repeat="month in $ctrl.months" class="monthStyle" ng-click="$ctrl.selectMonth(month.code)"
+                 ng-class="{'activeDay':$ctrl.isEqual($ctrl.now,month.code,'month')}">
+                {{month.name}}
+            </div>
+        </div>
+    </div>
+    <div ng-if="$ctrl.showYear">
+        <div class="hxCalTitle">
+            <div class="toleft" ng-click="$ctrl.toYearReduce()">
+            </div>
+            <div class="cur" ng-click="$ctrl.changeDay()">{{$ctrl.yearFirst}}-{{$ctrl.yearFirst+9}}</div>
+            <div class="toright" ng-click="$ctrl.toYearAdd()">
+            </div>
+        </div>
+        <div class="wyMonth">
+            <div ng-repeat="year in $ctrl.years" class="monthStyle" ng-click="$ctrl.selectYear(year)"
+                 ng-class="{hxTip:day.getMonth()!=$ctrl.cur.getMonth(),'activeDay':$ctrl.isEqual($ctrl.now,year,'year'),selectedDay:$ctrl.isEqual($ctrl.now,year,'year')}">
+                {{year}}
+            </div>
+        </div>
+    </div>
+</div>

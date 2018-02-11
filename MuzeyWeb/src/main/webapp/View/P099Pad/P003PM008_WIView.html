@@ -1,0 +1,18 @@
+﻿<link href="/Resource/Css/Page/P099Pad/P003PM003_StationSelect.css" rel="stylesheet" />
+<div class="station-list" style="width: 100%; padding: 10px; text-align: center;">
+    <div class="small-box bg-blue wi-item"
+         ng-repeat="wi in wiList" ng-click="wiSelect(wi)">
+        <div class="inner">
+            <h3>{{wi.AssemblyDesc}}</h3>
+            <p>{{wi.WIName}}</p>
+        </div>
+        <div class="icon">
+            <i class="fa fa-file-pdf-o"></i>
+        </div>
+        <a class="small-box-footer">
+            点击进查看WI <i class="fa fa-arrow-circle-right"></i>
+        </a>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+<pdfview></pdfview>

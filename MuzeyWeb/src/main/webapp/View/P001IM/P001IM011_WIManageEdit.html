@@ -1,0 +1,23 @@
+﻿<popup width="700" height="500" title="WI编辑" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <assembly ng-model="wi.AssemblyItem" mustinput="true" after-select="onAssemblyChange(item)" productline="productLine"></assembly>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="工艺指导名称" ng-model="wi.WIName" width="280" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-number caption="序号" ng-model="wi.SeqNo" width="280" mustinput="true"></text-box-number>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="文件名" ng-model="wi.AttachmentID" width="280" mustinput="true"></text-box-normal>.pdf
+        </div>
+        <div class="inputBar">
+            <text-area caption="备注" ng-model="wi.Remark" rows="3" style="width:100%;"></text-area>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

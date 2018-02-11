@@ -1,0 +1,20 @@
+﻿<popup width="600" height="500" title="工序编辑" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <combbox caption="产品" ng-model="box.AssemblyItem" list="assemblyList" width="300" mustinput="true" ng-disabled="true"></combbox>
+            <text-box-normal caption="工序" ng-model="box.OpNo" width="230" ng-disabled="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="料盒编号" ng-model="box.BoxNo" ng-disabled="mode=='view'" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="料盒描述" ng-model="box.BoxDesc" ng-disabled="mode=='view'"></text-box-normal>
+        </div>
+        <pagegridview config="config" list="boxList" refresh="refresh()" add="add()" edit="edit(item)"
+                      remove="onDelete(items)" rowcount="1000" totalrowcount="boxList.length"></pagegridview>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

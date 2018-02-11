@@ -1,0 +1,90 @@
+﻿.station-row {
+    min-height: 40px;
+    border: 1px solid #3b3b3b;
+    margin: 5px 0 5px 0;
+    background: #EDEDED;
+}
+
+.station-row:hover {
+    background: #FFFFE0;
+}
+
+.station-row-top {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 5px;
+}
+
+.btnBar {
+    float: right;
+    text-align: right;
+    height: 100%;
+    padding-right: 5px;
+}
+
+.StationCode {
+    float: left;
+    width: 150px;
+    display: inline-block;
+    overflow: hidden;
+    height: 100%;
+}
+
+.StationName {
+    float: left;
+    width: 300px;
+    display: inline-block;
+    overflow: hidden;
+    margin-right: 10px;
+    height: 100%;
+}
+
+.StationType {
+    float: left;
+    width: 150px;
+    display: inline-block;
+    overflow: hidden;
+    margin-right: 10px;
+    height: 100%;
+}
+.StationDesc {
+    float: left;
+    width: 300px;
+    display: inline-block;
+    overflow: hidden;
+    margin-right: 10px;
+    height: 100%;
+}
+
+.plusBtn {
+    float: left;
+    margin-right: 10px;
+}
+
+.detailData {
+    width: 100%;
+}
+
+.detailData th {
+    border: 1px solid #3b3b3b;
+    height: 25px;
+    background: #3b3b3b;
+    color: #fff;
+}
+
+.detailData td {
+    border: 1px solid #3b3b3b;
+    height: 25px;
+    padding-left: 3px;
+    overflow: hidden;
+}
+
+.detailData .AssemblyDesc{
+    width: 40%;
+}
+.detailData .OpName {
+    width: 20%;
+}
+.detailData .OpDesc {
+    width: 40%;
+}

@@ -1,0 +1,37 @@
+﻿<div class="top_search_bar" id="validate">
+    <date-input-double caption="日期查询" width="350" datefrom="dateFrom" dateto="dateTo" mustinput="true"></date-input-double>
+    <!--<assembly ng-model="condition.AssemblyItem" mustinput="true" after-select="getOpList(item.AssemblyItem)"></assembly>-->
+    <combbox caption="产品" ng-model="condition.AssemblyItem" list="assemblyList" width="200" mustinput="true" on-change="getRequirList(val)"></combbox>
+    <combbox caption="图纸要求" ng-model="condition.Requirement" list="requirList" width="200" mustinput="true"></combbox>    
+    <text-box-number caption="规格上限" ng-model="condition.UpperLimit" width="145" mustinput="true"></text-box-number>
+    <text-box-number caption="规格下限" ng-model="condition.LowerLimit" width="145" mustinput="true"></text-box-number>
+    <button type="button" ng-click="onResearch()" class="btn bg-green">计算</button>
+    <button type="button" class="btn bg-maroon" style="margin-right:20px" ng-click="export()"><i class="fa fa-cloud-download"></i>&nbsp;导出</button>
+</div>
+<div>
+    <div style="float: left; width: 59%">
+        <pagegridview config="config"
+                      list="qpItemList"
+                      refresh="refresh()"
+                      edit="edit(item)"
+                      remove="onDelete(items)"
+                      pagechange="onPageChange(val)"
+                      rowcount="{{more.size}}"
+                      totalrowcount="totalCount"
+                      ng-disabled="true"
+                      width="50%">
+        </pagegridview>   
+    </div> 
+    <div style="float: right; width: 40%">
+        <!--<div ng-if="model.dataList&&model.dataList.length>0">-->
+        <div>
+            <label for="male">CPK:{{CPK}}</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label for="male">规格下限:{{LSL}}</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label for="male">规格上限:{{USL}}</label>
+        </div>
+        <div ng-if="LineChar.dataList&&LineChar.dataList.length>0">
+            <linechart ng-model="LineChar" height="797"></linechart>
+        </div>       
+    </div>
+</div>
+

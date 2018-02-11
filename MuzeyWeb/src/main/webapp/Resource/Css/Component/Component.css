@@ -1,0 +1,152 @@
+﻿iframe {
+    border: 0;
+    margin: 0;
+    width: 100%;
+    min-height: 495px;
+}
+
+.userMenu {
+    height: 100%;
+}
+
+.userMenu .navbar-nav {
+    height: 100%;
+}
+
+.userMenu .dropdown {
+    height: 100%;
+}
+
+.userMenu .dropdown-toggle {
+    height: 100%;
+}
+
+.userMenu .user-image {
+    height: 24px;
+    width: 24px;
+    position: relative;
+    margin-right: 20px !important;
+}
+
+.userMenu .user-image .label{
+    position: absolute;
+    top: -1px;
+    right: -10px;
+    text-align: center;
+    font-size: 9px;
+    padding: 2px 3px;
+    line-height: .9;
+}
+
+.userMenu .user-menu .dropdown-toggle{
+    cursor: pointer;
+}
+
+.userMenu .user-menu .messageIcon {
+    background: url("../../../Resource/Image/System/Mail_24px.png") no-repeat !important;
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    position: relative;
+    cursor:pointer;
+}
+
+.userMenu .user-menu .messageIcon .label{
+    position: absolute;
+    top: -1px;
+    right: -10px;
+    text-align: center;
+    font-size: 9px;
+    padding: 2px 3px;
+    line-height: .9;
+}
+
+.userMenu .user-menu .dropdown-toggle {
+    width: 150px;
+    height: 100% !important;
+}
+
+.userMenu .user-menu-opened {
+    background: #3B3B3B !important;
+}
+
+.content-header {
+    height: 40px;
+    padding-top: 0;
+}
+
+.openedPageList {
+    border-bottom: 1px solid #383838;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.openedPageList ul {
+    height: 100%;
+    padding-top: 5px;
+    float: left;
+}
+.openedPageList li {
+    height: 50px;
+    width: 120px;
+    text-align: center;
+    padding: 0 10px;
+    margin-right: 5px;
+    border: 1px solid #383838;
+    display: inline-block;
+    cursor: pointer;
+    float: left;
+    background-color: #fff;
+}
+
+.openedPageList li:hover {
+    background: #383838;
+    color: #fff;
+}
+
+.openedPageList .active_page {
+    background: #383838;
+    color: #fff;
+}
+
+.openedPageList li .fa-times {
+    color: #ccc;
+}
+
+.openedPageList li table {
+    height: 100%;
+    width: 100%;
+}
+
+.openedPageList .tab-icon {
+    width: 15px;
+}
+
+.openedPageList .tab-content {
+     width: 70px;
+}
+
+.openedPageList li table td {
+    text-align: center;
+}
+
+.openedPageList .move-tab {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    background: #8e8e8e;
+}
+
+.openedPageList .tab-list-border {
+    margin-left: 120px;
+    width: 300%;
+    height: 100%;
+    padding-right: 50px;
+    overflow: hidden;
+} 
+
+.openedPageList .tab-list {
+    position: relative;
+}

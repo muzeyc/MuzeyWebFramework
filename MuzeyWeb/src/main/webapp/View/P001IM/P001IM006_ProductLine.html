@@ -1,0 +1,14 @@
+﻿<div>
+    <pagegridview config="config" 
+                  list="productList" 
+                  add="add()" 
+                  edit="edit(item)"
+                  refresh="refresh()" 
+                  remove="onDelete(items)"
+                  pagechange="onPageChange(val)"
+                  rowcount="{{more.size}}" 
+                  totalrowcount="totalCount">
+    </pagegridview>
+</div>
+<product-edit after-commit="afterCommit(res)"></product-edit>
+

@@ -1,0 +1,97 @@
+﻿
+.labor_top {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #3b3b3b;
+}
+
+.labor_item_main {
+    height: 80px;
+    min-height:80px;
+    margin: 8px 10px;
+    background: #fff;
+    padding-left: 5px;
+}
+
+.red {
+    background: #CD5C5C;
+}
+
+.labor_item_main span {
+    height: 100%;
+    display: inline-block;
+    float: left;
+    line-height: 15px;
+    padding-top: 8px;
+    /*margin-right: 15px;*/
+}
+
+.SeqNo {
+    width: 100px;
+}
+
+.Tunnel {
+    width: 100px;
+}
+
+.BeginTime {
+    width: 150px;
+}
+
+.EndTime {
+    width: 150px;
+}
+
+.RealBeginTime {
+    width: 150px;
+}
+
+.RealEndTime {
+    width: 150px;
+}
+
+.WorkContent {
+    width: 400px;
+}
+
+.RealOperationTime {
+    width: 150px;
+}
+
+.Status {
+    text-align: center;
+}
+
+.labor_btn {
+    height: 100%;
+    display: inline-block;
+    line-height: 80px !important;
+    min-height:80px;
+    padding-top: 0 !important;
+    float: right !important;
+    width: 40px;
+    background: #00a65a;
+    color: #fff;
+    width: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.labor_btn_disabled {
+    background: #9C9C9C;
+    cursor: not-allowed;
+}
+
+.btn_click {
+    background: #4169E1;
+}
+
+.functionBtn {
+    height: 100%;
+    display: inline-block;
+    float: right;
+    width: 60px;
+    text-align: center;
+    color: #fff;
+}

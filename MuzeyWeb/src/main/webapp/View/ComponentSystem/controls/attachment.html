@@ -1,0 +1,13 @@
+﻿<div class="attachment_border">
+    <div class="file_card" ng-click="downloadFile(file)" ng-repeat="file in list track by $index">
+        <span class=" btn_remove" ng-if="mode=='edit'" ng-click="removeFile($index)">×</span>
+        <div class="attach_info">
+            <span class="filename">{{file.fileName}}</span>
+        </div>
+    </div>
+
+    <label class="btn_file_add" ng-if="mode!='view'" for="file_{{$id}}">
+        <input id="file_{{$id}}" name="file_{{$id}}" type="file" onchange="angular.element(this).scope().onFileChange(this)" style="display:none">
+    </label>
+    <div style="clear:both;"></div>
+</div>

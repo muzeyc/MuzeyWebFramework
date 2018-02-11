@@ -1,0 +1,10 @@
+﻿<div class="control_container" style="width: {{width}}px">
+    <div class="input-group">
+        <span class="input-group-addon" ng-class="{mustInputCaption:mustinput}" ng-if="caption&&caption.length>0">{{caption}}</span>
+        <input type="text" class="form-control value" ng-class="{required:mustinput}" ng-disabled="ngDisabled"
+               ng-model="hour" ng-change="hourChange()" />:
+        <input type="text" class="form-control value" ng-class="{required:mustinput}" ng-disabled="ngDisabled"
+               ng-model="minut" ng-change="minChange()" />
+        <input type="hidden" ng-model="ngModel" />
+    </div>
+</div>

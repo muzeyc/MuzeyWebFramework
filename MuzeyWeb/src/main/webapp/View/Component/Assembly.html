@@ -1,0 +1,19 @@
+﻿<div class="control_container" style="width: 250px">
+    <div class="input-group">
+        <span class="input-group-addon" ng-class="{mustInputCaption:mustinput}">产品</span>
+        <input type="text" class="form-control value" ng-class="{required:mustinput}" ng-disabled="true" placeholder="请选择产品"
+               ng-model="AssemblyDesc" />
+        <span class="input-group-btn" ng-if="!ngDisabled">
+            <button type="button" class="btn btn-info btn-flat" ng-click="openPop()"><i class="fa fa-search"></i></button>
+            <input type="hidden" ng-model="ngModel" />
+        </span>
+    </div>
+    <popup width="600" height="550" title="产品选择{{lineType.length>0?'：'+lineTypeName:''}}" show="show">
+        <div class="modal-body" id="validate">
+            <div class="inputBar">
+                <combbox caption="产线" ng-model="productLine" list="productLineList" mustinput="true" on-change="lineSelect(val)"></combbox>
+            </div>
+            <pagegridview config="config" list="assemblyList" ng-disabled="true" hidefuncbar="true"></pagegridview>
+        </div>
+    </popup>
+</div>

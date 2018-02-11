@@ -1,0 +1,24 @@
+﻿<link href="/Resource/Css/Page/P099Pad/P004QM016_NCRIPad.css" rel="stylesheet" />
+<div class="top_search_bar" id="searchValidate" ng-if="isPc">
+    <text-box-normal caption="NCR编号" width="300" ng-model="condition.ncrNo"></text-box-normal>
+    <text-box-normal caption="物料序列号" width="300" ng-model="condition.materialSN"></text-box-normal>
+    <text-box-normal caption="红签号" width="300" ng-model="condition.redNo"></text-box-normal>
+    <button type="button" ng-click="onResearch()" class="btn bg-green">查询</button>
+</div>
+<div class="labor_top" id="searchValidate" ng-if="!isPc">
+    <text-box-normal placeholder="NCR编号" width="150" ng-model="condition.ncrNo"></text-box-normal>
+    <text-box-normal placeholder="物料序列号" width="150" ng-model="condition.materialSN"></text-box-normal>
+    <text-box-scan ng-id="redNo1" width="200" ng-model="condition.redNo" placeholder="红签号"></text-box-scan>
+    <button type="button" ng-click="onResearch()" class="btn bg-green">查询</button>
+</div>
+<div style="margin-top: 5px;">
+    <pagegridview config="config"
+                  list="ncrEventList"
+                  refresh="refresh()"
+                  ng-disabled="true"
+                  pagechange="onPageChange(val)"
+                  rowcount="{{more.size}}" totalrowcount="totalCount">
+    </pagegridview>
+</div>
+<ncripad-edit after-commit="afterCommit(res)"></ncripad-edit>
+<ncrflowipad-edit></ncrflowipad-edit>

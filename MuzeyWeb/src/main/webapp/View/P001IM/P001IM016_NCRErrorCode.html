@@ -1,0 +1,19 @@
+﻿<div class="top_search_bar">
+    <combbox caption="产线" ng-model="condition.ProductLine" list="productList" width="200" ></combbox>
+    <combbox caption="NCR分类" ng-model="condition.NcrType" list="ncrList" width="280" ></combbox>
+    <button type="button" ng-click="onResearch()" class="btn bg-green">查询</button>       
+</div>
+<div>
+    <pagegridview config="config"
+                  list="errorItemList"
+                  refresh="refresh()"
+                  add="add()"
+                  edit="edit(item)"
+                  remove="onDelete(items)"
+                  pagechange="onPageChange(val)"
+                  rowcount="{{more.size}}"
+                  totalrowcount="totalCount">
+    </pagegridview>
+
+</div>
+<ncrerror-edit after-commit="afterCommit(res)"></ncrerror-edit>

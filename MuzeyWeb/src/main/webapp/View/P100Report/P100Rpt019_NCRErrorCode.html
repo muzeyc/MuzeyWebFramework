@@ -1,0 +1,50 @@
+﻿<div class="top_search_bar" id="validate">
+    <date-input-double caption="时间范围" datefrom="searchParameters.dateFrom" dateto="searchParameters.dateTo"></date-input-double>
+    <combbox caption="产线" ng-model="searchParameters.productLine" width="200" list="productLineList" on-change="productLineChange(val)"></combbox>
+    <combbox caption="NCR分类" ng-model="searchParameters.ncrType" width="200" list="ncrTypeList"></combbox>
+    <text-box-normal caption="缺陷代码" ng-model="searchParameters.errorCode" width="200"></text-box-normal>
+    <button type="button" class="btn bg-blue" ng-click="search()"><i class="fa fa-search"></i>&nbsp;检索</button>
+    <div style="clear:both;"></div>
+</div>
+<div ng-if="list && list.length>0">
+    <div class="box box-primary">
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+            <div class="mailbox-controls">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm" ng-click="export()"><i class="fa fa-file-excel-o"></i></button>
+                </div>
+            </div>
+            <div class="table-responsive mailbox-messages">
+                <table class="table table-hover table-striped gridview" style="table-layout: fixed;">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px"></th>
+                            <th style="width: 100px">产线</th>
+                            <th style="width: 100px">NCR分类</th>
+                            <th style="width: 100px">缺陷代码</th>
+                            <th style="width: 100px">NCR数量</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in list" ng-class="{'select-row': selectedIndex == mainIndex}" ng-init="mainIndex=$index">
+                            <td>{{mainIndex + 1}}</td>
+                            <td>{{item.ProductLine}}</td>
+                            <td>{{item.NCRType}}</td>
+                            <td>{{item.ErrorCode}}</td>
+                            <td>{{item.NCRCount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="box-footer no-padding">
+            <div class="mailbox-controls">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm" ng-click="export()"><i class="fa fa-file-excel-o"></i></button>
+                    <button type="button" class="btn btn-default btn-sm" ng-click="search()"><i class="fa fa-refresh"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+﻿<style>
+    #validate .inputBar {
+        margin-bottom: 5px;
+    }
+</style>
+<div class="top_search_bar">
+    <button type="button" class="btn bg-blue" ng-click="goBack()"><i class="fa fa-floppy-o"></i>&nbsp;返回列表</button>
+    <button id="saveButton" type="button" class="btn bg-maroon" ng-click="save()"><i class="fa fa-floppy-o"></i>&nbsp;保存</button>
+</div>
+<div id="validate">
+    <div id="validate1" style="float: left; width: 35%; padding: 5px; border: 1px solid #3b3b3b; background: #fff; min-height: 700px;">
+        <div class="inputBar" style="display:none"><text-box-normal caption="NCR分类" ng-model="ncrEvent.NCRType" maxlength="50" style="display:none"></text-box-normal></div>
+        <div class="inputBar">
+            NCR分类：<br />
+            <span class="select-btn" ng-click="setNcrType(1)" ng-class="{'select-btn-active':ncrEvent.NCRType==1}">来料不合格</span>
+            <span class="select-btn" ng-click="setNcrType(2)" ng-class="{'select-btn-active':ncrEvent.NCRType==2}">机加/机装产线缺陷</span>
+            <span class="select-btn" ng-click="setNcrType(3)" ng-class="{'select-btn-active':ncrEvent.NCRType==3}">电装产线装配缺陷</span>
+            <span class="select-btn" ng-click="setNcrType(4)" ng-class="{'select-btn-active':ncrEvent.NCRType==4}">生产损坏物料</span>
+            <span class="select-btn" ng-click="setNcrType(5)" ng-class="{'select-btn-active':ncrEvent.NCRType==5}">机装不合格</span>
+            <span class="select-btn" ng-click="setNcrType(6)" ng-class="{'select-btn-active':ncrEvent.NCRType==6}">领料单</span>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="inputBar"><text-box-normal caption="加工序列号" ng-model="ncrEvent.SerialNo" maxlength="50" onBlur="serialNoBlur()"></text-box-normal></div>
+        <div class="inputBar" id="BoxSerialNo2"><text-box-normal caption="机加柜子序列号" ng-model="ncrEvent.BoxSerialNo" maxlength="50" ng-disabled="ncrEvent.NCRType!=2&&ncrEvent.NCRType!=3"></text-box-normal></div>
+        <div class="inputBar" id="BoxSerialNo3"><text-box-normal caption="电装柜子序列号" ng-model="ncrEvent.BoxSerialNo" maxlength="50" ng-disabled="ncrEvent.NCRType!=2&&ncrEvent.NCRType!=3"></text-box-normal></div>
+        <div class="inputBar"><assembly caption="产品" ng-model="ncrEvent.AssemblyItem" maxlength="50" after-select="afterAssemblyItemSelect(item)"></assembly></div>
+        <!--<div class="inputBar"><text-box-normal caption="产品序列号" ng-model="ncrEvent.ProductSerialNo" maxlength="30"></text-box-normal></div>-->
+        <div class="inputBar"><combbox caption="缺陷发生区域" ng-model="ncrEvent.ErrorZone" list="loaborOPNoList" on-change="afterloaborOPSelect(val)"></combbox></div>
+        <div class="inputBar"><combbox caption="物料编号" ng-model="ncrEvent.MaterialCode" list="materialList" on-change="materialChange(val)" mustinput="ncrEvent.AssemblyItem&&ncrEvent.AssemblyItem.length>0&&ncrEvent.ErrorZone&&ncrEvent.ErrorZone.length>0"></combbox></div>
+        <div class="inputBar"><text-box-normal caption="物料描述" ng-model="ncrEvent.MaterialDesc" ng-disabled="true" maxlength="30"></text-box-normal></div>
+        <div class="inputBar"><combbox caption="供应商" ng-model="ncrEvent.SupplierEnglish" maxlength="50" list="supplierList" mustinput="ncrEvent.MaterialCode&&ncrEvent.MaterialCode.length>0"></combbox></div>
+        <div class="inputBar"><text-box-number caption="缺陷数量" ng-model="ncrEvent.Amounts" mustinput="true"></text-box-number></div>
+        <div class="inputBar"><text-box-normal caption="缺陷数量单位" ng-model="ncrEvent.Unit" mustinput="true" maxlength="10"></text-box-normal></div>
+        <div class="inputBar"><text-box-normal caption="物料序列号" ng-model="ncrEvent.MaterialSN" maxlength="50" mustinput="serialFlag==1"></text-box-normal></div>
+        <div class="inputBar"><text-box-normal caption="红签号" ng-model="ncrEvent.RedNo" maxlength="50" mustinput="ncrEvent.MaterialCode"></text-box-normal></div>
+        <div class="inputBar"><text-box-normal caption="MRB库位" ng-model="ncrEvent.Location" maxlength="50"></text-box-normal></div>
+        <div class="inputBar"><combbox caption="缺陷代码" ng-model="ncrEvent.ErrorCode" list="errorCodeList"></combbox></div>
+        <div class="inputBar">
+            NCR是否创建领料单：<br />
+            <span class="select-btn" ng-click="setMaterialRequestFlag(1)" ng-class="{'select-btn-active':ncrEvent.MaterialRequestFlag==1}">是</span>
+            <span class="select-btn" ng-click="setMaterialRequestFlag(0)" ng-class="{'select-btn-active':ncrEvent.MaterialRequestFlag==0}">否</span>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="inputBar">
+            影响FPY通过率：<br />
+            <span class="select-btn" ng-click="setKPIFlag(1)" ng-class="{'select-btn-active':ncrEvent.KPIFlag==1}">是</span>
+            <span class="select-btn" ng-click="setKPIFlag(0)" ng-class="{'select-btn-active':ncrEvent.KPIFlag==0}">否</span>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    <div id="validate2" style="float: left; width: 30%; padding: 5px; border: 1px solid #3b3b3b; background: #fff; min-height: 700px; ">
+        <div>
+            <combbox caption="本次NCR操作" ng-model="ncrEvent.NCRInfoID" list="ncrInfoList" on-change="ncrInfoChange(val)" mustinput="true"></combbox>
+            <input style="display:none" ng-model="ncrEvent.NCRInfoName" />
+        </div>
+        <div><text-box-number id="txtRecordCount" caption="数量" ng-model="ncrEvent.RecordCount" maxlength="9"></text-box-number></div>
+        <div>
+            操作描述<br />
+            <textarea style="height: 60px; width: 100%;" ng-model="ncrEvent.Comments"></textarea>
+        </div>
+        <div>
+            <picture-list id="imageUI" list="imageList" mode="edit"></picture-list>
+            <div style="clear:both"></div>
+        </div>
+        <div><combbox caption="下一步操作组" ng-model="nextGroupID" list="nextGroupList" mustinput="!isClose" ng-disabled="isClose"></combbox></div>
+        <div><combbox caption="CC" ng-model="ccGroupID" list="ccGroupList"></combbox></div>
+    </div>
+    <div id="recordList" style="float: right; width: 35%; padding: 5px; border: 1px solid #3b3b3b; background: #fff; min-height: 630px;">
+        <ul class="timeline">
+            <!-- timeline time label -->
+            <li class="time-label">
+                <span class="bg-red" style="padding: 0 15px">
+                    开始
+                </span>
+            </li>
+            <li>
+                <i class="fa bg-blue"></i>
+                <div class="timeline-item">
+                    <span class="time"><i class="fa fa-clock-o"></i>{{ncrFlowRecordCreate.UpdateTime}}</span>
+                    <h3 class="timeline-header"><a>{{ncrFlowRecordCreate.GroupName}}-{{ncrFlowRecordCreate.CreateUserName}}</a>{{ncrFlowRecordCreate.NCRInfoName}}</h3>
+                    <div class="timeline-body">
+                        {{ncrFlowRecordCreate.Comments}}
+                        <div>
+                            <picture-list list="ncrFlowRecordCreate.imageList" mode="view"></picture-list>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li ng-repeat="record in ncrFlowRecordList">
+                <i class="fa bg-blue"></i>
+                <div class="timeline-item">
+                    <span class="time"><i class="fa fa-clock-o"></i>{{record.UpdateTime}}</span>
+                    <h3 class="timeline-header"><a>{{record.GroupName}}-{{record.CreateUserName}}</a>{{record.NCRInfoName}}</h3>
+                    <div class="timeline-body">{{record.Comments}}</div>
+                </div>
+            </li>
+            <!-- END timeline item -->
+            <!-- timeline time label -->
+            <li class="time-label" id="lableClose">
+                <span class="bg-green" style="padding: 0 15px">
+                    关闭
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div style="clear: both;"></div>
+</div>

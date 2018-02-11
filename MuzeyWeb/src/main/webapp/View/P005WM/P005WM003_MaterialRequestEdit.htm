@@ -1,0 +1,36 @@
+﻿<popup width="1000" height="485" title="领料单" show="show">
+    <div class="modal-body" id="validate">
+        <div style="width: 400px; float: left;">
+            <div class="inputBar">
+                <text-box-normal caption="产线" ng-model="obj.AssemblyName" width="150" ng-disabled="true"></text-box-normal>
+            </div>
+            <div class="inputBar">
+                <text-box-normal caption="工单" ng-model="obj.JobNo" width="150" ng-disabled="true"></text-box-normal>
+                <text-box-normal caption="加工序列号" ng-model="obj.SerialNo" width="180" ng-disabled="true"></text-box-normal>
+            </div>
+            <div class="inputBar">
+                <text-box-normal caption="工序" ng-model="obj.OpNo" width="150" ng-disabled="true"></text-box-normal>
+            </div>
+            <div class="inputBar" style="margin-bottom: 0;">
+                <span>备注</span>
+                <br />
+                <textarea style="height: 60px; width: 100%;" ng-model="obj.Comment" ng-disabled="obj.DeleteFlag"></textarea>
+            </div>
+            <div class="inputBar" style="margin-bottom: 0;">
+                <control-container width="150" caption="已处理">
+                    <check-box ng-model="obj.DeleteFlag" checkedvalue="1" uncheckedvalue="0"></check-box>
+                </control-container>
+            </div>
+        </div>
+        <div style="width: 550px; height: 100%; float: right; border: 1px solid #ccc; padding: 3px; overflow-y: auto;">
+            <div>物料清单</div>
+            <pagegridview config="config" list="materialList" refresh="refresh()" ng-disabled="true" hidefuncbar="true"
+                          pagechange="onPageMain(val)" rowcount="{{more.size}}" totalrowcount="totalrowcount"></pagegridview>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

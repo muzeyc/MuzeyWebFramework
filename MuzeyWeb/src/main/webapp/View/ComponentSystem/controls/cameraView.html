@@ -1,0 +1,9 @@
+﻿<div id="{{ngId}}" class="camera-view">
+    <span class="camera-button" ng-show="!src||(src&&src.length<=0)" ng-click="opCamera()" ng-disabled="ngDisabled">
+        <i class="fa fa-camera fa-3x"></i>
+    </span>
+    <input id="btnTest" type="button" style="display: none" onclick="angular.element(this).scope().inputChange()" />
+    <input id="hidVal" type="hidden" />
+    <input id="hidFileId" type="hidden" />
+    <img id="img" src="{{src}}" ng-if="src&&src.length>0" />
+</div>

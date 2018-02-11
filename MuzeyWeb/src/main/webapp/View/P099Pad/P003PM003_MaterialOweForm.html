@@ -1,0 +1,23 @@
+﻿<popup width="700" height="550" title="欠料信息" show="show">
+    <div class="modal-body" id="validate">
+        <table class="table table-hover table-striped gridview">
+            <tbody>
+                <tr>
+                    <th style="width: 10%;"></th>
+                    <th style="width: 35%;">物料编号</th>
+                    <th style="width: 40%;">物料名称</th>
+                    <th style="width: 15%;">数量</th>
+                </tr>
+                <tr ng-repeat="item in materialOweList track by $index">
+                    <td>{{$index + 1}}</td>
+                    <td>{{item.MaterialCode}}</td>
+                    <td>{{item.MaterialName}}</td>
+                    <td>{{item.Count}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">确定</button>
+    </div>
+</popup>

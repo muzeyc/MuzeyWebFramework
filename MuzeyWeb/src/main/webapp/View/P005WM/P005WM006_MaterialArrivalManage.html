@@ -1,0 +1,23 @@
+﻿<div class="top_search_bar">
+    <div id="validate">
+        <text-box-normal caption="供应商名称" ng-model="obj.SupplierEnglish" width="250" mustinput="!isHistory"></text-box-normal>
+        <text-box-normal caption="托盘序列号" ng-model="obj.TraySerialNo" width="250" mustinput="!isHistory"></text-box-normal>
+    </div>
+    <button type="button" class="btn bg-maroon" ng-click="save()" ng-hide="isHistory"><i class="fa fa-floppy-o"></i>&nbsp;保存</button>
+    <date-input-double caption="时间" datefrom="dateS" dateto="dateE" ng-hide="!isHistory" width="350"></date-input-double>
+
+    <button type="button" class="btn bg-blue" ng-click="onHistoryResearch()" ng-hide="!isHistory"><i class="fa fa-search"></i>&nbsp;检索</button>
+
+    <button type="button" class="btn float_right" ng-class="{'bg-green': isHistory, 'bg-gray': !isHistory}" ng-click="dateTypeClick(true)">历史记录</button>
+    <button type="button" class="btn float_right" ng-class="{'bg-green': !isHistory, 'bg-gray': isHistory}" ng-click="dateTypeClick(false)">当天记录</button>
+    <div style="clear:both;"></div>
+</div>
+<div ng-if="!isHistory">
+    <pagegridview config="config" list="materialList" add="add(item)" edit="edit(item)"  remove="onDelete(items)" refresh="refresh()"
+                  pagechange="onPageChange(val)" rowcount="{{more.size}}" totalrowcount="totalCount"></pagegridview>
+</div>
+<div ng-if="isHistory">
+    <pagegridview config="config" list="historyMaterialList" refresh="historyRefresh()" ng-disabled="true"
+                  pagechange="onHistoryPageChange(val)" rowcount="{{historyMore.size}}" totalrowcount="historyTotalCount"></pagegridview>
+
+</div>

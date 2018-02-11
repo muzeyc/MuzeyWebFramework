@@ -1,0 +1,69 @@
+﻿<link href="/Resource/Css/Page/P099Pad/P005WM005_WarehouseHour.css" rel="stylesheet" />
+<div class="labor_top">
+    <div style="float: left; height: 100%; padding:5px; padding-left: -10px" id="validate">
+        <combbox caption="巷道" ng-model="condition.Tunnel" list="tunnelList" width="300"  on-change="onTunnelItemChange(val)" mustinput="true"></combbox>
+        <combbox caption="计划分配日" ng-model="condition.CountFlag" list="countFlagList" width="300" on-change="onCountFlagItemChange(val)"></combbox>
+        <combbox caption="类型" ng-model="condition.Type" list="typeList" width="300" on-change="onTypeItemChange(val)"></combbox>
+    </div>
+</div>
+<div style="margin-top: 1px;">
+    <div class="labor_item" ng-repeat="item in warehousehourList">
+        <div style="background-color:{{item.Color}}" class="labor_item_main">
+            <span class="SeqNo">
+                编号
+                <br />
+                {{item.SeqNo}}
+            </span>
+            <span class="Tunnel">
+                巷道
+                <br />
+                {{item.TunnelName}}
+            </span>
+            <span class="BeginTime">
+                计划开始时间
+                <br />
+                {{item.BeginTime}}
+            </span>
+            <span class="EndTime">
+                计划结束时间
+                <br />
+                {{item.EndTime}}
+            </span>
+            <span class="RealBeginTime">
+                实际开始时间
+                <br />
+                {{item.RealBeginTime}}
+            </span>
+            <span class="RealEndTime">
+                实际结束时间
+                <br />
+                {{item.RealEndTime}}
+            </span>
+            <span class="RealOperationTime">
+                实际持续时长
+                <br />
+                {{item.RealOperationTime}}
+            </span>
+            <span class="WorkContent">
+                工作内容
+                <br />
+                {{item.WorkContent}}
+            </span>
+            <span class="Status">
+                <i class="fa fa-coffee" ng-if="item.Status=='0'"></i>
+                <i class="fa fa-space-shuttle" ng-if="item.Status=='1'"></i>
+                <i class="fa fa-check-circle-o" ng-if="item.Status=='2'"></i>
+                <br />
+                <font ng-if="item.Status=='0'">准备中</font>
+                <font ng-if="item.Status=='1'">进行中</font>
+                <font ng-if="item.Status=='2'">已完成</font>
+            </span>
+            <span class="labor_btn" ng-click="end(item)" ng-class="{'btn_click': item.Status=='2',
+                   'labor_btn_disabled': item.Status=='0'}">完成</span>
+            <span class="labor_btn" ng-click="begin(item)" ng-class="{'btn_click': item.Status=='1', 'labor_btn_disabled': item.Status=='2'}">开始</span>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+</div>
+
+

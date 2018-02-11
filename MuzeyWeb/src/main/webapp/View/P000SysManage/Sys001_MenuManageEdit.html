@@ -1,0 +1,31 @@
+﻿<popup width="600" height="400" title="菜单管理" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <text-box-normal caption="ID" ng-model="menu.Id" width="200" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <combbox caption="上级菜单" ng-model="menu.ParentId" list="parentMenuList" width="300" mustinput="true"></combbox>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="菜单名称" ng-model="menu.MenuTitle" width="300" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标" ng-model="menu.IconName" width="300"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="链&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接" ng-model="menu.PageName" width="300"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-number caption="排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序" ng-model="menu.SeqNo" width="150" mustinput="true"></text-box-number>
+        </div>
+        <div class="inputBar">
+            <control-container width="200" caption="有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;效">
+                <check-box ng-model="menu.DeleteFlag" checkedvalue="0" uncheckedvalue="1"></check-box>
+            </control-container>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

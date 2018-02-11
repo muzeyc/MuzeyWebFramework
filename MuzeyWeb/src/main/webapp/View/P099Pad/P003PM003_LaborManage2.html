@@ -1,0 +1,112 @@
+﻿<link href="Resource/Css/Page/P099Pad/P0003PM003_LaborManage.css" rel="stylesheet" />
+<div class="labor_top">
+    <text-box-scan ng-id="serialNo1" width="200" ng-model="condition.SerialNo" placeholder="加工序列号" ng-show="!showComplete&&!isPc" onchange="afterScan(val)"></text-box-scan>
+    <text-box-normal width="200" ng-model="condition.SerialNo" placeholder="加工序列号" ng-show="!showComplete&&isPc" onchange="afterScan(val)"></text-box-normal>
+    <div style="float: right; height: 100%; text-align: right;">
+        <span class="functionBtn" style="background: #4169E1;" ng-click="begin()">开始</span>
+        <span class="functionBtn" style="background: #757575;" ng-class="{'showCompleteBtn': showComplete}" ng-click="searchComplete()"><span ng-if="!showComplete">已完成</span><span ng-if="showComplete">返回</span></span>
+    </div>
+</div>
+<div style="padding-top: 1px;" ng-if="!showComplete">
+    <div class="labor_item" ng-repeat="item in laborItemList track by $index">
+        <div class="labor_item_main" style="padding-left: 0;">
+            <span class="check-col" ng-class="{'check-col-checked': item.selected==1, 'labor_btn_disabled': item.Status=='complete'||item.Status == 'begin'}" ng-click="checkboxClick(item)">
+                <i class="fa fa-check" ng-if="item.selected==1"></i>
+                <i class="fa fa-square-o" ng-if="item.selected!=1"></i>
+            </span>
+            <span class="work_order" style="margin-left: 10px;">
+                工单号
+                <br />
+                {{item.JobNo}}
+            </span>
+            <span class="serial_number">
+                序列号
+                <br />
+                {{item.SerialNo}}
+            </span>
+            <span class="Assembly">
+                产品
+                <br />
+                {{item.AssemblyDesc}}
+            </span>
+            <span class="OpNo">
+                工序
+                <br />
+                [{{item.OpNo}}]{{item.OpDesc}}
+            </span>
+            <span class="begin-time">
+                开始时间
+                <br />
+                {{item.RealBeginDate}}
+            </span>
+            <span class="status">
+                <i class="fa fa-coffee" ng-if="item.Status=='wait'"></i>
+                <i class="fa fa-space-shuttle" ng-if="item.Status=='begin'"></i>
+                <i class="fa fa-pause-circle" ng-if="item.Status=='pause'"></i>
+                <i class="fa fa-check-circle-o" ng-if="item.Status=='complete'"></i>
+                <br />
+                <font ng-if="item.Status=='begin'">进行中</font>
+                <font ng-if="item.Status=='wait'">准备中</font>
+                <font ng-if="item.Status=='pause'">暂停中</font>
+                <font ng-if="item.Status=='complete'">已完成</font>
+            </span>
+            <div class="buttons">
+                <a class="labor_btn btnAndon" ng-click="andon(item)" ng-class="{'btn-andon':item.AndonCount>0}">Andon<br />NCR</a>
+                <a class="labor_btn" ng-click="complete(item, $index)"
+                   ng-class="{'btn_click': item.Status=='complete', 'labor_btn_disabled': item.Status=='wait'||item.Status=='pause'}">完成</a>
+                <a class="labor_btn" ng-click="pause(item)"
+                   ng-class="{'btn_click': item.Status=='pause', 'labor_btn_disabled': item.Status=='wait'||item.Status=='complete'}">暂停</a>
+                <a class="labor_btn bg-maroon" ng-click="qpClick(item)"
+                   ng-class="{'labor_btn_disabled': item.Status!='begin'}">QP</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 1px;" ng-if="showComplete">
+    <div class="labor_item" ng-repeat="item in laborItemHistoryList">
+        <div class="labor_item_main">
+            <span class="work_order">
+                工单号
+                <br />
+                {{item.JobNo}}
+            </span>
+            <span class="serial_number">
+                序列号
+                <br />
+                {{item.SerialNo}}
+            </span>
+            <span class="Assembly">
+                产品
+                <br />
+                {{item.AssemblyDesc}}
+            </span>
+            <span class="OpNo">
+                工序
+                <br />
+                [{{item.OpNo}}]{{item.OpDesc}}
+            </span>
+            <span class="begin-time">
+                开始时间
+                <br />
+                {{item.RealBeginDate}}
+            </span>
+            <span class="end-time">
+                结束时间
+                <br />
+                {{item.RealEndDate}}
+            </span>
+            <span class="status">
+                <i class="fa fa-check-circle-o"></i>
+                <br />
+                <font ng-if="item.Status=='partcomplete'">仅报工</font>
+                <font ng-if="item.Status=='complete'">已完成</font>
+            </span>
+        </div>
+    </div>
+</div>
+<qp-form></qp-form>
+<qp-form2></qp-form2>
+<andon-form></andon-form>
+<moc-form></moc-form>
+<labor-in-select></labor-in-select>

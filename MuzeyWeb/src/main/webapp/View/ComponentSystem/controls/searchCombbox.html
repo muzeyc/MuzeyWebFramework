@@ -1,0 +1,19 @@
+﻿<div class="control_container" style="width: {{width}}px">
+    <div class="input-group searchCombbox" ng-mouseleave="afterLeave()">
+        <span class="input-group-addon" ng-class="{mustInputCaption:mustinput}">{{caption}}</span>
+        <span class="form-control displayBar" ng-class="{required:mustinput}" ng-click="showListBar()">{{dispName}}<span class="btnClear" ng-click="clear()">×</span></span>
+        <div class="listBar" ng-show="isShowListBar">
+            <div class="inputBar">
+                <input class="form-control txtFilter" id="{{$id}}" type="text" ng-model="filter" ng-change="onInputChange($id)" />
+            </div>
+            <ul>
+                <li ng-repeat="item in list" ng-class="{'selected':item.selected}" combvalue="{{item.value}}" ng-click="onSelect(item)">
+                    <span>
+                        {{item.name}}
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <input class="value" type="hidden" ng-model="ngModel" value="{{ngModel}}" />
+    </div>
+</div>

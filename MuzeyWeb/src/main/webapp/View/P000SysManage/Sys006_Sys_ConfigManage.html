@@ -1,0 +1,74 @@
+﻿
+<div id="validate" class="modal-body" region="north" split="true" title="系统参数设置" style="height:600px;background:#FFFFFF;">
+    <div style="padding: 2px; overflow: hidden;">
+        <div>
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="font-weight:bold">NCR预警设置：</a>
+            <br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            NCR报废数量超过：
+            <input caption="" placeholder="" style="width:100px" id="NCRScrapAmount" ng-model="Config.NCRScrapAmount" onkeyup="this.value = amountToPositiveInteger(this.value)"/>
+            个时，系统发邮件给buyer
+        </div>
+        <div>
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="font-weight:bold">离岗设置：</a>
+            <br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            离岗天数超过：
+            <input class="easyui-numberbox" data-options="min:0,precision:0" style="width: 100px" id="OffDuty" ng-model="Config.OffDuty" onkeyup="this.value = amountToPositiveInteger(this.value)" />
+            天时，报工不能报
+        </div>
+        <div>
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="font-weight:bold">库房配料超时设置：</a>
+            <br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            库房配料超时临界点：
+            <input class="easyui-numberbox" data-options="min:0,precision:0" style="width: 100px" id="OffDuty" ng-model="Config.MaterialHourPoint" onkeyup="this.value = amountToPositiveInteger(this.value)" />
+            （分钟）
+        </div>
+        <div>
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="font-weight:bold">Andon报警设置：</a>
+            <br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Andon报警时间超过：
+            <input class="easyui-numberbox" data-options="min:0,precision:0" style="width: 100px" id="AndonToSupervisor" ng-model="Config.AndonToSupervisor" onkeyup="this.value = amountToPositiveInteger(this.value)"/>
+            分钟时，升级到班长
+            <br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Andon报警时间超过：
+            <input class="easyui-numberbox" data-options="min:0,precision:0" style="width: 100px" id="AndonToDirector" ng-model="Config.AndonToManager" onkeyup="this.value = amountToPositiveInteger(this.value)"/>
+            分钟时，升级到主管
+            <br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Andon报警时间超过：
+            <input class="easyui-numberbox" data-options="min:0,precision:0" style="width: 100px" id="AndonAbnormalSlack" ng-model="Config.AndonToDirector" onkeyup="this.value = amountToPositiveInteger(this.value)"/>
+            分钟时，升级到厂长
+            <br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            节拍异常的Andon报警超过
+            <input class="easyui-numberbox" data-options="min:0,precision:0" style="width: 100px" id="AndonAbnormalSlack" ng-model="Config.AndonAbnormalSlack" onkeyup="this.value = amountToPositiveInteger(this.value)" />
+            分钟时，显示在看板上
+        </div>
+        <div>
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="font-weight:bold">库房IW报警设置：</a>
+            <br /><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            库房IW系统的空位货位数超过：
+            <input class="easyui-numberbox" data-options="min:0,precision:0" style="width: 100px" id="IWWarningValue" ng-model="Config.IWWarningValue" onkeyup="this.value = amountToPositiveInteger(this.value)"/>
+            时，发生报警
+        </div>
+        <div style="width:500px;margin-left:30px;margin-top:10px">
+            <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        </div>
+    </div>
+</div>
+

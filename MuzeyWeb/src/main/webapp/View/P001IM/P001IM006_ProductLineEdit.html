@@ -1,0 +1,20 @@
+﻿<popup width="600" height="500" title="产线管理" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <text-box-normal caption="产线编号" ng-model="op.ProductLine" width="200" mustinput="true" ng-disabled="mode=='edit'" maxlength="20"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="产线名称" ng-model="op.Name" width="200" mustinput="true" maxlength="30"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <combbox caption="产线分类" ng-model="op.LineType" list="lineTypeList" width="300" mustinput="true" ></combbox>
+        </div>
+        <div class="inputBar">
+            <combbox caption="电检区域" ng-model="op.Area" list="areaList" width="300"></combbox>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

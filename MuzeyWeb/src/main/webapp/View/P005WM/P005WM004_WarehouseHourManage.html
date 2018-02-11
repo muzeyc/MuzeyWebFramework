@@ -1,0 +1,19 @@
+﻿<div class="top_search_bar" id="validate"> 
+    <date-input-double caption="日期范围" datefrom="condition.dateFrom" dateto="condition.dateTo" mustinput="true" width="350"></date-input-double>
+    <combbox caption="巷道" ng-model="condition.tunnel" list="tunnelList" width="200"></combbox>
+    <combbox caption="类型" ng-model="condition.type" list="typeList" width="200" ></combbox>
+    <text-box-normal caption="操作人" width="200" ng-model="condition.user"></text-box-normal>
+    <button type="button" ng-click="onResearch()" class="btn bg-green" style="margin-right:10px">查询</button>
+    <button type="button" class="btn bg-maroon" style="margin-right:10px" ng-click="export()"><i class="fa fa-cloud-download"></i>&nbsp;导出</button>
+</div>
+<div>
+    <pagegridview config="config"
+                  ng-disabled="true"
+                  list="warehousehourList"
+                  refresh="refresh()"                 
+                  pagechange="onPageChange(val)"
+                  rowcount="{{more.size}}" totalrowcount="totalCount">
+    </pagegridview>
+
+</div>
+

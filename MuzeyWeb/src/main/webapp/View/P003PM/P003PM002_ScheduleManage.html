@@ -1,0 +1,150 @@
+﻿<style>
+    .schedule {
+        margin-left: auto;
+        margin-right: auto;
+        border-top: 0;
+        background: #fff;
+    }
+    .schedule th {
+        height: 30px;
+        border: 1px solid #3b3b3b;
+        color: #fff;
+        font-size: 11px;
+        text-align: center;
+        font-weight: normal;
+    }
+    .schedule td {
+        border: 1px solid #3b3b3b;
+        border-top: 0;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .schedule .base-info {
+        background: #FFF68F;
+        width: 100px;
+        border: 1px solid #3b3b3b;
+        border-top: 0;
+        border-bottom: 2px solid #3b3b3b;
+    }
+
+    .opItem {
+        margin: 3px;
+        display: inline-block;
+        width: 25px;
+    }
+
+    .timeItem {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .timeItem td {
+        height: 32px;
+    }
+
+    .td-begin {
+        background-color: #C1FFC1 !important;
+    }
+
+    .td-complete {
+        background-color: #BFEFFF !important;
+    }
+    .this-week {
+        background-color: #6CA6CD;
+    }
+    .next-week {
+        background-color: #66CD00;
+    }
+    .weekend {
+        background-color: #FF6347;
+    }
+    .time {
+        border-left: 0 !important;
+        background-color: #FFF68F;
+    }
+
+    .title th {
+        border-bottom: 0 !important;
+        border-top: 0 !important;
+    }
+
+    .coloricon {
+        height: 15px;
+        width: 15px;
+        float: left;
+        margin-right: 10px;
+        border: 1px solid #3b3b3b;
+    }
+
+    .colordesc {
+        float: left;
+        margin-right: 10px;
+    }
+</style>
+<div>
+    <div class="top_search_bar" id="validate">
+        <combbox caption="产线" ng-model="condition.productLine" list="productLineList" width="200" mustinput="true" on-change="productLineChange(val)"></combbox>
+        <file-upload-button caption="导入计划" url="uploadUrl" beforeload="beforeLoad()" afterupload="afterLoad(res)"></file-upload-button>
+        <button type="button" class="btn bg-maroon" style="margin-left:20px" ng-click="onDownload()"><i class="fa fa-cloud-download"></i>&nbsp;下载模板</button>
+        <button type="button" class="btn bg-green" style="margin-left:20px" ng-click="preWeek()"><i class="fa fa-arrow-circle-left"></i>&nbsp;上一周</button>
+        <button type="button" class="btn bg-green" style="margin-left:20px" ng-click="thisWeek()"><i class="fa fa-arrows-alt"></i>&nbsp;本周</button>
+        <button type="button" class="btn bg-green" style="margin-left:20px" ng-click="nextWeek()"><i class="fa fa-arrow-circle-right"></i>&nbsp;下一周</button>
+        <div style="float: right; height: 100%;">
+            <span class="coloricon"></span>
+            <span class="colordesc">未开始</span>
+            <span class="coloricon td-begin"></span>
+            <span class="colordesc">已开始</span>
+            <span class="coloricon td-complete"></span>
+            <span class="colordesc">已完成</span>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <table class="schedule" style="table-layout:fixed; width: 100%;">
+        <tr>
+            <th style="background: #EE3A8C;">岗位</th>
+            <th colspan="15" style="height='{{setHeight()}}'">
+                <table class="title" style="table-layout:fixed; width: 100%;">
+                    <tr>
+                        <th style="background: #EE3A8C; border-left: 0;">时间</th>
+                        <th style="background: #EE3A8C;">产品</th>
+                        <th style="background: #EE3A8C;">工序</th>
+                        <th class="this-week">周一<br />{{dateList[0]}}</th>
+                        <th class="this-week">周二<br />{{dateList[1]}}</th>
+                        <th class="this-week">周三<br />{{dateList[2]}}</th>
+                        <th class="this-week">周四<br />{{dateList[3]}}</th>
+                        <th class="this-week">周五<br />{{dateList[4]}}</th>
+                        <th class="weekend">周六<br />{{dateList[5]}}</th>
+                        <th class="weekend">周日<br />{{dateList[6]}}</th>
+                        <th class="next-week">周一<br />{{dateList[7]}}</th>
+                        <th class="next-week">周二<br />{{dateList[8]}}</th>
+                        <th class="next-week">周三<br />{{dateList[9]}}</th>
+                        <th class="next-week">周四<br />{{dateList[10]}}</th>
+                        <th class="next-week">周五<br />{{dateList[11]}}</th>
+                        <th class="weekend">周六<br />{{dateList[12]}}</th>
+                        <th class="weekend" style="border-right: 2px solid #3b3b3b;">周日<br />{{dateList[13]}}</th>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+        <tr ng-repeat="station in scheduleList">
+            <td class="base-info" style="background-color:{{station.color}}">
+                {{station.StationCode}}<br />{{station.StationName}}
+            </td>
+            <td colspan="15">
+                <table class="timeItem">
+                    <tr ng-repeat="detail in station.detailList|orderBy:'time'">
+                        <td class="time">{{detail.time?detail.time:"--"}}</td>
+                        <td class="time">{{detail.AssemblyDesc?detail.AssemblyDesc:"--"}}</td>
+                        <td class="time">{{detail.OpNo?detail.OpNo:"--"}}</td>
+                        <td ng-class="{'td-begin': serialItem.Status=='begin', 'td-complete': serialItem.Status=='complete'}"
+                            ng-repeat="serialItem in detail.serialItemList track by $index">
+                            {{serialItem.SerialNo?serialItem.SerialNo:"--"}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+<!--<file-upload show="showImport" attachlist="attachList" import="import()" cancel="cancelImport()"></file-upload>-->

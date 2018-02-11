@@ -1,0 +1,18 @@
+﻿<div class="top_search_bar">
+    <link href="Resource/Css/Page/P003PM/P003PM004_ProductionStatusView.css" rel="stylesheet" />
+    <div style="text-align:left;width:500px;float:left;" id="validate">
+        <combbox caption="产线" ng-model="productLine" list="productLineList" mustinput="true" width="200"></combbox>
+       <button type="button" class="btn bg-maroon" ng-click="onResearch()"><i class="fa fa-search"></i>&nbsp;检索</button>
+    </div>
+    <div style="width:600px;text-align:right;float:right;">
+        <span style="background:#fff;width:20px;height:20px;display:inline-block;border:1px solid #000000;vertical-align:middle;margin:0px 5px;"></span>未开始&nbsp;
+        <span style="background:#c1ffc1;width:20px;height:20px;display:inline-block;border:1px solid #000000;vertical-align:middle;margin:0px 5px;"></span>已开始&nbsp;
+        <span style="background:#EED2EE;width:20px;height:20px;display:inline-block;border:1px solid #000000;vertical-align:middle;margin:0px 5px;"></span>已完成&nbsp;
+    </div>
+</div>
+<table class="wip" ng-repeat="item in list">
+    <tr>
+        <td class="serialNo">加工序列号<br />{{item.SerialNo}}</td>
+        <td class="opNo" ng-repeat="op in item.opList" ng-class="{'opNo_complete':op.Status=='complete', 'opNo_begin':op.Status=='begin'}">{{op.OpNo}}</td>
+    </tr>
+</table>

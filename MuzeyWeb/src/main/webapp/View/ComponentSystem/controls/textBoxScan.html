@@ -1,0 +1,9 @@
+﻿<div id="{{ngId}}" class="control_container" style="width: {{width}}px">
+    <span class="textBoxScanBorder">
+        <input id="scanbox" type="text" style="width: {{width-70}}px;" placeholder="{{placeholder}}"
+               ng-disabled="ngDisabled" ng-model="ngModel" />
+        <span class="scanBox" ng-disabled="ngDisabled" ng-click="opCamera()"><i class="fa fa-qrcode fa-3x"></i></span>
+        <input id="btnTest" type="button" style="display: none" onclick="angular.element(this).scope().inputChange()" />
+        <input id="hidVal" type="hidden" />
+    </span>
+</div>

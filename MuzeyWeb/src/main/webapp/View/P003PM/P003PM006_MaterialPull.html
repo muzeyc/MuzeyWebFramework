@@ -1,0 +1,24 @@
+﻿<div class="top_search_bar" id="validate">
+    <div class="inputBar">
+        <assembly ng-model="obj.assemblyItem" mustinput="true" after-select="getOpList(item.AssemblyItem)"></assembly>
+    </div>
+    <div class="inputBar">
+        <text-box-normal caption="加工序列号" ng-model="obj.SerialNo" width="250" mustinput="true"></text-box-normal>
+    </div>
+    <div class="inputBar">
+        <combbox caption="工序" ng-model="obj.OpNo" list="opList" width="250" mustinput="true"></combbox>
+    </div>
+    <div class="inputBar">
+        <!--<date-input caption="需求时间" width="250" ng-model="obj.RequestDate" mustinput="true"></date-input>-->
+         <span>需求时间:</span>
+         <input type="datetime-local" ng-model="obj.RequestDate"/>
+    </div>
+    <div class="inputBar" style="margin-bottom: 0;">
+        <span>备注</span>
+        <br />
+        <textarea style="height: 60px; width: 100%" ng-model="obj.Comment"></textarea>
+    </div>
+    <div class="inputBar">
+        <button type="button" class="btn bg-maroon float_left" ng-click="save()"><i class="fa fa-floppy-o"></i>&nbsp;保存</button>
+    </div>
+</div>

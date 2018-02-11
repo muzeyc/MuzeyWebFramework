@@ -1,0 +1,23 @@
+﻿<div class="top_search_bar">
+    <button type="button" class="btn bg-yellow float_right" ng-click="onReflesh()">刷新</button>
+</div>
+<br />
+<div class="list_bar" style="margin-bottom: 50px;">
+    <table class="table table-striped table-hover table-condensed" style="margin-bottom: 0;">
+        <thead>
+            <tr>
+                <th class="bg-blue" style="width: 20%">编号</th>
+                <th class="bg-blue" style="width: 80%">区域名称</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="area in areaList track by $index" ng-class="{'select-row': selectedIndex == $index}" ng-click="rowSelect($index)">
+                <td>{{area.areaId}}</td>
+                <td>{{area.areaName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="button_bar">
+    <pager totalrowcount="totalCount" rowcount="100" dispcount="10" on-page-change="onPageChange(val)"></pager>
+</div>

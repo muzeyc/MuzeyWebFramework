@@ -1,0 +1,8 @@
+﻿<popup width="1100" height="550" title="关键件信息" show="show">
+    <div class="modal-body" id="validate">
+        <pagegridview config="config" list="keyPartList" ng-disabled="true"
+                      refresh="onResearch()"
+                      hidefuncbar="true"
+                      rowcount="{{more.size}}" totalrowcount="totalRowCount"></pagegridview>
+    </div>
+</popup>

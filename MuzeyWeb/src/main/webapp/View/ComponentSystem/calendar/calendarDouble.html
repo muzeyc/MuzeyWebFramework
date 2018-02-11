@@ -1,0 +1,24 @@
+﻿<div class="hxCalFrame" ng-if="$ctrl.show" ng-click="$ctrl.preventBubble($event)">
+    <div class="hxCalPopArrowEx">
+        <div class="hxCalPopArrowIn"></div>
+        <div class="hxCalPopArrowOut"></div>
+    </div>
+    <div class="hxCal hxCal_double">
+        <!--<div class="hxCalInputArea">
+            <input id="dateFrom" type="text" ng-model="$ctrl.startTime" class="hxInput hxCalInput" placeholder="年-月-日" ng-focus="$ctrl.selectStart(true)">
+            <div class="hxCalSeparator">
+                <div class="line"></div>
+            </div>
+            <input id="dateTo" type="text" ng-model="$ctrl.endTime" class="hxInput hxCalInput" placeholder="年-月-日" ng-focus="$ctrl.selectEnd(true)">
+        </div>-->
+        <div class="calendar-border">
+            <calendar on-select="$ctrl.selectDay(day)"></calendar>
+        </div>
+        <div class="calendar-border" style="margin-left: 50px">
+            <calendar on-select="$ctrl.selectDay(day)"></calendar>
+        </div>
+        <div class="hxCalSearch">
+            <input type="button" class="hxButton backgroundYellow hxWhite" value="确定" ng-click="$ctrl.search($event)">
+        </div>
+    </div>
+</div>

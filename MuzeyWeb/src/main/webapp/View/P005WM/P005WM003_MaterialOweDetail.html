@@ -1,0 +1,17 @@
+﻿<popup width="700" height="500" title="物料明细" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <text-box-normal caption="产品名称" ng-model="AssemblyItem" ng-disabled="true" width="280"></text-box-normal>
+            <text-box-normal caption="料盒编号" ng-model="BoxNo" width="250" ng-disabled="true"></text-box-normal>
+            <div style="clear:both;"></div>
+        </div>
+        <!--领料单-->
+        <pagegridview config="config"
+                      list="detailList"
+                      ng-disabled="true"
+                      pagechange="onPageMain(val)"
+                      rowcount="{{more.size}}"
+                      totalrowcount="totalCount">
+        </pagegridview>
+    </div>
+</popup>

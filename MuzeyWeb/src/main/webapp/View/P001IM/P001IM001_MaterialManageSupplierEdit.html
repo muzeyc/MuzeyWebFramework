@@ -1,0 +1,13 @@
+﻿<popup width="600" height="500" title="关联供应商" show="show">
+    <div class="modal-body" id="validate">
+        <pagegridview config="config"
+                      list="supplierList"
+                      refresh="refresh()"
+                      rowcount="1000"
+                      totalrowcount="SupplierList.length"
+                      hidefuncbar="true"></pagegridview>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">关闭</button>
+    </div>
+</popup>

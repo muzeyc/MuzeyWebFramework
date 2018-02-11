@@ -1,0 +1,14 @@
+﻿<div class="modal-dialog-container pdf-view" ng-show="show">
+    <div style="position: absolute; height: 100%; width: 100%; top: 0; bottom: 0; z-index: 100;">
+        <div class="modal-dialog" ng-class="{'popup':!isSetSize()}">
+            <div class="modal-content">
+                <iframe ng-src="{{src}}"
+                        style="position: absolute; height: 100%; width: 100%; top: 0; bottom: 0; z-index: 1000;"></iframe>
+            </div>
+        </div>
+    </div>
+    <span class="close-button-big" ng-click="cancel()">
+        <span>&times;</span>
+    </span>
+    <div class="bg"></div>
+</div>

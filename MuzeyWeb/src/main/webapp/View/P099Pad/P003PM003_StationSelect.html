@@ -1,0 +1,37 @@
+﻿<link href="/Resource/Css/Page/P099Pad/P003PM003_StationSelect.css?v={{random}}" rel="stylesheet" />
+<div>
+    <div class="col-md-3">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title">选择产线</h4>
+            </div>
+            <div class="box-body">
+                <!-- the events -->
+                <div id="external-events">
+                    <div class="external-event productLineRow" ng-click="lineSelect(productLine)"
+                         ng-repeat="productLine in productLineList" ng-class="{'productLineRow-selected':selectedLine==productLine.subId}">{{productLine.name}}</div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="col-md-9 station-list">
+        <div class="small-box station-item" ng-class="{'bg-aqua':station.StationType==1, 'bg-green':station.StationType==3, 'bg-yellow':station.StationType==99 }"
+             ng-repeat="station in stationList" ng-click="stationSelect(station)">
+            <div class="inner">
+                <h3>{{station.StationCode}}</h3>
+                <p>{{station.StationName}}</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-wrench" ng-if="station.StationType==1"></i>
+                <i class="fa fa-thermometer-three-quarters" ng-if="station.StationType==3"></i>
+                <i class="fa fa-cube" ng-if="station.StationType==99"></i>
+            </div>
+            <a class="small-box-footer">
+                点击进入报工页面 <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+    <div style="clear: both;"></div>
+</div>

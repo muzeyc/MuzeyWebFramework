@@ -1,0 +1,8 @@
+﻿<div class="top_search_bar" id="validate1">
+    <assembly ng-model="assemblyItem" mustinput="true" after-select="onAssemblyChange(item)"></assembly>
+</div>
+<div>
+    <pagegridview config="config" list="opList" refresh="refresh()" add="add()" edit="edit(item)" pagechange="onpageChange(val)"
+                  remove="onDelete(items)" rowcount="{{more.size}}" totalrowcount="totalCount"></pagegridview>
+</div>
+<op-edit after-commit="afterCommit(res)"></op-edit>

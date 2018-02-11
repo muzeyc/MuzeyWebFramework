@@ -1,0 +1,9 @@
+﻿<div class="top_search_bar" id="validate1">
+    <assembly ng-model="AssemblyItem" mustinput="true" after-select="onAssemblyChange(item)" productline="productLine"></assembly>
+</div>
+<div>
+    <pagegridview config="config" list="wiList" refresh="refresh()" add="add()" edit="edit(item)"
+                  remove="onDelete(items)" pagechange="onPage(val)"  rowcount="{{more.size}}" totalrowcount="totalCount"></pagegridview>
+</div>
+<wi-edit after-commit="afterCommit(res)"></wi-edit>
+<pdfview></pdfview>

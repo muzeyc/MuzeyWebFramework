@@ -1,0 +1,104 @@
+﻿<div style="height: 100%; background: #fff; padding: 5px;">
+    <div class="row" style="width: 80%; float: left;">
+        <div>
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-blue">
+                    <div class="inner">
+                        <h3>15<sup style="font-size: 20px">/20</sup></h3>
+                        <p>实际/计划</p>
+                    </div>
+                    <a class="small-box-footer">产量</a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-blue">
+                    <div class="inner">
+                        <h3>53<sup style="font-size: 20px">/210</sup></h3>
+
+                        <p>分钟</p>
+                    </div>
+                    <a class="small-box-footer">节拍状态</a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-blue">
+                    <div class="inner">
+                        <h3>33<sup style="font-size: 20px">/80%</sup></h3>
+                        <p>NCR数/一次通过率</p>
+                    </div>
+                    <a class="small-box-footer">质量</a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-blue">
+                    <div class="inner">
+                        <h3>20<sup style="font-size: 20px">/26</sup></h3>
+                        <p>上岗/岗位数</p>
+                    </div>
+                    <a class="small-box-footer">人员状态</a>
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <div style="padding: 15px">
+            <div class="box">
+                <div class="box-body no-padding">
+                    <table class="table table-condensed">
+                        <tbody>
+                            <tr>
+                                <th style="width: 2%"></th>
+                                <th style="width: 10%">Andon类型</th>
+                                <th style="width: 10%">产品</th>
+                                <th style="width: 10%">工序</th>
+                                <th style="width: 20%">报警时间</th>
+                                <th style="width: 50%">报警描述</th>
+                            </tr>
+                            <tr ng-repeat="andon in andonList track by $index" style="background: {{ andon.Level; }}">
+                                <td>{{$index+1}}</td>
+                                <td>{{andon.AndonTypeName}}</td>
+                                <td>{{andon.AssemblyName}}</td>
+                                <td>{{andon.OpNo}}</td>
+                                <td>{{andon.CreateTime}}</td>
+                                <td>{{andon.ExceptionDesc}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+        
+    </div>
+    <div style="width: 20%; float: right;">
+        <div class="small-box bg-green" style="height: 200px;">
+            <div class="inner" style="text-align: center;">
+                <h3 style="font-size: 80px;">0</h3>
+                <p>节拍异常</p>
+            </div>
+            <a class="small-box-footer" style="position: absolute; width: 100%; bottom: 0;">产线状态</a>
+        </div>
+        <div class="small-box bg-red" style="height: 160px;">
+            <div class="inner" style="text-align: center;">
+                <h3 style="font-size: 80px;">0</h3>
+                <p>未响应</p>
+            </div>
+            <a class="small-box-footer" style="position: absolute; width: 100%; bottom: 0;">产线状态</a>
+        </div>
+        <div class="small-box bg-yellow" style="height: 160px;">
+            <div class="inner" style="text-align: center;">
+                <h3 style="font-size: 80px;">0</h3>
+                <p>已响应</p>
+            </div>
+            <a class="small-box-footer" style="position: absolute; width: 100%; bottom: 0;">产线状态</a>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+

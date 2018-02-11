@@ -1,0 +1,12 @@
+﻿<popup width="600" height="500" title="用户与操作组对应关系" show="show">
+    <div class="modal-body">
+        <div class="inputBar">
+            <text-box-normal caption="用户" ng-model="ug.UserName" width="552" ng-disabled="true"></text-box-normal>
+        </div>
+        <pagegridview config="config" hidefuncbar="true" canselect="true" list="groupList" rowcount="1000" totalrowcount=""></pagegridview>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

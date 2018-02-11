@@ -1,0 +1,16 @@
+﻿<div class="wrapper">
+    <header class="main-header">
+        <!-- Logo -->
+        <nav class="navbar navbar-static-top" style="height: 40px; margin-left: 0; background: #4F4F4F">
+            <a ng-click="goHome()" class="logo" style="cursor: pointer; text-align: left; background: #4F4F4F; width: 80px;">
+                <i class="fa fa-home fa-2x"></i>
+            </a>
+            <span class="head-title" ng-click="goBack()"><i class="fa fa-arrow-circle-o-left fa-2x"></i></span>
+            <user-menu></user-menu>
+        </nav>
+    </header>
+    <div class="content-wrapper" style="margin: 0; background: #8e8e8e; ">
+        <div ui-view="mainView" style="height: 100%"></div>
+    </div>
+    <my-dialog></my-dialog>
+</div>

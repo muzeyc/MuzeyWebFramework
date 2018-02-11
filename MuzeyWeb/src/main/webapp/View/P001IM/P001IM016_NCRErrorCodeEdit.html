@@ -1,0 +1,21 @@
+﻿<popup width="600" height="500" title="编辑" show="show">
+    <div class="modal-body" id="validate">        
+        <div class="inputBar">
+            <combbox caption="产线" ng-model="errorItem.ProductLine" list="productList" width="300" mustinput="true"></combbox>
+        </div>
+        <div class="inputBar">
+            <combbox caption="NCR分类" ng-model="errorItem.NCRType" list="ncrList" width="300" mustinput="true"></combbox>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="缺陷代码名称" ng-model="errorItem.ErrorCode" width="300" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="备注" ng-model="errorItem.Remark" width="300"></text-box-normal>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>
+

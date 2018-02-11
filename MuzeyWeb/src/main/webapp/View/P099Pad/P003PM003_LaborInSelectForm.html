@@ -1,0 +1,15 @@
+﻿<popup width="600" height="400" title="选择是否移序" show="show">
+    <div class="modal-body" style="text-align: center">
+        <span class="btn bg-blue" ng-click="commit(0)"
+               style="height: 200px; width: 200px; margin: 20px; font-size: 30px; line-height: 200px;">
+            仅报工不移序
+        </span>
+        <span class="btn bg-green" ng-click="commit(1)"
+              style="height: 200px; width: 200px; margin: 20px; font-size: 30px; line-height: 200px;">
+            报工并移序
+        </span>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

@@ -1,0 +1,8 @@
+﻿<div class="control_container" style="width: {{width}}px">
+    <div class="input-group">
+        <span class="input-group-addon" ng-class="{mustInputCaption:mustinput}" ng-if="caption&&caption.length>0">{{caption}}</span>
+        <input id="{{id}}" type="text" class="form-control value" ng-class="{required:mustinput}" ng-disabled="ngDisabled" placeholder="{{placeholder}}"
+               ng-model="ngModel" maxlength="{{maxlength}}"
+               ng-change="inputChange()" ng-blur="onblur()" ng-focus="onfocus()" />
+    </div>
+</div>

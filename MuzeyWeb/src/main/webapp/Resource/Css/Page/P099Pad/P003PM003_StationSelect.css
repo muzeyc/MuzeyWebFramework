@@ -1,0 +1,43 @@
+﻿.productLineRow {
+    background: #3b3b3b;
+    color: #fff;
+    height: 40px;
+    line-height: 35px;
+}
+.productLineRow-selected {
+    background: #4169E1 !important;
+}
+.station-list {
+    overflow-y: auto;
+}
+.station-list .station-item {
+    width: 200px;
+    float: left;
+    margin-left: 20px;
+}
+.station-list .info-box-content {
+    text-align: center;
+    height: 100%;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.station-list .assembly-item {
+    width: 300px;
+    float: left;
+    margin-left: 20px;
+}
+
+.station-list .wi-item {
+    width: 250px;
+    float: left;
+    margin-left: 20px;
+}
+
+.assembly-item h3, .wi-item h3{
+    font-size: 20px !important;
+}
+
+.wi-item .inner {
+    text-align: left;
+}

@@ -1,0 +1,10 @@
+﻿<div class="top_search_bar" id="validate">
+    <text-box-number caption="年度" ng-model="condition.year" width="120" mustinput="true"></text-box-number>
+    <combbox caption="月份" ng-model="condition.month" list="monthList" width="120" mustinput="true"></combbox>
+    <combbox caption="产品" ng-model="condition.assemblyItem" list="assemblyList" width="200"></combbox>
+    <button type="button" class="btn bg-blue" ng-click="search()"><i class="fa fa-search"></i>&nbsp;检索</button>
+    <div style="clear:both;"></div>
+</div>
+<div ng-if="model.dataList&&model.dataList.length>0">
+    <piechart ng-model="model" height="400"></piechart>
+</div>

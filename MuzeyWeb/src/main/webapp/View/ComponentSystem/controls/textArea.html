@@ -1,0 +1,7 @@
+﻿<div class="control_container textArea" style="width: {{width}}px">
+    <div class="textArea-caption" ng-class="{mustInputCaption:mustinput}" ng-if="caption&&caption.length>0">{{caption}}</div>
+    <textarea class="value" ng-class="{required:mustinput}" ng-disabled="ngDisabled" placeholder="{{placeholder}}"
+              ng-model="ngModel" maxlength="{{maxlength}}" rows="{{rows}}"
+              ng-change="inputChange()"></textarea>
+    <div style="clear: both"></div>
+</div>

@@ -1,0 +1,46 @@
+﻿<popup width="800" height="550" title="MOC信息" show="show">
+    <link href="Resource/Css/Page/P003PM/P003PM005_MocEdit.css" rel="stylesheet" />
+    <div class="modal-body" id="validate">
+        <div class="moc-list">
+            <button class="select-btn" ng-repeat="moc in mocCodeList"
+                    ng-class="{'select-btn-active':moc.selected}"
+                    ng-click="showMocInfo(moc)">
+                {{moc.MocCode}}
+            </button>
+            <div style="clear: both;"></div>
+        </div>
+        <div>
+            <div style="width: 300px; float: left; margin-right: 10px;">
+                <div class="inputBar">
+                    <text-box-normal caption="产品" ng-model="moc.AssemblyDesc" width="250" ng-disabled="true"></text-box-normal>
+                </div>
+                <div class="inputBar">
+                    <text-box-normal caption="MOC类型" ng-model="moc.MOCTypeName" width="250" ng-disabled="true"></text-box-normal>
+                </div>
+                <div class="inputBar">
+                    <text-box-normal caption="MOC子类型" ng-model="moc.MOCSubTypeName" width="250" ng-disabled="true"></text-box-normal>
+                </div>
+                <div class="inputBar">
+                    <text-box-normal caption="ECO号" ng-model="moc.ECO" width="150" ng-disabled="true"></text-box-normal>
+                    <span class="moc-status" ng-class="{'moc-status-notexe':moc.Status==2}">{{moc.Status==1?'已执行':moc.Status==2?'不执行': ''}}</span>
+                </div>
+                <div class="inputBar" style="margin-bottom: 0;">
+                    <text-area caption="备注" style="width: 100%;" rows="6" ng-model="moc.Comment" ng-disabled="true"></text-area>
+                </div>
+            </div>
+            <div class="moc-border" style="width: 400px;" ng-if="moc.MOCType==1">
+                &nbsp;物料<br />
+                <button class="select-btn" ng-repeat="material in materialList">
+                    {{material.MaterialName}}
+                </button>
+                <div style="clear: both;"></div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-maroon" ng-click="updateMocStatus(2)">不执行MOC</button>
+        <button type="button" class="btn bg-green" ng-click="updateMocStatus(1)">执行MOC</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">关闭</button>
+    </div>
+</popup>

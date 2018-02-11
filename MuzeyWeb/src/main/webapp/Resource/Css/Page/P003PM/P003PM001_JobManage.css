@@ -1,0 +1,57 @@
+﻿.job-row {
+    min-height: 40px;
+    margin: 5px 0;
+    border: 1px solid #3b3b3b;
+    background: #fff;
+}
+.job-cell {
+    height: 100%;
+    display: inline-block;
+    text-align: left;
+    float: left;
+}
+.job-row-main {
+    padding: 3px;
+    height: 40px;
+}
+.job-row:hover {
+    background: #FFFFE0;
+}
+.index {
+    width: 40px;
+    color: #fff;
+    text-align: center;
+    line-height: 35px;
+}
+.btn-plus {
+    width: 5%;
+    padding-left: 10px;
+}
+.JobNo, .AssemblyItem, .Quantity, .JobBatchSize, .JobStatus {
+    width: 10%;
+}
+.ReleasedDate, .StartDate, .CompleteDate {
+    width: 12%;
+}
+.job-row-sub {
+    text-align: right;
+}
+.detailData {
+    width: 100%;
+}
+.detailData th {
+    height: 25px;
+    background: #3b3b3b;
+    color: #fff;
+}
+.detailData td {
+    height: 35px;
+    padding-left: 3px;
+    border-top: 1px solid #3b3b3b;
+}
+.SerialNo, .LaborHour, .Status, .Assembly {
+    width: 10%;
+}
+.BeginDate, .RealBeginDate, .RealEndDate, .Buttons {
+    width: 15%;
+}

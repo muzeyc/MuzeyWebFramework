@@ -1,0 +1,26 @@
+﻿<div class="top_search_bar" id="validate">
+    <assembly ng-model="condition.AssemblyItem" mustinput="true" after-select="getOpList(item.AssemblyItem)"></assembly>
+    <combbox caption="工序" ng-model="condition.OpNo" list="opList" width="250" mustinput="true"></combbox>
+    <button type="button" ng-click="onResearch()" class="btn bg-green float_left" style="margin-right:10px">查询</button>
+    <div class="float_left" style="margin-right: 10px;">
+        <file-upload-button caption="导入" url="uploadUrl" beforeload="beforeLoad()"></file-upload-button>
+    </div>
+    <button type="button" class="btn bg-maroon float_left" style="margin-right:10px" ng-click="export()"><i class="fa fa-cloud-download"></i>&nbsp;导出</button>
+    <button type="button" class="btn bg-maroon float_left" style="margin-right:10px" ng-click="downTemplateFile()"><i class="fa fa-cloud-download"></i>下载模板</button>
+    <div style="clear: both;"></div>
+</div>
+<div>
+    <pagegridview config="config"               
+                  list="checkItemList"
+                  refresh="refresh()"
+                  add="add()"
+                  edit="edit(item)"
+                  remove="onDelete(items)"
+                  pagechange="onPageChange(val)"
+                  rowcount="{{more.size}}"
+                  totalrowcount="totalCount">
+    </pagegridview>
+
+</div>
+<aclcheckitem-edit after-commit="afterCommit(res)"></aclcheckitem-edit>
+<pictureview width="1000" height="550"></pictureview>

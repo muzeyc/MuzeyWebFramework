@@ -1,0 +1,74 @@
+﻿
+.acl-row {
+    margin: 5px 0;
+    border: 1px solid #3b3b3b;
+    background: #757575;
+    color: #fff;
+}
+
+    .acl-row .select-btn-active {
+        color: #fff !important;
+    }
+
+.acl-row-err {
+    background-color: #EE5C42 !important;
+}
+
+.acl-col {
+    height: 100%;
+    display: inline-block;
+    padding: 5px 3px 3px 3px;
+    float: left;
+}
+
+.item-Code {
+    width: 80px;
+}
+
+.item-CheckItem {
+    width: 150px;
+}
+
+.item-Detail {
+    width: 200px;
+}
+
+.item-Range {
+    width: 80px;
+}
+
+.item-Result {
+    width: 350px;
+}
+
+    .item-Result .control_container {
+        margin: 0;
+        margin-right: 10px;
+    }
+
+    .item-Result input {
+        height: 40px;
+    }
+
+    .item-Result .select-btn {
+        height: 40px;
+        width: 60px;
+        line-height: 40px;
+        color: #3b3b3b;
+    }
+
+.item-Picture {
+    width: 70px;
+    padding-top: 10px;
+    font-size: 20px;
+}
+
+.acl-caption {
+    width: 80px;
+    text-align: left;
+}
+
+.acl-content {
+    width: 120px;
+    text-align: left;
+}

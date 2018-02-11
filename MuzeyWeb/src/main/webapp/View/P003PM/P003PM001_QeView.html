@@ -1,0 +1,18 @@
+﻿<popup width="1100" height="550" title="QE信息" show="show">
+    <div class="modal-body" id="validate">
+        工序：<br />
+        <div class="op-list-bar">
+            <button class="select-btn" ng-repeat="op in opList track by $index"
+                    ng-class="{'select-btn-active':opNo==op.OpNo}"
+                    ng-click="opSelect(op)">
+                {{op.OpNo}}
+            </button>
+            <div style="clear: both;"></div>
+        </div>
+        <div ng-if="qeList && qeList.length>0">
+            <pagegridview config="config" list="qeList" ng-disabled="true"
+                          refresh="refresh()"
+                          pagechange="onPageChange(val)" rowcount="{{more.size}}" totalrowcount="totalRowCount"></pagegridview>
+        </div>
+    </div>
+</popup>

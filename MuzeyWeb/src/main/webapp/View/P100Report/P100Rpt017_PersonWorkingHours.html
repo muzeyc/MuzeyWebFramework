@@ -1,0 +1,34 @@
+﻿<link href="/Resource/Css/Page/P100Report/P100Rpt017_PersonWorkingHours.css" rel="stylesheet" />
+<div class="top_search_bar" id="validate">
+    <date-input-double caption="日期范围" datefrom="condition.dateFrom" month-only="true"  dateto="condition.dateTo" width="350"></date-input-double>
+    <text-box-normal caption="SSO编号" width="300" ng-model="condition.SSO"></text-box-normal>
+    <text-box-normal caption="员工姓名" width="300" ng-model="condition.userName"></text-box-normal>
+    <button type="button" class="btn bg-blue" ng-click="search()" style="margin-right:10px"><i class="fa fa-search"></i>&nbsp;检索</button>
+    <button type="button" class="btn bg-maroon" style="margin-right:10px" ng-click="export()"><i class="fa fa-cloud-download"></i>&nbsp;导出</button>
+    <div style="clear:both;"></div>
+
+</div>
+<div ng-if="list && list.length>0" style="overflow-x: auto">
+    <table class="skill">
+        <thead>
+            <tr>
+                <th style="width: 40px;">序号</th>
+                <th style="width: 80px;">SSO</th>
+                <th style="width: 80px;">员工</th>
+                <th style="width: 90px;" ng-repeat="mon in monList track by $index">{{mon.Text}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="data in list" ng-class="{'select-row': selectedIndex == mainIndex}"
+                ng-init="mainIndex=$index">
+                <td style="background-color: #96CDCD;">{{mainIndex + 1}}</td>
+                <td style="background-color: #96CDCD;">{{data.SSO}}</td>
+                <td style="background-color: #96CDCD;">{{data.UserName}}</td>
+                <td ng-repeat="hour in data.laborHourList track by $index">
+                    <span ng-if="hour">{{hour.LaborHour}}分</span>
+                    <span ng-if="!hour">--</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

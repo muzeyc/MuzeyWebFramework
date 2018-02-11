@@ -1,0 +1,9 @@
+﻿<div ng-if="$ctrl.show" class="hxCalFrame" ng-click="$ctrl.preventBubble($event)">
+    <div class="hxCalPopArrowEx">
+        <div class="hxCalPopArrowIn"></div>
+        <div class="hxCalPopArrowOut"></div>
+    </div>
+    <div class="hxCal">
+        <calendar on-select="$ctrl.selectDay(day)" on-select-month="$ctrl.selectMonth(month)" month-only="$ctrl.monthOnly" from-now="$ctrl.fromNow"></calendar>
+    </div>
+</div>

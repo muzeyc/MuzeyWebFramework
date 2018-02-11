@@ -1,0 +1,56 @@
+﻿<popup width="1000" height="500" title="新增/编辑欠料单" show="show">
+    <link href="Resource/Css/Page/P005WM/P005WM003_MaterialOweEdit.css" rel="stylesheet" />
+    <div class="modal-body" id="validate">
+        <div style="width: 400px; float: left; margin-right: 10px;">
+            <div class="inputBar"></div>
+            <div class="inputBar">
+                <assembly ng-model="obj.AssemblyItem" mustinput="true" after-select="onAssemblyChange(item)" productline="productline" ng-disabled="mode=='edit'"></assembly>
+            </div>
+            <div class="inputBar">
+                <combbox caption="工序" ng-model="obj.OpNo" list="opList" width="250" mustinput="true" ng-disabled="mode=='edit'"></combbox>
+            </div>
+            <div class="inputBar">
+                <text-box-normal caption="料盒编号" ng-model="obj.BoxNo" width="250" mustinput="true" ng-disabled="mode=='edit'"></text-box-normal>
+            </div>
+            <div class="inputBar">
+                <!--<text-box-normal caption="工单" ng-model="obj.JobNo" width="150" ng-disabled="true" mustinput="true"></text-box-normal>-->
+                <text-box-normal caption="加工序列号" ng-model="obj.SerialNo" width="250" ng-disabled="true"></text-box-normal>
+            </div>
+            <div class="inputBar" style="margin-bottom: 0;">
+                <text-area caption="备注" style="height: 60px; width: 100%;" ng-model="obj.Comment"></text-area>
+            </div>
+            <div class="inputBar" style="margin-bottom: 0;" ng-if="mode=='editowe'">
+                <control-container width="150" caption="已处理">
+                    <check-box ng-model="obj.Status" checkedvalue="1" uncheckedvalue="0"></check-box>
+                </control-container>
+            </div>
+        </div>
+        <div style="width: 500px; height: 100%; float: left;">
+            <div style="width: 500px; height: 30px; margin-right: 10px;">
+                请选择加工序列号:<span style="background:#fff;width:20px;height:20px;display:inline-block;border:1px solid #000000;vertical-align:middle;margin:0px 5px;"></span>未开始&nbsp;
+                <span class="bg-green" style="width:20px;height:20px;display:inline-block;border:1px solid #000000;vertical-align:middle;margin:0px 5px;"></span>已开始&nbsp;&nbsp;请选择物料:
+            </div>
+            <div style="width:510px;height:100%;">
+                <div style="width: 250px; height: 350px; float: left; border: 1px solid #ccc; padding: 3px; overflow-y: auto;">
+                    <button class="select-btn" ng-repeat="job in jobList"
+                            ng-class="{'select-btn-active':job.SerialNo==selectedJob.SerialNo,'bg-green':job.Status=='begin'}" ng-disabled="mode=='edit'"
+                            ng-click="jobSelect(job)">
+                        {{job.SerialNo}}
+                    </button>
+                </div>
+                <div style="width: 250px; height: 350px; float: right; border: 1px solid #ccc; padding: 3px; overflow-y: auto;">
+
+                    <button class="select-btn" ng-repeat="material in materialList" style="width:100%;text-align:left;"
+                            ng-class="{'select-btn-active':material.selected}"
+                            ng-click="materialSelect(material)">{{material.MaterialName}}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

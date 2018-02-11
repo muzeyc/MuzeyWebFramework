@@ -1,0 +1,23 @@
+﻿<popup width="600" height="500" title="物料管理" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <text-box-normal caption="物料编号" ng-model="material.MaterialCode" mustinput="true" ng-disabled="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="物料名称" ng-model="material.MaterialName" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="单位" ng-model="material.Unit" width="150"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-number caption="单价" ng-model="material.UnitPrice" width="150"></text-box-number>
+        </div>
+        <div class="inputBar">
+            <combbox caption="序列号标识" ng-model="material.SerialFlag" list="serialFlagList" width="250" mustinput="true"></combbox>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

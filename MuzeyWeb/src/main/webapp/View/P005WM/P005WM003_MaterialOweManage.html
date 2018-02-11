@@ -1,0 +1,58 @@
+﻿<div class="top_search_bar" id="validate1">
+    <assembly ng-model="condition.assemblyItem" after-select="onAssemblyChange(item)" productline="productLine"></assembly>
+    <text-box-normal caption="加工序列号" ng-model="condition.SerialNo" width="180"></text-box-normal>
+    <text-box-normal caption="料盒编号" ng-model="condition.BoxNo" width="220" ng-disabled="displayType!=1"></text-box-normal>
+    <combbox caption="状态" ng-model="condition.Status" list="statusItemList" width="150"></combbox>
+    <button type="button" class="btn bg-maroon" ng-click="onResearch(condition)"><i class="fa fa-search"></i>&nbsp;检索</button>
+    <div style="clear:both;"></div>
+</div>
+<div style="padding: 0 0 5px 0;">
+    <span class="select-btn" ng-class="{'select-btn-active':displayType==1}" ng-click="setDisplayType(1)">欠料单</span>
+    <span class="select-btn" ng-class="{'select-btn-active':displayType==2}" ng-click="setDisplayType(2)">领料单</span>
+    <span class="select-btn" ng-class="{'select-btn-active':displayType==3}" ng-click="setDisplayType(3)">物料拉动</span>
+    <div style="clear:both;"></div>
+</div>
+<!--欠料单-->
+<div ng-if="displayType==1">
+    <pagegridview config="config" 
+                  list="oweList" 
+                  add="add()" 
+                  edit="edit(item)"
+                  remove="onDelete(items)"
+                  refresh="refresh()"
+                  pagechange="onPageOwe(val)" 
+                  rowcount="{{more.size}}" 
+                  totalrowcount="totalCount">
+    </pagegridview>
+</div>
+<!--领料单-->
+<div ng-if="displayType==2">
+    <pagegridview config="configRequest" 
+                  list="requestList"
+                  refresh="refreshRequest()"
+                  ng-disabled="true" 
+                  btnicon1="fa-pencil-square-o" 
+                  btnclick1="editRequest(item)"
+                  pagechange="onPageRequest(val)" 
+                  rowcount="{{moreRequest.size}}" 
+                  totalrowcount="totalrowcountRequest">
+    </pagegridview>
+
+</div>
+<!--物料拉动--> 
+<div ng-if="displayType==3">
+    <pagegridview config="configPull"
+                  list="pullList"
+                  refresh="refreshPull()" 
+                  ng-disabled="true" 
+                  btnicon1="fa-pencil-square-o"
+                  btnclick1="editPull(item)"
+                  pagechange="onPagePull(val)" 
+                  rowcount="{{morePull.size}}" 
+                  totalrowcount="totalrowcountPull">
+    </pagegridview>
+</div>
+<material-owe-edit after-commit="afterCommit(res)"></material-owe-edit>
+<material-request-edit after-commit="afterCommit(res)"></material-request-edit>
+<material-pull-edit after-commit="afterCommit(res)"></material-pull-edit>
+<material-owe-detail after-commit="afterCommit(res)"></material-owe-detail>

@@ -1,0 +1,11 @@
+﻿<div class="control_container" style="width: {{width}}px">
+    <div class="input-group">
+        <span class="input-group-addon">{{caption}}</span>
+        <span class="input-group-addon" ng-class="{ 'val-limit':model < lowerlimit}">{{lowerlimit}}</span>
+        <span ng-click="onValSubtrac(model)" class=" btn btn-warning input-group-addon"><i class="fa fa-minus font-com"></i></span>
+        <input id="{{id}}" type="text" class="form-control value" ng-class="{required:mustinput}" placeholder="{{placeholder}}"
+               ng-model="model" ng-change="inputNumChange()" ng-blur="onblur()" ng-focus="onfocus()" />
+        <span ng-click="onValAdd(model)" class="btn btn-info input-group-addon"><i class="fa fa-plus font-com"></i></span>
+        <span class="input-group-addon" ng-class="{ 'val-limit': (model-0) > upperlimit}">{{upperlimit}}</span>
+    </div>
+</div>

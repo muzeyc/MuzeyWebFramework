@@ -1,0 +1,25 @@
+﻿<popup width="500" height="500" title="调整报工时间" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <text-box-normal caption="工单号" ng-model="job.JobNo" width="200" ng-disabled="true"></text-box-normal>
+            <text-box-normal caption="加工序列号" ng-model="job.SerialNo" width="250" ng-disabled="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="产品" ng-model="job.AssemblyDesc" ng-disabled="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <date-input caption="报工时间" width="200" ng-model="labor.LaborDate" mustinput="true"></date-input>
+            <table>
+                <tr>
+                    <td><text-box-number ng-model="labor.Hour" width="40" mustinput="true" onblur="hourBlur()"></text-box-number></td>
+                    <td style="width: 20px; text-align: center">：</td>
+                    <td><text-box-number ng-model="labor.Minut" width="40" mustinput="true" onblur="minutBlur()"></text-box-number></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

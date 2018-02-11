@@ -1,0 +1,25 @@
+﻿
+<div class="modal-body" id="validate" style="height: 500px">
+    <div class="inputBar">
+        <text-box-normal caption="员工编号" ng-model="user.UserId" width="280" mustinput="true"></text-box-normal>
+    </div>
+    <div class="inputBar">
+        <text-box-normal caption="姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名" ng-model="user.UserName" width="280" mustinput="true"></text-box-normal>
+    </div>
+    <div class="inputBar">
+        <combbox caption="职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务" ng-model="user.Role" list="roleList" width="280" mustinput="true"></combbox>
+    </div>
+    <div class="inputBar">
+        <date-input caption="生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日" width="200" ng-model="user.Birthday"></date-input>
+    </div>
+    <div class="inputBar">
+        <text-box-normal caption="身份证号" ng-model="user.PersonId" width="280"></text-box-normal>
+    </div>
+    <div class="inputBar">
+        <radio-btn-list caption="性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别" width="280" ng-model="user.Sex" itemlist="sexlist" mustinput="true"></radio-btn-list>
+    </div>
+</div>
+
+<div class="button_bar">
+    <button type="button" class="btn bg-yellow" ng-click="onResearch()"><i class="fa fa-refresh"></i>&nbsp;刷新</button>
+</div>

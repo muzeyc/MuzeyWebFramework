@@ -1,0 +1,80 @@
+﻿.job-row {
+    height: 25px;
+    margin: 5px;
+    border: 1px solid #3b3b3b;
+    font-size: 10px;
+}
+
+.job-col {
+    height: 100%;
+    display: inline-block;
+    padding: 5px 3px 3px 3px;
+}
+
+.job-check {
+    height: 100%;
+    width: 30px;
+    display: inline-block;
+    background: #3b3b3b;
+    text-align: center;
+    color: #fff;
+}
+
+.job-checked {
+    background: #4169E1 !important;
+}
+
+.JobNo {
+    width: 150px;
+    float: left;
+}
+
+.SerialNo {
+    width: 200px;
+    float: left;
+    margin-left: 20px;
+}
+
+.input-value {
+    width: 80px;
+    float: right;
+    text-align: right;
+    padding: 0 !important;
+    line-height: 25px;
+}
+
+.input-value input {
+    width: 70px;
+    margin-right: 3px;
+    line-height: 20px;
+}
+
+.moc-border {
+    height: 100%;
+    float: left;
+    border: 1px solid #ccc;
+    overflow-y: auto;
+    margin-right: 10px;
+    padding: 3px;
+}
+
+.moc-border .select-btn {
+    min-width: 50px;
+    margin: 5px !important;
+}
+
+.moc-list {
+    margin-bottom: 5px;
+    padding: 3px;
+    padding-bottom: 0;
+    border: 1px solid #3b3b3b;
+}
+
+.moc-status {
+    font-size: 20px;
+    color: #4169E1;
+}
+
+.moc-status-notexe {
+    color: #FF4040;
+}

@@ -1,0 +1,98 @@
+﻿<div class="wrapper" style="overflow: hidden;">
+    <header class="main-header">
+        <!-- Logo -->
+        <a ng-click="goHome()" class="logo" style="cursor: pointer">
+            <!-- logo for regular state and mobile devices -->
+            <!--<span class="logo-lg" style="padding-top: 5px; text-align: center"><i class="fa fa-home fa-2x"></i></span>-->
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" style="height:40px;">
+            <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only"></span>
+            </a>
+            <span class="head-title"><b>{{title}}</b></span>
+            <user-menu></user-menu>
+        </nav>
+    </header>
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+                <li class="treeview" ng-repeat="menu in menuList track by $index">
+                    <a>
+                        <i class="fa {{menu.IconName}}"></i> <span>{{menu.MenuTitle}}</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li ng-repeat="subMenu in menu.subList" ng-click="onMenuClick(subMenu)"><a><i class="fa {{subMenu.IconName}}"></i> {{subMenu.MenuTitle}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        
+        <!-- Content Header (Page header) -->
+        <section class="content-header" style="height: 50px;">
+            <div class="openedPageList">
+                <ul class="move-tab" style="left: 0;">
+                    <li style="width: 30px; padding: 0;" ng-click="move(1)">
+                        <table>
+                            <tr>
+                                <td><i class="fa fa-chevron-left"></i></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li class="page-tab" ng-class="{'active_page': homeSelected}" ng-click="goHome()" style="width:80px;">
+                        <table>
+                            <tr>
+                                <td><i class="fa fa-home"></i>&nbsp;首页</td>
+                            </tr>
+                        </table>
+                    </li>
+                </ul>
+                <div class="tab-list-border">
+                    <ul class="tab-list">
+                        <li class="page-tab" ng-repeat="subMenu in openedPageList track by $index"
+                            ng-class="{'active_page': subMenu.opened}" ng-click="pageSelect($index)">
+                            <table>
+                                <tr>
+                                    <td class="tab-icon"><i class="fa {{subMenu.IconName}}"></i></td>
+                                    <td class="tab-content">{{subMenu.MenuTitle}}</td>
+                                    <td class="tab-icon"><i class="fa fa-times" ng-click="closePage($index)"></i></td>
+                                </tr>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="move-tab" style="right: 0; width: 35px;">
+                    <li style="margin-right: 0; width: 30px; padding: 0; float: right;" ng-click="move(-1)">
+                        <table>
+                            <tr>
+                                <td><i class="fa fa-chevron-right"></i></td>
+                            </tr>
+                        </table>
+                    </li>
+                </ul>
+                <div style="clear: both;"></div>
+            </div>
+            
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <iframe ng-src="indexSubPage.html#/subPages/home" ng-style="frameStyle" ng-show="homeSelected"></iframe>
+            <iframe ng-src="{{subMenu.url}}" ng-style="frameStyle"
+                    ng-repeat="subMenu in openedPageList" ng-show="subMenu.opened"></iframe>
+            <my-dialog></my-dialog>
+        </section>
+        <!-- /.content -->
+    </div>
+</div>

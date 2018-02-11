@@ -1,0 +1,8 @@
+﻿<div class="control_container" style="width: {{width}}px">
+    <div class="input-group">
+        <span class="input-group-addon" ng-class="{mustInputCaption:mustinput}" ng-if="caption&&caption.length>0">{{caption}}</span>
+        <span class="form-control">
+            <span ng-transclude></span>
+        </span>
+    </div>
+</div>

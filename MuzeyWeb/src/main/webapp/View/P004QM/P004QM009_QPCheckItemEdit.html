@@ -1,0 +1,34 @@
+﻿<popup width="700" height="500" title="QP基础管理" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <combbox caption="产品名称" ng-model="qp.AssemblyItem" list="assemblyList" width="300" mustinput="true"
+               on-change="onAssemblyItemChange(val)" ></combbox>
+
+            <combbox caption="工序" ng-model="qp.OpNo" on-change="GetStationName(val)" list="operationList" width="300" mustinput="true"></combbox>  
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="泡泡图编号" maxlength="200" ng-model="qp.ItemName" width="300" ></text-box-normal>
+            <text-box-number caption="排序" ng-model="qp.SeqNo" width="300" mustinput="true"></text-box-number>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="相关指导" maxlength="255" ng-model="qp.Requirement" width="300" ></text-box-normal>          
+            <combbox caption="录入方式" ng-model="qp.InputMethod" list="inputMethodList" width="300" mustinput="true"></combbox>
+        </div>        
+        <div class="inputBar">
+            <text-box-normal id="LowerLimit" caption="下限值" maxlength="50" ng-model="qp.LowerLimit" mustinput="qp.InputMethod==2" width="300"></text-box-normal>
+            <text-box-normal id="UpperLimit" caption="上限值" maxlength="50" ng-model="qp.UpperLimit" mustinput="qp.InputMethod==2" width="300"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="检验标准版本" ng-init="1.0"  ng-model="qp.Revision" width="300" mustinput="true"></text-box-normal>
+            <!--<text-box-normal caption="工装/量具" ng-model="qp.ToolName" width="300"></text-box-normal>-->
+       </div>
+        <div class="inputBar">
+            备注<br />
+            <text-area id="textarea" maxlength="255" ng-model="qp.Remark" rows="3" style="width:100%"></text-area>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

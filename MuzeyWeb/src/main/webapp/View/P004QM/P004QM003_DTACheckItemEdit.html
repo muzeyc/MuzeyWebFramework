@@ -1,0 +1,45 @@
+﻿<popup width="1000" height="800" title="DTA检查" show="show">
+        <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <combbox caption="产&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品" model="user.Role" list="roleList" width="300" mustinput="true"></combbox>
+            <text-box-normal caption="工&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序" model="user.UserName" width="300" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="序&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号" model="user.UserName" width="300" ></text-box-normal>
+            <radio-btn-list caption="录入方式" width="450" mustinput="true" model="validateRadioModel" itemlist="itemlist1" ></radio-btn-list>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="检验项目" model="user.UserName" width="600" ></text-box-normal>
+            </div>
+            <br />
+            <p>相关指导：</p>
+            <div class="inputBar">
+                <textarea id="textarea" model="user.stationDesc" rows="5" style="width:620px"></textarea>
+            </div>
+            <div class="inputBar">
+                <text-box-normal caption="值区间" model="user.Role" list="roleList" width="300" ></text-box-normal>
+                <text-box-normal caption="项目名称1" model="user.Role" list="roleList" width="300" ></text-box-normal>
+            </div>
+            <div class="inputBar">
+                <text-box-normal caption="项目名称2" model="user.Role" list="roleList" width="300"></text-box-normal>
+                <text-box-normal caption="项目名称3" model="user.Role" list="roleList" width="300"></text-box-normal>
+            </div>
+
+            <div class="inputBar">
+                <text-box-normal caption="项目名称4" model="user.Role" list="roleList" width="300"></text-box-normal>
+                <text-box-normal caption="项目名称5" model="user.Role" list="roleList" width="300"></text-box-normal>
+            </div>
+            <div class="inputBar">
+                <text-box-normal caption="照片" model="user.pic" list="roleList" width="300"></text-box-normal>
+            </div>
+        <br />
+        <p>备注：</p>
+        <div class="inputBar">
+            <textarea id="textarea" model="user.stationDesc" rows="5" style="width:620px"></textarea>
+        </div>
+        </div>
+   <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

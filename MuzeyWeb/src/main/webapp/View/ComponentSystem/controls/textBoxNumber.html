@@ -1,0 +1,8 @@
+﻿<div class="control_container" style="width: {{width}}px">
+    <div class="input-group">
+        <span class="input-group-addon" ng-class="{'mustInputCaption':mustinput}" ng-if="caption&&caption.length>0">{{caption}}</span>
+        <input id="{{id}}" type="text" class="form-control textboxNm value" ng-class="{required:mustinput}" ng-disabled="ngDisabled" placeholder="{{placeholder}}"
+               ng-model="ngModel" style="text-align: right; padding-right: 5px; ime-mode: Disabled; -webkit-ime-mode: disabled; "
+               ng-change="inputChange()" ng-blur="blur()" ng-focus="onfocus()" />
+    </div>
+</div>

@@ -1,0 +1,8 @@
+﻿<div class="control_container" style="width: {{width}}px">
+    <div class="input-group">
+        <span class="input-group-addon" ng-class="{mustInputCaption:mustinput}">{{caption}}</span>
+        <input id="{{id}}" type="text" class="form-control textboxDate value" ng-class="{required:mustinput}" ng-disabled="ngDisabled" placeholder="{{placeholder}}"
+               ng-model="ngModel" maxlength="{{maxlength}}" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask
+               ng-change="onchange()" ng-blur="onblur()" ng-focus="onfocus()" />
+    </div>
+</div>

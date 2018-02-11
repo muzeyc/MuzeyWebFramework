@@ -1,0 +1,9 @@
+﻿<div class="top_search_bar" id="validate">
+    <assembly ng-model="condition.assemblyItem"width="200" mustinput="true"></assembly>
+    <date-input-double caption="开始时间" datefrom="condition.dateFrom" dateto="condition.dateTo"></date-input-double>
+    <button type="button" class="btn bg-blue" ng-click="search()"><i class="fa fa-search"></i>&nbsp;检索</button>
+    <div style="clear:both;"></div>
+</div>
+<div ng-if="model.dataList&&model.dataList.length>0">
+    <linechart ng-model="model" height="600"></linechart>
+</div>

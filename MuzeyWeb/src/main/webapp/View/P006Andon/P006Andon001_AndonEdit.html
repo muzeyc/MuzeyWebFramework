@@ -1,0 +1,34 @@
+﻿<popup width="800" height="520" title="Andon管理" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <text-box-normal caption="加工序列号" ng-model="andon.SerialNo" width="300" mustinput="true" onblur="onSerialNoChange()"></text-box-normal>
+            <combbox caption="产线" ng-model="andon.ProductLine" list="productLineList" width="300" mustinput="true" ng-disabled="true"></combbox>
+        </div>
+        <div class="inputBar">
+            <combbox caption="产品" ng-model="andon.AssemblyItem" list="assemblyList" width="300" mustinput="true" ng-disabled="true"></combbox>
+            <combbox caption="工序" ng-model="andon.OpNo" list="opList" width="300" mustinput="true"></combbox>
+        </div>
+        <div class="inputBar">
+            <combbox caption="类型" ng-model="andon.AndonType" width="300" list="andonTypeList" mustinput="true"></combbox>
+            <combbox caption="状态" ng-model="andon.Status" width="300" list="statusList" mustinput="true"></combbox>
+        </div>
+        <div class="inputBar" style="height: 70px">
+            <text-area caption="异常描述" rows="2" ng-model="andon.ExceptionDesc"></text-area>
+        </div>
+        <div class="inputBar" ng-if="andon.Status>=1">
+            <text-box-normal caption="响应人SSO" ng-model="andon.AcknowledgeUser" ng-disabled="andon.Status!=1" width="250" mustinput="andon.Status==1"></text-box-normal>
+            <text-box-normal caption="响应时间" ng-model="andon.AcknowledgeTime" ng-disabled="true" width="200"></text-box-normal>
+        </div>
+        <div class="inputBar" ng-if="andon.Status==2||andon.Status==9">
+            <text-box-normal caption="解决人SSO" ng-model="andon.CloseUser" ng-disabled="andon.Status!=2&&andon.Status!=9" width="250" mustinput="andon.Status>1"></text-box-normal>
+            <text-box-normal caption="解决时间" ng-model="andon.CloseTime" ng-disabled="true" width="200"></text-box-normal>
+        </div>
+        <div class="inputBar" ng-if="andon.Status==2||andon.Status==9" style="height: 70px">
+            <text-area caption="解决方案" rows="2" ng-model="andon.Solution" ng-disabled="andon.Status!=2&&andon.Status!=9"></text-area>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

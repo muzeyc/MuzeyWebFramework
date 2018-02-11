@@ -1,0 +1,19 @@
+﻿<div class="top_search_bar" id="validate">
+    <date-input-double caption="创建时间" width="350" datefrom="dateFrom" dateto="dateTo"></date-input-double>
+    <combbox caption="NCR分类" ng-model="NCRType" list="ncrtypeList" width="200"></combbox>    
+    <combbox caption="操作状态" ng-model="OperationStatus" list="operationstatusList" width="200"></combbox>
+    <combbox caption="操作组" ng-model="Group" list="groupList" width="200"></combbox>
+    <combbox caption="排序方式" ng-model="InputMethod" list="inputmethodList" width="200"></combbox>
+    <button type="button" ng-click="onResearch()" class="btn bg-green">查询</button>    
+    <button type="button" class="btn bg-maroon" style="margin-right:20px" ng-click="export()"><i class="fa fa-cloud-download"></i>&nbsp;导出</button>
+</div>
+<div>
+    <pagegridview config="config"
+                  list="opkList"
+                  refresh="refresh()"                
+                  pagechange="onPageChange(val)"
+                  rowcount="{{more.size}}"
+                  totalrowcount="totalCount"
+                  ng-disabled="true">
+    </pagegridview>
+</div>

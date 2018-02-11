@@ -1,0 +1,77 @@
+﻿<div class="box box-primary">
+    <!-- /.box-header -->
+    <div class="box-body no-padding">
+        <div class="mailbox-controls" ng-if="!hidefuncbar">
+            <!-- Check all button -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm checkbox-toggle" ng-click="onCheckAll()" ng-if="canselect">
+                    <i class="fa" ng-class="{'fa-check-square-o': selectAll, 'fa-square-o': !selectAll}"></i>
+                </button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onAdd()" ng-if="!ngDisabled"><i class="fa fa-plus"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onRemove()" ng-disabled="selectedIndex < 0 && selectedRows.length <=0" ng-if="!ngDisabled"><i class=" fa fa-trash-o"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onEdit()" ng-disabled="selectedIndex < 0" ng-if="!ngDisabled"><i class="fa fa-pencil-square-o"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onBtnClick1()" ng-disabled="selectedIndex < 0" ng-if="btnicon1"><i class="fa {{btnicon1}}"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onBtnClick2()" ng-disabled="selectedIndex < 0" ng-if="btnicon2"><i class="fa {{btnicon2}}"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onBtnClick3()" ng-disabled="selectedIndex < 0" ng-if="btnicon3"><i class="fa {{btnicon3}}"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onBtnClick4()" ng-if="btnicon4"><i class="fa {{btnicon4}}"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onBtnClick5()" ng-if="btnicon5"><i class="fa {{btnicon5}}"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onRefresh()"><i class="fa fa-refresh"></i></button>
+            </div>
+        </div>
+        <div class="table-responsive mailbox-messages">
+            <div style="overflow-y: auto; height:{{height}}px;">
+                <table class="table table-hover table-striped gridview">
+                    <tbody>
+                        <tr>
+                            <th style="width: 30px; table-layout: fixed"></th>
+                            <th style="width: 45px; table-layout: fixed" ng-if="canselect"></th>
+                            <th ng-repeat="col in config.colModel" style="width: {{col.width}}">
+                                {{col.label}}
+                            </th>
+                        </tr>
+                        <tr ng-repeat="item in list track by $index" ng-class="{'select-row': selectedIndex == $index}" ng-click="onRowClick($index, item)">
+                            <td style="width: 2%">{{$index + 1}}</td>
+                            <td style="width: 2%" ng-if="canselect"><check-box ng-model="item.selected" checkedvalue="1" uncheckedvalue="0"></check-box></td>
+                            <td ng-repeat="col in config.colModel" style="text-align:{{col.align}}; width: {{col.width}}">
+                                <span ng-if="col.format" data-ng-bind-html="getItemValue(item, col)"></span>
+                                <span ng-if="!col.format&&!col.button">{{getItemValue(item, col)}}</span>
+                                <span ng-if="col.button">
+                                    <button type="button" class="btn bg-green" ng-click="btn.action(item)" ng-repeat="btn in col.button" ng-if="btn.show(item)"><i class="fa {{btn.icon}}" ng-if="btn.icon"></i>&nbsp;{{btn.caption}}</button>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.mail-box-messages -->
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer no-padding" ng-if="!hidefuncbar">
+        <div class="mailbox-controls">
+            <!-- Check all button -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm checkbox-toggle" ng-click="onCheckAll()" ng-if="canselect">
+                    <i class="fa" ng-class="{'fa-check-square-o': selectAll, 'fa-square-o': !selectAll}"></i>
+                </button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onAdd()" ng-if="!ngDisabled"><i class="fa fa-plus"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onRemove()" ng-disabled="selectedIndex < 0 && selectedRows.length <=0" ng-if="!ngDisabled"><i class=" fa fa-trash-o"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onEdit()" ng-disabled="selectedIndex < 0" ng-if="!ngDisabled"><i class="fa fa-pencil-square-o"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onBtnClick1()" ng-disabled="selectedIndex < 0" ng-if="btnicon1"><i class="fa {{btnicon1}}"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onBtnClick2()" ng-disabled="selectedIndex < 0" ng-if="btnicon2"><i class="fa {{btnicon2}}"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onBtnClick3()" ng-disabled="selectedIndex < 0" ng-if="btnicon3"><i class="fa {{btnicon3}}"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onBtnClick4()" ng-if="btnicon4"><i class="fa {{btnicon4}}"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onBtnClick5()" ng-if="btnicon5"><i class="fa {{btnicon5}}"></i></button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="onRefresh()"><i class="fa fa-refresh"></i></button>
+            </div>
+
+            <!-- /.btn-group -->
+            <div class="pull-right">
+                <div class="load-more text-center" ng-click="onPageChange()" ng-disabled="!hasMore">
+                    {{hasMoreDisp}}&nbsp;[{{totalpagecount>0?currentPage + 1:0}}/{{totalpagecount}}]
+                </div>
+            </div>
+            <!-- /.pull-right -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,187 @@
+﻿<popup width="1030" height="550" title="Andon/NCR" show="show">
+    <style>
+        .andonForm {
+            margin-bottom: 5px;
+            padding: 3px;
+            padding-bottom: 0;
+            border: 1px solid #3b3b3b;
+        }
+
+        .status0 {
+            background: red;
+            color: #fff;
+        }
+
+        .status1 {
+            background: #ff6a00;
+            color: #fff;
+        }
+
+        .baseArea {
+            float: left;
+            width: 250px;
+            height: 360px;
+            padding: 5px;
+            padding-top: 0;
+        }
+        .andonArea {
+            float: left;
+            width: 230px;
+            height: 360px;
+            border-left: 1px solid #ccc;
+            padding: 5px;
+            padding-top: 0;
+        }
+
+        .ncrArea {
+            float: left;
+            width: 300px;
+            height: 360px;
+            padding: 5px;
+            padding-top: 0;
+            border-left: 1px solid #ccc;
+            margin-left: 15px;
+        }
+
+        .photoArea {
+            float: right;
+            width: 190px;
+            height: 360px;
+        }
+
+        .andonArea .textBoxScanBorder {
+            height: 50px;
+        }
+
+        .andonArea .control_container {
+            margin-right: 0;
+        }
+
+        .scan .form-control {
+            height: 52px;
+        }
+
+        .coloricon {
+            height: 15px;
+            width: 15px;
+            float: left;
+            margin-right: 10px;
+            border: 1px solid #3b3b3b;
+        }
+
+        .colordesc {
+            float: left;
+            margin-right: 10px;
+        }
+    </style>
+    <div class="modal-body">
+        <div ng-if="andonList&&andonList.length>0">
+        已创建的Andon列表
+            <div style="float: right; height: 100%;">
+                <span class="coloricon status0"></span>
+                <span class="colordesc">未响应</span>
+                <span class="coloricon status1"></span>
+                <span class="colordesc">已响应</span>
+                <span class="coloricon bg-blue"></span>
+                <span class="colordesc">临时解决</span>
+                <span class="coloricon bg-green"></span>
+                <span class="colordesc">已解决</span>
+            </div>
+        </div>
+        <div class="andonForm" ng-if="andonList&&andonList.length>0">
+            <button class="select-btn" ng-repeat="item in andonList track by $index"
+                    ng-class="{'select-btn-active':andon.ID==item.ID, 'status0':item.Status==0, 'status1':item.Status==1, 'bg-blue':item.Status==2, 'bg-green':item.Status==9}"
+                    ng-click="showAndonInfo(item)">
+                Andon{{item.ID}}
+            </button>
+            <div style="clear: both;"></div>
+        </div>
+        <div>
+            <div class="baseArea" id="validateBase">
+                <div class="inputBar">
+                    <text-box-normal caption="产品号" ng-model="item.AssemblyItem" ng-disabled="true"></text-box-normal>
+                </div>
+                <div class="inputBar">
+                    <text-box-normal caption="产品描述" ng-model="item.AssemblyDesc" ng-disabled="true"></text-box-normal>
+                </div>
+                <div class="inputBar">
+                    <text-box-normal caption="工单号" ng-model="item.JobNo" ng-disabled="true"></text-box-normal>
+                </div>
+                <div class="inputBar">
+                    <text-box-normal caption="加工序列号" ng-model="item.SerialNo" ng-disabled="true"></text-box-normal>
+                </div>
+                <div class="inputBar">
+                    <text-box-normal caption="工序" ng-model="item.OpNo" ng-disabled="true"></text-box-normal>
+                </div>
+                <div class="inputBar">
+                    描述<br />
+                    <textarea style="width: 100%" ng-model="item.description" rows="7" ng-disabled="!isNcr && !isAndon"></textarea>
+                </div>
+            </div>
+            <div class="andonArea" id="validateAndon">
+                <div class="inputBar">
+                    <span class="select-btn" ng-class="{'select-btn-active': isAndon}"
+                          ng-click="createAndon()">创建Andon</span>
+                </div>
+                <div class="inputBar">
+                    <combbox caption="异常类型" ng-model="andon.AndonType" list="andonTypeList" ng-disabled="!isAndon" mustinput="true"></combbox>
+                </div>
+                <div class="inputBar">
+                    <combbox caption="状态" ng-model="andon.Status" list="andonStatusList" ng-disabled="!isAndon" ></combbox>
+                </div>
+                <div class="inputBar scan" ng-if="andon.Status==1">
+                    <control-container width="225">
+                        <text-box-scan ng-id="scan1" width="150" ng-model="andon.AcknowledgeUser" placeholder="响应负者人" mustinput="andon.Status==1"></text-box-scan>
+                    </control-container>
+                </div>
+                <div class="inputBar scan" ng-if="andon.Status>1">
+                    <control-container width="225">
+                        <text-box-scan ng-id="scan2" width="150" ng-model="andon.CloseUser" placeholder="解决负者人" mustinput="andon.Status>1"></text-box-scan>
+                    </control-container>
+                </div>
+                <div class="inputBar" ng-if="andon.Status==2||andon.Status==9">
+                    解决方案<br />
+                    <textarea style="width: 100%" ng-model="andon.Solution" rows="4" ng-disabled="!isAndon"></textarea>
+                </div>
+            </div>
+            <div class="ncrArea" id="validateNcr">
+                <div class="inputBar">
+                    <span class="select-btn" ng-class="{'select-btn-active': isNcr}"
+                          ng-click="createNCR()">创建NCR</span>
+                </div>
+                <div class="inputBar">
+                    <combbox caption="NCR分类" ng-model="ncr.NCRType" list="ncrTypeList" mustinput="true" ng-disabled="!isNcr"></combbox>
+                </div>
+                <div class="inputBar">
+                    <text-box-normal caption="缺陷发生区域" ng-model="ncr.ErrorZone" ng-disabled="true"></text-box-normal>
+                </div>
+                <div class="inputBar" ng-if="ncr.NCRType=='1'||ncr.NCRType=='4'">
+                    <text-box-normal caption="物料编号" ng-model="ncr.MaterialCode" mustinput="true" ng-disabled="!isNcr" onblur="getMaterialInfo()"></text-box-normal>
+                </div>
+                <div class="inputBar" ng-if="ncr.NCRType=='1'||ncr.NCRType=='4'">
+                    <text-box-normal caption="物料描述" ng-model="ncr.MaterialDesc"></text-box-normal>
+                </div>
+                <div class="inputBar" ng-if="ncr.NCRType=='1'||ncr.NCRType=='4'">
+                    <text-box-normal caption="物料序列号" ng-model="ncr.MaterialSN" ng-disabled="!isNcr"></text-box-normal>
+                </div>
+                <div class="inputBar">
+                    <text-box-number caption="缺陷数量" ng-model="ncr.Amounts" mustinput="true" ng-disabled="!isNcr"></text-box-number>
+                </div>
+                <div class="inputBar">
+                    <text-box-normal caption="单位" ng-model="ncr.Unit" width="120" ng-disabled="!isNcr"></text-box-normal>
+                </div>
+                <div class="inputBar">
+                    <combbox caption="NCR响应组" ng-model="ncr.CurrentGroupID" list="ncrGroupList" mustinput="true" ng-disabled="!isNcr"></combbox>
+                </div>
+            </div>
+            <div class="photoArea">
+                <camera-view ng-id="cameraView" onchange="afterPhoto(res)"></camera-view>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

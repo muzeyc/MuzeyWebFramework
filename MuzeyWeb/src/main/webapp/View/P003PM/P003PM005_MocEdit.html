@@ -1,0 +1,68 @@
+﻿<popup width="1100" height="550" title="MOC管理" show="show">
+    <link href="../../Resource/Css/Page/P003PM/P003PM005_MocEdit.css" rel="stylesheet" />
+    <div class="modal-body" id="validate">
+        <div style="width: 330px; float: left; margin-right: 10px;">
+            <div class="inputBar">
+                <assembly ng-model="moc.AssemblyItem" mustinput="true" after-select="onAssemblyChange(item)" productline="productline"></assembly>
+            </div>
+            <div class="inputBar">
+                <combbox caption="MOC类型" ng-model="moc.MOCType" list="mocTypeList" width="250" mustinput="true" on-change="mocTypeChange(val)"></combbox>
+            </div>
+            <div class="inputBar">
+                <combbox caption="MOC子类型" ng-model="moc.MOCSubType" list="mocSubTypeList" width="250" mustinput="moc.MOCType==1||moc.MOCType==2"></combbox>
+            </div>
+            <div class="inputBar">
+                <text-box-normal caption="ECO号" ng-model="moc.ECO" width="150"></text-box-normal>
+            </div>
+            <div class="inputBar">
+                <radio-btn-list caption="提醒方式" ng-model="moc.alertMethod" itemlist="alertMethodList" onchange="alertMethodChange(val)"></radio-btn-list>
+            </div>
+            <div class="inputBar" style="margin-bottom: 0;">
+                <text-area caption="备注" style="width: 100%;" rows="3" ng-model="moc.Comment"></text-area>
+            </div>
+            <div class="inputBar" style="margin-bottom: 0;">
+                <attachment list="attachList" subpath="Temp" mode="edit" after-upload="afterUpload(val, list)"></attachment>
+            </div>
+        </div>
+        <div class="moc-border" style="width: 220px;" ng-if="moc.alertMethod==1&&serialNoList&&serialNoList.length>0">
+            &nbsp;加工序列号<br />
+            <button class="select-btn" ng-repeat="item in serialNoList"
+                    ng-class="{'select-btn-active':item.selected}"
+                    ng-click="serialNoSelect(item)" ng-disabled="moc.alertMethod!=1">
+                {{item.SerialNo}}
+            </button>
+            <div style="clear: both;"></div>
+        </div>
+        <div style="width: 220px; float: left; margin-right: 10px;" ng-if="moc.alertMethod==2">
+            <div class="inputBar">
+                <date-input caption="开始时间" width="200" ng-model="moc.BeginTime" mustinput="moc.alertMethod==2"></date-input>
+            </div>
+            <div class="inputBar">
+                <date-input caption="结束时间" width="200" ng-model="moc.EndTime" mustinput="moc.alertMethod==2"></date-input>
+            </div>
+        </div>
+        <div class="moc-border" style="width: 210px;" ng-if="opList&&opList.length>0">
+            &nbsp;工序<br />
+            <button class="select-btn" ng-repeat="op in opList|orderBy:'SeqNo'"
+                    ng-class="{'select-btn-active':op.selected}"
+                    ng-click="opSelect(op)">
+                {{op.OpNo}}
+            </button>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="moc-border" style="width: 230px;" ng-if="moc.MOCType==1&&moc.AssemblyItem&&moc.AssemblyItem.length>0">
+            &nbsp;物料<br />
+            <button class="select-btn" ng-repeat="material in materialList"
+                    ng-class="{'select-btn-active':material.selected}"
+                    ng-click="materialSelect(material)">
+                {{material.MaterialName}}
+            </button>
+            <div style="clear: both;"></div>
+        </div>      
+        <div style="clear:both"></div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

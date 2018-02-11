@@ -1,0 +1,19 @@
+﻿<div>
+    <text-box-normal caption="产品" width="300"></text-box-normal>
+    <text-box-normal caption="工序" width="300"></text-box-normal>
+    <text-box-normal caption="检验项目" width="300"></text-box-normal>
+    <text-box-norma caption="相关指导" width="300"></text-box-norma>
+    <combbox caption="录入方式" width="300" ng-model="test"></combbox>
+    <button type="button" class="btn bg-green" ng-click="commit()">查询</button>
+    <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+</div>
+<div>
+    <pagegridview config="config" list="dtalist" refresh="refresh()" add="onNew(menu)" edit="onEdit(menu)"
+                  remove="onDelete(items)"
+                  pagechange="onPageChange(val)" rowcount="{{more.size}}" totalrowcount="totalCount"></pagegridview>
+</div>
+<div class="modal-footer" style="text-align:center; padding-right:0;">
+    <button type="button" class="btn bg-green" ng-click="import()">导入</button>
+    <button type="button" class="btn bg-yellow" ng-click="cancelImport()">取消</button>
+</div>
+<dtacheck-edit after-commit="afterCommit(res)"></dtacheck-edit>

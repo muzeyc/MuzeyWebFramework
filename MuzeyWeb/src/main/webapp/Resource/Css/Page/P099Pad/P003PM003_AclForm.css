@@ -1,0 +1,93 @@
+﻿
+.acl-row {
+    margin: 5px 0;
+    border: 1px solid #3b3b3b;
+    background: #757575;
+    color: #fff;
+}
+
+.acl-row-err {
+    background-color: #EE5C42 !important;
+}
+
+.acl-row input {
+    color: #3b3b3b;
+}
+
+.acl-col {
+    height: 60px;
+    display: inline-block;
+    padding: 5px 3px 3px 3px;
+    float: left;
+}
+
+    .acl-col .control_container {
+        margin: 0;
+    }
+
+.acl-check {
+    height: 100%;
+    line-height: 60px;
+    width: 50px;
+    display: inline-block;
+    background: #00a65a;
+    text-align: center;
+    color: #fff;
+}
+
+.acl-checked {
+    background: #4169E1 !important;
+}
+
+.item-StandardName {
+    width: 180px;
+}
+
+.item-Requirement {
+    width: 250px;
+}
+
+.item-CheckMethod {
+    width: 70px;
+}
+
+.item-icon {
+    width: 80px;
+    padding-top: 15px;
+    text-align: center;
+}
+
+    .item-icon .fa {
+        font-size: 35px;
+        color: #fff;
+    }
+
+.item-Tools {
+    width: 110px;
+}
+
+.input-value {
+    width: 100px;
+    float: right !important;
+    text-align: right;
+    padding: 0 !important;
+    line-height: 40px;
+}
+
+    .input-value input {
+        height: 50px;
+        margin-right: 3px;
+        line-height: 20px;
+        margin-top: 5px;
+        font-size: 17px;
+    }
+
+.acl-caption {
+    width: 150px;
+    text-align: right;
+}
+
+.acl-content {
+    width: 200px;
+    text-align: left;
+}

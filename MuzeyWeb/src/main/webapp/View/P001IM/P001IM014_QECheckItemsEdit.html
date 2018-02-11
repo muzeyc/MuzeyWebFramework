@@ -1,0 +1,42 @@
+﻿<popup width="600" height="500" title="电检工序项目管理" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <assembly ng-model="qECheckItem.AssemblyItem"  after-select="getOpList(item.AssemblyItem)"></assembly>
+            <combbox caption="工序" ng-model="qECheckItem.OpNo" width="250" list="opList" mustinput="true"></combbox>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="编号" ng-model="qECheckItem.Code" width="250" mustinput="true"></text-box-normal>
+            <combbox caption="录入方式" ng-model="qECheckItem.InputMethod" list="inputMethodList" width="250" mustinput="true"></combbox>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="检验项目" ng-model="qECheckItem.CheckItem" width="520" mustinput="!qECheckItem.CheckItem&&!qECheckItem.Detail"></text-box-normal>
+            <text-box-normal caption="相关指导" ng-model="qECheckItem.Detail" width="520" mustinput="!qECheckItem.CheckItem&&!qECheckItem.Detail"></text-box-normal>
+            <text-box-normal caption="检验标准版本" ng-model="qECheckItem.Revision" width="250" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-number caption="区间值" ng-model="qECheckItem.LowerLimit" placeholder="" width="140" mustinput="qECheckItem.InputMethod==3"></text-box-number>
+            <text-box-number caption="至" ng-model="qECheckItem.UpperLimit" placeholder="" width="90" mustinput="qECheckItem.InputMethod==3"></text-box-number>
+            <text-box-normal caption="项目名称1" ng-model="qECheckItem.Caption1" width="250" mustinput="qECheckItem.InputMethod==3 || qECheckItem.InputMethod==4"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="项目名称2" ng-model="qECheckItem.Caption2" width="250"></text-box-normal>
+            <text-box-normal caption="项目名称3" ng-model="qECheckItem.Caption3" width="250"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="项目名称4" ng-model="qECheckItem.Caption4" width="250"></text-box-normal>
+            <text-box-normal caption="项目名称5" ng-model="qECheckItem.Caption5" width="250"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="参考图片" ng-model="qECheckItem.AttachmentID" width="250"></text-box-normal>
+
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="备注" ng-model="qECheckItem.Remark" width="250"></text-box-normal>
+            <text-box-number caption="序号" ng-model="qECheckItem.SeqNo" width="250"></text-box-number>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

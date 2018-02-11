@@ -1,0 +1,250 @@
+﻿.hxCalPopArrowEx {
+  width: 15px;
+  height: 6px;
+  margin: auto;
+  position: relative;
+  z-index: 2;
+  margin-bottom: -2px;
+}
+.hxCalPopArrowEx .hxCalPopArrowOut {
+  border-width: 0px 7.5px 6px;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-color: transparent transparent white;
+  position: absolute;
+  top: 1px;
+  left: 0px;
+}
+.hxCalPopArrowEx .hxCalPopArrowIn {
+  border-width: 0px 7.5px 6px;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-color: transparent transparent #d8d8d8;
+  position: absolute;
+  top: -1px;
+  left: 0px;
+}
+
+.hxCal {
+  width: 245px;
+  background-color: white;
+  padding: 0px 10px;
+  font-size: 12px;
+  box-sizing: content-box;
+  border: #d8d8d8 solid 1px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  position: relative;
+}
+
+.hxCal_double {
+  width: 550px;
+  background-color: white;
+  padding: 0px 10px;
+  font-size: 12px;
+  box-sizing: content-box;
+  border: #d8d8d8 solid 1px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  position: relative;
+}
+
+.hxCal .hxCalInputArea {
+  padding: 10px 0;
+}
+.hxCal .hxCalInputArea .hxCalInput {
+  width: 45%;
+  float: left;
+  line-height: 25px;
+  height: 25px;
+}
+.hxCal .hxCalInputArea .hxCalSeparator {
+  float: left;
+  width: 10%;
+  height: 25px;
+  padding: 0px 5px;
+}
+.hxCal .hxCalInputArea .hxCalSeparator .line {
+  margin-top: 12.5px;
+  border: #d8d8d8 solid 1px;
+  border-top: 0px;
+}
+.hxCal .hxCalInputArea:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.hxCal .hxCalTitle {
+  height: 25px;
+  box-sizing: content-box;
+  padding: 5px 0px;
+}
+.hxCal .hxCalTitle .hxCalDirect {
+  float: left;
+  width: 25%;
+  height: 100%;
+  line-height: 25px;
+  cursor: pointer;
+}
+.hxCal .hxCalTitle .toleft {
+  float: left;
+  width: 25%;
+  height: 100%;
+  line-height: 25px;
+  cursor: pointer;
+  text-align: right;
+  padding-right: 10px;
+  background: url(../../../Resource/Image/System/icon_small_arrow_left.png) no-repeat right center;
+}
+.hxCal .hxCalTitle .toright {
+  float: left;
+  width: 25%;
+  height: 100%;
+  line-height: 25px;
+  cursor: pointer;
+  text-align: left;
+  padding-left: 10px;
+  background: url(../../../Resource/Image/System/icon_small_arrow_right.png) no-repeat left center;
+}
+.hxCal .hxCalTitle .cur {
+  float: left;
+  margin: 0 5%;
+  width: 40%;
+  height: 100%;
+  text-align: center;
+  line-height: 25px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.hxCal .hxCalTitle:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.hxCal .hxCalBody {
+  padding: 5px 0px;
+}
+.hxCal .hxCalBody .hxCalCell {
+  width: 35px;
+  height: 35px;
+  float: left;
+  text-align: center;
+  line-height: 35px;
+  cursor: pointer;
+}
+.hxCal .hxCalBody .hxCalCell:hover {
+  background-color: #f6f8f8;
+}
+.hxCal .hxCalBody .hxCalCell:active {
+  background-color: #d8d8d8;
+}
+.hxCal .hxCalBody:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.hxCal .wyMonth {
+  padding: 5px 0px;
+}
+.hxCal .wyMonth .monthStyle {
+  float: left;
+  width: 61px;
+  height: 61px;
+  line-height: 61px;
+  text-align: center;
+  cursor: pointer;
+}
+.hxCal .wyMonth .monthStyle:hover {
+  background-color: #f6f8f8;
+}
+.hxCal .wyMonth .monthStyle:active {
+  background-color: #d8d8d8;
+}
+.hxCal .wyMonth:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.hxCal .hxCalSearch {
+  text-align: center;
+  padding: 10px 0px;
+}
+
+.hxCalFrame.ng-animate {
+  transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
+  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  transition-property: opacity;
+}
+.hxCalFrame.ng-enter {
+  opacity: 0;
+}
+.hxCalFrame.ng-enter-active {
+  opacity: 1;
+}
+.hxCalFrame.ng-leave {
+  opacity: 1;
+}
+.hxCalFrame.ng-leave-active {
+  opacity: 0;
+}
+
+.selectedDay {
+  background-color: #d8d8d8 !important;
+}
+.activeDay {
+  background-color: #3BC0C3 !important;
+  color: #ffffff !important;
+}
+.lessDay {
+  background-color: #F5F5F5;
+}
+
+.dateInputFrame {
+  position: relative;
+  height: 100%;
+}
+.dateInputFrame input {
+  line-height: 33px;
+  width: 100px;
+  box-sizing: border-box;
+  /*border-radius: 4px !important;*/
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+.dateInputFrame .dateInputCalCon {
+  height: 28px;
+  width: 35px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  /*z-index: 100000;*/
+}
+.dateInputFrame .dateInputCalCon:focus {
+  outline: none;
+}
+.dateInputFrame .dateInputCalCon img {
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  margin-left: 7.5px;
+  cursor: pointer;
+  vertical-align: baseline;
+}
+.dateInputFrame .dateInputCalCon .dateInputCal {
+  position: absolute;
+  top: 100%;
+  left: 0px;
+  margin-left: -117px;
+  display: inline-block;
+  z-index: 20000;
+}
+
+.calendar-border {
+    width: 245px;
+    display: inline-block;
+}

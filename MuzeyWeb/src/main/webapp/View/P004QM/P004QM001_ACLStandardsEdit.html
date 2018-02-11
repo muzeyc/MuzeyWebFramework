@@ -1,0 +1,35 @@
+﻿<popup width="700" height="500" title="ACL管理" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <combbox caption="产品" ng-model="standard.AssemblyItem" list="lineTypeList" width="200" mustinput="true"></combbox>
+            <combbox caption="工序" ng-model="standard.OpNo" list="assemblyList" width="120" mustinput="true"></combbox>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="检验标准" ng-model="standard.StandardName" width="300" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            装配要求<br />
+            <textarea id="textarea" ng-model="standard.Requirement" rows="3" style="width:100%"></textarea>
+        </div>
+        <div class="inputBar">
+            <combbox caption="检查方法" ng-model="standard.CheckMethod" list="roleList" width="300" mustinput="true"></combbox>
+            <text-box-normal caption="工装/量具" ng-model="standard.ToolID" width="300"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-number caption="下限值" ng-model="standard.LowerLimit" width="300"></text-box-number>
+            <text-box-number caption="上限值" ng-model="standard.UpperLimit" width="300"></text-box-number>
+        </div>
+        <div class="inputBar">
+            <radio-btn-list caption="录入方式" width="300" mustinput="true" ng-model="standard.InputMethod" itemlist="inputMethodList"></radio-btn-list>
+            <text-box-normal caption="图片名称" ng-model="standard.Picture" width="300"></text-box-normal>
+       </div>
+        <div class="inputBar">
+            备注<br />
+            <textarea id="textarea" ng-model="standard.Remark" rows="3" style="width:100%"></textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

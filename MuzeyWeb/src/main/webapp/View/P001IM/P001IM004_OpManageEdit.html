@@ -1,0 +1,26 @@
+﻿<popup width="600" height="500" title="工序编辑" show="show">
+    <div class="modal-body" id="validate">
+        <div class="inputBar">
+            <assembly ng-model="op.AssemblyItem" mustinput="true" ng-disabled="true"></assembly>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="工序名称" ng-model="op.OpNo" width="200" mustinput="true" ng-disabled="mode=='edit'" maxlength="10"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-normal caption="工序描述" ng-model="op.OpDesc" mustinput="true"></text-box-normal>
+        </div>
+        <div class="inputBar">
+            <text-box-number caption="序号" ng-model="op.SeqNo" width="150" mustinput="true"></text-box-number>
+        </div>
+        <div class="inputBar">
+            <text-box-number caption="标准工时(小时)" ng-model="op.StandardTime" width="300" mustinput="true"></text-box-number>
+        </div>
+        <div class="inputBar">
+            <text-box-number caption="标准节拍时间(分钟)" ng-model="op.DurationTime" width="300" mustinput="true"></text-box-number>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

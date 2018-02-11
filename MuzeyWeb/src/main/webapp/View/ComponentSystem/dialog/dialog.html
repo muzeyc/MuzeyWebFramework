@@ -1,0 +1,25 @@
+﻿<div class="modal-dialog-container " ng-if="show">
+    <div class="modal-dialog dialog" ng-class="init()">
+        <div class="modal-content">
+            <div class="modal-header" ng-class="{'bg-nomal': mode=='info'||mode=='comfirm', 'bg-error': mode=='error', 'bg-warning': mode=='warning'}">
+                <span ng-if="mode=='info'">提示信息</span>
+                <span ng-if="mode=='comfirm'">确认信息</span>
+                <span ng-if="mode=='error'">错误</span>
+                <span ng-if="mode=='warning'">警告</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{message}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-green" ng-click="commit()" ng-if="mode=='info'||mode=='error'||mode=='warning'">确定</button>
+                <button type="button" class="btn bg-green" ng-click="onYes()" ng-if="mode=='comfirm'">是</button>
+                <button type="button" class="btn bg-yellow" ng-click="onNo()" ng-if="mode=='comfirm'">否</button>
+                <!--<button type="button" class="btn bg-yellow" ng-click="cancel()">关闭</button>-->
+            </div>
+        </div>
+    </div>
+    <div class="dialog-bg"></div>
+</div>

@@ -1,0 +1,10 @@
+﻿<popup show="show" width="300" height="300" title="选择要导入的文件">
+    <div class="attachment-border">
+        <attachment list="attachlist" subpath="Temp" mode="edit" after-upload="afterUpload(val, list)"></attachment>
+        <div style="clear:both"></div>
+    </div>
+    <div class="modal-footer" style="text-align:center; padding-right:0;">
+        <button type="button" class="btn bg-green" ng-click="import()">导入</button>
+        <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+    </div>
+</popup>

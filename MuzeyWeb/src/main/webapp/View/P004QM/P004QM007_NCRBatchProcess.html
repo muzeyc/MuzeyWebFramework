@@ -1,0 +1,28 @@
+﻿<div class="top_search_bar">
+    <button type="button" class="btn bg-blue" ng-click="goBack()"><i class="fa fa-floppy-o"></i>&nbsp;返回列表</button>
+    <button id="saveButton" type="button" class="btn bg-maroon" ng-click="save()"><i class="fa fa-floppy-o"></i>&nbsp;保存</button>
+</div>
+<div id="validate">
+    <div style="float: left; width: 70%; padding: 5px; border: 1px solid #3b3b3b; background: #fff; height: 500px">
+        已选记录<br />
+        <pagegridview config="config"
+                      list="ncrEventList"
+                      rowcount="{{more.size}}"
+                      totalrowcount="totalCount"
+                      hidefuncbar="true"></pagegridview>
+    </div>
+    <div style="float: left; width: 30%; padding: 5px; border: 1px solid #3b3b3b; background: #fff; height: 500px; ">
+        <div>
+            <combbox caption="本次NCR操作" ng-model="ncrEvent.NCRInfoID" list="ncrInfoList" on-change="ncrInfoChange(val)" mustinput="true"></combbox>
+            <input style="display:none" ng-model="ncrEvent.NCRInfoName" />
+        </div>
+        <div><text-box-number id="txtRecordCount" caption="数量" ng-model="ncrEvent.RecordCount" style="display:none"></text-box-number></div>
+        <div>
+            操作描述<br />
+            <textarea style="height: 60px; width: 100%;" ng-model="ncrEvent.Comments"></textarea>
+        </div>
+        <div><combbox caption="下一步操作组" ng-model="nextGroupID" list="nextGroupList" mustinput="!isClose" ng-disabled="isClose"></combbox></div>
+        <div><combbox caption="CC" ng-model="ccGroupID" list="ccGroupList"></combbox></div>
+    </div>
+    <div style="clear: both"></div>
+</div>
