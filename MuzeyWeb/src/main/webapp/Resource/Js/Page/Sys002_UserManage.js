@@ -72,10 +72,10 @@
         }
 
         $scope.onResearch = function (offset, size) {
-            var req = { action: "", offset: offset, size: size };          
+            var req = { offset: offset, size: size };          
             req.selUserId = $scope.condition.selUserId;
             req.selUserName = $scope.condition.selUserName;
-            netRequest.post("Controller/P000SysManage/Sys002_UserManageController.ashx", req, function (res) {
+            netRequest.post("/MuzeyWeb/Login/Sys002_UserManage", req, function (res) {
                 $scope.userList = res.userList;
                 $scope.totalCount = res.totalCount;
             });

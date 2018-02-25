@@ -8,17 +8,17 @@ import com.muzey.helper.MuzeyBusinessLogic;
 import com.muzey.until.DESEncrypt;
 import com.muzey.until.SqlUtil;
 import com.muzey.until.StringUtil;
-import com.muzey.web.base.annotation.MuzeyBLAutowired;
+import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.constant.CommonConst;
 import com.muzey.web.model.LoginModel;
 
 public class LoginService extends MuzeyService{
     
-    @MuzeyBLAutowired
+    @MuzeyAutowired
     private MuzeyBusinessLogic<Sys_userinfoDto> userInfoBL;
-    @MuzeyBLAutowired
+    @MuzeyAutowired
     private MuzeyBusinessLogic<Sys_roleDto> roleBL;
-    @MuzeyBLAutowired
+    @MuzeyAutowired
     private MuzeyBusinessLogic<TestDto> testBL;
     
     public Sys_userinfoDto login(LoginModel model)

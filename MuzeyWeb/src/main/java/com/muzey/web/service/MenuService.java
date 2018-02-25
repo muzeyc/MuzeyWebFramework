@@ -5,16 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.muzey.base.MuzeyService;
 import com.muzey.dto.Sys_menuDto;
 import com.muzey.helper.MuzeyBusinessLogic;
+import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.constant.CommonConst;
 import com.muzey.web.model.MenuModel;
 
-public class MenuService {
+public class MenuService extends MuzeyService{
 
+    @MuzeyAutowired
+    private MuzeyBusinessLogic<Sys_menuDto> menuBL;
+    
     public List<MenuModel> getMenuList(String role) {
 
-        MuzeyBusinessLogic<Sys_menuDto> menuBL = new MuzeyBusinessLogic<Sys_menuDto>(Sys_menuDto.class);
         String where = CommonConst.ADMIN_ROLE.equals(role) ? "AND(DeleteFlag<>1 OR IsSystemMenu=1)"
                 : "AND (DeleteFlag<>1 AND IsSystemMenu<>1)";
         List<Sys_menuDto> list = menuBL.getDtoList(where);

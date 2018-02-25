@@ -12,7 +12,7 @@ public class LoginModel {
     private int canCreate;
     private int canEdit;
     private int canDelete;
-    private String Title;
+    private String title;
 
     public int getId() {
 
@@ -116,12 +116,12 @@ public class LoginModel {
 
     public String getTitle() {
 
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
 
-        Title = title;
+        this.title = title;
     }
 
 }

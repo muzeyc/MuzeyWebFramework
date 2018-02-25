@@ -9,83 +9,83 @@ public class MenuModel {
         this.subList = new ArrayList<MenuModel>();
     }
 
-    private int Id;
-    private int SeqNo;
-    private int ParentId;
-    private String MenuTitle;
-    private String IconName;
-    private String PageName;
-    private int DeleteFlag;
+    private int id;
+    private int seqNo;
+    private int parentId;
+    private String menuTitle;
+    private String iconName;
+    private String pageName;
+    private int deleteFlag;
     private List<MenuModel> subList;
 
     public int getId() {
 
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
 
-        Id = id;
+        this.id = id;
     }
 
     public int getSeqNo() {
 
-        return SeqNo;
+        return seqNo;
     }
 
     public void setSeqNo(int seqNo) {
 
-        SeqNo = seqNo;
+        this.seqNo = seqNo;
     }
 
     public int getParentId() {
 
-        return ParentId;
+        return parentId;
     }
 
     public void setParentId(int parentId) {
 
-        ParentId = parentId;
+        this.parentId = parentId;
     }
 
     public String getMenuTitle() {
 
-        return MenuTitle;
+        return menuTitle;
     }
 
     public void setMenuTitle(String menuTitle) {
 
-        MenuTitle = menuTitle;
+        this.menuTitle = menuTitle;
     }
 
     public String getIconName() {
 
-        return IconName;
+        return iconName;
     }
 
     public void setIconName(String iconName) {
 
-        IconName = iconName;
+        this.iconName = iconName;
     }
 
     public String getPageName() {
 
-        return PageName;
+        return pageName;
     }
 
     public void setPageName(String pageName) {
 
-        PageName = pageName;
+        this.pageName = pageName;
     }
 
     public int getDeleteFlag() {
 
-        return DeleteFlag;
+        return deleteFlag;
     }
 
     public void setDeleteFlag(int deleteFlag) {
 
-        DeleteFlag = deleteFlag;
+        this.deleteFlag = deleteFlag;
     }
 
     public List<MenuModel> getSubList() {

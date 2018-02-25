@@ -28,8 +28,9 @@ public class MuzeyProxy implements MethodInterceptor {
         }
         catch(Exception e){
             
-            System.err.println(e.getMessage());
             db.transactionRollBack();
+            System.err.println(e.getMessage());
+            throw new Exception("Service发生错误:" + e.getMessage());
         }
         
         return o1;

@@ -129,7 +129,7 @@ public class MuzeyBusinessLogic<T> {
 
                     if (pks.contains(fName)) {
 
-                        throw new Exception("主键" + fName + "值为空!");
+                        throw new Exception("PK:" + fName + "value is null!");
                     }
 
                     if (allFlag) {
@@ -174,7 +174,7 @@ public class MuzeyBusinessLogic<T> {
     }
 
     public MuzeyBusinessLogic(Class<T> clazz, DBHelper dbHelper) {
-        
+
         this.clazz = clazz;
         this.fs = clazz.getDeclaredFields();
         this.tableName = clazz.getName().replace("com.muzey.dto.", "").replace("Dto", "");
@@ -184,7 +184,7 @@ public class MuzeyBusinessLogic<T> {
         this.insertStr = createInsert();
         this.updateStr = createUpdate();
     }
-    
+
     public MuzeyBusinessLogic(Class<T> clazz) {
 
         this.clazz = clazz;
@@ -299,11 +299,11 @@ public class MuzeyBusinessLogic<T> {
 
         return resDto;
     }
-    
-    private String getDeleteStr(T dto){
-        
+
+    private String getDeleteStr(T dto) {
+
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("DELETE FROM " + tableName  + " WHERE 1=1 ");
+        stringBuffer.append("DELETE FROM " + tableName + " WHERE 1=1 ");
         Method m = null;
         try {
 
@@ -323,17 +323,17 @@ public class MuzeyBusinessLogic<T> {
 
             System.err.println(e.getMessage());
         }
-        
+
         return stringBuffer.toString();
     }
-    
-    public void deleteDto(T dto){
-        
+
+    public void deleteDto(T dto) {
+
         dbHelper.sqlExecuteUpdate(getDeleteStr(dto));
     }
-    
-    public void deleteDtoList(List<T> dtoList){
-        
+
+    public void deleteDtoList(List<T> dtoList) {
+
         String sqlStr = "";
         for (T t : dtoList) {
 

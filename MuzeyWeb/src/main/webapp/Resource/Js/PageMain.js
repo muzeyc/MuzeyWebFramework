@@ -7,8 +7,8 @@
             $("#hidCanCreate").val(res.loginModel.canCreate);
             $("#hidCanEdit").val(res.loginModel.canEdit);
             $("#hidCanDelete").val(res.loginModel.canDelete);
-            $("#hidTitle").val(res.loginModel.Title);
-            $rootScope.title = res.loginModel.Title;
+            $("#hidTitle").val(res.loginModel.title);
+            $rootScope.title = res.loginModel.title;
         });
     }
 

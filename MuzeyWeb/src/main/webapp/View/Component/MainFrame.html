@@ -23,13 +23,13 @@
             <ul class="sidebar-menu">
                 <li class="treeview" ng-repeat="menu in menuList track by $index">
                     <a>
-                        <i class="fa {{menu.IconName}}"></i> <span>{{menu.MenuTitle}}</span>
+                        <i class="fa {{menu.iconName}}"></i> <span>{{menu.menuTitle}}</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li ng-repeat="subMenu in menu.subList" ng-click="onMenuClick(subMenu)"><a><i class="fa {{subMenu.IconName}}"></i> {{subMenu.MenuTitle}}</a></li>
+                        <li ng-repeat="subMenu in menu.subList" ng-click="onMenuClick(subMenu)"><a><i class="fa {{subMenu.iconName}}"></i> {{subMenu.menuTitle}}</a></li>
                     </ul>
                 </li>
             </ul>
@@ -64,8 +64,8 @@
                             ng-class="{'active_page': subMenu.opened}" ng-click="pageSelect($index)">
                             <table>
                                 <tr>
-                                    <td class="tab-icon"><i class="fa {{subMenu.IconName}}"></i></td>
-                                    <td class="tab-content">{{subMenu.MenuTitle}}</td>
+                                    <td class="tab-icon"><i class="fa {{subMenu.iconName}}"></i></td>
+                                    <td class="tab-content">{{subMenu.menuTitle}}</td>
                                     <td class="tab-icon"><i class="fa fa-times" ng-click="closePage($index)"></i></td>
                                 </tr>
                             </table>

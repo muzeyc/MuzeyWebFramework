@@ -1,8 +1,0 @@
-﻿<div class="top_search_bar">
-    <combbox caption="产品" ng-model="assemblyItem" list="assemblyList" width="200" mustinput="true" on-change="onAssemblyChange(val)"></combbox>
-</div>
-<div>
-    <pagegridview config="config" list="wipList" refresh="refresh()" add="add()" edit="edit(item)"
-                  remove="onDelete(items)" rowcount="{{more.size}}" totalrowcount="totalCount"></pagegridview>
-</div>
-<wip-edit after-commit="afterCommit(res)"></wip-edit>

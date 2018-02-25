@@ -20,7 +20,7 @@
 	                $scope.homeSelected = false;
 	                var hasOpened = false;
 	                for (var i = 0; i < $scope.openedPageList.length; i++) {
-	                    if ($scope.openedPageList[i].PageName == subMenu.PageName) {
+	                    if ($scope.openedPageList[i].pageName == subMenu.pageName) {
 	                        $scope.openedPageList[i].opened = true;
 	                        hasOpened = true;
 	                    } else {
@@ -29,7 +29,7 @@
 	                }
 	                if (!hasOpened) {
 	                    subMenu.opened = true;
-	                    subMenu.url = $sce.trustAsResourceUrl("indexSubPage.html#/subPages/" + subMenu.PageName);
+	                    subMenu.url = $sce.trustAsResourceUrl("indexSubPage.html#/subPages/" + subMenu.pageName);
 	                    $scope.openedPageList.push(subMenu);
 	                }
 	            }

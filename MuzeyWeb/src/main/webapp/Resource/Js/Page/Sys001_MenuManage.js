@@ -34,7 +34,7 @@
 
             dialog.showDialog("comfirm", sysMessage.sys0001, {
                 yes: function () {
-                    netRequest.post("Controller/P000SysManage/Sys001_MenuManageController.ashx?action=delete", $scope.menu, function (res) {
+                    netRequest.post("/MuzeyWeb/Sys001_MenuManage/delete", $scope.menu, function (res) {
                         if (res.menuList) {
                             $scope.menuList = res.menuList;
                             $scope.menu = null;
@@ -52,7 +52,7 @@
         $scope.onResearch = function () {
             $scope.selectedIndex = -1;
             $scope.menu = null;
-            netRequest.get("Controller/P000SysManage/Sys001_MenuManageController.ashx", function (res) {
+            netRequest.get("/MuzeyWeb/Sys001_MenuManage", function (res) {
                 $scope.menuList = res.menuList;
             });
         }
@@ -68,7 +68,7 @@
 
         $scope.import = function () {
             if ($scope.attachList && $scope.attachList.length > 0) {
-                netRequest.get("Controller/P000SysManage/Sys001_MenuManageController.ashx?action=import&fileId=" + $scope.attachList[0].fileId, function (res) {
+                netRequest.get("/MuzeyWeb/Sys001_MenuManage/import?fileId=" + $scope.attachList[0].fileId, function (res) {
                     $scope.menuList = res.list;
 
                     $scope.showImport = false;
@@ -83,7 +83,7 @@
         $scope.cancelImport = function () {
 
             if ($scope.attachList && $scope.attachList.length > 0) {
-                netRequest.get("Controller/P000SysManage/Sys001_MenuManageController.ashx?action=importCancel&fileId=" + $scope.attachList[0].fileId, function (res) {
+                netRequest.get("/MuzeyWeb/Sys001_MenuManage/importCancel&fileId=" + $scope.attachList[0].fileId, function (res) {
                     $scope.showImport = !$scope.showImport;
                 });
             } else {
@@ -124,7 +124,7 @@
                         return;
                     }
 
-                    netRequest.post("Controller/P000SysManage/Sys001_MenuManageController.ashx?action=" + $scope.mode, $scope.menu, function (res) {
+                    netRequest.post("/MuzeyWeb/Sys001_MenuManage/" + $scope.mode, $scope.menu, function (res) {
                         if (res.result == "ok") {
 
                             dialog.showDialog("info", sysMessage.sys0004, {
@@ -147,17 +147,17 @@
                 $scope.$on("showSys001_MenuEdit", function (event, mode, menu) {
                     $scope.mode = mode;
                     $scope.menu = angular.copy(menu);
-                    $scope.menu.DeleteFlag = $scope.menu.DeleteFlag ? $scope.menu.DeleteFlag.toString() : "0";
+                    $scope.menu.deleteFlag = $scope.menu.deleteFlag ? $scope.menu.deleteFlag.toString() : "0";
                     if ("edit" == mode) {
-                        $scope.menu.ParentId = $scope.menu.ParentId.toString();
-                        $scope.menu.DeleteFlag = $scope.menu.DeleteFlag ? $scope.menu.DeleteFlag.toString() : "0";
+                        $scope.menu.parentId = $scope.menu.parentId.toString();
+                        $scope.menu.deleteFlag = $scope.menu.deleteFlag ? $scope.menu.deleteFlag.toString() : "0";
                     }
                     $scope.init();
                 });
 
                 // 初始化上级菜单下拉列表
                 $scope.init = function () {
-                    netRequest.get("Controller/P000SysManage/Sys001_MenuManageController.ashx?action=getParentMenu", function (res) {
+                    netRequest.get("/MuzeyWeb/Sys001_MenuManage/getParentMenu", function (res) {
                         $scope.parentMenuList = res.list;
                         $scope.show = !$scope.show;
                     });

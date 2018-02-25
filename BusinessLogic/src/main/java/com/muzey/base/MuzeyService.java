@@ -3,7 +3,7 @@ package com.muzey.base;
 import com.base.DBHelper;
 
 /**
- * 事物处理类
+ * Service基类
  * 
  * @author MuzeyC
  *

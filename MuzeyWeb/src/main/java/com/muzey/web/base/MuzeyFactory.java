@@ -7,13 +7,23 @@ import java.lang.reflect.Type;
 
 import com.base.DBHelper;
 import com.muzey.helper.MuzeyBusinessLogic;
-import com.muzey.web.base.annotation.MuzeyBLAutowired;
+import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.base.proxy.MuzeyProxy;
 
 import net.sf.cglib.proxy.Enhancer;
 
+/**
+ * 工厂类制造各种类的实例
+ * @author 秦川
+ *
+ */
 public class MuzeyFactory {
     
+    /**
+     * 创建Service实例，实现自动装配和事物
+     * @param clazz
+     * @return
+     */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public synchronized static <T> T createService(Class<T> clazz) {
         
@@ -29,16 +39,16 @@ public class MuzeyFactory {
             DBHelper dObj = (DBHelper) clazz.getField("dbHelper").get(t);
             for (Field f : clazz.getDeclaredFields()) {
                 // 获取字段中包含fieldMeta的注解
-                MuzeyBLAutowired ma = f.getAnnotation(MuzeyBLAutowired.class);
+                MuzeyAutowired ma = f.getAnnotation(MuzeyAutowired.class);
                 if (ma != null) {
                     Type gType = f.getGenericType();
                     ParameterizedType pType = (ParameterizedType)gType;  
                     Type[] gArgs = pType.getActualTypeArguments();  
                     Class<MuzeyBusinessLogic> cls = MuzeyBusinessLogic.class;
                     Constructor<MuzeyBusinessLogic> con = cls.getConstructor(Class.class, DBHelper.class); 
-                    Object obl = con.newInstance(gArgs[0], dObj);
+                    Object obj = con.newInstance(gArgs[0], dObj);
                     f.setAccessible(true);
-                    f.set(t, obl);
+                    f.set(t, obj);
                 }
             }
         }catch(Exception e){

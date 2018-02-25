@@ -347,7 +347,7 @@ angular.module('myApp')
 
                 init();
             }],
-            templateUrl: 'View/componentSystem/controls/textBoxDate.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/textBoxDate.html?v=' + Math.random(),
 
             link: function ($scope, iElm, iAttrs, controller) {
 
@@ -430,7 +430,7 @@ angular.module('myApp')
 
                 init();
             }],
-            templateUrl: 'View/componentSystem/controls/textBoxNumber.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/textBoxNumber.html?v=' + Math.random(),
 
             link: function ($scope, iElm, iAttrs, controller) {
 
@@ -532,7 +532,7 @@ angular.module('myApp')
                     init();
                 });
             }],
-            templateUrl: 'View/componentSystem/controls/radioBtnList.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/radioBtnList.html?v=' + Math.random(),
 
             link: function ($scope, iElm, iAttrs, controller) {
 
@@ -593,7 +593,7 @@ angular.module('myApp')
                 init();
 
             }],
-            templateUrl: 'View/componentSystem/controls/checkBox.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/checkBox.html?v=' + Math.random(),
 
             link: function ($scope, iElm, iAttrs, controller) {
 
@@ -611,7 +611,7 @@ angular.module('myApp')
             controller: ['$scope', function ($scope) {
 
             }],
-            templateUrl: 'View/componentSystem/controls/controlContainer.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/controlContainer.html?v=' + Math.random(),
 
             link: function ($scope, iElm, iAttrs, controller) {
 
@@ -669,7 +669,7 @@ angular.module('myApp')
 
                
             }],
-            templateUrl: 'View/componentSystem/controls/popup.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/popup.html?v=' + Math.random(),
         };
     }])
     .directive('searchCombbox', ['$rootScope', function ($rootScope) {
@@ -755,7 +755,7 @@ angular.module('myApp')
 
                 setValue();
             }],
-            templateUrl: 'View/componentSystem/controls/searchCombbox.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/searchCombbox.html?v=' + Math.random(),
 
             link: function ($scope, iElm, iAttrs, controller) {
 
@@ -816,7 +816,7 @@ angular.module('myApp')
 
                 init();
             }],
-            templateUrl: 'View/componentSystem/controls/attachment.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/attachment.html?v=' + Math.random(),
 
             link: function ($scope, iElm, iAttrs, controller) {
 
@@ -868,7 +868,7 @@ angular.module('myApp')
 
                 init();
             }],
-            templateUrl: 'View/componentSystem/controls/combbox.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/combbox.html?v=' + Math.random(),
         };
     }])
     .directive('pager', [function () {
@@ -957,7 +957,7 @@ angular.module('myApp')
                     init();
                 });
             }],
-            templateUrl: 'View/componentSystem/controls/pager.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/pager.html?v=' + Math.random(),
         };
     }])
     .directive('gridview', [function () {
@@ -1169,7 +1169,7 @@ angular.module('myApp')
                     }
                 }
             }],
-            templateUrl: 'View/componentSystem/controls/gridview.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/gridview.html?v=' + Math.random(),
         };
     }])
     .directive('pagegridview', [function () {
@@ -1379,7 +1379,7 @@ angular.module('myApp')
                     }
                 }
             }],
-            templateUrl: 'View/componentSystem/controls/pagegridview.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/pagegridview.html?v=' + Math.random(),
         };
     }])
     .directive('fileUpload', [function () {
@@ -1396,7 +1396,7 @@ angular.module('myApp')
                     $scope.attachlist = list;
                 }
             }],
-            templateUrl: 'View/componentSystem/controls/fileUpload.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/fileUpload.html?v=' + Math.random(),
         };
     }])
     .directive('numberBox', [function () {
@@ -1580,7 +1580,7 @@ angular.module('myApp')
                     return 0;
                 }
             }],
-            templateUrl: 'View/componentSystem/controls/pictureView.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/pictureView.html?v=' + Math.random(),
             link: function ($scope, iElm, iAttrs, controller) {
                 $scope.$on("showPicture", function (event, src) {
                     $scope.src = src;
@@ -1610,7 +1610,7 @@ angular.module('myApp')
                     return false;
                 }
             }],
-            templateUrl: 'View/componentSystem/controls/pdfView.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/pdfView.html?v=' + Math.random(),
             link: function ($scope, iElm, iAttrs, controller) {
                 $scope.$on("showPdf", function (event, src) {
                     $scope.src = src;
@@ -1723,7 +1723,7 @@ angular.module('myApp')
 
                 init();
             }],
-            templateUrl: 'View/componentSystem/controls/pictureList.html?v=' + Math.random(),
+            templateUrl: 'View/ComponentSystem/controls/pictureList.html?v=' + Math.random(),
 
             link: function ($scope, iElm, iAttrs, controller) {
 

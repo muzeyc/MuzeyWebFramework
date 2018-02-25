@@ -1,20 +1,18 @@
 package com.muzey.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.muzey.dto.Sys_userinfoDto;
 import com.muzey.until.CookieUtil;
 import com.muzey.until.JsonUtil;
 import com.muzey.until.StringUtil;
-import com.muzey.web.base.MuzeyFactory;
+import com.muzey.web.base.BaseController;
+import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.constant.CommonConst;
 import com.muzey.web.model.LoginModel;
 import com.muzey.web.model.res.LoginResModel;
@@ -22,32 +20,32 @@ import com.muzey.web.model.res.ResponseModelBase;
 import com.muzey.web.service.LoginService;
 
 @PropertySource("classpath:webconfig.properties")
-@Controller
+@RestController
 @RequestMapping("/Login")
 public class LoginController extends BaseController {
 
     @Autowired
-    private Environment env;
+    public Environment env;
+
+    @MuzeyAutowired
+    private LoginService service;
 
     @RequestMapping(method = RequestMethod.GET)
-    public void getTitle(HttpServletRequest request, HttpServletResponse response) {
+    public void getTitle() {
 
         LoginResModel resModel = new LoginResModel();
         resModel.setSysTitle(env.getProperty("web.title"));
         CookieUtil.setCookie(response, "Title", resModel.getSysTitle());
-        renderData(response, JsonUtil.serializer(resModel));
+        returnData(resModel);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public void login(HttpServletRequest request, HttpServletResponse response) {
+    public void login(LoginModel model) {
 
         String resust = "";
-        String json = request.getParameterMap().keySet().iterator().next();
-        LoginModel model = JsonUtil.deSerializer(json, LoginModel.class);
         LoginResModel resModel = new LoginResModel();
         try {
             if (CommonConst.ADMIN_USER_ID.equals(model.getUserName())) {
-                LoginService service = MuzeyFactory.createService(LoginService.class);
                 Sys_userinfoDto dto = service.login(model);
                 if (dto == null) {
                     resModel.setLoginResult(ResponseModelBase.FAILED);
@@ -68,11 +66,11 @@ public class LoginController extends BaseController {
             resust = this.getFailResult(e.getMessage());
         }
 
-        renderData(response, resust);
+        returnData(resust);
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public void logout(HttpServletRequest request, HttpServletResponse response) {
+    public void logout() {
 
         CookieUtil.clearCookie(response, "UserIdDisp");
         CookieUtil.clearCookie(response, "UserId");
@@ -85,13 +83,12 @@ public class LoginController extends BaseController {
         LoginResModel resModel = new LoginResModel();
         resModel.result = ResponseModelBase.SUCCESSED;
 
-        renderData(response, JsonUtil.serializer(resModel));
+        returnData(resModel);
     }
 
     @RequestMapping(value = "/getLoginInfo", method = RequestMethod.GET)
-    public void getLoginInfo(HttpServletRequest request, HttpServletResponse response) {
+    public void getLoginInfo() {
 
-        String resStr = "";
         LoginResModel resModel = new LoginResModel();
         resModel.result = ResponseModelBase.SUCCESSED;
         LoginModel model = new LoginModel();
@@ -99,12 +96,11 @@ public class LoginController extends BaseController {
         model.setUserName(CookieUtil.getCookieValue(request, "UserName"));
         model.setMessageCount(11);
         resModel.setLoginModel(model);
-        resStr = JsonUtil.serializer(resModel);
-        renderData(response, resStr);
+        returnData(resModel);
     }
 
     @RequestMapping(value = "/setAuthority", method = RequestMethod.GET)
-    public void setAuthority(HttpServletRequest request, HttpServletResponse response) {
+    public void setAuthority() {
 
         LoginResModel resModel = new LoginResModel();
         resModel.getLoginModel().setUserId(CookieUtil.getCookieValue(request, "UserIdDisp"));
@@ -114,7 +110,7 @@ public class LoginController extends BaseController {
         resModel.getLoginModel().setCanDelete(Integer.parseInt(CookieUtil.getCookieValue(request, "CanDelete")));
         resModel.getLoginModel().setTitle(CookieUtil.getCookieValue(request, "Title"));
 
-        renderData(response, JsonUtil.serializer(resModel));
+        returnData(resModel);
     }
 
 }
