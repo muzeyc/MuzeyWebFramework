@@ -29,132 +29,132 @@ import com.muzey.web.base.annotation.MuzeyAutowired;
 @Aspect
 public class ControllerProxy {
 
-	@Pointcut("execution(* com.muzey.web.controller..*.*(..))")
-	private void controllerAspect() {
+    @Pointcut("execution(* com.muzey.web.controller..*.*(..))")
+    private void controllerAspect() {
 
-		System.out.println("controllerAspect................");
-	}
+        System.out.println("controllerAspect................");
+    }
 
-	/**
-	 * 鏂规硶寮�濮嬫墽琛�
-	 */
-	@Before("controllerAspect()")
-	public void doBefore() {
+    /**
+     * 方法开始执行
+     */
+    @Before("controllerAspect()")
+    public void doBefore() {
 
-		System.out.println("Aspect start");
-	}
+        System.out.println("Aspect start");
+    }
 
-	/**
-	 * 鏂规硶缁撴潫鎵ц
-	 */
-	@After("controllerAspect()")
-	public void after() {
+    /**
+     * 方法结束执行
+     */
+    @After("controllerAspect()")
+    public void after() {
 
-		System.out.println("controllerAspect end");
-	}
+        System.out.println("controllerAspect end");
+    }
 
-	/**
-	 * 鏂规硶缁撴潫鎵ц鍚庣殑鎿嶄綔
-	 */
-	@AfterReturning("controllerAspect()")
-	public void doAfter() {
+    /**
+     * 方法结束执行后的操作
+     */
+    @AfterReturning("controllerAspect()")
+    public void doAfter() {
 
-		System.out.println("controllerAspect AfterReturning");
-	}
+        System.out.println("controllerAspect AfterReturning");
+    }
 
-	/**
-	 * 鏂规硶鏈夊紓甯告椂鐨勬搷浣�
-	 */
-	@AfterThrowing("controllerAspect()")
-	public void doAfterThrow() {
+    /**
+     * 方法有异常时的操作
+     */
+    @AfterThrowing("controllerAspect()")
+    public void doAfterThrow() {
 
-		System.out.println("Aspect throw-----------------------------------");
-	}
+        System.out.println("Aspect throw-----------------------------------");
+    }
 
-	/**
-	 * 鏂规硶鎵ц
-	 *
-	 * @param pjp
-	 * @return
-	 * @throws Throwable
-	 */
-	@Around("controllerAspect()")
-	public Object around(ProceedingJoinPoint pjp) throws Throwable {
+    /**
+     * 方法执行
+     * 
+     * @param pjp
+     * @return
+     * @throws Throwable
+     */
+    @Around("controllerAspect()")
+    public Object around(ProceedingJoinPoint pjp) throws Throwable {
 
-		Object objController = null;
-		Class<?> clazz = null;
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-				.getRequest();
-		HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-				.getResponse();
-		Object[] param = null;
-		Object resObj = null;
-		// 鎷︽埅鐨勬柟娉曞悕绉般�傚綋鍓嶆鍦ㄦ墽琛岀殑鏂规硶
-		// String methodName = pjp.getSignature().getName();
-		// 鎷︽埅鐨勬柟娉曞弬鏁�
-		param = pjp.getArgs();
-		try {
-			objController = pjp.getTarget();
-			clazz = objController.getClass();
-			clazz.getField("request").set(objController, request);
-			clazz.getField("response").set(objController, response);
-			for (Field f : clazz.getDeclaredFields()) {
-				// 鑾峰彇瀛楁涓寘鍚玣ieldMeta鐨勬敞瑙�
-				MuzeyAutowired ma = f.getAnnotation(MuzeyAutowired.class);
-				if (ma != null) {
+        Object objController = null;
+        Class<?> clazz = null;
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+                .getRequest();
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+                .getResponse();
+        Object[] param = null;
+        Object resObj = null;
+        // 拦截的方法名称。当前正在执行的方法
+        // String methodName = pjp.getSignature().getName();
+        // 拦截的方法参数
+        param = pjp.getArgs();
+        try {
+            objController = pjp.getTarget();
+            clazz = objController.getClass();
+            clazz.getField("request").set(objController, request);
+            clazz.getField("response").set(objController, response);
+            for (Field f : clazz.getDeclaredFields()) {
+                // 获取字段中包含fieldMeta的注解
+                MuzeyAutowired ma = f.getAnnotation(MuzeyAutowired.class);
+                if (ma != null) {
 
-					Object obj = null;
-					if (f.getType().toString().equals("class com.muzey.helper.MuzeyBusinessLogic")) {
+                    Object obj = null;
+                    if(f.getType().toString().equals("class com.muzey.helper.MuzeyBusinessLogic")){
+                        
+                        Type gType = f.getGenericType();
+                        ParameterizedType pType = (ParameterizedType)gType;  
+                        Type[] gArgs = pType.getActualTypeArguments();  
+                        @SuppressWarnings("rawtypes")
+                        Class<MuzeyBusinessLogic> cls = MuzeyBusinessLogic.class;
+                        @SuppressWarnings("rawtypes")
+                        Constructor<MuzeyBusinessLogic> con = cls.getConstructor(Class.class); 
+                        obj = con.newInstance(gArgs[0]);
+                    }else{
+                        
+                        obj = MuzeyFactory.createService(f.getType());
+                    }
+                    
+                    f.setAccessible(true);
+                    f.set(objController, obj);
+                }
+            }
+            // 实例化对象
+            if (param.length == 0) {
 
-						Type gType = f.getGenericType();
-						ParameterizedType pType = (ParameterizedType) gType;
-						Type[] gArgs = pType.getActualTypeArguments();
-						@SuppressWarnings("rawtypes")
-						Class<MuzeyBusinessLogic> cls = MuzeyBusinessLogic.class;
-						@SuppressWarnings("rawtypes")
-						Constructor<MuzeyBusinessLogic> con = cls.getConstructor(Class.class);
-						obj = con.newInstance(gArgs[0]);
-					} else {
+                resObj = pjp.proceed();
+            } else {
+                Class<?> paramClazz = pjp.getArgs()[0].getClass();
+                Object paramObj = null;
+                String methodType = request.getMethod();
+                // 拦截的实体类，就是当前正在执行的controller
+                if (methodType.equals("GET")) {
 
-						obj = MuzeyFactory.createService(f.getType());
-					}
+                    paramObj = paramClazz.newInstance();
+                    for (String getParam : request.getParameterMap().keySet()) {
 
-					f.setAccessible(true);
-					f.set(objController, obj);
-				}
-			}
-			// 瀹炰緥鍖栧璞�
-			if (param.length == 0) {
+                        Field f = paramClazz.getDeclaredField(getParam);
+                        f.setAccessible(true);
+                        f.set(paramObj, request.getParameter(getParam));
+                    }
 
-				resObj = pjp.proceed();
-			} else {
-				Class<?> paramClazz = pjp.getArgs()[0].getClass();
-				Object paramObj = null;
-				String methodType = request.getMethod();
-				// 鎷︽埅鐨勫疄浣撶被锛屽氨鏄綋鍓嶆鍦ㄦ墽琛岀殑controller
-				if (methodType.equals("GET")) {
+                } else {
 
-					paramObj = paramClazz.newInstance();
-					for (String getParam : request.getParameterMap().keySet()) {
+                    String json = request.getParameterMap().keySet().iterator().next();
+                    paramObj = JsonUtil.deSerializer(json, paramClazz);
+                }
 
-						Field f = paramClazz.getDeclaredField(getParam);
-						f.setAccessible(true);
-						f.set(paramObj, request.getParameter(getParam));
-					}
+                param[0] = paramObj;               
+                resObj = pjp.proceed(param);
+            }
+        } catch (Exception e) {
 
-				} else {
-
-					String json = request.getParameterMap().keySet().iterator().next();
-					paramObj = JsonUtil.deSerializer(json, paramClazz);
-				}
-
-				param[0] = paramObj;
-				resObj = pjp.proceed(param);
-			}
-		} catch (Exception e) {
-
-			System.err.println(e.getMessage());
-		}
-		return resObj;
-	}
+            System.err.println(e.getMessage());
+        }
+        return resObj;
+    }
 }
