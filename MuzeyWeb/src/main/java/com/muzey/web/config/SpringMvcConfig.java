@@ -7,13 +7,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
 @EnableAspectJAutoProxy
 @ComponentScan("com.muzey.web.controller,com.muzey.web.base.proxy")
-public class SpringMvcConfig extends WebMvcConfigurerAdapter {
+public class SpringMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -30,7 +30,7 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        
+
         //registry.addInterceptor(new ControllerProxy()).addPathPatterns("/*").addPathPatterns("/*/*");
     }
 }
