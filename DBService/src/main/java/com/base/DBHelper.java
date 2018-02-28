@@ -22,9 +22,9 @@ public class DBHelper {
     private String url = "jdbc:postgresql://127.0.0.1:5432/muzeywebframework";
     private String user = "admin";
     private String password = "123456";
-    // private String url = "jdbc:postgresql://127.0.0.1:5432/linktalent";
-    // private String user = "linktalent";
-    // private String password = "linktalent";
+//     private String url = "jdbc:postgresql://192.168.0.8:5432/muzeywebframework";
+//     private String user = "admin";
+//     private String password = "123456";
 
     public DBHelper() {
 
