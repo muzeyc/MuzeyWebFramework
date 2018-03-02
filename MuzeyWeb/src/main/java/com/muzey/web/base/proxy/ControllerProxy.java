@@ -139,7 +139,19 @@ public class ControllerProxy {
 
                         Field f = paramClazz.getDeclaredField(getParam);
                         f.setAccessible(true);
-                        f.set(paramObj, request.getParameter(getParam));
+                        switch (f.getType().toString()) {
+						case "class java.lang.String":
+							
+							f.set(paramObj, request.getParameter(getParam));
+							break;
+						case "class java.lang.Integer":
+							
+							f.set(paramObj, Integer.parseInt(request.getParameter(getParam)));
+							break;
+
+						default:
+							break;
+						}
                     }
 
                 } else {

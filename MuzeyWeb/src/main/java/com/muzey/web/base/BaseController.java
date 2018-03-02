@@ -62,6 +62,7 @@ public class BaseController {
 
         PrintWriter printWriter = null;
         try {
+        	response.setCharacterEncoding("utf-8");
             printWriter = response.getWriter();
             printWriter.print(JsonUtil.serializer(obj));
         } catch (IOException ex) {
