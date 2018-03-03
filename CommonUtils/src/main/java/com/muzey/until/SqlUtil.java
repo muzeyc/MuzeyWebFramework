@@ -23,7 +23,7 @@ public class SqlUtil {
     public static String partAgreeSql(String val)
     {
         val = ConvertSQL(val);
-        return String.format("'%%s%'", StringUtil.trim(val));
+        return String.format("'%%%s%%'", StringUtil.trim(val));
     }
 
 

@@ -89,6 +89,21 @@ public class Sys002_UserManageService extends MuzeyService {
 
 	/**
 	 * <p>
+	 * 用户管理刪除Impl
+	 * </p>
+	 * @author zhouc
+	 * @date 2018-3-3
+	 * @param model
+	 */
+	public void delete(UserInfoModel model)
+	{
+		Sys_userinfoDto userDto = new Sys_userinfoDto();
+		userDto.setUserid(model.getUserId());
+		userBL.deleteDto(userDto);
+	}
+	
+	/**
+	 * <p>
 	 * 用户新增画面查询职务(角色)的下拉框数据Impl
 	 * </p>
 	 * 

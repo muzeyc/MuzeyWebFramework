@@ -55,7 +55,7 @@
             req.userList = items;
             req.selUserId = $scope.condition.selUserId;
             req.selUserName = $scope.condition.selUserName;
-            netRequest.post("Controller/P000SysManage/Sys002_UserManageController.ashx", req, function (res) {
+            netRequest.post("/MuzeyWeb/Sys002_UserManage/delete", $scope.user, function (res) {
                 $scope.userList = res.userList;
                 $scope.totalCount = res.totalCount;
             });
