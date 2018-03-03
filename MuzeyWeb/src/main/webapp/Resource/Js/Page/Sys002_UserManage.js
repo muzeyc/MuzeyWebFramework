@@ -9,19 +9,19 @@
 
         $scope.config = {
             colModel: [
-                        { label: "员工编号", name: "UserId", width: "10%" },
-                        { label: "姓名", name: "UserName", width: "10%" },
-                        { label: "职务", name: "RoleName", width: "10%" },
+                        { label: "员工编号", name: "userId", width: "10%" },
+                        { label: "姓名", name: "userName", width: "10%" },
+                        { label: "职务", name: "roleName", width: "10%" },
                         {
-                            label: "性别", name: "Sex", width: "5%",
+                            label: "性别", name: "sex", width: "5%",
                             format: [{ value: "1", display: "男" }, {value: "2", display: "女"}],
                         },
-                        { label: "身份证号", name: "PersonId", width: "15%" },
-                        { label: "电话", name: "PhoneNo", width: "10%" },
-                        { label: "邮箱", name: "Email", width: "10%" },
-                        { label: "生日", name: "Birthday", width: "10%" },
+                        { label: "身份证号", name: "personId", width: "15%" },
+                        { label: "电话", name: "phoneNo", width: "10%" },
+                        { label: "邮箱", name: "email", width: "10%" },
+                        { label: "生日", name: "birthday", width: "10%" },
                         {
-                            label: "有效", name: "DeleteFlag", width: "10%", type: "icon",
+                            label: "有效", name: "deleteFlag", width: "10%", type: "icon",
                             format: [{ value: 0, display: "<i class='fa fa-check'></i>", default: true }, { value: 1, display: "\<i class='fa fa-ban'\>\</i\>" }],
                         },
                         {
@@ -75,7 +75,7 @@
             var req = { offset: offset, size: size };          
             req.selUserId = $scope.condition.selUserId;
             req.selUserName = $scope.condition.selUserName;
-            netRequest.post("/MuzeyWeb/Login/Sys002_UserManage", req, function (res) {
+            netRequest.post("/MuzeyWeb/Sys002_UserManage", req, function (res) {
                 $scope.userList = res.userList;
                 $scope.totalCount = res.totalCount;
             });

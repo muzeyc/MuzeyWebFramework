@@ -34,7 +34,7 @@ public class Sys002_UserManageService extends MuzeyService {
 		}
 
 		StringBuilder strSql = new StringBuilder();
-		strSql.append(" Role<>0 ");
+		strSql.append(" AND Role<>0 ");
 		if (strWhere.trim() != "") {
 			strSql.append(strWhere);
 		}
@@ -45,8 +45,16 @@ public class Sys002_UserManageService extends MuzeyService {
 		for (int i = offset; i <= endIndex; i++) {
 			Sys_userinfoDto dto = list.get(i);
 			UserInfoModel model = new UserInfoModel();
-			BeanUtils.copyProperties(dto, model);
-			model.setRoleName(roleMap.containsKey(model.getRole()) ? roleMap.get(model.getRole()).getRolename() : "");
+			model.setUserId(dto.getUserid());
+			model.setUserName(dto.getUsername());
+			model.setSex(dto.getSex());
+			model.setPersonId(dto.getPersonid());
+			model.setPhoneNo(dto.getPhoneno());
+			model.setEmail(dto.getEmail());
+			model.setBirthday(dto.getBirthday());
+			model.setDeleteFlag(dto.getDeleteflag());
+			//BeanUtils.copyProperties(dto, model);
+			model.setRoleName(roleMap.containsKey(dto.getRole()) ? roleMap.get(dto.getRole()).getRolename() : "");
 			modelList.add(model);
 		}
 		UserInfoResModel resModel = new UserInfoResModel();
