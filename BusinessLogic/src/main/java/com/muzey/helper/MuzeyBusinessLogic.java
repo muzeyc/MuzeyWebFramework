@@ -46,7 +46,7 @@ public class MuzeyBusinessLogic<T> {
         stringBuffer.append(tableName + "(");
         for (int i = 0; i < fs.length; i++) {
 
-            stringBuffer.append(fs[i].getName());
+            stringBuffer.append("⊙" + fs[i].getName());
             if (i != fs.length - 1)
                 stringBuffer.append(",");
         }
@@ -91,15 +91,15 @@ public class MuzeyBusinessLogic<T> {
                 Object obj = m.invoke(dto);
                 if (obj == null) {
 
-                    insertStr = insertStr.replace(fName, "").replace(",,", ",");
+                    insertStr = insertStr.replace("⊙" + fName, "").replace(",,", ",");
                 } else {
 
+                	insertStr = insertStr.replace("⊙" + fName, fName);
                     if (i != 0)
                         insertStr += ",";
 
                     insertStr += "'" + obj.toString() + "'";
                 }
-
             }
             insertStr += ")";
             insertStr = insertStr.replace("(,", "(");
