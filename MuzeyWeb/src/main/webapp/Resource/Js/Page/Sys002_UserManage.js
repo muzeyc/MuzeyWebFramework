@@ -37,7 +37,7 @@
                         },
             ],
         };
-
+        
         // 模型
         $scope.more = { offset: 0, size: 20 };
 
@@ -183,15 +183,16 @@
 
                 // 初始化职位下拉列表
                 $scope.init = function () {
-//                    if (!$scope.roleList) {
-//                        $scope.roleList = [];
-//                    }
-//                    if ($scope.roleList.length <= 0) {
-//                        var req = { action: "getRoleList" };
-//                        netRequest.post("Controller/P000SysManage/Sys002_UserManageController.ashx", req, function (res) {
-//                            $scope.roleList = res.list;
-//                        });
-//                    }
+// if (!$scope.roleList) {
+// $scope.roleList = [];
+// }
+// if ($scope.roleList.length <= 0) {
+// var req = { action: "getRoleList" };
+// netRequest.post("Controller/P000SysManage/Sys002_UserManageController.ashx",
+// req, function (res) {
+// $scope.roleList = res.list;
+// });
+// }
                     netRequest.get("/MuzeyWeb/Sys002_UserManage/getRoleList", function (res) {
                         $scope.roleList = res.list;
                         $scope.show = !$scope.show;
@@ -202,6 +203,7 @@
             templateUrl: 'View/P000SysManage/Sys002_UserManageEdit.html?v=' + Math.random(),
             link: function ($scope, iElm, iAttrs, controller) {
                 $scope.$on("showSys002_UserEdit", function (event, mode, user, more, selUserId, selUserName) {
+                	$scope.mode = mode;
                     $scope.show = !$scope.show;
                     $scope.user = angular.copy(user);
                     $scope.user.DeleteFlag = $scope.user.DeleteFlag ? $scope.user.DeleteFlag.toString() : "0";
@@ -212,7 +214,6 @@
                     if ("new" == mode) {
                         $scope.more.offset = 0;
                     }
-                    $scope.mode = mode;
                     $scope.selUserId = selUserId;
                     $scope.selUserName = selUserName;
                 });
@@ -232,15 +233,15 @@
                             { label: "操作组名称", name: "GroupName", width: "40%" },
                 ],
             }
-            //取消
+            // 取消
             $scope.cancel = function () {
                 $scope.show = false;
             };
-            //提交
+            // 提交
             $scope.commit = function () {
-                //if (!validate.doValidate("#validate")) {
-                //    return;
-                //}
+                // if (!validate.doValidate("#validate")) {
+                // return;
+                // }
                 var ids = [];
                 for (var i = 0; i < $scope.groupList.length; i++) {
                     if ($scope.groupList[i].selected) {

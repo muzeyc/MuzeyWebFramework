@@ -5,10 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.BeanUtils;
-
 import com.muzey.base.MuzeyService;
-import com.muzey.dto.Sys_menuDto;
 import com.muzey.dto.Sys_roleDto;
 import com.muzey.dto.Sys_userinfoDto;
 import com.muzey.helper.MuzeyBusinessLogic;
@@ -45,6 +42,7 @@ public class Sys002_UserManageService extends MuzeyService {
 		for (int i = offset; i <= endIndex; i++) {
 			Sys_userinfoDto dto = list.get(i);
 			UserInfoModel model = new UserInfoModel();
+			model.setId(dto.getId());
 			model.setUserId(dto.getUserid());
 			model.setUserName(dto.getUsername());
 			model.setSex(dto.getSex());
@@ -53,7 +51,7 @@ public class Sys002_UserManageService extends MuzeyService {
 			model.setEmail(dto.getEmail());
 			model.setBirthday(dto.getBirthday());
 			model.setDeleteFlag(dto.getDeleteflag());
-			//BeanUtils.copyProperties(dto, model);
+			// BeanUtils.copyProperties(dto, model);
 			model.setRoleName(roleMap.containsKey(dto.getRole()) ? roleMap.get(dto.getRole()).getRolename() : "");
 			modelList.add(model);
 		}
@@ -67,13 +65,14 @@ public class Sys002_UserManageService extends MuzeyService {
 	 * <p>
 	 * 用户管理新增Impl
 	 * </p>
+	 * 
 	 * @author zhouc
 	 * @date 2018-3-3
 	 * @param model
 	 */
 	public void add(UserInfoModel model) {
 		Sys_userinfoDto userDto = new Sys_userinfoDto();
-		
+
 		userDto.setUserid(model.getUserId());
 		userDto.setUsername(model.getUserName());
 		userDto.setRole(model.getRole());
@@ -83,25 +82,53 @@ public class Sys002_UserManageService extends MuzeyService {
 		userDto.setPhoneno(model.getPhoneNo());
 		userDto.setEmail(model.getEmail());
 		userDto.setDeleteflag(model.getDeleteFlag());
-		
+
 		userBL.insertDto(userDto);
+	}
+
+	/**
+	 * <p>
+	 * 用户管理编辑Impl
+	 * </p>
+	 * 
+	 * @author zhouc
+	 * @date 2018-3-3
+	 * @param model
+	 */
+	public void update(UserInfoModel model) {
+
+		Sys_userinfoDto pkDto = new Sys_userinfoDto();
+		pkDto.setId(model.getId());
+		Sys_userinfoDto userDto = userBL.getDtoByPK(pkDto);
+
+		userDto.setUserid(model.getUserId());
+		userDto.setUsername(model.getUserName());
+		userDto.setRole(model.getRole());
+		userDto.setBirthday(model.getBirthday());
+		userDto.setPersonid(model.getPersonId());
+		userDto.setSex(model.getSex());
+		userDto.setPhoneno(model.getPhoneNo());
+		userDto.setEmail(model.getEmail());
+		userDto.setDeleteflag(model.getDeleteFlag());
+
+		userBL.updateDtoToAll(userDto);
 	}
 
 	/**
 	 * <p>
 	 * 用户管理刪除Impl
 	 * </p>
+	 * 
 	 * @author zhouc
 	 * @date 2018-3-3
 	 * @param model
 	 */
-	public void delete(UserInfoModel model)
-	{
+	public void delete(UserInfoModel model) {
 		Sys_userinfoDto userDto = new Sys_userinfoDto();
 		userDto.setUserid(model.getUserId());
 		userBL.deleteDto(userDto);
 	}
-	
+
 	/**
 	 * <p>
 	 * 用户新增画面查询职务(角色)的下拉框数据Impl

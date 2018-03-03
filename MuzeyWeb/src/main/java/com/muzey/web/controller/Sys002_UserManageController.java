@@ -79,6 +79,38 @@ public class Sys002_UserManageController extends BaseController {
 
 	/**
 	 * <p>
+	 * 用户管理编辑更新Control
+	 * </p>
+	 * 
+	 * @author zhouc
+	 * @date 2018-3-3
+	 * @param model
+	 */
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public void update(UserInfoModel model) {
+
+		String resStr = "";
+
+		try {
+
+			service.update(model);
+		} catch (Exception e) {
+
+			resStr = this.getFailResult(e.getMessage());
+		}
+
+		if (resStr.equals("")) {
+
+			UserInfoReqModel reqModel = new UserInfoReqModel();
+			OnResearch(reqModel);
+		} else {
+
+			returnData(resStr);
+		}
+	}
+
+	/**
+	 * <p>
 	 * 用户管理删除Control
 	 * </p>
 	 * 
