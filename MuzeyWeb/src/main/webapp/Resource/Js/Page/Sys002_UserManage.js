@@ -164,7 +164,7 @@
                     req.size = $scope.more.size;
                     req.selUserId = $scope.selUserId;
                     req.selUserName = $scope.selUserName;
-                    netRequest.post("Controller/P000SysManage/Sys002_UserManageController.ashx", req, function (res) {
+                    netRequest.post("/MuzeyWeb/Sys002_UserManage/" + $scope.mode, $scope.user, function (res) {
 
                         if (res.result == "ok") {
 
@@ -183,15 +183,19 @@
 
                 // 初始化职位下拉列表
                 $scope.init = function () {
-                    if (!$scope.roleList) {
-                        $scope.roleList = [];
-                    }
-                    if ($scope.roleList.length <= 0) {
-                        var req = { action: "getRoleList" };
-                        netRequest.post("Controller/P000SysManage/Sys002_UserManageController.ashx", req, function (res) {
-                            $scope.roleList = res.list;
-                        });
-                    }
+//                    if (!$scope.roleList) {
+//                        $scope.roleList = [];
+//                    }
+//                    if ($scope.roleList.length <= 0) {
+//                        var req = { action: "getRoleList" };
+//                        netRequest.post("Controller/P000SysManage/Sys002_UserManageController.ashx", req, function (res) {
+//                            $scope.roleList = res.list;
+//                        });
+//                    }
+                    netRequest.get("/MuzeyWeb/Sys002_UserManage/getRoleList", function (res) {
+                        $scope.roleList = res.list;
+                        $scope.show = !$scope.show;
+                    });
                 }
                 $scope.init();
             }],

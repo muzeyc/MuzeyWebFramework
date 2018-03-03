@@ -1,32 +1,32 @@
 ﻿<popup width="600" height="400" title="用户管理" show="show">
     <div class="modal-body" id="validate">
         <div class="inputBar">
-            <text-box-normal caption="员工编号" ng-model="user.UserId" width="300" mustinput="true"></text-box-normal>
+            <text-box-normal caption="员工编号" ng-model="user.userId" width="300" mustinput="true"></text-box-normal>
         </div>
         <div class="inputBar">
-            <text-box-normal caption="姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名" ng-model="user.UserName" width="300" mustinput="true"></text-box-normal>
+            <text-box-normal caption="姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名" ng-model="user.userName" width="300" mustinput="true"></text-box-normal>
         </div>
         <div class="inputBar">
-            <combbox caption="职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务" ng-model="user.Role" list="roleList" width="300" mustinput="true"></combbox>
+            <combbox caption="职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务" ng-model="user.role" list="roleList" width="300" mustinput="true"></combbox>
         </div>
         <div class="inputBar">
-            <date-input caption="生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日" width="200" ng-model="user.Birthday"></date-input>
+            <date-input caption="生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日" width="200" ng-model="user.birthday"></date-input>
         </div>
         <div class="inputBar">
-            <text-box-normal caption="身份证号" ng-model="user.PersonId" width="500"></text-box-normal>
+            <text-box-normal caption="身份证号" ng-model="user.personId" width="500"></text-box-normal>
         </div>
         <div class="inputBar">
-            <radio-btn-list caption="性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别" width="280" ng-model="user.Sex" itemlist="sexlist" mustinput="true"></radio-btn-list>
+            <radio-btn-list caption="性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别" width="280" ng-model="user.sex" itemlist="sexlist" mustinput="true"></radio-btn-list>
         </div>
         <div class="inputBar">
-            <text-box-normal caption="电话号码" ng-model="user.PhoneNo" ></text-box-normal>
+            <text-box-normal caption="电话号码" ng-model="user.phoneNo" ></text-box-normal>
         </div>
         <div class="inputBar">
-            <text-box-normal caption="邮箱地址" ng-model="user.Email"></text-box-normal>
+            <text-box-normal caption="邮箱地址" ng-model="user.email"></text-box-normal>
         </div>
         <div class="inputBar">
             <control-container width="200" caption="有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;效">
-                <check-box ng-model="user.DeleteFlag" checkedvalue="0" uncheckedvalue="1"></check-box>
+                <check-box ng-model="user.deleteFlag" checkedvalue="0" uncheckedvalue="1"></check-box>
             </control-container>
         </div>
     </div>
