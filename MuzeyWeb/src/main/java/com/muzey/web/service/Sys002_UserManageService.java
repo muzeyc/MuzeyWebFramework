@@ -125,7 +125,7 @@ public class Sys002_UserManageService extends MuzeyService {
 	 */
 	public void delete(UserInfoModel model) {
 		Sys_userinfoDto userDto = new Sys_userinfoDto();
-		userDto.setUserid(model.getUserId());
+		userDto.setId(model.getId());
 		userBL.deleteDto(userDto);
 	}
 

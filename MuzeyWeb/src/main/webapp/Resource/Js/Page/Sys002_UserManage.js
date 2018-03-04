@@ -53,9 +53,10 @@
         $scope.onDelete = function (items) {
             var req = { action: "delete", offset: 0, size: $scope.more.size };
             req.userList = items;
+            $scope.user=angular.copy(items);
             req.selUserId = $scope.condition.selUserId;
             req.selUserName = $scope.condition.selUserName;
-            netRequest.post("/MuzeyWeb/Sys002_UserManage/delete", $scope.user, function (res) {
+            netRequest.post("/MuzeyWeb/Sys002_UserManage/delete", $scope.user[0], function (res) {
                 $scope.userList = res.userList;
                 $scope.totalCount = res.totalCount;
             });
@@ -206,10 +207,10 @@
                 	$scope.mode = mode;
                     $scope.show = !$scope.show;
                     $scope.user = angular.copy(user);
-                    $scope.user.DeleteFlag = $scope.user.DeleteFlag ? $scope.user.DeleteFlag.toString() : "0";
                     $scope.more = more;
                     if ("edit" == mode) {
-                        $scope.user.Role = $scope.user.Role.toString();
+                        $scope.user.role = $scope.user.role.toString();
+                        $scope.user.deleteFlag = $scope.user.deleteFlag.toString();
                     }
                     if ("new" == mode) {
                         $scope.more.offset = 0;
