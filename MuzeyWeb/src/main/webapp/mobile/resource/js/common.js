@@ -147,9 +147,6 @@
         };
     }])
     .factory('setMap', ['$state', function ($state) {
-
-        var map = new Map();
-        map.put("mobilePage.home", { pageName: "首页", parentUrl: "mobilePage.home" });
         
         var getMaps = function (name, mapList) {
             var obj = map.get(name);

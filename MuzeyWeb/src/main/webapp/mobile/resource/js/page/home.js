@@ -5,11 +5,11 @@
     })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $stateProvider
-        .state('home', {
+        .state('mobilePage.home', {
             url: '/home',
             cache: 'false',
             views: {
-                'mainframe': {
+                'mainView': {
                     templateUrl: 'view/home.html?v=' + Math.random(),
                     controller: 'homeCtrl'
                 }

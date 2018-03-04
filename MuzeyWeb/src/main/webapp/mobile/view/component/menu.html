@@ -1,0 +1,12 @@
+<div class="weui-tabbar">
+	<a href="javascript:;" ng-repeat="menudata in menudatas"
+		class="weui-tabbar__item" ng-click="menuclick(menudata.url)"
+		ng-class="{'weui-bar__item--on': menudata.url == currentpageurl}">
+		<span class="weui-badge" ng-if="menudata.msgNum"
+		style="position: absolute; top: -.4em; right: 1em;">{{menudata.msgNum}}</span>
+		<div class="weui-tabbar__icon">
+			<img ng-src="{{'resource/images/' + menudata.pictureSrc}}" alt="">
+		</div>
+		<p class="weui-tabbar__label">{{menudata.name}}</p>
+	</a>
+</div>
