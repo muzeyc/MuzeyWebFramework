@@ -70,6 +70,7 @@ public class Sys002_UserManageController extends BaseController {
 		if (resStr.equals("")) {
 
 			UserInfoReqModel reqModel = new UserInfoReqModel();
+			reqModel.setSize(20);
 			OnResearch(reqModel);
 		} else {
 
@@ -102,6 +103,7 @@ public class Sys002_UserManageController extends BaseController {
 		if (resStr.equals("")) {
 
 			UserInfoReqModel reqModel = new UserInfoReqModel();
+			reqModel.setSize(20);
 			OnResearch(reqModel);
 		} else {
 
@@ -132,6 +134,7 @@ public class Sys002_UserManageController extends BaseController {
 		if (resStr.equals("")) {
 
 			UserInfoReqModel reqModel = new UserInfoReqModel();
+			reqModel.setSize(20);
 			OnResearch(reqModel);
 		} else {
 
