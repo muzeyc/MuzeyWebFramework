@@ -63,7 +63,7 @@
 
         $scope.afterCommit = function (res) {
             $scope.userList = res.userList;
-          //  $scope.totalCount = res.totalCount;
+            $scope.totalCount = res.totalCount;
         }
 
         $scope.refresh = function () {
@@ -164,6 +164,7 @@
                     req.size = $scope.more.size;
                     req.selUserId = $scope.selUserId;
                     req.selUserName = $scope.selUserName;
+                    $scope.user.deleteFlag = $scope.user.deleteFlag.toString();
                     netRequest.post("/MuzeyWeb/Sys002_UserManage/" + $scope.mode, $scope.user, function (res) {
 
                         if (res.result == "ok") {
