@@ -63,7 +63,7 @@
 
         $scope.afterCommit = function (res) {
             $scope.userList = res.userList;
-            $scope.totalCount = res.totalCount;
+          //  $scope.totalCount = res.totalCount;
         }
 
         $scope.refresh = function () {
