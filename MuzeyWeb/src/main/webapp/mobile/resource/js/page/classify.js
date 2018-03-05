@@ -1,7 +1,7 @@
 ﻿angular.module('myApp')
     .controller('classifyCtrl', function ($scope, setMap, netRequest) {
-
-        
+    	
+    	$scope.topHeight = ($(window).height() - $('#footerMenu').height() + 1) + 'px';
     })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $stateProvider

@@ -1,0 +1,48 @@
+.placeholder {
+	text-align: center;
+	padding: 0 10px;
+}
+
+.classify-background {
+	background-color: #ebebeb !important;
+	margin-top :0 !important;
+}
+
+.muzey-fixed-bottom {
+	bottom: 0 !important;
+}
+
+.muzey-overflow-background {
+	width:100%;
+}
+
+.muzey-overflow-left {
+	width:30%;
+	overflow:auto;
+	text-align: center;
+}
+
+.muzey-overflow-right {
+	width:70%;
+	overflow:auto;
+	text-align: center;
+}
+
+.muzey-pitch {
+	color: #f6383a;
+	background-color: #fff;
+}
+
+.muzey-pitch {
+	color: #f6383a;
+	background-color: #fff;
+}
+
+.muzey-grid {
+	margin: 0 auto;
+}
+
+.muzey-grid img {
+    display: block;
+    width: 100%;
+    height: 100%;
