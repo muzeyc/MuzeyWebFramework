@@ -42,6 +42,8 @@ public class Sys002_UserManageService extends MuzeyService {
 		for (int i = offset; i <= endIndex; i++) {
 			Sys_userinfoDto dto = list.get(i);
 			UserInfoModel model = new UserInfoModel();
+			//无法使用报错
+			// BeanUtils.copyProperties(dto, model);
 			model.setId(dto.getId());
 			model.setUserId(dto.getUserid());
 			model.setUserName(dto.getUsername());
@@ -51,7 +53,7 @@ public class Sys002_UserManageService extends MuzeyService {
 			model.setEmail(dto.getEmail());
 			model.setBirthday(dto.getBirthday());
 			model.setDeleteFlag(dto.getDeleteflag());
-			// BeanUtils.copyProperties(dto, model);
+			model.setRole(dto.getRole());
 			model.setRoleName(roleMap.containsKey(dto.getRole()) ? roleMap.get(dto.getRole()).getRolename() : "");
 			modelList.add(model);
 		}

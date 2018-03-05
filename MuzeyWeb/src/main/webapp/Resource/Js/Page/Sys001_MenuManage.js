@@ -4,7 +4,7 @@
         $scope.authority = authority;
         $scope.showImport = false;
         $scope.attachList = [];
-
+        $scope.show = true;
         // 模型
 
         // 事件/方法
