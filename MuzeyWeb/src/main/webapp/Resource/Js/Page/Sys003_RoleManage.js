@@ -1,6 +1,8 @@
 ﻿angular.module('myApp')
     .controller('Sys003_RoleManageCtrl', function ($scope, netRequest, dialog, sysMessage, fileUpLoad, authority, $compile) {
 
+    	$scope.condition = {};
+        $scope.totalCount = 0;
         $scope.authority = authority;
         $scope.selectedIndex;
         $scope.showImport = false;
@@ -33,11 +35,11 @@
 
         // 事件/方法
         $scope.onNew = function () {
-            $scope.$broadcast("showSys003_RoleEdit", "new", {}, $scope.more);
+            $scope.$broadcast("showSys003_RoleEdit", "new", {}, $scope.more,$scope.condition.selRoleName);
         }
 
         $scope.onEdit = function (item) {
-            $scope.$broadcast("showSys003_RoleEdit", "edit", item, $scope.more);
+            $scope.$broadcast("showSys003_RoleEdit", "edit", item, $scope.more,$scope.condition.selRoleName);
         }
 
         $scope.onMenuEdit = function (item) {
@@ -66,6 +68,7 @@
 
         $scope.onResearch = function (offset, size) {
             var req = {offset: offset, size: size };
+            req.selRoleName = $scope.condition.selRoleName;
             netRequest.post("/MuzeyWeb/Sys003_RoleManage", req, function (res) {
                 $scope.roleList = res.roleList;
                 $scope.totalCount = res.totalCount;
@@ -169,7 +172,7 @@
             }],
             templateUrl: 'View/P000SysManage/Sys003_RoleManageEdit.html?v=' + Math.random(),
             link: function ($scope, iElm, iAttrs, controller) {
-                $scope.$on("showSys003_RoleEdit", function (event, mode, role, more) {
+                $scope.$on("showSys003_RoleEdit", function (event, mode, role, more,selRoleName) {
                     $scope.show = !$scope.show;
                     $scope.role = angular.copy(role);
                     $scope.more = more;
@@ -182,93 +185,7 @@
                         $scope.more.offset = 0;
                     }
                     $scope.mode = mode;
-                });
-            }
-        };
-    })
-    .directive('roleMenuEdit', function (netRequest, dialog, validate, sysMessage) {
-        return {
-            scope: {
-                afterCommit: "&"
-            },
-            controller: ['$scope', function ($scope) {
-
-                $scope.role = {};
-
-                $scope.cancel = function () {
-
-                    $scope.show = false;
-                }
-
-                $scope.toLeft = function () {
-                    for (var i = $scope.roleMenuList.length - 1; i >= 0; i--) {
-                        if ($scope.roleMenuList[i].selected) {
-                            $scope.roleMenuList[i].selected = false;
-                            $scope.roleForbidMenuList.push($scope.roleMenuList[i]);
-                            $scope.roleMenuList.splice(i, 1);
-                        }
-                    }
-                }
-
-                $scope.toRight = function () {
-                    for (var i = $scope.roleForbidMenuList.length - 1; i >= 0; i--) {
-                        if ($scope.roleForbidMenuList[i].selected) {
-                            $scope.roleForbidMenuList[i].selected = false;
-                            $scope.roleMenuList.push($scope.roleForbidMenuList[i]);
-                            $scope.roleForbidMenuList.splice(i, 1);
-                        }
-                    }
-                }
-
-                $scope.toLeftAll = function () {
-                    for (var i = $scope.roleMenuList.length - 1; i >= 0; i--) {
-                        $scope.roleMenuList[i].selected = false;
-                        $scope.roleForbidMenuList.push($scope.roleMenuList[i]);
-                        $scope.roleMenuList.splice(i, 1);
-                    }
-                }
-
-                $scope.toRightAll = function () {
-                    for (var i = $scope.roleForbidMenuList.length - 1; i >= 0; i--) {
-                        $scope.roleForbidMenuList[i].selected = false;
-                        $scope.roleMenuList.push($scope.roleForbidMenuList[i]);
-                        $scope.roleForbidMenuList.splice(i, 1);
-                    }
-                }
-
-                $scope.commit = function () {
-                    if ($scope.roleForbidMenuList.length <= 0) {
-                        $scope.show = false;
-                        return;
-                    }
-                    var req = { action: "updateForbid", roleId: $scope.roleId, roleForbidMenuList: $scope.roleForbidMenuList };
-                    netRequest.post("Controller/P000SysManage/Sys003_RoleManageController.ashx", req, function (res) {
-
-                        if (res.result == "ok") {
-
-                            dialog.showDialog("info", sysMessage.sys0004, {
-                                afterCommit: function () {
-
-                                    $scope.show = false;
-                                    if ($scope.afterCommit) {
-                                        $scope.afterCommit({ res: res });
-                                    }
-                                }
-                            });
-                        }
-                    });
-                }
-            }],
-            templateUrl: 'View/P000SysManage/Sys003_RoleMenuManageEdit.html?v=' + Math.random(),
-            link: function ($scope, iElm, iAttrs, controller) {
-                $scope.$on("showSys003_RoleMenuEdit", function (event, roleId) {
-                    $scope.roleId = roleId;
-                    var req = { action: "getRoleMenu" };
-                    netRequest.post("Controller/P000SysManage/Sys003_RoleManageController.ashx?roleId=" + roleId, req, function (res) {
-                        $scope.roleForbidMenuList = res.roleForbidMenuList;
-                        $scope.roleMenuList = res.roleMenuList;
-                        $scope.show = !$scope.show;
-                    });
+                    $scope.selRoleName = selRoleName;
                 });
             }
         };
