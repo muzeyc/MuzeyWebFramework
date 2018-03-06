@@ -2,7 +2,9 @@ package com.muzey.tool;
 
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.base.DBHelper;
 import com.data.DataRow;
@@ -10,300 +12,338 @@ import com.data.DataTable;
 
 public class DtoFactory {
 
-    private String dtoPath = "src\\main\\java\\com\\muzey\\dto\\";
-    private String pkPath = "src\\main\\java\\com\\muzey\\base\\";
-    private DBHelper dh = new DBHelper();
-    private String fieldOptionSql;
-    private String pkInfoStr;
-    
-    public void dtoMain() {
+	private String dtoPath = "src\\main\\java\\com\\muzey\\dto\\";
+	private String pkPath = "src\\main\\java\\com\\muzey\\base\\";
+	private Map<String, String> fieldSqlMap;
+	private DBHelper dh = new DBHelper();
+	private String fieldForPostgresql;
+	private String fieldForSqlServer;
+	private String pkInfoStr;
 
-        String pkCore = "";
-        List<String> pks;
-        String fileName;
-        String dtoStr;
-        String fieldCore;
-        boolean bigdecimalFlag;
-        for (String tableName : getTables()) {
+	public void dtoMain() {
 
-            System.out.println("Create Table " + tableName);
-            pks = new ArrayList<String>();
-            fileName = "";
-            dtoStr = "";
-            fieldCore = "";
-            bigdecimalFlag = false;
-            fileName = tableName.substring(0, 1).toUpperCase() + tableName.substring(1) + "Dto";
-            DataTable dt = dh.sqlQuery(fieldOptionSql.replaceAll("@TableName", tableName));
-            for (int i = 0; i < dt.getRowSize(); i++) {
+		String pkCore = "";
+		List<String> pks;
+		String fileName;
+		String dtoStr;
+		String fieldCore;
+		boolean bigdecimalFlag;
+		for (String tableName : getTables()) {
 
-                DataRow dr = dt.getRow(i);
-                String type = dr.getData("type");
-                if (!bigdecimalFlag) {
-                    if (getTypeStr(type).equals("BigDecimal")) {
+			System.out.println("Create Table " + tableName);
+			pks = new ArrayList<String>();
+			fileName = "";
+			dtoStr = "";
+			fieldCore = "";
+			bigdecimalFlag = false;
+			fileName = tableName.substring(0, 1).toUpperCase() + tableName.substring(1) + "Dto";
+			DataTable dt = dh.sqlQuery(fieldSqlMap.get(DBHelper.driver).replaceAll("@TableName", tableName));
+			for (int i = 0; i < dt.getRowSize(); i++) {
 
-                        bigdecimalFlag = true;
-                    }
-                }
+				DataRow dr = dt.getRow(i);
+				String type = dr.getData("type");
+				if (!bigdecimalFlag) {
+					if (getTypeStr(type).equals("BigDecimal")) {
 
-                String fN = dr.getData("field");
-                fieldCore += createField(fN, type);
-                if(dr.getData("pkflag").equals("true")){
-                    
-                    pks.add(fN);
-                }
-            }
+						bigdecimalFlag = true;
+					}
+				}
 
-            pkCore += createPkStr(tableName, pks);
-            dtoStr += createBase(tableName, bigdecimalFlag) + fieldCore + "}";
-            createFile(dtoPath, fileName, dtoStr);
-        }
+				String fN = dr.getData("field");
+				fieldCore += createField(fN, type);
+				if (dr.getData("pkflag").equals("true")) {
 
-        createFile(pkPath, "PKInfo", pkInfoStr.replace("≡≡", pkCore));
-        System.out.println("Dto生成成功！");
-    }
+					pks.add(fN);
+				}
+			}
 
-    public DtoFactory() {
+			pkCore += createPkStr(tableName, pks);
+			dtoStr += createBase(tableName, bigdecimalFlag) + fieldCore + "}";
+			createFile(dtoPath, fileName, dtoStr);
+		}
 
-        StringBuffer strBuffer = new StringBuffer();
-        strBuffer.append(" SELECT ");
-        strBuffer.append(" fieldInfo.field, ");
-        strBuffer.append(" fieldInfo.type, ");
-        strBuffer.append(" case COALESCE(pkInfo.colname, 'NULL') ");
-        strBuffer.append(" when 'NULL' then  'false' ");
-        strBuffer.append(" else 'true' ");
-        strBuffer.append(" end AS pkflag ");
-        strBuffer.append(" from ");
-        strBuffer.append(" ( ");
-        strBuffer.append(" SELECT a.attnum, ");
-        strBuffer.append(" a.attname AS field, ");
-        strBuffer.append(" t.typname AS type, ");
-        strBuffer.append(" a.attlen AS length, ");
-        strBuffer.append(" a.atttypmod AS lengthvar, ");
-        strBuffer.append(" a.attnotnull AS notnull, ");
-        strBuffer.append(" b.description AS comment ");
-        strBuffer.append(" FROM pg_class c, ");
-        strBuffer.append(" pg_attribute a ");
-        strBuffer.append(" LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid, ");
-        strBuffer.append(" pg_type t ");
-        strBuffer.append(" WHERE c.relname = '@TableName' ");
-        strBuffer.append(" and a.attnum > 0 ");
-        strBuffer.append(" and a.attrelid = c.oid ");
-        strBuffer.append(" and a.atttypid = t.oid ");
-        strBuffer.append(" ORDER BY a.attnum ");
-        strBuffer.append(" ) AS fieldInfo ");
-        strBuffer.append(" left JOIN ");
-        strBuffer.append(" ( ");
-        strBuffer.append(" select pg_attribute.attname as colname from ");
-        strBuffer.append(" pg_constraint  inner join pg_class ");
-        strBuffer.append(" on pg_constraint.conrelid = pg_class.oid ");
-        strBuffer.append(" inner join pg_attribute on pg_attribute.attrelid = pg_class.oid ");
-        strBuffer.append(" and  pg_attribute.attnum = ANY(pg_constraint.conkey) ");
-        strBuffer.append(" inner join pg_type on pg_type.oid = pg_attribute.atttypid ");
-        strBuffer.append(" where pg_class.relname = '@TableName' ");
-        strBuffer.append(" and pg_constraint.contype='p' ");
-        strBuffer.append(" ) as pkInfo ");
-        strBuffer.append(" ON ");
-        strBuffer.append(" pkInfo.colname = fieldInfo.field ");
-        strBuffer.append(" order by fieldInfo.attnum ");
-        fieldOptionSql = strBuffer.toString();
+		createFile(pkPath, "PKInfo", pkInfoStr.replace("≡≡", pkCore));
+		System.out.println("Dto生成成功！");
+	}
 
-        strBuffer = new StringBuffer();
-        strBuffer.append("package com.muzey.base;");
-        strBuffer.append("\r\n");
-        strBuffer.append("\r\n");
-        strBuffer.append("import java.util.HashMap;");
-        strBuffer.append("\r\n");
-        strBuffer.append("import java.util.Map;");
-        strBuffer.append("public class PKInfo {");
-        strBuffer.append("\r\n");
-        strBuffer.append("\r\n");
-        strBuffer.append("    private static Map<String, String[]> pkMap;");
-        strBuffer.append("\r\n");
-        strBuffer.append("\r\n");
-        strBuffer.append("    public static void init()");
-        strBuffer.append("\r\n");
-        strBuffer.append("    {");
-        strBuffer.append("\r\n");
-        strBuffer.append("        pkMap = new HashMap<String, String[]>();");
-        strBuffer.append("\r\n");
-        strBuffer.append("≡≡");
-        strBuffer.append("    }");
-        strBuffer.append("\r\n");
-        strBuffer.append("\r\n");
-        strBuffer.append("    public static String[] getPK(String tableName){");
-        strBuffer.append("\r\n");
-        strBuffer.append("\r\n");
-        strBuffer.append("        return pkMap.get(tableName);");
-        strBuffer.append("\r\n");
-        strBuffer.append("    }");
-        strBuffer.append("\r\n");
-        strBuffer.append("}");
-        pkInfoStr = strBuffer.toString();
-    }
+	public DtoFactory() {
 
-    private void createFile(String path, String fileName, String dtoStr) {
+		StringBuffer strBuffer = new StringBuffer();
+		strBuffer.append(" SELECT ");
+		strBuffer.append(" fieldInfo.field, ");
+		strBuffer.append(" fieldInfo.type, ");
+		strBuffer.append(" case COALESCE(pkInfo.colname, 'NULL') ");
+		strBuffer.append(" when 'NULL' then  'false' ");
+		strBuffer.append(" else 'true' ");
+		strBuffer.append(" end AS pkflag ");
+		strBuffer.append(" from ");
+		strBuffer.append(" ( ");
+		strBuffer.append(" SELECT a.attnum, ");
+		strBuffer.append(" a.attname AS field, ");
+		strBuffer.append(" t.typname AS type, ");
+		strBuffer.append(" a.attlen AS length, ");
+		strBuffer.append(" a.atttypmod AS lengthvar, ");
+		strBuffer.append(" a.attnotnull AS notnull, ");
+		strBuffer.append(" b.description AS comment ");
+		strBuffer.append(" FROM pg_class c, ");
+		strBuffer.append(" pg_attribute a ");
+		strBuffer.append(" LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid, ");
+		strBuffer.append(" pg_type t ");
+		strBuffer.append(" WHERE c.relname = '@TableName' ");
+		strBuffer.append(" and a.attnum > 0 ");
+		strBuffer.append(" and a.attrelid = c.oid ");
+		strBuffer.append(" and a.atttypid = t.oid ");
+		strBuffer.append(" ORDER BY a.attnum ");
+		strBuffer.append(" ) AS fieldInfo ");
+		strBuffer.append(" left JOIN ");
+		strBuffer.append(" ( ");
+		strBuffer.append(" select pg_attribute.attname as colname from ");
+		strBuffer.append(" pg_constraint  inner join pg_class ");
+		strBuffer.append(" on pg_constraint.conrelid = pg_class.oid ");
+		strBuffer.append(" inner join pg_attribute on pg_attribute.attrelid = pg_class.oid ");
+		strBuffer.append(" and  pg_attribute.attnum = ANY(pg_constraint.conkey) ");
+		strBuffer.append(" inner join pg_type on pg_type.oid = pg_attribute.atttypid ");
+		strBuffer.append(" where pg_class.relname = '@TableName' ");
+		strBuffer.append(" and pg_constraint.contype='p' ");
+		strBuffer.append(" ) as pkInfo ");
+		strBuffer.append(" ON ");
+		strBuffer.append(" pkInfo.colname = fieldInfo.field ");
+		strBuffer.append(" order by fieldInfo.attnum ");
+		fieldForPostgresql = strBuffer.toString();
 
-        try {
+		strBuffer = new StringBuffer();
+		strBuffer.append(" select ");
+		strBuffer.append(" tcol.field as field ");
+		strBuffer.append(" ,tcol.type as type ");
+		strBuffer.append(" ,case COALESCE(tpk.name, 'NULL') ");
+		strBuffer.append(" when 'NULL' then  'false' ");
+		strBuffer.append(" else 'true' ");
+		strBuffer.append(" end as pkflag ");
+		strBuffer.append(" from ");
+		strBuffer.append(" (select ");
+		strBuffer.append(" a.name as field ");
+		strBuffer.append(" ,b.name as type ");
+		strBuffer.append(" from ");
+		strBuffer.append(" syscolumns a ");
+		strBuffer.append(" ,systypes b ");
+		strBuffer.append(" where ");
+		strBuffer.append(" a.id=object_id('@TableName') ");
+		strBuffer.append(" and a.xtype=b.xtype ");
+		strBuffer.append(" and b.name <> 'sysname' ");
+		strBuffer.append(" ) as tcol ");
+		strBuffer.append(" left join ");
+		strBuffer.append(" ( ");
+		strBuffer.append(" SELECT ");
+		strBuffer.append(" name ");
+		strBuffer.append(" FROM ");
+		strBuffer.append(" syscolumns ");
+		strBuffer.append(" WHERE ");
+		strBuffer.append(" id=Object_Id('@TableName') ");
+		strBuffer.append(" and colid ");
+		strBuffer.append(" IN ");
+		strBuffer.append(" ( ");
+		strBuffer.append(" SELECT ");
+		strBuffer.append(" keyno ");
+		strBuffer.append(" from ");
+		strBuffer.append(" sysindexkeys ");
+		strBuffer.append(" WHERE ");
+		strBuffer.append(" id=Object_Id('@TableName')) ");
+		strBuffer.append(" ) as tpk ");
+		strBuffer.append(" on ");
+		strBuffer.append(" tcol.field = tpk.name ");
+		fieldForSqlServer = strBuffer.toString();
 
-            FileWriter fw = new FileWriter(path + fileName + ".java");
-            fw.write(dtoStr);
-            fw.flush();
-            fw.close();
-        } catch (Exception e) {
+		strBuffer = new StringBuffer();
+		strBuffer.append("package com.muzey.base;");
+		strBuffer.append("\r\n");
+		strBuffer.append("\r\n");
+		strBuffer.append("import java.util.HashMap;");
+		strBuffer.append("\r\n");
+		strBuffer.append("import java.util.Map;");
+		strBuffer.append("public class PKInfo {");
+		strBuffer.append("\r\n");
+		strBuffer.append("\r\n");
+		strBuffer.append("    private static Map<String, String[]> pkMap;");
+		strBuffer.append("\r\n");
+		strBuffer.append("\r\n");
+		strBuffer.append("    public static void init()");
+		strBuffer.append("\r\n");
+		strBuffer.append("    {");
+		strBuffer.append("\r\n");
+		strBuffer.append("        pkMap = new HashMap<String, String[]>();");
+		strBuffer.append("\r\n");
+		strBuffer.append("≡≡");
+		strBuffer.append("    }");
+		strBuffer.append("\r\n");
+		strBuffer.append("\r\n");
+		strBuffer.append("    public static String[] getPK(String tableName){");
+		strBuffer.append("\r\n");
+		strBuffer.append("\r\n");
+		strBuffer.append("        return pkMap.get(tableName);");
+		strBuffer.append("\r\n");
+		strBuffer.append("    }");
+		strBuffer.append("\r\n");
+		strBuffer.append("}");
+		pkInfoStr = strBuffer.toString();
 
-            System.err.println(e.getMessage());
-        }
-    }
+		fieldSqlMap = new HashMap<String, String>();
+		fieldSqlMap.put("org.postgresql.Driver", fieldForPostgresql);
+		fieldSqlMap.put("com.microsoft.sqlserver.jdbc.SQLServerDriver", fieldForSqlServer);
+	}
 
-    private String createBase(String tableName, boolean bigdecimalFlag) {
+	private void createFile(String path, String fileName, String dtoStr) {
 
-        StringBuffer strBuffer = new StringBuffer();
-        strBuffer.append("package com.muzey.dto;");
-        strBuffer.append("\r\n");
-        strBuffer.append("\r\n");
-        if (bigdecimalFlag) {
+		try {
 
-            strBuffer.append("import java.math.BigDecimal;");
-            strBuffer.append("\r\n");
-            strBuffer.append("\r\n");
-        }
-        strBuffer.append("public class ");
-        strBuffer.append(tableName.substring(0, 1).toUpperCase() + tableName.substring(1) + "Dto");
-        strBuffer.append(" {");
-        strBuffer.append("\r\n");
-        strBuffer.append("\r\n");
+			FileWriter fw = new FileWriter(path + fileName + ".java");
+			fw.write(dtoStr);
+			fw.flush();
+			fw.close();
+		} catch (Exception e) {
 
-        return strBuffer.toString();
-    }
+			System.err.println(e.getMessage());
+		}
+	}
 
-    private String createField(String fieldName, String type) {
+	private String createBase(String tableName, boolean bigdecimalFlag) {
 
-        String javaType = getTypeStr(type);
-        String fieldNameUp = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+		StringBuffer strBuffer = new StringBuffer();
+		strBuffer.append("package com.muzey.dto;");
+		strBuffer.append("\r\n");
+		strBuffer.append("\r\n");
+		if (bigdecimalFlag) {
 
-        StringBuffer strBuffer = new StringBuffer();
-        strBuffer.append("    private " + javaType + " ");
-        strBuffer.append(fieldName);
-        strBuffer.append(";");
-        strBuffer.append("\r\n");
-        strBuffer.append("\r\n");
-        strBuffer.append("    public ");
-        strBuffer.append(javaType);
-        strBuffer.append(" get");
-        strBuffer.append(fieldNameUp);
-        strBuffer.append("() {");
-        strBuffer.append("\r\n");
-        strBuffer.append("\r\n");
-        strBuffer.append("        return " + fieldName + ";");
-        strBuffer.append("\r\n");
-        strBuffer.append("    }");
-        strBuffer.append("\r\n");
-        strBuffer.append("\r\n");
-        strBuffer.append("    public void set");
-        strBuffer.append(fieldNameUp);
-        strBuffer.append("(");
-        strBuffer.append(javaType + " ");
-        strBuffer.append(fieldName);
-        strBuffer.append(") {");
-        strBuffer.append("\r\n");
-        strBuffer.append("\r\n");
-        strBuffer.append("        this.");
-        strBuffer.append(fieldName);
-        strBuffer.append(" = ");
-        strBuffer.append(fieldName);
-        strBuffer.append(";");
-        strBuffer.append("\r\n");
-        strBuffer.append("\r\n");
-        strBuffer.append("    }");
-        strBuffer.append("\r\n");
-        strBuffer.append("\r\n");
-        return strBuffer.toString();
-    }
+			strBuffer.append("import java.math.BigDecimal;");
+			strBuffer.append("\r\n");
+			strBuffer.append("\r\n");
+		}
+		strBuffer.append("public class ");
+		strBuffer.append(tableName.substring(0, 1).toUpperCase() + tableName.substring(1) + "Dto");
+		strBuffer.append(" {");
+		strBuffer.append("\r\n");
+		strBuffer.append("\r\n");
 
-    private String createPkStr(String tableName, List<String> pks) {
+		return strBuffer.toString();
+	}
 
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("        pkMap.put(\"");
-        stringBuffer.append(tableName.substring(0, 1).toUpperCase() + tableName.substring(1));
-        stringBuffer.append("\", new String[] {");
-        boolean first = true;
-        for (String pk : pks) {
+	private String createField(String fieldName, String type) {
 
-            if (first) {
+		String javaType = getTypeStr(type);
+		String fieldNameUp = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+		fieldName = fieldName.substring(0, 1).toLowerCase() + fieldName.substring(1);
+		StringBuffer strBuffer = new StringBuffer();
+		strBuffer.append("    private " + javaType + " ");
+		strBuffer.append(fieldName);
+		strBuffer.append(";");
+		strBuffer.append("\r\n");
+		strBuffer.append("\r\n");
+		strBuffer.append("    public ");
+		strBuffer.append(javaType);
+		strBuffer.append(" get");
+		strBuffer.append(fieldNameUp);
+		strBuffer.append("() {");
+		strBuffer.append("\r\n");
+		strBuffer.append("\r\n");
+		strBuffer.append("        return " + fieldName + ";");
+		strBuffer.append("\r\n");
+		strBuffer.append("    }");
+		strBuffer.append("\r\n");
+		strBuffer.append("\r\n");
+		strBuffer.append("    public void set");
+		strBuffer.append(fieldNameUp);
+		strBuffer.append("(");
+		strBuffer.append(javaType + " ");
+		strBuffer.append(fieldName);
+		strBuffer.append(") {");
+		strBuffer.append("\r\n");
+		strBuffer.append("\r\n");
+		strBuffer.append("        this.");
+		strBuffer.append(fieldName);
+		strBuffer.append(" = ");
+		strBuffer.append(fieldName);
+		strBuffer.append(";");
+		strBuffer.append("\r\n");
+		strBuffer.append("\r\n");
+		strBuffer.append("    }");
+		strBuffer.append("\r\n");
+		strBuffer.append("\r\n");
+		return strBuffer.toString();
+	}
 
-                first = !first;
-            } else {
+	private String createPkStr(String tableName, List<String> pks) {
 
-                stringBuffer.append(",");
-            }
-            stringBuffer.append("\"" + pk + "\"");
-        }
-        stringBuffer.append("});");
-        stringBuffer.append("\r\n");
-        return stringBuffer.toString();
-    }
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append("        pkMap.put(\"");
+		stringBuffer.append(tableName.substring(0, 1).toUpperCase() + tableName.substring(1));
+		stringBuffer.append("\", new String[] {");
+		boolean first = true;
+		for (String pk : pks) {
 
-    private String getTypeStr(String type) {
+			if (first) {
 
-        String resStr = "";
-        switch (type) {
-            case "int2":
+				first = !first;
+			} else {
 
-                resStr = "Integer";
-                break;
-            case "int4":
+				stringBuffer.append(",");
+			}
+			stringBuffer.append("\"" + pk.substring(0, 1).toLowerCase() + pk.substring(1) + "\"");
+		}
+		stringBuffer.append("});");
+		stringBuffer.append("\r\n");
+		return stringBuffer.toString();
+	}
 
-                resStr = "Integer";
-                break;
-            case "int8":
+	private String getTypeStr(String type) {
 
-                resStr = "Integer";
-                break;
-            case "varchar":
+		String resStr = "";
+		switch (type) {
+		case "int":
 
-                resStr = "String";
-                break;
-            case "bpchar":
+			resStr = "Integer";
+			break;
+		case "int2":
 
-                resStr = "String";
-                break;
-            case "text":
+			resStr = "Integer";
+			break;
+		case "int4":
 
-                resStr = "String";
-                break;
-            case "timestamp":
+			resStr = "Integer";
+			break;
+		case "int8":
 
-                resStr = "String";
-                break;
-            case "decimal":
+			resStr = "Integer";
+			break;
+		case "decimal":
 
-                resStr = "BigDecimal";
-                break;
-            case "float4":
+			resStr = "BigDecimal";
+			break;
+		case "float4":
 
-                resStr = "BigDecimal";
-                break;
-            case "float8":
+			resStr = "BigDecimal";
+			break;
+		case "float8":
 
-                resStr = "BigDecimal";
-                break;
-            case "numeric":
+			resStr = "BigDecimal";
+			break;
+		case "numeric":
 
-                resStr = "BigDecimal";
-                break;
-            default:
-                break;
-        }
+			resStr = "BigDecimal";
+			break;
+		default:
 
-        return resStr;
-    }
+			resStr = "String";
+			break;
+		}
 
-    private List<String> getTables() {
+		return resStr;
+	}
 
-        String sqlStr = "SELECT tablename FROM pg_tables Where SCHEMANAME = 'public'";
+	private List<String> getTables() {
 
-        DataTable dt = dh.sqlQuery(sqlStr);
-
-        return dt.getColumnData("tablename");
-    }
+		Map<String, String> sqlMap = new HashMap<String, String>();
+		sqlMap.put("org.postgresql.Driver", "SELECT tablename FROM pg_tables Where SCHEMANAME = 'public'");
+		sqlMap.put("com.microsoft.sqlserver.jdbc.SQLServerDriver", "select name as tablename from sys.tables");
+		DataTable dt = dh.sqlQuery(sqlMap.get(DBHelper.driver));
+		return dt.getColumnData("tablename");
+	}
 }

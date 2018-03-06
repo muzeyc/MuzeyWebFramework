@@ -2,6 +2,7 @@ package com.base;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,264 +16,265 @@ import com.data.DataTable;
 
 public class DBHelper {
 
-    private boolean transactionFlag = false;
-    private Connection connection = null;
-    private Statement statement = null;
-    private ResultSet resultSet = null;
-    private String url = "jdbc:postgresql://127.0.0.1:5432/muzeywebframework";
-    private String user = "admin";
-    private String password = "123456";
-//     private String url = "jdbc:postgresql://192.168.0.8:5432/muzeywebframework";
-//     private String user = "admin";
-//     private String password = "123456";
+	private boolean transactionFlag = false;
+	private Connection connection = null;
+	private Statement statement = null;
+	private ResultSet resultSet = null;
 
-    public DBHelper() {
+	 private String url =
+	 "jdbc:postgresql://127.0.0.1:5432/muzeywebframework";
+	 private String user = "admin";
+	 private String password = "123456";
+	 public static String driver = "org.postgresql.Driver";
 
-        try {
+//	private String url = "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=SOADB_P1000";
+//	private String user = "sa";
+//	private String password = "123456";
+//	public static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
-            Class.forName("org.postgresql.Driver");
-        } catch (Exception e) {
+	public DBHelper() {
 
-            System.err.println(e.getMessage());
-        }
-    }
+	}
 
-    /**
-     * 事物模式
-     */
-    public void transactionMod() {
+	/**
+	 * 事物模式
+	 */
+	public void transactionMod() {
 
-        System.out.println("transaction start");
-        transactionFlag = true;
-        try {
+		System.out.println("transaction start");
+		transactionFlag = true;
+		try {
 
-            connection = DriverManager.getConnection(url, user, password);
-            connection.setAutoCommit(false);
-            statement = connection.createStatement();
+			connection = DriverManager.getConnection(url, user, password);
+			connection.setAutoCommit(false);
+			statement = connection.createStatement();
 
-        } catch (Exception e) {
+		} catch (Exception e) {
 
-            System.err.println(e.getMessage());
-        }
-    }
+			System.err.println(e.getMessage());
+		}
+	}
 
-    /**
-     * 事物提交
-     */
-    public void transactionCommit() {
+	/**
+	 * 事物提交
+	 */
+	public void transactionCommit() {
 
-        System.out.println("transaction commit");
-        
-        try {
+		System.out.println("transaction commit");
 
-            connection.commit();
-        } catch (Exception e) {
+		try {
 
-            System.err.println(e.getMessage());
-        } finally {
-            try {
+			connection.commit();
+		} catch (Exception e) {
 
-                statement.close();
-            } catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
 
-                System.err.println(e.getMessage());
-            } finally {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    
-                    System.err.println(e.getMessage());
-                }
-            }
-        }
-    }
-    
-    /**
-     * 事物回滚
-     */
-    public void transactionRollBack() {
+				statement.close();
+			} catch (Exception e) {
 
-        System.out.println("transaction commit rollback");
-        
-        try {
+				System.err.println(e.getMessage());
+			} finally {
+				try {
+					connection.close();
+				} catch (SQLException e) {
 
-            connection.rollback();
-        } catch (Exception e) {
+					System.err.println(e.getMessage());
+				}
+			}
+		}
+	}
 
-            System.err.println(e.getMessage());
-        } finally {
-            try {
+	/**
+	 * 事物回滚
+	 */
+	public void transactionRollBack() {
 
-                statement.close();
-            } catch (Exception e) {
+		System.out.println("transaction commit rollback");
 
-                System.err.println(e.getMessage());
-            } finally {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    
-                    System.err.println(e.getMessage());
-                }
-            }
-        }
-    }
+		try {
 
-    public void sqlExecuteUpdate(String sqlStr) {
+			connection.rollback();
+		} catch (Exception e) {
 
-        try {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
 
-            if (!transactionFlag) {
+				statement.close();
+			} catch (Exception e) {
 
-                connection = DriverManager.getConnection(url, user, password);
-                statement = connection.createStatement();
-            }
+				System.err.println(e.getMessage());
+			} finally {
+				try {
+					connection.close();
+				} catch (SQLException e) {
 
-            statement.executeUpdate(sqlStr);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                if (!transactionFlag)
-                    statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            } finally {
-                try {
-                    if (!transactionFlag)
-                        connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-    }
+					System.err.println(e.getMessage());
+				}
+			}
+		}
+	}
 
-    public DataTable sqlQuery(String sqlStr) {
+	public void sqlExecuteUpdate(String sqlStr) {
 
-        DataTable dt;
-        try {
-            if (!transactionFlag) {
+		try {
 
-                connection = DriverManager.getConnection(url, user, password);
-                statement = connection.createStatement();
-            }
+			if (!transactionFlag) {
 
-            resultSet = statement.executeQuery(sqlStr);
-            List<String> names = new ArrayList<String>();
-            List<String> rowData;
-            List<List<String>> dtData = new ArrayList<List<String>>();
-            ResultSetMetaData rsmd = resultSet.getMetaData();
-            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+				connection = DriverManager.getConnection(url, user, password);
+				statement = connection.createStatement();
+			}
 
-                names.add(rsmd.getColumnName(i + 1));
-            }
+			statement.executeUpdate(sqlStr);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				if (!transactionFlag)
+					statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} finally {
+				try {
+					if (!transactionFlag)
+						connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					throw new RuntimeException(e);
+				}
+			}
+		}
+	}
 
-            while (resultSet.next()) {
+	public DataTable sqlQuery(String sqlStr) {
 
-                rowData = new ArrayList<String>();
-                for (int i = 1; i <= names.size(); i++) {
+		DataTable dt;
+		try {
+			if (!transactionFlag) {
 
-                    rowData.add(resultSet.getString(i));
-                }
+				connection = DriverManager.getConnection(url, user, password);
+				statement = connection.createStatement();
+			}
 
-                dtData.add(rowData);
-            }
+			resultSet = statement.executeQuery(sqlStr);
+			List<String> names = new ArrayList<String>();
+			List<String> rowData;
+			List<List<String>> dtData = new ArrayList<List<String>>();
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			for (int i = 0; i < rsmd.getColumnCount(); i++) {
 
-            dt = new DataTable(names, dtData);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                if (!transactionFlag)
-                    statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            } finally {
-                try {
-                    if (!transactionFlag)
-                        connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    throw new RuntimeException(e);
-                }
-            }
-        }
+				names.add(rsmd.getColumnName(i + 1));
+			}
 
-        return dt;
-    }
+			while (resultSet.next()) {
 
-    public <T> List<T> sqlQuery(String sqlStr, Class<T> clazz) {
+				rowData = new ArrayList<String>();
+				for (int i = 1; i <= names.size(); i++) {
 
-        List<T> resList;
-        try {
-            if (!transactionFlag) {
+					rowData.add(resultSet.getString(i));
+				}
 
-                connection = DriverManager.getConnection(url, user, password);
-                statement = connection.createStatement();
-            }
+				dtData.add(rowData);
+			}
 
-            resultSet = statement.executeQuery(sqlStr);
-            List<String> names = new ArrayList<String>();
-            ResultSetMetaData rsmd = resultSet.getMetaData();
-            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+			dt = new DataTable(names, dtData);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				if (!transactionFlag)
+					statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} finally {
+				try {
+					if (!transactionFlag)
+						connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					throw new RuntimeException(e);
+				}
+			}
+		}
 
-                names.add(rsmd.getColumnName(i + 1));
-            }
+		return dt;
+	}
 
-            resList = new ArrayList<T>();
-            T t = null;
-            Method m = null;
-            Field field;
-            while (resultSet.next()) {
+	public <T> List<T> sqlQuery(String sqlStr, Class<T> clazz) {
 
-                t = clazz.newInstance();
-                for (int i = 1; i <= names.size(); i++) {
+		List<T> resList;
+		try {
+			if (!transactionFlag) {
 
-                    String resStr = resultSet.getString(i);
-                    if (resStr == null) {
+				connection = DriverManager.getConnection(url, user, password);
+				statement = connection.createStatement();
+			}
 
-                    } else {
+			resultSet = statement.executeQuery(sqlStr);
+			List<String> names = new ArrayList<String>();
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			for (int i = 0; i < rsmd.getColumnCount(); i++) {
 
-                        field = clazz.getDeclaredField(names.get(i - 1));
-                        m = clazz.getMethod(
-                                "set" + names.get(i - 1).substring(0, 1).toUpperCase() + names.get(i - 1).substring(1),
-                                field.getType());
-                        if (field.getType().equals(Integer.class)) {
+				names.add(rsmd.getColumnName(i + 1));
+			}
 
-                            m.invoke(t, Integer.parseInt(resStr));
-                        } else {
+			resList = new ArrayList<T>();
+			T t = null;
+			Method m = null;
+			Field field;
+			while (resultSet.next()) {
 
-                            m.invoke(t, resStr);
-                        }
-                    }
-                }
+				t = clazz.newInstance();
+				for (int i = 1; i <= names.size(); i++) {
 
-                resList.add(t);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                if (!transactionFlag)
-                    statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            } finally {
-                try {
-                    if (!transactionFlag)
-                        connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    throw new RuntimeException(e);
-                }
-            }
-        }
+					String resStr = resultSet.getString(i);
+					if (resStr == null) {
 
-        return resList;
-    }
+					} else {
+
+						field = clazz.getDeclaredField(names.get(i - 1));
+						m = clazz.getMethod(
+								"set" + names.get(i - 1).substring(0, 1).toUpperCase() + names.get(i - 1).substring(1),
+								field.getType());
+						if (field.getType().equals(Integer.class)) {
+
+							m.invoke(t, Integer.parseInt(resStr));
+						} else if(field.getType().equals(BigDecimal.class)){
+
+							m.invoke(t, new BigDecimal(resStr));
+						}else{
+							
+							m.invoke(t, resStr);
+						}
+					}
+				}
+
+				resList.add(t);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				if (!transactionFlag)
+					statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} finally {
+				try {
+					if (!transactionFlag)
+						connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					throw new RuntimeException(e);
+				}
+			}
+		}
+
+		return resList;
+	}
 }
