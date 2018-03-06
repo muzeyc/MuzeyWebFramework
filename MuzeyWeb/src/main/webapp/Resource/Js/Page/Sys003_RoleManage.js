@@ -8,21 +8,21 @@
 
         $scope.config = {
             colModel: [
-                        { label: "职务名称", name: "RoleName", width: "10%" },
+                        { label: "职务名称", name: "rolename", width: "20%" },
                         {
-                            label: "新建权限", name: "CanCreate", width: "10%", type: "icon",
-                            format: [{ value: 0, display: "<i class='fa fa-times'></i>", default: true }, { value: 1, display: "\<i class='fa fa-check'\>\</i\>" }],
+                            label: "新建权限", name: "cancreate", width: "20%", type: "icon",
+                            format: [{ value: 1, display: "<i class='fa fa-times'></i>", default: true }, { value: 0, display: "\<i class='fa fa-check'\>\</i\>" }],
                         },
                         {
-                            label: "编辑权限", name: "CanEdit", width: "10%", type: "icon",
-                            format: [{ value: 0, display: "<i class='fa fa-times'></i>", default: true }, { value: 1, display: "\<i class='fa fa-check'\>\</i\>" }],
+                            label: "编辑权限", name: "canedit", width: "20%", type: "icon",
+                            format: [{ value: 1, display: "<i class='fa fa-times'></i>", default: true }, { value: 0, display: "\<i class='fa fa-check'\>\</i\>" }],
                         },
                         {
-                            label: "删除权限", name: "CanDelete", width: "10%", type: "icon",
-                            format: [{ value: 0, display: "<i class='fa fa-times'></i>", default: true }, { value: 1, display: "\<i class='fa fa-check'\>\</i\>" }],
+                            label: "删除权限", name: "candelete", width: "20%", type: "icon",
+                            format: [{ value: 1, display: "<i class='fa fa-times'></i>", default: true }, { value: 0, display: "\<i class='fa fa-check'\>\</i\>" }],
                         },
                         {
-                            label: "有效", name: "DeleteFlag", width: "10%", type: "icon",
+                            label: "有效", name: "deleteflag", width: "20%", type: "icon",
                             format: [{ value: 1, display: "<i class='fa fa-times'></i>", default: true }, { value: 0, display: "\<i class='fa fa-check'\>\</i\>" }],
                         },
             ],
@@ -47,7 +47,8 @@
         $scope.onDelete = function (items) {
             var req = { action: "delete", offset: 0, size: $scope.more.size };
             req.roleList = items;
-            netRequest.post("Controller/P000SysManage/Sys003_RoleManageController.ashx", req, function (res) {
+            $scope.role=angular.copy(items);
+            netRequest.post("/MuzeyWeb/Sys003_RoleManage/delete", $scope.role[0], function (res) {
                 $scope.roleList = res.roleList;
                 $scope.totalCount = res.totalCount;
             });
@@ -64,8 +65,8 @@
         }
 
         $scope.onResearch = function (offset, size) {
-            var req = { action: "", offset: offset, size: size };
-            netRequest.post("Controller/P000SysManage/Sys003_RoleManageController.ashx", req, function (res) {
+            var req = {offset: offset, size: size };
+            netRequest.post("/MuzeyWeb/Sys003_RoleManage", req, function (res) {
                 $scope.roleList = res.roleList;
                 $scope.totalCount = res.totalCount;
             });
@@ -150,8 +151,7 @@
                     req.action = $scope.mode;
                     req.offset = $scope.more.offset;
                     req.size = $scope.more.size;
-                    netRequest.post("Controller/P000SysManage/Sys003_RoleManageController.ashx", req, function (res) {
-
+                    netRequest.post("/MuzeyWeb/Sys003_RoleManage/" + $scope.mode, $scope.role, function (res) {
                         if (res.result == "ok") {
 
                             dialog.showDialog("info", sysMessage.sys0004, {
@@ -172,9 +172,13 @@
                 $scope.$on("showSys003_RoleEdit", function (event, mode, role, more) {
                     $scope.show = !$scope.show;
                     $scope.role = angular.copy(role);
-                    $scope.role.DeleteFlag = $scope.role.DeleteFlag ? $scope.role.DeleteFlag.toString() : "0";
                     $scope.more = more;
+                    if ("edit" == mode) {
+                    	  $scope.role.deleteFlag = $scope.role.deleteflag.toString();
+                    }
                     if ("new" == mode) {
+                        $scope.role.deleteflag = $scope.role.deleteflag ? $scope.role.deleteflag.toString() : "0";
+                    	$scope.role.deleteFlag="0";
                         $scope.more.offset = 0;
                     }
                     $scope.mode = mode;
