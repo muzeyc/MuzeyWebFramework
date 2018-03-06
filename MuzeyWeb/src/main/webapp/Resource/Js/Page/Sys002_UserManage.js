@@ -24,17 +24,6 @@
                             label: "有效", name: "deleteFlag", width: "10%", type: "icon",
                             format: [{ value: 0, display: "<i class='fa fa-check'></i>", default: true }, { value: 1, display: "\<i class='fa fa-ban'\>\</i\>" }],
                         },
-// {
-// label: "", name: "", width: "5%",
-// align: "right",
-// button: [{
-// caption: '所属操作组', action: function (item) {
-// $scope.$broadcast("showSys002_R_UserGroup", item);
-//
-// },
-// show: function (item) { return true; }
-// }],
-// },
             ],
         };
         
@@ -176,32 +165,11 @@
                                     if ($scope.afterCommit) {
                                         $scope.afterCommit({ res: res });
                                     }
-                                   
                                 }
                             });
-                          //  $scope.refresh();
                         }
                     });
                 }
-
-                // 初始化职位下拉列表
-// $scope.init = function () {
-// if (!$scope.roleList) {
-// $scope.roleList = [];
-// }
-// if ($scope.roleList.length <= 0) {
-// var req = { action: "getRoleList" };
-// netRequest.post("Controller/P000SysManage/Sys002_UserManageController.ashx",
-// req, function (res) {
-// $scope.roleList = res.list;
-// });
-// }
-// netRequest.get("/MuzeyWeb/Sys002_UserManage/getRoleList", function (res) {
-// $scope.roleList = res.list;
-// $scope.show = !$scope.show;
-// });
-// }
-// $scope.init();
             }],
             templateUrl: 'View/P000SysManage/Sys002_UserManageEdit.html?v=' + Math.random(),
             link: function ($scope, iElm, iAttrs, controller) {
@@ -230,67 +198,4 @@
                 }
             }
         };
-    })
-// .directive('rusergroupEdit', function (netRequest, dialog, validate,
-// sysMessage) {
-//
-// return {
-// scope: {
-// },
-// controller: ['$scope', function ($scope) {
-//
-// $scope.config = {
-// colModel: [
-// { label: "上一级名称", name: "ParentName", width: "40%" },
-// { label: "操作组名称", name: "GroupName", width: "40%" },
-// ],
-// }
-// // 取消
-// $scope.cancel = function () {
-// $scope.show = false;
-// };
-// // 提交
-// $scope.commit = function () {
-// // if (!validate.doValidate("#validate")) {
-// // return;
-// // }
-// var ids = [];
-// for (var i = 0; i < $scope.groupList.length; i++) {
-// if ($scope.groupList[i].selected) {
-// ids.push($scope.groupList[i].ID);
-// }
-// }
-// var req = {};
-// req.action = "addRGroupSupplier";
-// req.ug = angular.copy($scope.ug);
-// req.groupids = ids.toString();
-// netRequest.post("Controller/P000SysManage/Sys002_UserManageController.ashx",
-// req, function (res) {
-// if (res.result == "ok") {
-// dialog.showDialog("info", sysMessage.sys0004, {
-// afterCommit: function () {
-// $scope.show = false;
-// }
-// });
-// }
-// });
-// }
-//
-// }],
-// templateUrl: 'View/P000SysManage/Sys002_R_UserGroup.html?v=' + Math.random(),
-// link: function ($scope, iElm, iAttrs, controller) {
-// $scope.$on("showSys002_R_UserGroup", function (event, ug) {
-// $scope.show = !$scope.show;
-// $scope.ug = angular.copy(ug);
-// var req = {};
-// req.action = "GetGroupList";
-// req.selUserId = ug.UserId;
-// netRequest.post("Controller/P000SysManage/Sys002_UserManageController.ashx",
-// req, function (res) {
-// $scope.groupList = res.groupList;
-// });
-// });
-// }
-// };
-// })
-;
+    });
