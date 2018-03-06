@@ -182,6 +182,7 @@
                         $scope.user.deleteFlag = $scope.user.deleteFlag.toString();
                     }
                     if ("new" == mode) {
+                    	 $scope.user.deleteFlag = $scope.user.deleteFlag ? $scope.user.deleteFlag.toString() : "0";
                         $scope.more.offset = 0;
                     }
                     $scope.selUserId = selUserId;

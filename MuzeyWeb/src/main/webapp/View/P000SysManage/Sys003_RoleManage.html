@@ -1,21 +1,36 @@
 ﻿<div class="top_search_bar">
-    <button type="button" class="btn bg-maroon float_right" style="margin-right:20px" ng-click="downloadImportTemp()" ng-if="authority.canCreate()"><i class="fa fa-cloud-download"></i>&nbsp;下载导入模板</button>
-    <button type="button" class="btn bg-blue float_right" style="margin-right:20px" ng-click="showImportPop()" ng-if="authority.canCreate()"><i class="fa fa-cloud-upload"></i>&nbsp;导入</button>
+	<text-box-normal caption="职务名称" width="200" ng-model="condition.selRoleName"></text-box-normal>
+	<button type="button" ng-click="refresh()" class="btn bg-green" style="margin-right: 10px">查询</button>
+	<button type="button" class="btn bg-maroon float_right" style="margin-right: 20px" ng-click="downloadImportTemp()" ng-if="authority.canCreate()">
+	<i class="fa fa-cloud-download"></i>&nbsp;下载导入模板
+	</button>
+	<button type="button" class="btn bg-blue float_right"
+		style="margin-right: 20px" ng-click="showImportPop()"
+		ng-if="authority.canCreate()">
+		<i class="fa fa-cloud-upload"></i>&nbsp;导入
+	</button>
 </div>
 <div>
-    <gridview config="config" list="roleList" refresh="refresh()" add="onNew()" edit="onEdit(item)" fixed="true"
-              remove="onDelete(items)" btnicon1="fa-map-o" btnclick1="onMenuEdit(item)"
-              pagechange="onPageChange(val)" rowcount="{{more.size}}" totalrowcount="totalCount"></gridview>
+	<pagegridview config="config" 
+	          refresh="refresh()"
+	          list="roleList" 
+		      add="onNew()" 
+		      edit="onEdit(item)" 
+		      remove="onDelete(items)"
+		      pagechange="onPageChange(val)" 
+		      rowcount="{{more.size}}"
+		      totalrowcount="totalCount">
+     </pagegridview>
 </div>
 <role-edit after-commit="afterCommit(res)"></role-edit>
 <role-menu-edit></role-menu-edit>
 <popup show="showImport" width="300" height="300" title="选择要导入的文件">
-    <div class="attachment-border">
-        <attachment list="attachList" subpath="Temp" mode="edit"></attachment>
-        <div style="clear:both"></div>
-    </div>
-    <div class="modal-footer" style="text-align:center; padding-right:0;">
-        <button type="button" class="btn bg-green" ng-click="import()">导入</button>
-        <button type="button" class="btn bg-yellow" ng-click="cancelImport()">取消</button>
-    </div>
+<div class="attachment-border">
+	<attachment list="attachList" subpath="Temp" mode="edit"></attachment>
+	<div style="clear: both"></div>
+</div>
+<div class="modal-footer" style="text-align: center; padding-right: 0;">
+	<button type="button" class="btn bg-green" ng-click="import()">导入</button>
+	<button type="button" class="btn bg-yellow" ng-click="cancelImport()">取消</button>
+</div>
 </popup>

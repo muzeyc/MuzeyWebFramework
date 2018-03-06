@@ -1,26 +1,27 @@
-﻿<popup width="600" height="500" title="职位管理" show="show">
+﻿<popup width="600" height="400" title="职位管理" show="show">
     <div class="modal-body" id="validate">
         <div class="inputBar">
-            <text-box-normal caption="职位名称" ng-model="role.RoleName" width="300" mustinput="true"></text-box-normal>
+            <text-box-normal caption="职位名称" ng-model="role.rolename" width="300" mustinput="true"></text-box-normal>
+            {{role.roleName}}
         </div>
         <div class="inputBar">
             <control-container width="200" caption="新建权限">
-                <check-box ng-model="role.CanCreate" checkedvalue="1" uncheckedvalue="0"></check-box>
+                <check-box ng-model="role.cancreate" checkedvalue="0" uncheckedvalue="1"></check-box>
             </control-container>
         </div>
         <div class="inputBar">
             <control-container width="200" caption="编辑权限">
-                <check-box ng-model="role.CanEdit" checkedvalue="1" uncheckedvalue="0"></check-box>
+                <check-box ng-model="role.canedit" checkedvalue="0" uncheckedvalue="1"></check-box>
             </control-container>
         </div>
         <div class="inputBar">
             <control-container width="200" caption="删除权限">
-                <check-box ng-model="role.CanDelete" checkedvalue="1" uncheckedvalue="0"></check-box>
+                <check-box ng-model="role.candelete" checkedvalue="0" uncheckedvalue="1"></check-box>
             </control-container>
         </div>
         <div class="inputBar">
             <control-container width="200" caption="有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;效">
-                <check-box ng-model="role.DeleteFlag" checkedvalue="0" uncheckedvalue="1"></check-box>
+                <check-box ng-model="role.deleteflag" checkedvalue="0" uncheckedvalue="1"></check-box>
             </control-container>
         </div>
     </div>
