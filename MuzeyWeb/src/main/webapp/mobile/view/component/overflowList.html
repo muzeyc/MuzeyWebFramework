@@ -1,0 +1,11 @@
+<div class="muzey-overflow-left" style="height: {{topHeight}}">
+	<div class="weui-cells classify-background">
+		<div class="weui-cell" ng-repeat="data in datas"
+			ng-click="onItemClick(data.name)"
+			ng-class="{'muzey-pitch': data.name == currentname}">
+			<div class="weui-cell__bd">
+				<p>{{data.name}}</p>
+			</div>
+		</div>
+	</div>
+</div>

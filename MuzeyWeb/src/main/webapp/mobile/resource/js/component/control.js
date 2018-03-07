@@ -19,6 +19,47 @@ angular.module('myApp')
             	
             	setMap.go("mobilePage." + $scope.currentpageurl);
             }],
-            templateUrl: 'view/component/menu.html?v=' + Math.random(),
+            templateUrl: 'view/component/menuBar.html?v=' + Math.random(),
+        };
+    }])
+    .directive('overflowList', [function () {
+        return {
+            scope: {
+                datas: "=datas",
+                onclick: "&"
+            },
+            controller: ['$scope', function ($scope) {
+
+            	$scope.topHeight = ($(window).height() - $('#footerMenu').height() + 1) + 'px';
+            	$scope.onItemClick = function (name){
+            		
+            		$scope.currentname = name;
+                	if ($scope.onclick) {
+
+                        $scope.onclick({name : name});
+                    }
+            	}
+            	
+            	$scope.onItemClick($scope.datas[0].name);
+            }],
+            templateUrl: 'view/component/overflowList.html?v=' + Math.random(),
+        };
+    }])    
+    .directive('gridList', [function () {
+        return {
+            scope: {
+                datas: "=datas",
+                ispage: "@",
+                onclick: "&"
+            },
+            controller: ['$scope', function ($scope) {
+
+                if ($scope.onclick) {
+                	var res = {};
+                    res.src = $scope.src;
+                    $scope.onclick({ res: res });
+                }
+            }],
+            templateUrl: 'view/component/gridList.html?v=' + Math.random(),
         };
     }]);
