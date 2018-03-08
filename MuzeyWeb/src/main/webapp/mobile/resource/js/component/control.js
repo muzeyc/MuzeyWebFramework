@@ -24,13 +24,26 @@ angular.module('myApp')
     }])
     .directive('overflowList', [function () {
         return {
+        	
+        	replace: true, 
             scope: {
+            	width: "@",
                 datas: "=datas",
                 onclick: "&"
             },
             controller: ['$scope', function ($scope) {
 
-            	$scope.topHeight = ($(window).height() - $('#footerMenu').height() + 1) + 'px';
+            	if(document.getElementById("footerMenu")){
+        			
+        			$scope.topHeight = ($(window).height() - $('#footerMenu').height() + 1) + 'px';
+        		}else{
+        			
+        			$scope.topHeight = $(window).height() + 'px';
+        		}
+            	if(!$scope.width){
+            		
+            		$scope.width = '100%';
+            	}
             	$scope.onItemClick = function (name){
             		
             		$scope.currentname = name;
@@ -47,13 +60,35 @@ angular.module('myApp')
     }])    
     .directive('gridList', [function () {
         return {
-            scope: {
+            
+        	replace: true, 
+        	scope: {
+        		width: "@",
                 datas: "=datas",
                 ispage: "@",
                 onclick: "&"
             },
             controller: ['$scope', function ($scope) {
 
+            	if($scope.ispage == 'true'){
+            		
+            		$scope.topHeight = '100%';
+            	}else{
+            		
+            		if(document.getElementById("footerMenu")){
+            			
+            			$scope.topHeight = ($(window).height() - $('#footerMenu').height() + 1) + 'px';
+            		}else{
+            			
+            			$scope.topHeight = $(window).height() + 'px';
+            		}
+            	}
+            	
+            	if(!$scope.width){
+            		
+            		$scope.width = '100%';
+            	}
+            	
                 if ($scope.onclick) {
                 	var res = {};
                     res.src = $scope.src;

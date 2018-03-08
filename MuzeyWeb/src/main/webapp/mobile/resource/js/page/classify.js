@@ -1,7 +1,6 @@
 ﻿angular.module('myApp')
     .controller('classifyCtrl', function ($scope, setMap, netRequest) {
     	
-    	$scope.topHeight = ($(window).height() - $('#footerMenu').height() + 1) + 'px';
 		$scope.leftDatas = [ 
 		  { name : '水果'},
 		  { name : '蔬菜'},
@@ -17,6 +16,10 @@
 		  { name : '地方特产'},
 		  { name : '母婴'},
 		  { name : '宠物'},
+		  { name : '冰棒'},
+		  { name : '汽水'},
+		  { name : '文具'},
+		  { name : '女性用品'},
 		 ];
 		
 		$scope.rigthDatas = [];
