@@ -97,4 +97,31 @@ angular.module('myApp')
             }],
             templateUrl: 'view/component/gridList.html?v=' + Math.random(),
         };
+    }])    
+    .directive('shopList', [function () {
+        return {
+            
+        	replace: true, 
+        	scope: {
+                datas: "=datas",
+                add: "&",
+                minus: "&"
+            },
+            controller: ['$scope', function ($scope) {
+
+            	$scope.add = function(index){
+            		
+            		$scope.datas[index].num +=1;
+            	}
+            	
+            	$scope.minus = function(index){
+            		
+            		if($scope.datas[index].num >0){
+            			
+            			$scope.datas[index].num -=1;
+            		}
+            	}
+            }],
+            templateUrl: 'view/component/shopList.html?v=' + Math.random(),
+        };
     }]);

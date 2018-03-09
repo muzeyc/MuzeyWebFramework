@@ -1,0 +1,21 @@
+<div class="weui-cells muzey-top0">
+	<div class="weui-cell" ng-repeat="data in datas track by $index">
+		<div class="weui-cell__hd">
+			<img
+				ng-src="{{'resource/images/' + data.pictureSrc}}"
+				alt="" style="width: 50px; margin-right: 5px; display: block">
+		</div>
+		<div class="weui-cell__bd" style="margin-left:15px;">
+			<p>{{data.name}}</p>
+			<p class="muzey-font-placeholder">{{data.placeholder}}</p>
+			<p class="muzey-font-money">{{'￥'  + data.money}}</p>
+		</div>
+		<div class="weui-cell__ft">
+			<div class="weui-count">
+				<a class="weui-count__btn weui-count__decrease" ng-click="minus($index)"></a> <input
+					class="weui-count__number" type="number" value="{{data.num}}"> <a
+					class="weui-count__btn weui-count__increase" ng-click="add($index)"></a>
+			</div>
+		</div>
+	</div>
+</div>
