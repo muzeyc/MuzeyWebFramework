@@ -211,8 +211,7 @@
 
  $scope.config = {
  colModel: [
- { label: "上一级名称", name: "ParentName", width: "40%" },
- { label: "操作组名称", name: "GroupName", width: "40%" },
+ { label: "菜单名称", name: "menuTitle", width: "40%" },
  ],
  }
  // 取消
@@ -221,21 +220,20 @@
  };
  // 提交
  $scope.commit = function () {
- // if (!validate.doValidate("#validate")) {
- // return;
- // }
-// var ids = [];
-// for (var i = 0; i < $scope.groupList.length; i++) {
-// if ($scope.groupList[i].selected) {
-// ids.push($scope.groupList[i].subId);
-// }
-// }
+  if (!validate.doValidate("#validate")) {
+  return;
+  }
+ var ids = [];
+ for (var i = 0; i < $scope.menuList.length; i++) {
+ if ($scope.menuList[i].selected) {
+ ids.push($scope.menuList[i].id);
+ }
+ }
  var req = {};
- req.action = "addRGroupSupplier";
- //req.ug = angular.copy($scope.ug);
- //req.groupids = ids.toString();
- netRequest.post("Controller/P000SysManage/Sys002_UserManageController.ashx",
- req, function (res) {
+  req.action = "addRoleMenu";
+  req.role = angular.copy($scope.role);
+  req.menuids = ids.toString();
+  netRequest.post("/MuzeyWeb/Sys003_RoleManage/" + req.action, req , function (res) {
  if (res.result == "ok") {
  dialog.showDialog("info", sysMessage.sys0004, {
  afterCommit: function () {
@@ -251,22 +249,17 @@
  link: function ($scope, iElm, iAttrs, controller) {
  $scope.$on("showSys002_R_UserGroup", function (event, role) {
  $scope.show = !$scope.show;
-// $scope.ug = angular.copy(ug);
+ $scope.role = angular.copy(role);
 // var req = {};
 // req.action = "GetGroupList";
- //req.selUserId = ug.UserId;
+ // req.selUserId = ug.UserId;
  // 初始化上级菜单下拉列表
  $scope.init = function () {
-     netRequest.get("/MuzeyWeb/Sys001_MenuManage/getParentMenu", function (res) {
-        // $scope.parentMenuList = res.list;
-         $scope.groupList = res.list;
+     netRequest.get("/MuzeyWeb/Sys003_RoleManage/getMenu", function (res) {
+         $scope.menuList = res.menuList;
      });
  }
- 
-// netRequest.post("Controller/P000SysManage/Sys002_UserManageController.ashx",
-// req, function (res) {
-// $scope.groupList = res.groupList;
-// });
+ $scope.init();
  });
  }
  };

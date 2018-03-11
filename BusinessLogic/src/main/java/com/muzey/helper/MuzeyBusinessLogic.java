@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.base.DBHelper;
+import com.data.DataTable;
 import com.muzey.base.PKInfo;
 
 public class MuzeyBusinessLogic<T> {
@@ -341,5 +342,16 @@ public class MuzeyBusinessLogic<T> {
         }
 
         dbHelper.sqlExecuteUpdate(sqlStr);
+    }
+    
+    /**
+     * 查询数据返回datatable
+     * 
+     * @param sqlStr
+     * @return
+     */
+    public DataTable getDataTableList(String sqlStr)
+    {
+    	return dbHelper.sqlQuery(sqlStr);
     }
 }

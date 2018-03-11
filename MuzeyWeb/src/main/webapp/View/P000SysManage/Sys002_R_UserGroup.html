@@ -1,9 +1,9 @@
-﻿<popup width="600" height="400" title="用户与操作组对应关系" show="show">
+﻿<popup width="600" height="400" title="角色与菜单对应关系" show="show">
     <div class="modal-body">
         <div class="inputBar">
-            <text-box-normal caption="用户" ng-model="ug.UserName" width="552" ng-disabled="true"></text-box-normal>
+            <text-box-normal caption="角色名称" ng-model="role.rolename" width="552" ng-disabled="true"></text-box-normal>
         </div>
-        <pagegridview config="config" hidefuncbar="true" canselect="true" list="groupList" rowcount="1000" totalrowcount=""></pagegridview>
+        <pagegridview config="config" hidefuncbar="true" canselect="true" list="menuList" rowcount="1000" totalrowcount=""></pagegridview>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn bg-green" ng-click="commit()">保存</button>
