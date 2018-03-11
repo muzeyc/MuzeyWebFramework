@@ -5,7 +5,8 @@
 angular.module('myApp')
     .directive('menuBar', [function () {
         return {
-            scope: {
+        	replace: true, 
+        	scope: {
                 menudatas: "=menudatas",
                 currentpageurl: "=currentpageurl"
             },
@@ -109,6 +110,8 @@ angular.module('myApp')
             },
             controller: ['$scope', function ($scope) {
 
+            	$scope.topHeight = ($(window).height() - $('#footerMenu').height() + 1) + 'px';
+            	
             	$scope.add = function(index){
             		
             		$scope.datas[index].num +=1;

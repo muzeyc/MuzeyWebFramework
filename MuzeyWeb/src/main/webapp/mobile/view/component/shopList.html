@@ -1,4 +1,4 @@
-<div class="weui-cells muzey-top0">
+<div class="weui-cells muzey-top0" style="overflow: auto;height: {{topHeight}}">
 	<div class="weui-cell" ng-repeat="data in datas track by $index">
 		<div class="weui-cell__hd">
 			<img
@@ -13,7 +13,7 @@
 		<div class="weui-cell__ft">
 			<div class="weui-count">
 				<a class="weui-count__btn weui-count__decrease" ng-click="minus($index)"></a> <input
-					class="weui-count__number" type="number" value="{{data.num}}"> <a
+					class="weui-count__number" type="text" value="{{data.num}}"> <a
 					class="weui-count__btn weui-count__increase" ng-click="add($index)"></a>
 			</div>
 		</div>
