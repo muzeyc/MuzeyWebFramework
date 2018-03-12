@@ -3,10 +3,10 @@ angular.module('myApp')
 
 			$scope.currentPageUrl = "home";
 			$scope.menuDatas = [ 
-			  { url : 'home' , name : '首页' , pictureSrc : 'icon_nav_button.png'},
-			  { url : 'classify' , name : '分类' , pictureSrc : 'icon_nav_msg.png' },
-			  { url : 'shoppingcart' , name : '购物车' , pictureSrc : 'icon_nav_article.png' , msgNum: '8'},
-			  { url : 'me' , name : '我' , pictureSrc : 'icon_nav_cell.png' }
+			  { url : 'home' , name : '首页' , pictureSrc : '首页.png'},
+			  { url : 'classify' , name : '分类' , pictureSrc : '分类2.png' },
+			  { url : 'shoppingcart' , name : '购物车' , pictureSrc : '购物车.png' , msgNum: '8'},
+			  { url : 'me' , name : '我' , pictureSrc : '我.png' }
 			 ];
 
 		}).config(
