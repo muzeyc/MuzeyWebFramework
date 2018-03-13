@@ -231,9 +231,10 @@
  }
  var req = {};
   req.action = "addRoleMenu";
+  $scope.role.menuIdList=ids.toString();
   req.role = angular.copy($scope.role);
   req.menuids = ids.toString();
-  netRequest.post("/MuzeyWeb/Sys003_RoleManage/" + req.action, req , function (res) {
+  netRequest.post("/MuzeyWeb/Sys003_RoleManage/" + req.action, req.role , function (res) {
  if (res.result == "ok") {
  dialog.showDialog("info", sysMessage.sys0004, {
  afterCommit: function () {
