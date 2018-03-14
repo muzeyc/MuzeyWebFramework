@@ -33,14 +33,14 @@ public class TestController extends BaseController{
     public void getParamTest(TestReqModel model) {
 
     	TestResModel res = new TestResModel();
-    	if(CheckUtil.isNullOrEmpty(model.getAa())){
+    	if(CheckUtil.isNullOrEmpty(model.getReqA())){
     		
         	res.setAaaaa("没有提供参数");
         	res.setBb(000);
     	}else{
     		
-        	res.setAaaaa(model.getAa() + "--Get请求返回了！");
-        	res.setBb(model.getBb() + 100);
+        	res.setAaaaa(model.getReqA() + "--Get请求返回了！");
+        	res.setBb(model.getReqB() + 100);
     	}
     	
     	returnData(res);
@@ -50,14 +50,14 @@ public class TestController extends BaseController{
     public void postParamTest(TestReqModel model) {
 
     	TestResModel res = new TestResModel();
-    	if(CheckUtil.isNullOrEmpty(model.getAa())){
+    	if(CheckUtil.isNullOrEmpty(model.getReqA())){
     		
         	res.setAaaaa("没有提供参数");
         	res.setBb(000);
     	}else{
     		
-        	res.setAaaaa(model.getAa() + "--Post请求返回了！");
-        	res.setBb(model.getBb() + 200);
+        	res.setAaaaa(model.getReqA() + "--Post请求返回了！");
+        	res.setBb(model.getReqB() + 200);
     	}
     	
     	returnData(res);

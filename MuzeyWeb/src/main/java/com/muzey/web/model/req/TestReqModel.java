@@ -2,23 +2,23 @@ package com.muzey.web.model.req;
 
 public class TestReqModel extends RequestModelBase {
 
-	private String aa;
-	private Integer bb;
+	private String reqA;
+	private Integer reqB;
 
-	public String getAa() {
-		return aa;
+	public String getReqA() {
+		return reqA;
 	}
 
-	public void setAa(String aa) {
-		this.aa = aa;
+	public void setReqA(String reqA) {
+		this.reqA = reqA;
 	}
 
-	public Integer getBb() {
-		return bb;
+	public Integer getReqB() {
+		return reqB;
 	}
 
-	public void setBb(Integer bb) {
-		this.bb = bb;
+	public void setReqB(Integer reqB) {
+		this.reqB = reqB;
 	}
 
 }
