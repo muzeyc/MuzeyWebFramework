@@ -1,5 +1,8 @@
 package com.muzey.until;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class StringUtil {
@@ -39,10 +42,55 @@ public class StringUtil {
 	 * @return
 	 */
 	public static int toInt(String str) {
-		
+
 		if (CheckUtil.isNullOrEmpty(str)) {
 			return 0;
 		}
 		return Integer.parseInt(str);
+	}
+
+	/**
+	 * 取得系统时间
+	 * 
+	 * type 为1取得年;为2取得月;为3取得日;为4取得年月日;为5年月日时分秒;其他返回空
+	 * 
+	 * @param type
+	 * @return
+	 */
+	public static String GetDateTime(int type) {
+
+		// 类型
+		String typeTime = "";
+
+		switch (type) {
+		case 1:
+			// 年
+			typeTime = "yyyy";
+
+			break;
+		case 2:
+			// 月
+			typeTime = "MM";
+			break;
+		case 3:
+			// 日
+			typeTime = "dd";
+			break;
+		case 4:
+			// 年月日
+			typeTime = "yyyy-MM-dd";
+			break;
+		case 5:
+			// 年月日时分秒
+			typeTime = "yyyy-MM-dd HH:mm:ss";
+			break;
+		default:
+			break;
+		}
+
+		Date dNow = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat(typeTime);
+
+		return ft.format(dNow);
 	}
 }
