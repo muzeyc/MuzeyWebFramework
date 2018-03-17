@@ -1,0 +1,48 @@
+﻿<popup width="600" height="400" title="商户基本信息" show="show">
+<div class="modal-body" id="validate">
+	<div class="inputBar">
+		<text-box-normal caption="商户名称" ng-model="basic.name" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="省份" ng-model="basic.province" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="城市" ng-model="basic.city" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="区" ng-model="basic.district" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="详细地址" ng-model="basic.address" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="等级" ng-model="basic.lv" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="状态" ng-model="basic.state" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="电话" ng-model="basic.tel" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="简介" ng-model="basic.dmdesc" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="图片" ng-model="basic.picture" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+	<button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+</div>
+</popup>
