@@ -171,19 +171,6 @@ public class Sys_userinfoDto {
 
     }
 
-    private String updateuser;
-
-    public String getUpdateuser() {
-
-        return updateuser;
-    }
-
-    public void setUpdateuser(String updateuser) {
-
-        this.updateuser = updateuser;
-
-    }
-
     private String updatetime;
 
     public String getUpdatetime() {
@@ -194,6 +181,19 @@ public class Sys_userinfoDto {
     public void setUpdatetime(String updatetime) {
 
         this.updatetime = updatetime;
+
+    }
+
+    private String updateuser;
+
+    public String getUpdateuser() {
+
+        return updateuser;
+    }
+
+    public void setUpdateuser(String updateuser) {
+
+        this.updateuser = updateuser;
 
     }
 
