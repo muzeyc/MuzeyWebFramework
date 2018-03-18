@@ -127,4 +127,27 @@ angular.module('myApp')
             }],
             templateUrl: 'view/component/shopList.html?v=' + Math.random(),
         };
+    }])    
+    .directive('slideList', [function () {
+        return {
+            
+        	replace: true, 
+        	scope: {
+                datas: "=datas"
+            },
+            controller: ['$scope', function ($scope) {
+
+            	$scope.topHeight = ($(window).width() / 2) + 'px';
+            	
+            	$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+
+            		var swiper = new Swiper('.swiper-container', {
+                	      pagination: {
+                	        el: '.swiper-pagination',
+                	      },
+                	    });   
+            	});
+            }],
+            templateUrl: 'view/component/slideList.html?v=' + Math.random(),
+        };
     }]);
