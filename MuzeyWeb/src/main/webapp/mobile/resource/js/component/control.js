@@ -3,6 +3,7 @@
 //版本日期：2018-3-1
 //声明：该框架的使用权归作者个人所有，未经作者允许不得用于任何商业用途。
 angular.module('myApp')
+	 //底部Menu控件
     .directive('menuBar', [function () {
         return {
         	replace: true, 
@@ -23,6 +24,7 @@ angular.module('myApp')
             templateUrl: 'view/component/menuBar.html?v=' + Math.random(),
         };
     }])
+     //列表控件
     .directive('overflowList', [function () {
         return {
         	
@@ -58,7 +60,8 @@ angular.module('myApp')
             }],
             templateUrl: 'view/component/overflowList.html?v=' + Math.random(),
         };
-    }])    
+    }])
+     //九宫格控件
     .directive('gridList', [function () {
         return {
             
@@ -98,7 +101,8 @@ angular.module('myApp')
             }],
             templateUrl: 'view/component/gridList.html?v=' + Math.random(),
         };
-    }])    
+    }])
+     //购物车控件
     .directive('shopList', [function () {
         return {
             
@@ -127,7 +131,8 @@ angular.module('myApp')
             }],
             templateUrl: 'view/component/shopList.html?v=' + Math.random(),
         };
-    }])    
+    }])
+     //推荐图片控件
     .directive('slideList', [function () {
         return {
             
@@ -144,6 +149,9 @@ angular.module('myApp')
             		var swiper = new Swiper('.swiper-container', {
                 	      pagination: {
                 	        el: '.swiper-pagination',
+                	      },
+                	      autoplay: {
+                	    	    delay: 2000,
                 	      },
                 	    });   
             	});

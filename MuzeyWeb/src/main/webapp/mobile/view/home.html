@@ -1,2 +1,50 @@
 <slide-list datas="slideDatas"></slide-list>
-<grid-List datas="gridDatas" ispage="true"></grid-List>
+<div class="weui-search-bar" id="searchBar">
+  <div class="weui-search-bar__form">
+    <div class="weui-search-bar__box">
+      <i class="weui-icon-search"></i>
+      <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索城市或小区" required="">
+      <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+    </div>
+    <label class="weui-search-bar__label" id="searchText">
+      <i class="weui-icon-search"></i>
+      <span>搜索城市或小区</span>
+    </label>
+  </div>
+  <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+</div>
+<div class="muzey-bd">
+<div class="weui-cell">
+	<div class="weui-cell__hd">
+		<label class="weui-label">城市</label>
+	</div>
+	<div class="weui-cell__bd">
+		<input id="city-picker" class="weui-input" type="text"
+			placeholder="请选择">
+	</div>
+</div>
+<div class="weui-cell">
+	<div class="weui-cell__hd">
+		<label class="weui-label">街道</label>
+	</div>
+	<div class="weui-cell__bd">
+		<input id="road" class="weui-input" type="text" placeholder="请选择街道">
+	</div>
+</div>
+<div class="weui-cell">
+	<div class="weui-cell__hd">
+		<label class="weui-label">小区</label>
+	</div>
+	<div class="weui-cell__bd">
+		<input id="community" class="weui-input" type="text" placeholder="请选择小区">
+	</div>
+</div>
+<div class="weui-cell">
+	<div class="weui-cell__hd">
+		<label class="weui-label">小卖部</label>
+	</div>
+	<div class="weui-cell__bd">
+		<input id="supermarket" class="weui-input" type="text" placeholder="请选择小卖部">
+	</div>
+</div>
+</div>

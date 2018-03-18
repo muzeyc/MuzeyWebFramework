@@ -3,6 +3,7 @@
 //版本日期：2018-3-1
 //声明：该框架的使用权归作者个人所有，未经作者允许不得用于任何商业用途。
 angular.module('myApp')
+	 //repeat结束后执行方法
     .directive('onFinishRenderFilters', function($timeout) {
         return {
             restrict: 'A',
