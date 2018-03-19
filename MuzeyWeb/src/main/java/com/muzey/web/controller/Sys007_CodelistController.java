@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.muzey.until.CheckUtil;
+import com.muzey.until.CookieUtil;
 import com.muzey.until.JsonUtil;
 import com.muzey.until.SqlUtil;
 import com.muzey.web.base.BaseController;
@@ -42,25 +43,25 @@ public class Sys007_CodelistController extends BaseController {
 
 		returnData(resStr);
 	}
-	
+
 	/***
 	 * 取得父级数据字典
 	 * 
 	 */
-    @RequestMapping(value = "/getParentCodeList", method = RequestMethod.GET)
-    public void getParentCodeList() {
+	@RequestMapping(value = "/getParentCodeList", method = RequestMethod.GET)
+	public void getParentCodeList() {
 
-        String resStr = "";
-        CombboxResModel resModel = new CombboxResModel();
-        try {
-            resModel.setList(service.getParentCodeList());
-            resStr = JsonUtil.serializer(resModel);
-        } catch (Exception e) {
-            resStr = this.getFailResult(e.getMessage());
-        }
+		String resStr = "";
+		CombboxResModel resModel = new CombboxResModel();
+		try {
+			resModel.setList(service.getParentCodeList());
+			resStr = JsonUtil.serializer(resModel);
+		} catch (Exception e) {
+			resStr = this.getFailResult(e.getMessage());
+		}
 
-        returnData(resStr);
-    }
+		returnData(resStr);
+	}
 
 	/**
 	 * <p>
@@ -74,11 +75,13 @@ public class Sys007_CodelistController extends BaseController {
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public void add(CodeListModel model) {
 
+		String userName = CookieUtil.getCookieValue(request, "UserName");
+
 		String resStr = "";
 
 		try {
 
-			service.add(model);
+			service.add(model, userName);
 		} catch (Exception e) {
 
 			resStr = this.getFailResult(e.getMessage());
@@ -109,9 +112,11 @@ public class Sys007_CodelistController extends BaseController {
 
 		String resStr = "";
 
+		String userName = CookieUtil.getCookieValue(request, "UserName");
+		
 		try {
 
-			service.update(model);
+			service.update(model,userName);
 		} catch (Exception e) {
 
 			resStr = this.getFailResult(e.getMessage());

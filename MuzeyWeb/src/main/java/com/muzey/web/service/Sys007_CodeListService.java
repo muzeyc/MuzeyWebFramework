@@ -9,6 +9,7 @@ import com.muzey.base.MuzeyService;
 import com.muzey.dto.Sys_codelistDto;
 import com.muzey.helper.MuzeyBusinessLogic;
 import com.muzey.until.CheckUtil;
+import com.muzey.until.CookieUtil;
 import com.muzey.until.StringUtil;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.CodeListModel;
@@ -60,7 +61,7 @@ public class Sys007_CodeListService extends MuzeyService {
 				StringBuilder strSql = new StringBuilder();
 				strSql.append(" AND parentid='" + dto.getId() + "'");
 				strSql.append(" ORDER BY no ");
-				
+
 				if (strWhere.trim() != "") {
 					strSql.append(strWhere);
 				}
@@ -127,7 +128,7 @@ public class Sys007_CodeListService extends MuzeyService {
 	 * @date 2018-3-19
 	 * @param model
 	 */
-	public void add(CodeListModel model) {
+	public void add(CodeListModel model,String userName) {
 
 		Sys_codelistDto codeListDto = new Sys_codelistDto();
 
@@ -136,9 +137,10 @@ public class Sys007_CodeListService extends MuzeyService {
 		codeListDto.setCodename(model.getCodename());
 		codeListDto.setNo(model.getNo());
 		codeListDto.setCreatetime(StringUtil.GetDateTime(5));
-		codeListDto.setCreateuser("admin");
+		codeListDto.setCreateuser(userName);
 		codeListDto.setUpdatetime(StringUtil.GetDateTime(5));
-		codeListDto.setUpdateuser("admin");
+		codeListDto.setUpdateuser(userName);
+	
 
 		codeListBL.insertDto(codeListDto);
 	}
@@ -152,7 +154,7 @@ public class Sys007_CodeListService extends MuzeyService {
 	 * @date 2018-3-19
 	 * @param model
 	 */
-	public void update(CodeListModel model) {
+	public void update(CodeListModel model,String userName) {
 
 		Sys_codelistDto pkDto = new Sys_codelistDto();
 		pkDto.setId(model.getId());
@@ -163,7 +165,7 @@ public class Sys007_CodeListService extends MuzeyService {
 		codeListDto.setCodename(model.getCodename());
 		codeListDto.setNo(model.getNo());
 		codeListDto.setUpdatetime(StringUtil.GetDateTime(5));
-
+		codeListDto.setUpdateuser(userName);
 		codeListBL.updateDtoToAll(codeListDto);
 	}
 
