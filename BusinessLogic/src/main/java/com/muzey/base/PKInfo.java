@@ -10,6 +10,7 @@ import java.util.Map;public class PKInfo {
         pkMap = new HashMap<String, String[]>();
         pkMap.put("Um_basicinfo", new String[] {"id"});
         pkMap.put("Dm_basicinfo", new String[] {"id"});
+        pkMap.put("Sys_codelist", new String[] {"id"});
         pkMap.put("Sys_role", new String[] {"id"});
         pkMap.put("Sys_userinfo", new String[] {"id"});
         pkMap.put("Sys_menu", new String[] {"menuid"});

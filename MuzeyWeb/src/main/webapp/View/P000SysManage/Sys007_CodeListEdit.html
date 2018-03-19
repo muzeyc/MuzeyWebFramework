@@ -1,0 +1,23 @@
+﻿<popup width="600" height="400" title="数据字典" show="show">
+<div class="modal-body" id="validate">
+	<div class="inputBar">
+		<text-box-normal caption="名称" ng-model="code.name" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+			<div class="inputBar">
+		<text-box-normal caption="编码" ng-model="code.codename" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+	 <combbox caption="父级名称" ng-model="code.parentid" list="parentCodeList" width="300" mustinput="true"></combbox>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="序号" ng-model="code.no" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+	<button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+</div>
+</popup>
