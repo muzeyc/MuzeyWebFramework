@@ -1,0 +1,32 @@
+﻿<popup width="600" height="400" title="用户基本信息" show="show">
+<div class="modal-body" id="validate">
+	<div class="inputBar">
+		<text-box-normal caption="用户名称" ng-model="basic.name" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="用户等级" ng-model="basic.lv" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+    <div class="inputBar">
+		<text-box-normal caption="余额" ng-model="basic.money" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="电话" ng-model="basic.tel" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="用户类型" ng-model="basic.type" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+		<div class="inputBar">
+		<text-box-normal caption="加入渠道" ng-model="basic.road" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+	<button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+</div>
+</popup>
