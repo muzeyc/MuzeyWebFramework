@@ -158,7 +158,6 @@
             templateUrl: 'View/P000SysManage/Sys005_DMBasicInfoEdit.html?v=' + Math.random(),
             link: function ($scope, iElm, iAttrs, controller) {
                 $scope.$on("showSys005_BasicEdit", function (event, mode, basic, more,selBasicName) {
-                    $scope.show = !$scope.show;
                     $scope.basic = angular.copy(basic);
                     $scope.more = more;
                     if ("edit" == mode) {
@@ -168,7 +167,20 @@
                     }
                     $scope.mode = mode;
                     $scope.selBasicName = selBasicName;
+                    
+                    $scope.init();
                 });
+                
+                // 初始化商户状态下拉列表
+                $scope.init = function () {
+                	
+                	 var req = {};
+                	 req.codename = "UM_Type";
+                	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", req, function (res) {
+                        $scope.DMStateList = res.list;
+                        $scope.show = !$scope.show;
+                    });
+                }
             }
         };
     });

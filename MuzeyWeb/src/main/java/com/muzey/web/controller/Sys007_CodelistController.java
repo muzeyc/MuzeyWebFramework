@@ -163,4 +163,23 @@ public class Sys007_CodelistController extends BaseController {
 			returnData(resStr);
 		}
 	}
+	
+	/***
+	 * 取得商户的状态
+	 * 
+	 */
+	@RequestMapping(value = "/getChildenList", method = RequestMethod.POST)
+	public void getChildenList(CodeListModel model) {
+
+		String resStr = "";
+		CombboxResModel resModel = new CombboxResModel();
+		try {
+			resModel.setList(service.getChildenList(model.getCodename()));
+			resStr = JsonUtil.serializer(resModel);
+		} catch (Exception e) {
+			resStr = this.getFailResult(e.getMessage());
+		}
+
+		returnData(resStr);
+	}
 }

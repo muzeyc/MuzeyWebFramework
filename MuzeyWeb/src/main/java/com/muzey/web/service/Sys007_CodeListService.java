@@ -186,4 +186,39 @@ public class Sys007_CodeListService extends MuzeyService {
 
 		codeListBL.deleteDto(codeListDto);
 	}
+	
+	/***
+	 * 根绝条件取得数据字典的子级名称
+	 * 
+	 * @return
+	 */
+	public List<CombboxModel> getChildenList(String type) {
+
+		List<CombboxModel> list = new ArrayList<CombboxModel>();
+
+		StringBuilder strSql = new StringBuilder();
+
+		strSql.append(" AND parentid = ");
+		strSql.append(" cast ");
+		strSql.append(" ((SELECT ");
+		strSql.append(" id ");
+		strSql.append(" FROM ");
+		strSql.append(" sys_codelist ");
+		strSql.append(" WHERE 1=1 ");
+		strSql.append(" AND codename ='"+type+"') ");
+		strSql.append(" as character ) ");
+		
+		List<Sys_codelistDto> dtoList = codeListBL.getDtoList(strSql.toString());
+		
+		CombboxModel model = new CombboxModel();
+		
+		for (Sys_codelistDto dto : dtoList) {
+			model = new CombboxModel();
+			model.setSubId(dto.getId().toString());
+			model.setName(dto.getName());
+			list.add(model);
+		}
+
+		return list;
+	}
 }

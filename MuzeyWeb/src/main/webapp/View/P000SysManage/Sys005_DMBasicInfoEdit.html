@@ -13,7 +13,7 @@
 			mustinput="true"></text-box-normal>
 	</div>
 	<div class="inputBar">
-		<text-box-normal caption="区" ng-model="basic.district" width="300"
+		<text-box-normal caption="区" ng-model="basic.dmdistrict" width="300"
 			mustinput="true"></text-box-normal>
 	</div>
 	<div class="inputBar">
@@ -25,8 +25,8 @@
 			mustinput="true"></text-box-normal>
 	</div>
 	<div class="inputBar">
-		<text-box-normal caption="状态" ng-model="basic.state" width="300"
-			mustinput="true"></text-box-normal>
+		<combbox caption="状态" ng-model="basic.state" width="300"
+			list="DMStateList" mustinput="true"></combbox>
 	</div>
 	<div class="inputBar">
 		<text-box-normal caption="电话" ng-model="basic.tel" width="300"
@@ -37,8 +37,16 @@
 			mustinput="true"></text-box-normal>
 	</div>
 	<div class="inputBar">
-		<text-box-normal caption="图片" ng-model="basic.picture" width="300"
+		<text-box-normal caption="图片" ng-model="basic.pictureid" width="300"
 			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="起送价" ng-model="basic.startprice" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="配送费" ng-model="basic.dispatching"
+			width="300" mustinput="true"></text-box-normal>
 	</div>
 </div>
 <div class="modal-footer">

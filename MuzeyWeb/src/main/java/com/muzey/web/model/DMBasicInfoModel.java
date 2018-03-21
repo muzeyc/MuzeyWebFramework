@@ -1,5 +1,7 @@
 package com.muzey.web.model;
 
+import java.math.BigDecimal;
+
 public class DMBasicInfoModel {
 
 	private int id;
@@ -13,6 +15,8 @@ public class DMBasicInfoModel {
 	private String tel;
 	private String dmdesc;
 	private Integer pictureid;
+	private BigDecimal startprice;
+	private BigDecimal dispatching;
 
 	public int getId() {
 		return id;
@@ -100,6 +104,22 @@ public class DMBasicInfoModel {
 
 	public void setPictureid(Integer pictureid) {
 		this.pictureid = pictureid;
+	}
+
+	public BigDecimal getStartprice() {
+		return startprice;
+	}
+
+	public void setStartprice(BigDecimal startprice) {
+		this.startprice = startprice;
+	}
+
+	public BigDecimal getDispatching() {
+		return dispatching;
+	}
+
+	public void setDispatching(BigDecimal dispatching) {
+		this.dispatching = dispatching;
 	}
 
 }

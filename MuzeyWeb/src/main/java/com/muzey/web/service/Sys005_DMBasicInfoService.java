@@ -38,6 +38,9 @@ public class Sys005_DMBasicInfoService extends MuzeyService {
 			model.setTel(dto.getTel());
 			model.setDmdesc(dto.getDmdesc());
 			model.setPictureid(dto.getPictureid());
+			model.setStartprice(dto.getStartprice());
+			model.setDispatching(dto.getDispatching());
+			
 			modelList.add(model);
 		}
 		DMBasicInfoResModel resModel = new DMBasicInfoResModel();
@@ -70,7 +73,8 @@ public class Sys005_DMBasicInfoService extends MuzeyService {
 		dmBasicDto.setDmdesc(model.getDmdesc());
 		dmBasicDto.setPictureid(model.getPictureid());
 		dmBasicDto.setCreatetime(StringUtil.GetDateTime(5));
-
+		dmBasicDto.setStartprice(model.getStartprice());
+		dmBasicDto.setDispatching(model.getDispatching());
 		basicBL.insertDto(dmBasicDto);
 	}
 
@@ -99,7 +103,9 @@ public class Sys005_DMBasicInfoService extends MuzeyService {
 		dmBasicDto.setTel(model.getTel());
 		dmBasicDto.setDmdesc(model.getDmdesc());
 		dmBasicDto.setPictureid(model.getPictureid());
-
+		dmBasicDto.setStartprice(model.getStartprice());
+		dmBasicDto.setDispatching(model.getDispatching());
+		
 		basicBL.updateDtoToAll(dmBasicDto);
 	}
 
