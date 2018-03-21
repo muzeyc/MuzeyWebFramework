@@ -6,13 +6,13 @@ public class DMBasicInfoModel {
 	private String name;
 	private String province;
 	private String city;
-	private String district;
+	private String dmdistrict;
 	private String address;
 	private int lv;
 	private String state;
 	private String tel;
 	private String dmdesc;
-	private String picture;
+	private Integer pictureid;
 
 	public int getId() {
 		return id;
@@ -46,12 +46,12 @@ public class DMBasicInfoModel {
 		this.city = city;
 	}
 
-	public String getDistrict() {
-		return district;
+	public String getDmdistrict() {
+		return dmdistrict;
 	}
 
-	public void setDistrict(String district) {
-		this.district = district;
+	public void setDmdistrict(String dmdistrict) {
+		this.dmdistrict = dmdistrict;
 	}
 
 	public String getAddress() {
@@ -94,12 +94,12 @@ public class DMBasicInfoModel {
 		this.dmdesc = dmdesc;
 	}
 
-	public String getPicture() {
-		return picture;
+	public Integer getPictureid() {
+		return pictureid;
 	}
 
-	public void setPicture(String picture) {
-		this.picture = picture;
+	public void setPictureid(Integer pictureid) {
+		this.pictureid = pictureid;
 	}
 
 }

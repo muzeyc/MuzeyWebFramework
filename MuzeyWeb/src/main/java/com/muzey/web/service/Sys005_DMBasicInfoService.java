@@ -31,13 +31,13 @@ public class Sys005_DMBasicInfoService extends MuzeyService {
 			model.setName(dto.getName());
 			model.setProvince(dto.getProvince());
 			model.setCity(dto.getCity());
-			model.setDistrict(dto.getDistrict());
+			model.setDmdistrict(dto.getDmdistrict());
 			model.setAddress(dto.getAddress());
 			model.setLv(dto.getLv());
 			model.setState(dto.getState());
 			model.setTel(dto.getTel());
 			model.setDmdesc(dto.getDmdesc());
-			model.setPicture(dto.getPicture());
+			model.setPictureid(dto.getPictureid());
 			modelList.add(model);
 		}
 		DMBasicInfoResModel resModel = new DMBasicInfoResModel();
@@ -62,13 +62,13 @@ public class Sys005_DMBasicInfoService extends MuzeyService {
 		dmBasicDto.setName(model.getName());
 		dmBasicDto.setProvince(model.getProvince());
 		dmBasicDto.setCity(model.getCity());
-		dmBasicDto.setDistrict(model.getDistrict());
+		dmBasicDto.setDmdistrict(model.getDmdistrict());
 		dmBasicDto.setAddress(model.getAddress());
 		dmBasicDto.setLv(model.getLv());
 		dmBasicDto.setState(model.getState());
 		dmBasicDto.setTel(model.getTel());
 		dmBasicDto.setDmdesc(model.getDmdesc());
-		dmBasicDto.setPicture(model.getPicture());
+		dmBasicDto.setPictureid(model.getPictureid());
 		dmBasicDto.setCreatetime(StringUtil.GetDateTime(5));
 
 		basicBL.insertDto(dmBasicDto);
@@ -92,13 +92,13 @@ public class Sys005_DMBasicInfoService extends MuzeyService {
 		dmBasicDto.setName(model.getName());
 		dmBasicDto.setProvince(model.getProvince());
 		dmBasicDto.setCity(model.getCity());
-		dmBasicDto.setDistrict(model.getDistrict());
+		dmBasicDto.setDmdistrict(model.getDmdistrict());
 		dmBasicDto.setAddress(model.getAddress());
 		dmBasicDto.setLv(model.getLv());
 		dmBasicDto.setState(model.getState());
 		dmBasicDto.setTel(model.getTel());
 		dmBasicDto.setDmdesc(model.getDmdesc());
-		dmBasicDto.setPicture(model.getPicture());
+		dmBasicDto.setPictureid(model.getPictureid());
 
 		basicBL.updateDtoToAll(dmBasicDto);
 	}

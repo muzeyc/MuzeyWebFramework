@@ -1,5 +1,7 @@
 package com.muzey.dto;
 
+import java.math.BigDecimal;
+
 public class Um_basicinfoDto {
 
     private Integer id;
@@ -41,14 +43,14 @@ public class Um_basicinfoDto {
 
     }
 
-    private String money;
+    private BigDecimal money;
 
-    public String getMoney() {
+    public BigDecimal getMoney() {
 
         return money;
     }
 
-    public void setMoney(String money) {
+    public void setMoney(BigDecimal money) {
 
         this.money = money;
 

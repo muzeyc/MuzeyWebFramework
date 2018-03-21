@@ -1,11 +1,13 @@
 package com.muzey.web.model;
 
+import java.math.BigDecimal;
+
 public class UMBasicInfoModel {
 
 	private int id;
 	private String name;
 	private int lv;
-	private String money;
+	private BigDecimal money;
 	private int tel;
 	private String type;
 	private String road;
@@ -34,11 +36,11 @@ public class UMBasicInfoModel {
 		this.lv = lv;
 	}
 
-	public String getMoney() {
+	public BigDecimal getMoney() {
 		return money;
 	}
 
-	public void setMoney(String money) {
+	public void setMoney(BigDecimal money) {
 		this.money = money;
 	}
 

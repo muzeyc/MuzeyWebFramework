@@ -1,5 +1,7 @@
 package com.muzey.dto;
 
+import java.math.BigDecimal;
+
 public class Dm_basicinfoDto {
 
     private Integer id;
@@ -54,16 +56,16 @@ public class Dm_basicinfoDto {
 
     }
 
-    private String district;
+    private String dmdistrict;
 
-    public String getDistrict() {
+    public String getDmdistrict() {
 
-        return district;
+        return dmdistrict;
     }
 
-    public void setDistrict(String district) {
+    public void setDmdistrict(String dmdistrict) {
 
-        this.district = district;
+        this.dmdistrict = dmdistrict;
 
     }
 
@@ -132,16 +134,16 @@ public class Dm_basicinfoDto {
 
     }
 
-    private String picture;
+    private Integer pictureid;
 
-    public String getPicture() {
+    public Integer getPictureid() {
 
-        return picture;
+        return pictureid;
     }
 
-    public void setPicture(String picture) {
+    public void setPictureid(Integer pictureid) {
 
-        this.picture = picture;
+        this.pictureid = pictureid;
 
     }
 
@@ -155,6 +157,32 @@ public class Dm_basicinfoDto {
     public void setCreatetime(String createtime) {
 
         this.createtime = createtime;
+
+    }
+
+    private BigDecimal startprice;
+
+    public BigDecimal getStartprice() {
+
+        return startprice;
+    }
+
+    public void setStartprice(BigDecimal startprice) {
+
+        this.startprice = startprice;
+
+    }
+
+    private BigDecimal dispatching;
+
+    public BigDecimal getDispatching() {
+
+        return dispatching;
+    }
+
+    public void setDispatching(BigDecimal dispatching) {
+
+        this.dispatching = dispatching;
 
     }
 
