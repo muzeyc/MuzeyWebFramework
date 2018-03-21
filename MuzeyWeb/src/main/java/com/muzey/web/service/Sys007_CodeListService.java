@@ -206,7 +206,7 @@ public class Sys007_CodeListService extends MuzeyService {
 		strSql.append(" sys_codelist ");
 		strSql.append(" WHERE 1=1 ");
 		strSql.append(" AND codename ='"+type+"') ");
-		strSql.append(" as character ) ");
+		strSql.append(" as character(100) ) ");
 		
 		List<Sys_codelistDto> dtoList = codeListBL.getDtoList(strSql.toString());
 		
