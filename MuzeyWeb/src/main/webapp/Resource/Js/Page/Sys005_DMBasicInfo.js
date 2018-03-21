@@ -175,7 +175,7 @@
                 $scope.init = function () {
                 	
                 	 var req = {};
-                	 req.codename = "UM_Type";
+                	 req.codename = "DM_State";
                 	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", req, function (res) {
                         $scope.DMStateList = res.list;
                         $scope.show = !$scope.show;

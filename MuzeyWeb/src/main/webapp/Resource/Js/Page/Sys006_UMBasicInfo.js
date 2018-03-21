@@ -159,7 +159,7 @@
             templateUrl: 'View/P000SysManage/Sys006_UMBasicInfoEdit.html?v=' + Math.random(),
             link: function ($scope, iElm, iAttrs, controller) {
                 $scope.$on("showSys006_BasicEdit", function (event, mode, basic, more,selName) {
-                    $scope.show = !$scope.show;
+                  
                     $scope.basic = angular.copy(basic);
                     $scope.more = more;
                     if ("edit" == mode) {
@@ -169,7 +169,34 @@
                     }
                     $scope.mode = mode;
                     $scope.selName = selName;
+                    
+                    //用户类型
+                    $scope.initUmType();
+                    //用户加入渠道
+                    $scope.initUmRoad();
                 });
+                
+                // 初始化用户类型下拉列表
+                $scope.initUmType = function () {
+                	
+                	 var reqType = {};
+                	 reqType.codename = "UM_Type";
+                	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", reqType, function (res) {
+                        $scope.UmTypeList = res.list;
+                        $scope.show = !$scope.show;
+                    });
+                }
+                
+                // 初始化用户加入渠道下拉列表
+                $scope.initUmRoad = function () {
+                	
+                	 var reqRoad = {};
+                	 reqRoad.codename = "Road";
+                	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", reqRoad, function (res) {
+                        $scope.UmRoadList = res.list;
+                        $scope.show = !$scope.show;
+                    });
+                }
             }
         };
     });
