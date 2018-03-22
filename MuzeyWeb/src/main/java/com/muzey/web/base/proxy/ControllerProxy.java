@@ -1,5 +1,7 @@
 package com.muzey.web.base.proxy;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -24,6 +26,7 @@ import com.muzey.helper.MuzeyBusinessLogic;
 import com.muzey.until.JsonUtil;
 import com.muzey.web.base.MuzeyFactory;
 import com.muzey.web.base.annotation.MuzeyAutowired;
+import com.muzey.web.model.res.ResponseModelBase;
 
 @Component
 @Aspect
@@ -166,6 +169,23 @@ public class ControllerProxy {
         } catch (Exception e) {
 
             System.err.println(e.getMessage());
+            ResponseModelBase resModel = new ResponseModelBase();
+            resModel.result = ResponseModelBase.FAILED;
+            resModel.errMessage = e.getMessage();
+            PrintWriter printWriter = null;
+            try {
+                response.setCharacterEncoding("utf-8");
+                printWriter = response.getWriter();
+                printWriter.print(JsonUtil.serializer(resModel));
+            } catch (IOException ex) {
+                
+                System.err.println(ex.getMessage());
+            } finally {
+                if (null != printWriter) {
+                    printWriter.flush();
+                    printWriter.close();
+                }
+            }
         }
         return resObj;
     }
