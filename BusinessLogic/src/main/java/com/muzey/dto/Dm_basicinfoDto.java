@@ -17,68 +17,16 @@ public class Dm_basicinfoDto {
 
     }
 
-    private String name;
+    private Integer comid;
 
-    public String getName() {
+    public Integer getComid() {
 
-        return name;
+        return comid;
     }
 
-    public void setName(String name) {
+    public void setComid(Integer comid) {
 
-        this.name = name;
-
-    }
-
-    private String province;
-
-    public String getProvince() {
-
-        return province;
-    }
-
-    public void setProvince(String province) {
-
-        this.province = province;
-
-    }
-
-    private String city;
-
-    public String getCity() {
-
-        return city;
-    }
-
-    public void setCity(String city) {
-
-        this.city = city;
-
-    }
-
-    private String dmdistrict;
-
-    public String getDmdistrict() {
-
-        return dmdistrict;
-    }
-
-    public void setDmdistrict(String dmdistrict) {
-
-        this.dmdistrict = dmdistrict;
-
-    }
-
-    private String address;
-
-    public String getAddress() {
-
-        return address;
-    }
-
-    public void setAddress(String address) {
-
-        this.address = address;
+        this.comid = comid;
 
     }
 
