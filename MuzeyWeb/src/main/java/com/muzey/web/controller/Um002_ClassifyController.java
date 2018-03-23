@@ -19,7 +19,7 @@ public class Um002_ClassifyController extends BaseController {
         Um002_ClassifyResModel resModel = new Um002_ClassifyResModel();
         
         StringBuffer sql = new StringBuffer();
-        sql.append("")
+        sql.append("");
         
 
         String resStr = JsonUtil.serializer(resModel);

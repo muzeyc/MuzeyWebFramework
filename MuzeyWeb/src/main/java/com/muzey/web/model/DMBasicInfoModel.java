@@ -5,11 +5,7 @@ import java.math.BigDecimal;
 public class DMBasicInfoModel {
 
 	private int id;
-	private String name;
-	private String province;
-	private String city;
-	private String dmdistrict;
-	private String address;
+	private int comid;
 	private int lv;
 	private String state;
 	private String tel;
@@ -26,44 +22,12 @@ public class DMBasicInfoModel {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public int getComid() {
+		return comid;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getProvince() {
-		return province;
-	}
-
-	public void setProvince(String province) {
-		this.province = province;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getDmdistrict() {
-		return dmdistrict;
-	}
-
-	public void setDmdistrict(String dmdistrict) {
-		this.dmdistrict = dmdistrict;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
+	public void setComid(int comid) {
+		this.comid = comid;
 	}
 
 	public int getLv() {
