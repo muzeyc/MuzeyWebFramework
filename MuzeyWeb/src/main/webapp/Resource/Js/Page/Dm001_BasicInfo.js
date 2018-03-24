@@ -77,7 +77,7 @@
         $scope.refresh();
     })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        var pageName = "Sys005_DMBasicInfo";
+        var pageName = "Dm001_BasicInfo";
         var url = "/" + pageName;
         $stateProvider.state("subPages." + pageName, {
             url: url,
@@ -132,7 +132,7 @@
             }],
             templateUrl: 'View/P000SysManage/Dm001_BasicInfoEdit.html?v=' + Math.random(),
             link: function ($scope, iElm, iAttrs, controller) {
-                $scope.$on("showSys005_BasicEdit", function (event, mode, basic, more,selBasicName) {
+                $scope.$on("showDm001_BasicEdit", function (event, mode, basic, more,selBasicName) {
                     $scope.basic = angular.copy(basic);
                     $scope.more = more;
                     if ("edit" == mode) {
