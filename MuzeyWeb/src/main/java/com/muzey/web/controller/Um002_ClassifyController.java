@@ -54,7 +54,7 @@ public class Um002_ClassifyController extends BaseController {
             }
         }
 
-        String resStr = JsonUtil.serializer(resModel); 
+        String resStr = JsonUtil.serializer(resModel);
         returnData(resStr);
     }
     
