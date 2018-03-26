@@ -62,7 +62,7 @@ public class Sys007_CodeListService extends MuzeyService {
 				codeListDtoList.add(dto);
 
 				StringBuilder strSql = new StringBuilder();
-				strSql.append(" AND parentid='" + dto.getId() + "'");
+				strSql.append(" AND parentid='" + dto.getCodename() + "'");
 				if (strWhere.trim() != "") {
 					strSql.append(strWhere);
 				}
@@ -113,7 +113,7 @@ public class Sys007_CodeListService extends MuzeyService {
 		list.add(model);
 		for (Sys_codelistDto dto : dtoList) {
 			model = new CombboxModel();
-			model.setSubId(dto.getId().toString());
+			model.setSubId(dto.getCodename());
 			model.setName(dto.getName());
 			list.add(model);
 		}
@@ -134,7 +134,7 @@ public class Sys007_CodeListService extends MuzeyService {
 
 		Sys_codelistDto codeListDto = new Sys_codelistDto();
 
-		codeListDto.setParentid(model.getParentid());
+		codeListDto.setParentid(model.getParentCodename());
 		codeListDto.setName(model.getName());
 		codeListDto.setCodename(model.getCodename());
 		codeListDto.setNo(model.getNo());
@@ -162,7 +162,7 @@ public class Sys007_CodeListService extends MuzeyService {
 		pkDto.setId(model.getId());
 		Sys_codelistDto codeListDto = codeListBL.getDtoByPK(pkDto);
 
-		codeListDto.setParentid(model.getParentid());
+		codeListDto.setParentid(model.getParentCodename());
 		codeListDto.setName(model.getName());
 		codeListDto.setCodename(model.getCodename());
 		codeListDto.setNo(model.getNo());
@@ -203,7 +203,7 @@ public class Sys007_CodeListService extends MuzeyService {
 		strSql.append(" AND parentid = ");
 		strSql.append(" cast ");
 		strSql.append(" ((SELECT ");
-		strSql.append(" id ");
+		strSql.append(" codename ");
 		strSql.append(" FROM ");
 		strSql.append(" sys_codelist ");
 		strSql.append(" WHERE 1=1 ");
@@ -216,7 +216,7 @@ public class Sys007_CodeListService extends MuzeyService {
 		
 		for (Sys_codelistDto dto : dtoList) {
 			model = new CombboxModel();
-			model.setSubId(dto.getId().toString());
+			model.setSubId(dto.getCodename());
 			model.setName(dto.getName());
 			list.add(model);
 		}

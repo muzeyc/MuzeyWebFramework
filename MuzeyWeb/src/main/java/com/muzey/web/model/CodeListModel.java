@@ -6,6 +6,7 @@ public class CodeListModel {
 	private String parentid;
 	private String name;
 	private String codename;
+	private String parentCodename;
 	private int no;
 
 	public int getId() {
@@ -38,6 +39,14 @@ public class CodeListModel {
 
 	public void setCodename(String codename) {
 		this.codename = codename;
+	}
+
+	public String getParentCodename() {
+		return parentCodename;
+	}
+
+	public void setParentCodename(String parentCodename) {
+		this.parentCodename = parentCodename;
 	}
 
 	public int getNo() {
