@@ -8,6 +8,7 @@ public class Um002_MenuItemModel {
     private String name;
     private String classify;
     private String classifyName;
+    private int fromDic;
     private int pictureid;
     private BigDecimal price;
     
@@ -61,6 +62,16 @@ public class Um002_MenuItemModel {
         this.classifyName = classifyName;
     }
     
+    public int getFromDic() {
+    
+        return fromDic;
+    }
+    
+    public void setFromDic(int fromDic) {
+    
+        this.fromDic = fromDic;
+    }
+    
     public int getPictureid() {
     
         return pictureid;
@@ -80,4 +91,6 @@ public class Um002_MenuItemModel {
     
         this.price = price;
     }
+    
+    
 }
