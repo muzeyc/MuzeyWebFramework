@@ -12,14 +12,14 @@ import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.DMBasicInfoModel;
 import com.muzey.web.model.req.DMBasicInfoReqModel;
 import com.muzey.web.model.res.DMBasicInfoResModel;
-import com.muzey.web.service.Sys005_DMBasicInfoService;
+import com.muzey.web.service.Dm001_BasicInfoService;
 
 @RestController
-@RequestMapping("/Sys005_BasicInfo")
-public class Sys005_DMBasicInfoController extends BaseController {
+@RequestMapping("/Dm001_BasicInfo")
+public class Dm001_BasicInfoController extends BaseController {
 
 	@MuzeyAutowired
-	private Sys005_DMBasicInfoService service;
+	private Dm001_BasicInfoService service;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public void OnResearch(DMBasicInfoReqModel reqModel) {
@@ -138,27 +138,4 @@ public class Sys005_DMBasicInfoController extends BaseController {
 			returnData(resStr);
 		}
 	}
-
-//	/**
-//	 * <p>
-//	 * 用户新增画面查询职务(角色)的下拉框数据Control
-//	 * </p>
-//	 * 
-//	 * @author zhouc
-//	 * @date 2018-3-3
-//	 */
-//	@RequestMapping(value = "/getRoleList", method = RequestMethod.GET)
-//	public void getParentMenuList() {
-//
-//		String resStr = "";
-//		CombboxResModel resModel = new CombboxResModel();
-//		try {
-//			resModel.setList(service.getRoleList());
-//			resStr = JsonUtil.serializer(resModel);
-//		} catch (Exception e) {
-//			resStr = this.getFailResult(e.getMessage());
-//		}
-//
-//		returnData(resStr);
-//	}
 }

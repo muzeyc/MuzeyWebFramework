@@ -9,10 +9,9 @@ import com.muzey.helper.MuzeyBusinessLogic;
 import com.muzey.until.StringUtil;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.DMBasicInfoModel;
-import com.muzey.web.model.UserInfoModel;
 import com.muzey.web.model.res.DMBasicInfoResModel;
 
-public class Sys005_DMBasicInfoService extends MuzeyService {
+public class Dm001_BasicInfoService extends MuzeyService {
 
 	@MuzeyAutowired
 	private MuzeyBusinessLogic<Dm_basicinfoDto> basicBL;
@@ -28,11 +27,7 @@ public class Sys005_DMBasicInfoService extends MuzeyService {
 			DMBasicInfoModel model = new DMBasicInfoModel();
 
 			model.setId(dto.getId());
-			model.setName(dto.getName());
-			model.setProvince(dto.getProvince());
-			model.setCity(dto.getCity());
-			model.setDmdistrict(dto.getDmdistrict());
-			model.setAddress(dto.getAddress());
+			model.setComid(dto.getComid());
 			model.setLv(dto.getLv());
 			model.setState(dto.getState());
 			model.setTel(dto.getTel());
@@ -62,19 +57,17 @@ public class Sys005_DMBasicInfoService extends MuzeyService {
 
 		Dm_basicinfoDto dmBasicDto = new Dm_basicinfoDto();
 
-		dmBasicDto.setName(model.getName());
-		dmBasicDto.setProvince(model.getProvince());
-		dmBasicDto.setCity(model.getCity());
-		dmBasicDto.setDmdistrict(model.getDmdistrict());
-		dmBasicDto.setAddress(model.getAddress());
+		dmBasicDto.setId(model.getId());
+		dmBasicDto.setComid(model.getComid());
 		dmBasicDto.setLv(model.getLv());
 		dmBasicDto.setState(model.getState());
 		dmBasicDto.setTel(model.getTel());
 		dmBasicDto.setDmdesc(model.getDmdesc());
 		dmBasicDto.setPictureid(model.getPictureid());
-		dmBasicDto.setCreatetime(StringUtil.GetDateTime(5));
 		dmBasicDto.setStartprice(model.getStartprice());
 		dmBasicDto.setDispatching(model.getDispatching());
+		dmBasicDto.setCreatetime(StringUtil.GetDateTime(5));
+		
 		basicBL.insertDto(dmBasicDto);
 	}
 
@@ -93,11 +86,8 @@ public class Sys005_DMBasicInfoService extends MuzeyService {
 		pkDto.setId(model.getId());
 		Dm_basicinfoDto dmBasicDto = basicBL.getDtoByPK(pkDto);
 
-		dmBasicDto.setName(model.getName());
-		dmBasicDto.setProvince(model.getProvince());
-		dmBasicDto.setCity(model.getCity());
-		dmBasicDto.setDmdistrict(model.getDmdistrict());
-		dmBasicDto.setAddress(model.getAddress());
+		dmBasicDto.setId(model.getId());
+		dmBasicDto.setComid(model.getComid());
 		dmBasicDto.setLv(model.getLv());
 		dmBasicDto.setState(model.getState());
 		dmBasicDto.setTel(model.getTel());
@@ -127,30 +117,4 @@ public class Sys005_DMBasicInfoService extends MuzeyService {
 		basicBL.deleteDto(basicDto);
 	}
 
-	// /**
-	// * <p>
-	// * 用户新增画面查询职务(角色)的下拉框数据Impl
-	// * </p>
-	// *
-	// * @author zhouc
-	// * @date 2018-3-3
-	// * @return
-	// */
-	// public List<CombboxModel> getRoleList() {
-	//
-	// List<CombboxModel> list = new ArrayList<CombboxModel>();
-	// List<Sys_roleDto> roleDtoList = roleBL.getDtoList("");
-	// CombboxModel model = new CombboxModel();
-	// model.setSubId("0");
-	// model.setName("无");
-	// list.add(model);
-	// for (Sys_roleDto dto : roleDtoList) {
-	// model = new CombboxModel();
-	// model.setSubId(dto.getId().toString());
-	// model.setName(dto.getRolename());
-	// list.add(model);
-	// }
-	//
-	// return list;
-	// }
 }

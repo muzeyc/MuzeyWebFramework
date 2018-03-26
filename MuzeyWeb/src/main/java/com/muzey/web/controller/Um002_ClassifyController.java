@@ -33,6 +33,8 @@ public class Um002_ClassifyController extends BaseController {
         sql.append("INNER JOIN Sys_Commodity t2 ON t1.commodityid=t2.id ");
         sql.append("WHERE t1.dmid=" + SqlUtil.allAgreeSql(StringUtil.toStr(reqModel.getDmid())));
 
+        
+
         String resStr = JsonUtil.serializer(resModel);
         
         

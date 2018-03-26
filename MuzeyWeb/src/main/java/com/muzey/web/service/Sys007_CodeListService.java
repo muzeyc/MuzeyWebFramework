@@ -37,6 +37,9 @@ public class Sys007_CodeListService extends MuzeyService {
 		sbSql.append(" sys_codelist ");
 		sbSql.append(" WHERE ");
 		sbSql.append(" parentid ='ROOT' ");
+		if (strWhere.trim() != "") {
+			sbSql.append(strWhere);
+		}
 		sbSql.append(" ORDER BY no ASC ");
 
 		// 查询出父级菜单数据
@@ -60,11 +63,10 @@ public class Sys007_CodeListService extends MuzeyService {
 
 				StringBuilder strSql = new StringBuilder();
 				strSql.append(" AND parentid='" + dto.getId() + "'");
-				strSql.append(" ORDER BY no ");
-
 				if (strWhere.trim() != "") {
 					strSql.append(strWhere);
 				}
+				strSql.append(" ORDER BY no ");
 
 				List<Sys_codelistDto> list = codeListBL.getDtoList(strSql.toString());
 
@@ -88,7 +90,7 @@ public class Sys007_CodeListService extends MuzeyService {
 		}
 		CodeListResModel resModel = new CodeListResModel();
 		resModel.setCodeList(modelList);
-		resModel.setTotalCount(modelList.size());
+		resModel.setTotalCount(codeListDtoList.size());
 		return resModel;
 	}
 
