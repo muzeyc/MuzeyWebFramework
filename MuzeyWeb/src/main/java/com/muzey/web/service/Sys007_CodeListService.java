@@ -9,7 +9,6 @@ import com.muzey.base.MuzeyService;
 import com.muzey.dto.Sys_codelistDto;
 import com.muzey.helper.MuzeyBusinessLogic;
 import com.muzey.until.CheckUtil;
-import com.muzey.until.CookieUtil;
 import com.muzey.until.StringUtil;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.CodeListModel;
@@ -130,11 +129,11 @@ public class Sys007_CodeListService extends MuzeyService {
 	 * @date 2018-3-19
 	 * @param model
 	 */
-	public void add(CodeListModel model,String userName) {
+	public void add(CodeListModel model, String userName) {
 
 		Sys_codelistDto codeListDto = new Sys_codelistDto();
 
-		codeListDto.setParentid(model.getParentCodename());
+		codeListDto.setParentid(model.getParentid());
 		codeListDto.setName(model.getName());
 		codeListDto.setCodename(model.getCodename());
 		codeListDto.setNo(model.getNo());
@@ -142,7 +141,6 @@ public class Sys007_CodeListService extends MuzeyService {
 		codeListDto.setCreateuser(userName);
 		codeListDto.setUpdatetime(StringUtil.GetDateTime(5));
 		codeListDto.setUpdateuser(userName);
-	
 
 		codeListBL.insertDto(codeListDto);
 	}
@@ -156,13 +154,13 @@ public class Sys007_CodeListService extends MuzeyService {
 	 * @date 2018-3-19
 	 * @param model
 	 */
-	public void update(CodeListModel model,String userName) {
+	public void update(CodeListModel model, String userName) {
 
 		Sys_codelistDto pkDto = new Sys_codelistDto();
 		pkDto.setId(model.getId());
 		Sys_codelistDto codeListDto = codeListBL.getDtoByPK(pkDto);
 
-		codeListDto.setParentid(model.getParentCodename());
+		codeListDto.setParentid(model.getParentid());
 		codeListDto.setName(model.getName());
 		codeListDto.setCodename(model.getCodename());
 		codeListDto.setNo(model.getNo());
@@ -180,15 +178,25 @@ public class Sys007_CodeListService extends MuzeyService {
 	 * @date 2018-3-19
 	 * @param model
 	 */
-	public void delete(CodeListModel model) {
+	public int delete(CodeListModel model) {
+
+		//判断删除的数据是否存在子菜单
+		List<Sys_codelistDto> list = codeListBL.getDtoList("AND parentid='" + model.getCodename()+"'");
+
+		if (list.size() > 0) {
+			
+			return list.size();
+		}
 
 		Sys_codelistDto codeListDto = new Sys_codelistDto();
 
 		codeListDto.setId(model.getId());
 
 		codeListBL.deleteDto(codeListDto);
+
+		return 0;
 	}
-	
+
 	/***
 	 * 根绝条件取得数据字典的子级名称
 	 * 
@@ -207,13 +215,13 @@ public class Sys007_CodeListService extends MuzeyService {
 		strSql.append(" FROM ");
 		strSql.append(" sys_codelist ");
 		strSql.append(" WHERE 1=1 ");
-		strSql.append(" AND codename ='"+type+"') ");
+		strSql.append(" AND codename ='" + type + "') ");
 		strSql.append(" as character(100) ) ");
-		
+
 		List<Sys_codelistDto> dtoList = codeListBL.getDtoList(strSql.toString());
-		
+
 		CombboxModel model = new CombboxModel();
-		
+
 		for (Sys_codelistDto dto : dtoList) {
 			model = new CombboxModel();
 			model.setSubId(dto.getCodename());

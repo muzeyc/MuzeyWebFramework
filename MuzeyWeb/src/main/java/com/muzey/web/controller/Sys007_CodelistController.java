@@ -113,10 +113,10 @@ public class Sys007_CodelistController extends BaseController {
 		String resStr = "";
 
 		String userName = CookieUtil.getCookieValue(request, "UserName");
-		
+
 		try {
 
-			service.update(model,userName);
+			service.update(model, userName);
 		} catch (Exception e) {
 
 			resStr = this.getFailResult(e.getMessage());
@@ -147,9 +147,18 @@ public class Sys007_CodelistController extends BaseController {
 
 		String resStr = "";
 		try {
+			int result = service.delete(model);
 
-			service.delete(model);
+			if (result < 0) {
+
+				resStr = this.getFailResult("删除失败");
+			} else if (result > 0) {
+
+				resStr = this.getFailResult("不能删除含有子集的数据字典！");
+			}
+
 		} catch (Exception e) {
+			
 			resStr = this.getFailResult(e.getMessage());
 		}
 
@@ -163,7 +172,7 @@ public class Sys007_CodelistController extends BaseController {
 			returnData(resStr);
 		}
 	}
-	
+
 	/***
 	 * 取得商户的状态
 	 * 
