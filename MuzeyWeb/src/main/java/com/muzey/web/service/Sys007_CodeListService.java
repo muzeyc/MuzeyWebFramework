@@ -134,7 +134,7 @@ public class Sys007_CodeListService extends MuzeyService {
 
 		Sys_codelistDto codeListDto = new Sys_codelistDto();
 
-		codeListDto.setParentid(model.getParentCodename());
+		codeListDto.setParentid(model.getParentid());
 		codeListDto.setName(model.getName());
 		codeListDto.setCodename(model.getCodename());
 		codeListDto.setNo(model.getNo());
@@ -162,7 +162,7 @@ public class Sys007_CodeListService extends MuzeyService {
 		pkDto.setId(model.getId());
 		Sys_codelistDto codeListDto = codeListBL.getDtoByPK(pkDto);
 
-		codeListDto.setParentid(model.getParentCodename());
+		codeListDto.setParentid(model.getParentid());
 		codeListDto.setName(model.getName());
 		codeListDto.setCodename(model.getCodename());
 		codeListDto.setNo(model.getNo());
