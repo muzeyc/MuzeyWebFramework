@@ -27,6 +27,7 @@ public class Dm001_BasicInfoService extends MuzeyService {
 			DMBasicInfoModel model = new DMBasicInfoModel();
 
 			model.setId(dto.getId());
+			model.setName(dto.getName());
 			model.setComid(dto.getComid());
 			model.setLv(dto.getLv());
 			model.setState(dto.getState());
@@ -58,6 +59,7 @@ public class Dm001_BasicInfoService extends MuzeyService {
 		Dm_basicinfoDto dmBasicDto = new Dm_basicinfoDto();
 
 		dmBasicDto.setId(model.getId());
+		dmBasicDto.setName(model.getName());
 		dmBasicDto.setComid(model.getComid());
 		dmBasicDto.setLv(model.getLv());
 		dmBasicDto.setState(model.getState());
@@ -87,6 +89,7 @@ public class Dm001_BasicInfoService extends MuzeyService {
 		Dm_basicinfoDto dmBasicDto = basicBL.getDtoByPK(pkDto);
 
 		dmBasicDto.setId(model.getId());
+		dmBasicDto.setName(model.getName());
 		dmBasicDto.setComid(model.getComid());
 		dmBasicDto.setLv(model.getLv());
 		dmBasicDto.setState(model.getState());

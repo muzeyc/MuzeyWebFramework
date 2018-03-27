@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public class DMBasicInfoModel {
 
 	private int id;
+	private String name;
 	private int comid;
 	private int lv;
 	private String state;
@@ -20,6 +21,14 @@ public class DMBasicInfoModel {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getComid() {
@@ -85,5 +94,4 @@ public class DMBasicInfoModel {
 	public void setDispatching(BigDecimal dispatching) {
 		this.dispatching = dispatching;
 	}
-
 }

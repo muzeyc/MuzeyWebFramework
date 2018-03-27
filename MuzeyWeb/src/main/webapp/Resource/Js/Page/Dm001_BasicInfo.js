@@ -11,10 +11,12 @@
         $scope.config = {
             colModel: [
                         { label: "商户名称", name: "name", width: "15%" },
-                        { label: "商户地址", name: "address", width: "15%" },
+                        { label: "小区", name: "comid", width: "15%" },
                         { label: "商户电话", name: "tel", width: "15%" },
                         { label: "商户状态", name: "state", width: "15%" },
-                        { label: "商户简介", name: "dmdesc", width: "40%" },
+                        { label: "起送价", name: "startprice", width: "10%" },
+                        { label: "配送费", name: "dispatching", width: "10%" },
+                        { label: "商户简介", name: "dmdesc", width: "20%" },
                       
             ],
         };
@@ -150,7 +152,7 @@
                 $scope.init = function () {
                 	
                 	 var req = {};
-                	 req.codename = "DM_State";
+                	 req.codename = "Dm_State";
                 	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", req, function (res) {
                         $scope.DMStateList = res.list;
                         $scope.show = !$scope.show;
