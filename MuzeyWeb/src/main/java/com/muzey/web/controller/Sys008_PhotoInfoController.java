@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.muzey.until.FtpUtil;
+import com.muzey.until.JsonUtil;
 import com.muzey.web.base.BaseController;
 import com.muzey.web.model.PhotoInfoModel;
 import com.muzey.web.model.res.Sys008_PhotoInfoResModel;
@@ -27,6 +28,7 @@ public class Sys008_PhotoInfoController extends BaseController {
                 PhotoInfoModel model = new PhotoInfoModel();
                 model.setName(file);
                 resModel.getPhotoList().add(model);
+                resStr = JsonUtil.serializer(resModel);
             }
         } catch (Exception e) {
             resStr = this.getFailResult(e.getMessage());
