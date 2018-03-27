@@ -8,37 +8,43 @@ import com.muzey.web.model.S_GroupModel;
 
 public class RoleInfoResModel extends ResponseModelBase {
 
-	public RoleInfoResModel() {
-		this.roleList = new ArrayList<RoleInfoModel>();
-		 this.groupList = new ArrayList<S_GroupModel>();
-	}
+    public RoleInfoResModel() {
+        this.roleList = new ArrayList<RoleInfoModel>();
+        this.groupList = new ArrayList<S_GroupModel>();
+    }
 
-	private List<RoleInfoModel> roleList;
-	 private List<S_GroupModel> groupList;
-	private int totalCount;
+    private List<RoleInfoModel> roleList;
+    private List<S_GroupModel> groupList;
+    private int totalCount;
 
-	public List<RoleInfoModel> getRoleList() {
-		return roleList;
-	}
+    public List<RoleInfoModel> getRoleList() {
 
-	public void setRoleList(List<RoleInfoModel> roleList) {
-		this.roleList = roleList;
-	}
+        return roleList;
+    }
 
-	public int getTotalCount() {
-		return totalCount;
-	}
+    public void setRoleList(List<RoleInfoModel> roleList) {
 
-	public void setTotalCount(int totalCount) {
-		this.totalCount = totalCount;
-	}
+        this.roleList = roleList;
+    }
 
-	public List<S_GroupModel> getGroupList() {
-		return groupList;
-	}
+    public int getTotalCount() {
 
-	public void setGroupList(List<S_GroupModel> groupList) {
-		this.groupList = groupList;
-	}
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+
+        this.totalCount = totalCount;
+    }
+
+    public List<S_GroupModel> getGroupList() {
+
+        return groupList;
+    }
+
+    public void setGroupList(List<S_GroupModel> groupList) {
+
+        this.groupList = groupList;
+    }
 
 }
