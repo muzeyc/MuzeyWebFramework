@@ -20,13 +20,13 @@ import org.apache.commons.net.ftp.FTPReply;
  */  
 public class FtpUtil {  
     // ftp 地址  
-    private static String url = "hxu0080844.my3w.com";  
+    private static String url = "law02.gotoftp5.com";  
     // ftp端口  
     private static int port = 21;  
     // 用户名  
-    private static String userName = "hxu0080844";  
+    private static String userName = "law02";  
     // 密码  
-    private static String password = "kaixin2017";   
+    private static String password = "lcj428111";   
   
     /** 
      * 从FTP服务器下载指定文件名的文件。 

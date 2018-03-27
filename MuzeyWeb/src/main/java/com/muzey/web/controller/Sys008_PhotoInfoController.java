@@ -13,7 +13,7 @@ import com.muzey.web.model.res.Sys008_PhotoInfoResModel;
 
 @RestController
 @RequestMapping("/Sys008_PhotoInfo")
-public class Sys008_PhotoInfo extends BaseController {
+public class Sys008_PhotoInfoController extends BaseController {
 
     @RequestMapping(method = RequestMethod.POST)
     public void onResearch() {
