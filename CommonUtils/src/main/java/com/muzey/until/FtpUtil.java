@@ -20,35 +20,13 @@ import org.apache.commons.net.ftp.FTPReply;
  */  
 public class FtpUtil {  
     // ftp 地址  
-    private String url;  
+    private static String url = "hxu0080844.my3w.com";  
     // ftp端口  
-    private int port;  
+    private static int port = 21;  
     // 用户名  
-    private String userName;  
+    private static String userName = "hxu0080844";  
     // 密码  
-    private String password;  
-  
-    /** 
-     * 构造函数 
-     *  
-     * @param url 
-     *            ftp地址 
-     * @param port 
-     *            ftp端口 
-     * @param userName 
-     *            用户名 
-     * @param password 
-     *            密码 
-     * @author MuzeyC 
-     * @date 2017年03月03日
-     * 
-     */  
-    public FtpUtil(String url, int port, String userName, String password) {  
-        this.url = url;  
-        this.port = port;  
-        this.userName = userName;  
-        this.password = password;  
-    }  
+    private static String password = "kaixin2017";   
   
     /** 
      * 从FTP服务器下载指定文件名的文件。 
@@ -64,7 +42,7 @@ public class FtpUtil {
      * @author MuzeyC 
      * @date 2017年03月03日
      */  
-    public boolean downFile(String remotePath, String fileName, String localPath)  
+    public static boolean downFile(String remotePath, String fileName, String localPath)  
             throws IOException {  
         boolean success = false;  
         FTPClient ftp = new FTPClient();  
@@ -117,7 +95,7 @@ public class FtpUtil {
      * @author MuzeyC 
      * @date 2017年03月03日
      */  
-    public List<String> getFileNameList(String remotePath) throws IOException {  
+    public static List<String> getFileNameList(String remotePath) throws IOException {  
         // 目录列表记录  
         List<String> fileNames = new ArrayList<String>();  
         FTPClient ftp = new FTPClient();  

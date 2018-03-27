@@ -5,97 +5,106 @@ import java.util.List;
 
 public class MenuModel {
 
-    public MenuModel() {
-        this.subList = new ArrayList<MenuModel>();
-    }
+	public MenuModel() {
+		this.subList = new ArrayList<MenuModel>();
+	}
 
-    private int id;
-    private int seqNo;
-    private int parentId;
-    private String menuTitle;
-    private String iconName;
-    private String pageName;
-    private int deleteFlag;
-    private List<MenuModel> subList;
+	private int id;
+	private int menuId;
+	private int seqNo;
+	private int parentId;
+	private String menuTitle;
+	private String iconName;
+	private String pageName;
+	private int deleteFlag;
+	private List<MenuModel> subList;
 
-    public int getId() {
+	public int getId() {
 
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(int id) {
+	public void setId(int id) {
 
-        this.id = id;
-    }
+		this.id = id;
+	}
 
-    public int getSeqNo() {
+	public int getSeqNo() {
 
-        return seqNo;
-    }
+		return seqNo;
+	}
 
-    public void setSeqNo(int seqNo) {
+	public void setSeqNo(int seqNo) {
 
-        this.seqNo = seqNo;
-    }
+		this.seqNo = seqNo;
+	}
 
-    public int getParentId() {
+	public int getParentId() {
 
-        return parentId;
-    }
+		return parentId;
+	}
 
-    public void setParentId(int parentId) {
+	public void setParentId(int parentId) {
 
-        this.parentId = parentId;
-    }
+		this.parentId = parentId;
+	}
 
-    public String getMenuTitle() {
+	public String getMenuTitle() {
 
-        return menuTitle;
-    }
+		return menuTitle;
+	}
 
-    public void setMenuTitle(String menuTitle) {
+	public void setMenuTitle(String menuTitle) {
 
-        this.menuTitle = menuTitle;
-    }
+		this.menuTitle = menuTitle;
+	}
 
-    public String getIconName() {
+	public String getIconName() {
 
-        return iconName;
-    }
+		return iconName;
+	}
 
-    public void setIconName(String iconName) {
+	public void setIconName(String iconName) {
 
-        this.iconName = iconName;
-    }
+		this.iconName = iconName;
+	}
 
-    public String getPageName() {
+	public String getPageName() {
 
-        return pageName;
-    }
+		return pageName;
+	}
 
-    public void setPageName(String pageName) {
+	public void setPageName(String pageName) {
 
-        this.pageName = pageName;
-    }
+		this.pageName = pageName;
+	}
 
-    public int getDeleteFlag() {
+	public int getDeleteFlag() {
 
-        return deleteFlag;
-    }
+		return deleteFlag;
+	}
 
-    public void setDeleteFlag(int deleteFlag) {
+	public void setDeleteFlag(int deleteFlag) {
 
-        this.deleteFlag = deleteFlag;
-    }
+		this.deleteFlag = deleteFlag;
+	}
 
-    public List<MenuModel> getSubList() {
+	public List<MenuModel> getSubList() {
 
-        return subList;
-    }
+		return subList;
+	}
 
-    public void setSubList(List<MenuModel> subList) {
+	public void setSubList(List<MenuModel> subList) {
 
-        this.subList = subList;
-    }
+		this.subList = subList;
+	}
+
+	public int getMenuId() {
+		return menuId;
+	}
+
+	public void setMenuId(int menuId) {
+		this.menuId = menuId;
+	}
 
 }

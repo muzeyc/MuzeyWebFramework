@@ -2,19 +2,6 @@ package com.muzey.dto;
 
 public class Sys_menuDto {
 
-    private Integer menuid;
-
-    public Integer getMenuid() {
-
-        return menuid;
-    }
-
-    public void setMenuid(Integer menuid) {
-
-        this.menuid = menuid;
-
-    }
-
     private Integer id;
 
     public Integer getId() {
@@ -25,6 +12,19 @@ public class Sys_menuDto {
     public void setId(Integer id) {
 
         this.id = id;
+
+    }
+
+    private Integer menuid;
+
+    public Integer getMenuid() {
+
+        return menuid;
+    }
+
+    public void setMenuid(Integer menuid) {
+
+        this.menuid = menuid;
 
     }
 

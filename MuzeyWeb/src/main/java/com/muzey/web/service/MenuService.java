@@ -42,13 +42,14 @@ public class MenuService extends MuzeyService{
         Map<Integer, List<MenuModel>> dicSubMenu = new HashMap<Integer, List<MenuModel>>();
         for (Sys_menuDto dto : list) {
             if (dto.getParentid() == 0) {
-                dicMenu.put(dto.getId(), dto);
+                dicMenu.put(dto.getMenuid(), dto);
             } else {
                 if (!dicSubMenu.containsKey(dto.getParentid())) {
                     dicSubMenu.put(dto.getParentid(), new ArrayList<MenuModel>());
                 }
                 MenuModel subMenuModel = new MenuModel();
                 subMenuModel.setId(dto.getId());
+                subMenuModel.setMenuId(dto.getMenuid());
                 subMenuModel.setParentId(dto.getParentid());
                 subMenuModel.setMenuTitle(dto.getMenutitle());
                 subMenuModel.setIconName(dto.getIconname());
@@ -64,12 +65,13 @@ public class MenuService extends MuzeyService{
             MenuModel menuModel = new MenuModel();
             Sys_menuDto mDto = dicMenu.get(key);
             menuModel.setId(mDto.getId());
+            menuModel.setMenuId(mDto.getMenuid());
             menuModel.setParentId(dicMenu.get(key).getParentid());
             menuModel.setMenuTitle(mDto.getMenutitle());
             menuModel.setIconName(mDto.getIconname());
             menuModel.setPageName(mDto.getPagename());
-            if (dicSubMenu.containsKey(mDto.getId())) {
-                menuModel.setSubList(dicSubMenu.get(mDto.getId()));
+            if (dicSubMenu.containsKey(mDto.getMenuid())) {
+                menuModel.setSubList(dicSubMenu.get(mDto.getMenuid()));
             }
             menuList.add(menuModel);
         }
