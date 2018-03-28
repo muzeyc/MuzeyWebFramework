@@ -110,6 +110,7 @@ public class FtpUtil {
                 return null;  
             }  
             ftp.changeWorkingDirectory(remotePath);// 转移到FTP服务器目录  
+            ftp.setControlEncoding("UTF-8");
             FTPFile[] fs = ftp.listFiles();  
             for (FTPFile file : fs) {  
                 fileNames.add(file.getName());  
