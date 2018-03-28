@@ -3,25 +3,26 @@ package com.muzey.web.model.res;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.muzey.web.model.PhotoInfoListModel;
 import com.muzey.web.model.PhotoInfoModel;
 
-public class Sys008_PhotoInfoResModel {
+public class Sys008_PhotoInfoResModel extends ResponseModelBase{
 
     public Sys008_PhotoInfoResModel() {
 
-        photoList = new ArrayList<PhotoInfoModel>();
+        typeList = new ArrayList<PhotoInfoListModel>();
     }
 
-    private List<PhotoInfoModel> photoList;
+    private List<PhotoInfoListModel> typeList;
 
-    public List<PhotoInfoModel> getPhotoList() {
+    public List<PhotoInfoListModel> gettypeList() {
 
-        return photoList;
+        return typeList;
     }
 
-    public void setPhotoList(List<PhotoInfoModel> photoList) {
+    public void settypeList(List<PhotoInfoListModel> typeList) {
 
-        this.photoList = photoList;
+        this.typeList = typeList;
     }
 
 }

@@ -1,5 +1,13 @@
 ﻿angular.module('myApp')
     .controller('Sys008_PhotoInfo', function ($scope, netRequest) {
+    	$scope.condition = {};
+    	$scope.condition.searchType = 1;
+
+					    	
+    	$scope.searchTypeSelect = function(type) {
+    		$scope.condition.searchType = type;
+		}
+    	
     	var init = function() {
         	var req = {};
         	req.offset = 0;

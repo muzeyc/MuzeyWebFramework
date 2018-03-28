@@ -1,4 +1,7 @@
-﻿body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+﻿body {
+   -webkit-overflow-scrolling:touch;
+}
+body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     font-family: microsoft yahei,"宋体" !important;
 }
 input, textarea, select {
@@ -19,8 +22,15 @@ ul {
 
 .table>tbody>tr>td{
     vertical-align:middle!important;
+    word-break: break-all;
 }
-
+.table>tbody>tr>td .control_container {
+    margin: 0 !important;
+    height: auto !important;
+}
+.wrapper {
+    -webkit-overflow-scrolling:touch;
+}
 .content-wrapper {
     position: relative;
 }
@@ -144,7 +154,7 @@ ul {
 .modal-dialog-container {
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     z-index: 9997;
     top: 0;
     left: 0;
@@ -218,7 +228,8 @@ ul {
 
 .inputBar, .modal-body .inputBar, .popup .inputBar {
     min-height: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    clear: both;
 }
 
 .dialog {
@@ -391,7 +402,8 @@ ul {
 }
 
 .input-group-btn .btn {
-    padding: 5px 10px;
+    height: 28px;
+    padding: 0 10px;
 }
 
 .attachment-border {
@@ -399,19 +411,23 @@ ul {
     margin-top: 20px;
 }
 .login-box {
-    border: 1px solid !important;
-    background: #3b3b3b;
+    background: #f4f4ef;
     height: 400px;
     width: 500px;
+    border-radius: 5px;
+}
+
+.login-box .control_container {
+    float: none !important;
 }
 .login-logo {
-    color: #fff;
+    color: #3b3b3b;
     height: 100px;
     line-height: 100px;
     margin: 0;
 }
 .login-box-body {
-    background: #3b3b3b;
+   background: #f4f4ef;
 }
 
 .login-box-body input,.login-box-body .glyphicon,.login-box-body button{
@@ -440,6 +456,7 @@ ul {
     text-align: center;
     padding: 0 10px;
     float:left;
+    border-radius: 4px;
 }
 
 /*.select-btn:hover {
@@ -451,6 +468,10 @@ ul {
 .select-btn-active {
     background: #3b3b3b !important;
     border: 1px solid #3b3b3b;
+    color: #fff !important;
+}
+
+.select-btn-active:hover {
     color: #fff;
 }
 
@@ -475,7 +496,7 @@ ul {
 }
 
 .head-title {
-    height: 100%;
+    height: 40px;
     width: 80px;
     line-height: 50px;
     display: inline-block;
@@ -543,4 +564,18 @@ ul {
 .bg-warning {
     background: ##FFA54F;
     color: #fff;
+}
+
+.pad-body .box {
+    border-top: 0;
+}
+
+.clear-btn {
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    display: inline-block;
+    right: 30px;
+    line-height: 30px;
+    color: #ccc;
 }

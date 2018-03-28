@@ -7,7 +7,21 @@
 	border: 1px solid #3b3b3b;
 }
 </style>
-<div class="top_search_bar"></div>
+<div class="top_search_bar">
+  <button class="select-btn" ng-click="searchTypeSelect(1)" ng-class="{'select-btn-active':condition.searchType==1}">已入库</button>
+  <button class="select-btn" ng-click="searchTypeSelect(2)" ng-class="{'select-btn-active':condition.searchType==2}">未入库</button>
+</div>
 <div class="photoList">
-  <img src="http://law02.gotoip55.com/images/csgimg/{{photo.photoName}}" ng-repeat="photo in photoList" />
+  <div class="station-list area-border">
+    <div class="box box-danger wip-group">
+      <div class="box-header with-border">
+        <h4 class="box-title">{{wip.WIPID}}台/天</h4>
+      </div>
+      <div class="box-body">
+        <img src="http://law02.gotoip55.com/images/csgimg/{{photo.name}}" ng-repeat="photo in photoList" />
+        <div style="clear: both;"></div>
+      </div>
+    </div>
+  </div>
+  
 </div>
