@@ -12,14 +12,14 @@ import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.UMBasicInfoModel;
 import com.muzey.web.model.req.UMBasicInfoReqModel;
 import com.muzey.web.model.res.UMBasicInfoResModel;
-import com.muzey.web.service.Sys006_UMBasicInfoService;
+import com.muzey.web.service.Um001_BasicInfoService;
 
 @RestController
-@RequestMapping("/Sys006_BasicInfo")
-public class Sys006_UMBasicInfoController extends BaseController {
+@RequestMapping("/Um001_BasicInfo")
+public class Um001_BasicInfoController extends BaseController {
 
 	@MuzeyAutowired
-	private Sys006_UMBasicInfoService service;
+	private Um001_BasicInfoService service;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public void OnResearch(UMBasicInfoReqModel reqModel) {

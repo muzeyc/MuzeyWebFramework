@@ -1,5 +1,5 @@
 ﻿angular.module('myApp')
-    .controller('Sys006_UMBasicInfoCtrl', function ($scope, netRequest, dialog, sysMessage, fileUpLoad, authority, $compile) {
+    .controller('Um001_BasicInfoCtrl', function ($scope, netRequest, dialog, sysMessage, fileUpLoad, authority, $compile) {
 
     	$scope.condition = {};
         $scope.totalCount = 0;
@@ -25,18 +25,18 @@
 
         // 事件/方法
         $scope.onNew = function () {
-            $scope.$broadcast("showSys006_BasicEdit", "new", {}, $scope.more,$scope.condition.selName);
+            $scope.$broadcast("showUm001_BasicEdit", "new", {}, $scope.more,$scope.condition.selName);
         }
 
         $scope.onEdit = function (item) {
-            $scope.$broadcast("showSys006_BasicEdit", "edit", item, $scope.more,$scope.condition.selName);
+            $scope.$broadcast("showUm001_BasicEdit", "edit", item, $scope.more,$scope.condition.selName);
         }
 
         $scope.onDelete = function (items) {
             var req = { action: "delete", offset: 0, size: $scope.more.size };
             req.basicList = items;
             $scope.basic=angular.copy(items);
-            netRequest.post("/MuzeyWeb/Sys006_BasicInfo/delete", $scope.basic[0], function (res) {
+            netRequest.post("/MuzeyWeb/Um001_BasicInfo/delete", $scope.basic[0], function (res) {
                 $scope.basicList = res.basicList;
                 $scope.totalCount = res.totalCount;
             });
@@ -55,7 +55,7 @@
         $scope.onResearch = function (offset, size) {
             var req = {offset: offset, size: size };
             req.selName = $scope.condition.selName;
-            netRequest.post("/MuzeyWeb/Sys006_BasicInfo", req, function (res) {
+            netRequest.post("/MuzeyWeb/Um001_BasicInfo", req, function (res) {
                 $scope.basicList = res.basicList;
                 $scope.totalCount = res.totalCount;
             });
@@ -75,43 +75,18 @@
             $scope.showImport = !$scope.showImport;
         }
 
-        $scope.import = function () {
-            if ($scope.attachList && $scope.attachList.length > 0) {
-                netRequest.get("Controller/P000SysManage/Sys003_RoleManageController.ashx?action=import&fileId=" + $scope.attachList[0].fileId, function (res) {
-                    $scope.roleList = res.list;
-
-                    $scope.showImport = false;
-
-                    dialog.showDialog("info", sysMessage.sys0003, {
-                        yes: function () { }
-                    });
-                });
-            }
-        }
-
-        $scope.cancelImport = function () {
-
-            if ($scope.attachList && $scope.attachList.length > 0) {
-                netRequest.get("Controller/P000SysManage/Sys003_RoleManageController.ashx?action=importCancel&fileId=" + $scope.attachList[0].fileId, function (res) {
-                    $scope.showImport = !$scope.showImport;
-                });
-            } else {
-                $scope.showImport = !$scope.showImport;
-            }
-        }
-
         $scope.refresh();
     })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        var pageName = "Sys006_UMBasicInfo";
+        var pageName = "Um001_BasicInfo";
         var url = "/" + pageName;
         $stateProvider.state("subPages." + pageName, {
             url: url,
             cache: 'false',
             views: {
                 'mainView': {
-                    templateUrl: 'View/P000SysManage/Sys006_UMBasicInfo.html?v=' + Math.random(),
-                    controller: 'Sys006_UMBasicInfoCtrl'
+                    templateUrl: 'View/P000SysManage/Um001_BasicInfo.html?v=' + Math.random(),
+                    controller: 'Um001_BasicInfoCtrl'
                 }
             }
         });
@@ -140,7 +115,7 @@
                     req.action = $scope.mode;
                     req.offset = $scope.more.offset;
                     req.size = $scope.more.size;
-                    netRequest.post("/MuzeyWeb/Sys006_BasicInfo/" + $scope.mode, $scope.basic, function (res) {
+                    netRequest.post("/MuzeyWeb/Um001_BasicInfo/" + $scope.mode, $scope.basic, function (res) {
                         if (res.result == "ok") {
 
                             dialog.showDialog("info", sysMessage.sys0004, {
@@ -156,9 +131,9 @@
                     });
                 }
             }],
-            templateUrl: 'View/P000SysManage/Sys006_UMBasicInfoEdit.html?v=' + Math.random(),
+            templateUrl: 'View/P000SysManage/Um001_BasicInfoEdit.html?v=' + Math.random(),
             link: function ($scope, iElm, iAttrs, controller) {
-                $scope.$on("showSys006_BasicEdit", function (event, mode, basic, more,selName) {
+                $scope.$on("showUm001_BasicEdit", function (event, mode, basic, more,selName) {
                   
                     $scope.basic = angular.copy(basic);
                     $scope.more = more;

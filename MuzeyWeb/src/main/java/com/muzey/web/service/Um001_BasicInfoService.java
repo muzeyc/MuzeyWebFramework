@@ -11,7 +11,7 @@ import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.UMBasicInfoModel;
 import com.muzey.web.model.res.UMBasicInfoResModel;
 
-public class Sys006_UMBasicInfoService extends MuzeyService {
+public class Um001_BasicInfoService extends MuzeyService {
 
 	@MuzeyAutowired
 	private MuzeyBusinessLogic<Um_basicinfoDto> basicBL;
