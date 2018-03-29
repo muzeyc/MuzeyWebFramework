@@ -1,0 +1,24 @@
+﻿<popup width="600" height="400" title="街道信息" show="show">
+<div class="modal-body" id="validate">
+	<div class="inputBar">
+		<text-box-normal caption="街道名" ng-model="rode.name" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+		<div class="inputBar">
+		<text-box-normal caption="省" ng-model="rode.province" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+			<div class="inputBar">
+		<text-box-normal caption="市" ng-model="rode.city" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+				<div class="inputBar">
+		<text-box-normal caption="区" ng-model="rode.dmdistrict" width="300"
+			mustinput="true"></text-box-normal>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+	<button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+</div>
+</popup>
