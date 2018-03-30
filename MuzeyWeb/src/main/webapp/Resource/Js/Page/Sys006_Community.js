@@ -36,13 +36,13 @@
 
 					// 事件/方法
 					$scope.onNew = function() {
-						$scope.$broadcast("showSys006_CommunityEdit", "new", {},
-								$scope.more, $scope.condition.selName);
+						$scope.$broadcast("showSys006_CommunityEdit", "new",
+								{}, $scope.more, $scope.condition.selName);
 					}
 
 					$scope.onEdit = function(item) {
-						$scope.$broadcast("showSys006_CommunityEdit", "edit", item,
-								$scope.more, $scope.condition.selName);
+						$scope.$broadcast("showSys006_CommunityEdit", "edit",
+								item, $scope.more, $scope.condition.selName);
 					}
 
 					$scope.onDelete = function(items) {
@@ -76,11 +76,11 @@
 							size : size
 						};
 						req.selName = $scope.condition.selName;
-						netRequest.post("/MuzeyWeb/Sys006_Community", req, function(
-								res) {
-							$scope.communityList = res.communityList;
-							$scope.totalCount = res.totalCount;
-						});
+						netRequest.post("/MuzeyWeb/Sys006_Community", req,
+								function(res) {
+									$scope.communityList = res.communityList;
+									$scope.totalCount = res.totalCount;
+								});
 					}
 
 					$scope.onPageChange = function(val) {
@@ -173,7 +173,6 @@
 						link : function($scope, iElm, iAttrs, controller) {
 							$scope.$on("showSys006_CommunityEdit", function(
 									event, mode, community, more, selName) {
-								  $scope.show = !$scope.show;
 								$scope.community = angular.copy(community);
 								$scope.more = more;
 								if ("edit" == mode) {
@@ -183,7 +182,17 @@
 								}
 								$scope.mode = mode;
 								$scope.selName = selName;
+								$scope.init();
 							});
+							// 初始化街道名称下拉列表
+							$scope.init = function() {
+								netRequest.get(
+										"/MuzeyWeb/Sys005_Rode/GetRodeList",
+										function(res) {
+											$scope.rodeList = res.list;
+											$scope.show = !$scope.show;
+										});
+							}
 						}
 					};
 				});

@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.muzey.base.MuzeyService;
+import com.muzey.dto.Sys_menuDto;
 import com.muzey.dto.Sys_rodeDto;
 import com.muzey.helper.MuzeyBusinessLogic;
+import com.muzey.until.StringUtil;
 import com.muzey.web.base.annotation.MuzeyAutowired;
+import com.muzey.web.constant.CommonConst;
+import com.muzey.web.model.CombboxModel;
 import com.muzey.web.model.RodeModel;
 import com.muzey.web.model.res.RodeResModel;
 
@@ -63,7 +67,6 @@ public class Sys005_RodeService extends MuzeyService {
 
 		Sys_rodeDto rodetDto = new Sys_rodeDto();
 
-		rodetDto.setId(model.getId());
 		rodetDto.setName(model.getName());
 		rodetDto.setProvince(model.getProvince());
 		rodetDto.setCity(model.getCity());
@@ -113,5 +116,20 @@ public class Sys005_RodeService extends MuzeyService {
 
 		rodeBL.deleteDto(rodeDto);
 	}
+	
+	public List<CombboxModel> GetRodeList() {
 
+		List<CombboxModel> list = new ArrayList<CombboxModel>();
+		List<Sys_rodeDto> dtoList = rodeBL.getDtoList("");
+		CombboxModel model;
+	
+		for (Sys_rodeDto dto : dtoList) {
+				model = new CombboxModel();
+				model.setSubId(StringUtil.toStr(dto.getId()));
+				model.setName(dto.getName());
+				list.add(model);
+		}
+
+		return list;
+	}
 }

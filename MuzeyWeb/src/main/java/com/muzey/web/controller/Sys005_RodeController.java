@@ -11,6 +11,7 @@ import com.muzey.web.base.BaseController;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.RodeModel;
 import com.muzey.web.model.req.RodeReqModel;
+import com.muzey.web.model.res.CombboxResModel;
 import com.muzey.web.model.res.RodeResModel;
 import com.muzey.web.service.Sys005_RodeService;
 
@@ -139,5 +140,27 @@ public class Sys005_RodeController extends BaseController {
 
 			returnData(resStr);
 		}
+	}
+	
+	/***
+	 * 街道名称lis取得
+	 * @author 花嫣染
+	 * @date 2018-03-30
+	 * 
+	 */
+	 @RequestMapping(value = "/GetRodeList", method = RequestMethod.GET)
+	public void GetRodeList()
+	{
+		  String resStr = "";
+	        CombboxResModel resModel = new CombboxResModel();
+	        try {
+			resModel.setList(service.GetRodeList());
+	            resStr = JsonUtil.serializer(resModel);
+	        } catch (Exception e) {
+	            resStr = this.getFailResult(e.getMessage());
+	        }
+
+	        returnData(resStr);
+		
 	}
 }

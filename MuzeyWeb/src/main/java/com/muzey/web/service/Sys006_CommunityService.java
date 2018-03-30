@@ -6,6 +6,7 @@ import java.util.List;
 import com.muzey.base.MuzeyService;
 import com.muzey.dto.Sys_communityDto;
 import com.muzey.helper.MuzeyBusinessLogic;
+import com.muzey.until.StringUtil;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.CommunityModel;
 import com.muzey.web.model.res.CommunityResModel;
@@ -38,7 +39,7 @@ public class Sys006_CommunityService extends MuzeyService {
 
 			model.setId(dto.getId());
 			model.setName(dto.getName());
-			model.setRoadid(dto.getRoadid());
+			model.setRoadid(StringUtil.toStr(dto.getRoadid()));
 			model.setAddress(dto.getAddress());
 
 			communityList.add(model);
@@ -63,7 +64,7 @@ public class Sys006_CommunityService extends MuzeyService {
 		Sys_communityDto communityDto = new Sys_communityDto();
 
 		communityDto.setName(model.getName());
-		communityDto.setRoadid(model.getRoadid());
+		communityDto.setRoadid(StringUtil.toInt(model.getRoadid()));
 		communityDto.setAddress(model.getAddress());
 
 		communityBL.insertDto(communityDto);
@@ -86,7 +87,7 @@ public class Sys006_CommunityService extends MuzeyService {
 
 		communityDto.setId(model.getId());
 		communityDto.setName(model.getName());
-		communityDto.setRoadid(model.getRoadid());
+		communityDto.setRoadid(StringUtil.toInt(model.getRoadid()));
 		communityDto.setAddress(model.getAddress());
 
 		communityBL.updateDtoToAll(communityDto);

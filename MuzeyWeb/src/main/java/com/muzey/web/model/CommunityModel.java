@@ -3,7 +3,7 @@ package com.muzey.web.model;
 public class CommunityModel {
 
 	private int id;
-	private int roadid;
+	private String roadid;
 	private String name;
 	private String address;
 
@@ -15,11 +15,11 @@ public class CommunityModel {
 		this.id = id;
 	}
 
-	public int getRoadid() {
+	public String getRoadid() {
 		return roadid;
 	}
 
-	public void setRoadid(int roadid) {
+	public void setRoadid(String roadid) {
 		this.roadid = roadid;
 	}
 
