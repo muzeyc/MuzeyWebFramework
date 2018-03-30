@@ -4,6 +4,7 @@ public class CommunityModel {
 
 	private int id;
 	private String roadid;
+	private String roadName;
 	private String name;
 	private String address;
 
@@ -21,6 +22,14 @@ public class CommunityModel {
 
 	public void setRoadid(String roadid) {
 		this.roadid = roadid;
+	}
+
+	public String getRoadName() {
+		return roadName;
+	}
+
+	public void setRoadName(String roadName) {
+		this.roadName = roadName;
 	}
 
 	public String getName() {

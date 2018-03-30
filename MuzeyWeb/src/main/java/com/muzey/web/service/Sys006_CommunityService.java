@@ -3,9 +3,12 @@ package com.muzey.web.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.data.DataRow;
+import com.data.DataTable;
 import com.muzey.base.MuzeyService;
 import com.muzey.dto.Sys_communityDto;
 import com.muzey.helper.MuzeyBusinessLogic;
+import com.muzey.until.CheckUtil;
 import com.muzey.until.StringUtil;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.CommunityModel;
@@ -28,25 +31,53 @@ public class Sys006_CommunityService extends MuzeyService {
 	 */
 	public CommunityResModel GetCommunityListInfo(String strWhere, int offset, int size) {
 
-		List<Sys_communityDto> communityDtoList = communityBL.getDtoList(strWhere);
+		List<Sys_communityDto> communityDtoList = null;
+		List<CommunityModel> communityList = null;
 
-		List<CommunityModel> communityList = new ArrayList<CommunityModel>();
+		StringBuffer sbSQL = new StringBuffer();
 
-		int endIndex = offset + size > communityDtoList.size() ? communityDtoList.size() - 1 : offset + size - 1;
-		for (int i = offset; i <= endIndex; i++) {
-			Sys_communityDto dto = communityDtoList.get(i);
-			CommunityModel model = new CommunityModel();
+		sbSQL.append(" SELECT ");
+		sbSQL.append(" community.id AS id, ");
+		sbSQL.append(" community.roadid AS roadid, ");
+		sbSQL.append(" community.name AS name, ");
+		sbSQL.append(" community.address AS address, ");
+		sbSQL.append(" rode.name AS rodeName ");
+		sbSQL.append(" FROM ");
+		sbSQL.append(" Sys_community community ");
+		sbSQL.append(" LEFT JOIN ");
+		sbSQL.append(" sys_rode rode ");
+		sbSQL.append(" ON ");
+		sbSQL.append(" rode.id = community.roadid ");
+		sbSQL.append(" WHERE 1=1 ");
+		sbSQL.append(strWhere);
 
-			model.setId(dto.getId());
-			model.setName(dto.getName());
-			model.setRoadid(StringUtil.toStr(dto.getRoadid()));
-			model.setAddress(dto.getAddress());
+		DataTable communitydataTable = communityBL.getDataTableList(sbSQL.toString());
 
-			communityList.add(model);
+		if (CheckUtil.isNotNullOrEmpty(communitydataTable)) {
+
+			communityList = new ArrayList<CommunityModel>();
+
+			int endIndex = offset + size > communitydataTable.getRowSize() ? communitydataTable.getRowSize() - 1
+					: offset + size - 1;
+
+			for (int i = offset; i <= endIndex; i++) {
+
+				DataRow dataRow = communitydataTable.getRow(i);
+
+				CommunityModel model = new CommunityModel();
+
+				model.setId(StringUtil.toInt(dataRow.getData("id")));
+				model.setName(dataRow.getData("name"));
+				model.setRoadid(dataRow.getData("roadid"));
+				model.setAddress(dataRow.getData("address"));
+				model.setRoadName(dataRow.getData("rodename"));
+				communityList.add(model);
+			}
+
 		}
 		CommunityResModel resModel = new CommunityResModel();
 		resModel.setCommunityList(communityList);
-		resModel.setTotalCount(communityDtoList.size());
+		resModel.setTotalCount(communitydataTable.getRowSize());
 		return resModel;
 	}
 

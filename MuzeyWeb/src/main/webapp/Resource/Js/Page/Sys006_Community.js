@@ -15,7 +15,7 @@
 					$scope.config = {
 						colModel : [ {
 							label : "街道名称",
-							name : "roadid",
+							name : "roadName",
 							width : "25%"
 						}, {
 							label : "小区名称",
