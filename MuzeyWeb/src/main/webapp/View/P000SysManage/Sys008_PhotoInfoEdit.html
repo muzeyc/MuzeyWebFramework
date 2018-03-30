@@ -1,0 +1,26 @@
+<popup width="500" height="500" title="调整计划" show="show">
+<div class="modal-body" id="validateEdit">
+  <div class="inputBar">
+    <text-box-normal caption="名称" ng-model="photo.name" width="300" mustinput="true"></text-box-normal>
+  </div>
+  <div class="inputBar">
+    <combbox caption="图片类型" ng-model="photo.type" list="typeList" mustinput="true"></combbox>
+  </div>
+  <div class="inputBar">
+    <text-box-normal caption="地址" ng-model="photo.src"></text-box-normal>
+  </div>
+  <div class="inputBar">
+    <text-box-number caption="宽度" ng-model="photo.width" width="100" ng-disabled="true"></text-box-normal>
+  </div>
+  <div class="inputBar">
+    <text-box-number caption="高度" ng-model="photo.height" width="100" ng-disabled="true"></text-box-normal>
+  </div>
+  <div class="inputBar">
+    <combbox caption="用途" ng-model="photo.usetype" list="usetypeList" mustinput="true"></combbox>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn bg-green" ng-click="commit()" ng-if="mode!='view'">保存</button>
+  <button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+</div>
+</popup>
