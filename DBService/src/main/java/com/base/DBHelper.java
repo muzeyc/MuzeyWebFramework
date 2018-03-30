@@ -22,7 +22,7 @@ public class DBHelper {
 	private ResultSet resultSet = null;
 
 	 private String url =
-	 "jdbc:postgresql://127.0.0.1:5432/muzeywebframework";
+	 "jdbc:postgresql://139.159.220.146:5432/muzeywebframework";
 	 private String user = "admin";
 	 private String password = "123456";
 	 public static String driver = "org.postgresql.Driver";
