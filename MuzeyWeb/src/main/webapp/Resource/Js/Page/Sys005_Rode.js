@@ -1,9 +1,5 @@
-﻿angular
-		.module('myApp')
-		.controller(
-				'Sys005_RodeInfoCtrl',
-				function($scope, netRequest, dialog, sysMessage, fileUpLoad,
-						authority, $compile) {
+﻿angular.module('myApp')
+.controller('Sys005_RodeInfoCtrl',function($scope, netRequest, dialog, sysMessage, fileUpLoad,authority, $compile) {
 
 					$scope.condition = {};
 					$scope.totalCount = 0;
@@ -93,133 +89,60 @@
 					}
 
 					$scope.refresh();
-				})
-		.config(
-				[
-						'$stateProvider',
-						'$urlRouterProvider',
-						function($stateProvider, $urlRouterProvider) {
-							var pageName = "Sys005_Rode";
-							var url = "/" + pageName;
-							$stateProvider
-									.state(
-											"subPages." + pageName,
-											{
-												url : url,
-												cache : 'false',
-												views : {
-													'mainView' : {
-														templateUrl : 'View/P000SysManage/Sys005_Rode.html?v='
-																+ Math.random(),
-														controller : 'Sys005_RodeInfoCtrl'
-													}
-												}
-											});
-						} ])
-		.directive(
-				'rodeEdit',
-				function(netRequest, dialog, validate, sysMessage) {
-					return {
-						scope : {
-							afterCommit : "&"
-						},
-						controller : [
-								'$scope',
-								function($scope) {
-
-									$scope.basic = {};
-
-									$scope.cancel = function() {
-
-										$scope.show = false;
-									}
-									
-									$scope.commit = function() {
-
-										if (!validate.doValidate("#validate")) {
-											return;
-										}
-
-										var req = $scope.rode;
-										req.action = $scope.mode;
-										req.offset = $scope.more.offset;
-										req.size = $scope.more.size;
-										netRequest
-												.post(
-														"/MuzeyWeb/Sys005_Rode/"
-																+ $scope.mode,
-														$scope.rode,
-														function(res) {
-															if (res.result == "ok") {
-
-																dialog
-																		.showDialog(
-																				"info",
-																				sysMessage.sys0004,
-																				{
-																					afterCommit : function() {
-
-																						$scope.show = false;
-																						if ($scope.afterCommit) {
-																							$scope
-																									.afterCommit({
-																										res : res
-																									});
-																						}
-																					}
-																				});
-																
-																
-																var $town = $('#demo3 select[name="town"]');
-														    	var townFormat = function(info) {
-														    		$town.hide().empty();
-														    		if (info['code'] % 1e4 && info['code'] < 7e5) { //是否为“区”且不是港澳台地区
-														    			$.ajax({
-														    				url : 'http://passer-by.com/data_location/town/' + info['code']
-														    						+ '.json',
-														    				dataType : 'json',
-														    				success : function(town) {
-														    					$town.show();
-														    					for (i in town) {
-														    						$town.append('<option value="'+i+'">' + town[i]
-														    								+ '</option>');
-														    					}
-														    				}
-														    			});
-														    		}
-														    	};
-														    	$('#demo3').citys({
-														    		province : '福建',
-														    		city : '厦门',
-														    		area : '思明',
-														    		onChange : function(info) {
-														    			townFormat(info);
-														    		}
-														    	}, function(api) {
-														    		var info = api.getInfo();
-														    		townFormat(info);
-														    	});
-															}
-														});
-									}
-								} ],
-						templateUrl : 'View/P000SysManage/Sys005_RodeEdit.html?v='
-								+ Math.random(),
-						link : function($scope, iElm, iAttrs, controller) {
-							$scope.$on("showSys005_RodeEdit", function(
-									event, mode, rode, more, selName) {
-								  $scope.show = !$scope.show;
-								$scope.rode = angular.copy(rode);
-								$scope.more = more;
-								if ("edit" == mode) {
-								}
-								if ("new" == mode) {
-									$scope.more.offset = 0;
-								}
-								$scope.mode = mode;
-								$scope.selName = selName;
-							
-							});
+					})
+.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+					
+	var pageName = "Sys005_Rode";
+	var url = "/" + pageName;
+	$stateProvider.state("subPages." + pageName,{url : url,cache : 'false',
+		views : {'mainView' : 
+		{
+			templateUrl : 'View/P000SysManage/Sys005_Rode.html?v='+ Math.random(),
+			controller : 'Sys005_RodeInfoCtrl'
+		}}
+	});
+}])
+.directive('rodeEdit',function(netRequest, dialog, validate, sysMessage) {
+	return {
+		scope : {
+			afterCommit : "&"
+		},controller : ['$scope',function($scope) {
+			$scope.basic = {};
+			$scope.cancel = function() {}
+			$scope.show = false;
+			$scope.commit = function() {
+				if (!validate.doValidate("#validate")) {
+					return;
+				}
+				var req = $scope.rode;
+				req.action = $scope.mode;
+				req.offset = $scope.more.offset;
+				req.size = $scope.more.size;
+				netRequest.post("/MuzeyWeb/Sys005_Rode/"+ $scope.mode,$scope.rode,function(res) {
+					if (res.result == "ok") {
+						dialog.showDialog("info",sysMessage.sys0004,{afterCommit : function() {
+							$scope.show = false;
+							if ($scope.afterCommit) {
+								$scope.afterCommit({res : res});
+							}
 						}
-					};
+						});
+					}
 				});
+			}}],templateUrl : 'View/P000SysManage/Sys005_RodeEdit.html?v='+ Math.random(),
+			link : function($scope, iElm, iAttrs, controller) {
+				$scope.$on("showSys005_RodeEdit", function(event, mode, rode, more, selName) {
+					$scope.show = !$scope.show;
+					$scope.rode = angular.copy(rode);
+					$scope.more = more;
+					if ("edit" == mode) {
+					}
+					if ("new" == mode) {
+						$scope.more.offset = 0;
+					}
+					$scope.mode = mode;
+					$scope.selName = selName;
+				});
+			}
+	};
+});

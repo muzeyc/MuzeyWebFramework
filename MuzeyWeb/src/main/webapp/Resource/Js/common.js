@@ -371,6 +371,156 @@ angular.module('myApp')
         }
 
     }])
+    .factory('citys', ['$rootScope', '$state', function ($rootScope, $state) {
+
+    	var datas = {};
+        var provinceList = [];
+    	var cityList = [];
+    	var areaList = [];
+    	var townsList = [];
+    	
+        var defaults = {
+            dataUrl:'http://passer-by.com/data_location/list.json',     //数据库地址
+            crossDomain: true,        //是否开启跨域
+            dataType:'json',          //数据库类型:'json'或'jsonp'
+            provinceField:'province', //省份字段名
+            cityField:'city',         //城市字段名
+            areaField:'area',         //地区字段名
+            valueType:'code',         //下拉框值的类型,code行政区划代码,name地名
+            code:0,                   //地区编码
+            province:0,               //省份,可以为地区编码或者名称
+            city:0,                   //城市,可以为地区编码或者名称
+            area:0,                   //地区,可以为地区编码或者名称
+            required: true,           //是否必须选一个
+            nodata: 'hidden',         //当无数据时的表现形式:'hidden'隐藏,'disabled'禁用,为空不做任何处理
+            onChange:function(){}     //地区切换时触发,回调函数传入地区数据
+        };
+        var options = $.extend({}, defaults);
+        $.ajax({
+            url:options.dataUrl,
+            type:'GET',
+            async:false,
+            crossDomain: options.crossDomain,
+            dataType:options.dataType,
+            jsonpCallback:'jsonp_location',
+            success:function(data){
+            	
+            	datas = data;
+            }
+        });
+        
+        var updateData = function(){
+        	provinceList = [];
+        	cityList = [];
+        	areaList = [];
+        	townsList = [];
+            hasCity = false;       //判断是非有地级城市
+            for(var code in datas){
+                if(!(code%1e4)){     //获取所有的省级行政单位
+                	var objProvince = {};
+                	objProvince.subId = code;
+                	objProvince.name = datas[code];
+                	provinceList.push(objProvince);
+                    if(options.required&&!options.province){
+                        if(options.city&&!(options.city%1e4)){  //省未填，并判断为直辖市
+                            options.province = options.city;
+                        }else{
+                            options.province = code;
+                        }
+                    }else if(isNaN(options.province)&&datas[code].indexOf(options.province)>-1){
+                        options.province = code;
+                    }
+                }else{
+                    var p = code - options.province;
+                    if(options.province&&p>0&&p<1e4){    //同省的城市或地区
+                        if(!(code%100)){
+                            hasCity = true;
+                        	var objCity = {};
+                        	objCity.subId = code;
+                        	objCity.name = datas[code];
+                        	cityList.push(objCity);
+                            if(options.required&&!options.city){
+                                options.city = code;
+                            }else if(isNaN(options.city)&&datas[code].indexOf(options.city)>-1){
+                                options.city = code;
+                            }
+                        }else if(p>8000){                 //省直辖县级行政单位
+                        	var objCity = {};
+                        	objCity.subId = code;
+                        	objCity.name = datas[code];
+                        	cityList.push(objCity);
+                            if(options.required&&!options.city){
+                                options.city = code;
+                            }else if(isNaN(options.city)&&datas[code].indexOf(options.city)>-1){
+                                options.city = code;
+                            }
+                        }else if(hasCity){                  //非直辖市
+                            var c = code-options.city;
+                            if(options.city&&c>0&&c<100){     //同个城市的地区
+                            	var objArea = {};
+                            	objArea.subId = code;
+                            	objArea.name = datas[code];
+                            	areaList.push(objArea);
+                                if(options.required&&!options.area){
+                                    options.area = code;
+                                }else if(isNaN(options.area)&&datas[code].indexOf(options.area)>-1){
+                                    options.area = code;
+                                }
+                            }
+                        }else{
+                        	//直辖市
+                        	if(cityList.length == 0){
+                        		
+                        		var objcity = {};
+                        		objcity.subId = options.province;
+                        		objcity.name = datas[options.province];
+                            	cityList.push(objcity);         
+                        	}
+                        	var objArea = {};
+                        	objArea.subId = code;
+                        	objArea.name = datas[code];
+                        	areaList.push(objArea);         
+                            if(options.required&&!options.area){
+                                options.area = code;
+                            }else if(isNaN(options.area)&&datas[code].indexOf(options.area)>-1){
+                                options.area = code;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        
+        updateData();
+        
+        return {
+        	provinceList:provinceList,
+        	cityList:cityList,
+        	areaList:areaList,
+        	townsList:townsList,
+        	getCityList:function(provinceCode){
+        		
+        		options.province = provinceCode;
+                options.city = 0;
+                options.area = 0;
+        		updateData();
+        		return cityList;
+        	},
+        	getAreaList:function(cityCode){
+        		
+        		options.city = cityCode;
+                options.area = 0;
+        		updateData();
+        		return areaList;
+        	},
+        	getTownList:function(areaCode){
+        		
+        		options.area = areaCode;
+        		updateData();
+        		return townsList;
+        	}
+        } 
+    }])
     .factory('sysMessage', [function () {
 
         return {

@@ -1,54 +1,26 @@
 angular.module('myApp')
-    .controller('cityDemoCtrl', function ($scope, setMap, netRequest) {
-
-    	$('#demo').citys({
-    		code : 350206
-    	});
+    .controller('cityDemoCtrl', function ($scope, setMap, netRequest, citys) {
     	
-    	$('#demo1').citys({
-    		valueType : 'name',
-    		province : '福建',
-    		city : '厦门',
-    		area : '思明'
-    	});
+    	$scope.onProvinceChange = function(val){
+    		
+    		$scope.cityList = citys.getCityList(val);
+    		$scope.cityCode = $scope.cityList[0].subId;
+    		$scope.onCityChange($scope.cityCode);
+    	}
     	
-    	$('#demo2').citys({
-    				required : false,
-    				nodata : 'disabled',
-    				onChange : function(data) {
-    				var text = data['direct'] ? '(直辖市)' : '';
-    				$('#place').text('当前选中地区：' + data['province'] + text + ' ' + data['city'] + ' ' + data['area']);
-    				}});
+    	$scope.onCityChange = function(val){
+    		
+    		$scope.areaList = citys.getAreaList(val);
+    		$scope.areaCode = $scope.areaList[0].subId;
+    	}
     	
-    	var $town = $('#demo3 select[name="town"]');
-    	var townFormat = function(info) {
-    		$town.hide().empty();
-    		if (info['code'] % 1e4 && info['code'] < 7e5) { //是否为“区”且不是港澳台地区
-    			$.ajax({
-    				url : 'http://passer-by.com/data_location/town/' + info['code']
-    						+ '.json',
-    				dataType : 'json',
-    				success : function(town) {
-    					$town.show();
-    					for (i in town) {
-    						$town.append('<option value="'+i+'">' + town[i]
-    								+ '</option>');
-    					}
-    				}
-    			});
-    		}
-    	};
-    	$('#demo3').citys({
-    		province : '福建',
-    		city : '厦门',
-    		area : '思明',
-    		onChange : function(info) {
-    			townFormat(info);
-    		}
-    	}, function(api) {
-    		var info = api.getInfo();
-    		townFormat(info);
-    	});
+    	$scope.provinceList = citys.provinceList;
+    	$scope.provinceCode = $scope.provinceList[0].subId;
+    	$scope.cityList = citys.cityList;
+    	$scope.cityCode = $scope.cityList[0].subId;
+    	$scope.areaList = citys.areaList;
+    	$scope.areaCode = $scope.areaList[0].subId;
+    	
     })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         var pageName = "cityDemo";
