@@ -1,62 +1,19 @@
-﻿<div class="box box-primary">
-    <!-- /.box-header -->
-    <div class="box-body no-padding">
-        <div class="mailbox-controls">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm" ng-click="onAdd()"><i class="fa fa-plus"></i></button>
-                <button type="button" class="btn btn-default btn-sm" ng-click="onRemove()" ng-disabled="selectedIndex<0"><i class=" fa fa-trash-o"></i></button>
-                <button type="button" class="btn btn-default btn-sm" ng-click="onEdit()" ng-disabled="selectedIndex<0"><i class="fa fa-pencil-square-o"></i></button>
-                <button type="button" class="btn btn-default btn-sm" ng-click="onResearch()"><i class="fa fa-refresh"></i></button>
-            </div>
-        </div>
-        <div class="table-responsive mailbox-messages">
-            <table class="table table-hover table-striped gridview">
-                <thead>
-                    <tr ng-if="$index==0">
-                        <th></th>
-                        <th></th>
-                        <th>名称</th>
-                        <th>链接</th>
-                        <th>图标</th>
-                        <th>有效</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="menu in menuList track by $index" ng-class="{'select-row': selectedIndex == $index}"
-                        ng-click="rowSelect($index, menu)" ng-show="!menu.hidden">
-                        <td style="width: 2%">
-                            <i class="fa" ng-class="{'fa-plus-square':menu.close, 'fa-minus-square':!menu.close}"
-                               style="cursor:pointer" ng-click="openSubMenu(menu)" ng-if="menu.ParentId==0"></i>
-                        </td>
-                        <td style="width: 5%">{{menu.seqNo}}</td>
-                        <td style="width: 30%">{{menu.menuTitle}}</td>
-                        <td style="width: 20%">{{menu.pageName?menu.pageName:'--'}}</td>
-                        <td style="width: 10%"><i class="fa {{menu.iconName}}"></i></td>
-                        <td style="width: 10%">
-                            <i class="fa fa-check" ng-if="menu.deleteFlag!=1"></i>
-                            <i class="fa fa-ban" ng-if="menu.deleteFlag==1"></i>
-                        </td>
-                        <td class="text_align_right" style="width: 23%">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- /.table -->
-        </div>
-        <!-- /.mail-box-messages -->
-    </div>
-    <!-- /.box-body -->
-    <div class="box-footer no-padding">
-        <div class="mailbox-controls">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm" ng-click="onAdd()"><i class="fa fa-plus"></i></button>
-                <button type="button" class="btn btn-default btn-sm" ng-click="onRemove()" ng-disabled="selectedIndex<0"><i class=" fa fa-trash-o"></i></button>
-                <button type="button" class="btn btn-default btn-sm" ng-click="onEdit()" ng-disabled="selectedIndex<0"><i class="fa fa-pencil-square-o"></i></button>
-                <button type="button" class="btn btn-default btn-sm" ng-click="onResearch()"><i class="fa fa-refresh"></i></button>
-            </div>
-        </div>
-    </div>
+﻿<div class="top_search_bar">
+	<text-box-normal caption="菜单名称" width="200" ng-model="condition.selName"></text-box-normal>
+	<button type="button" ng-click="refresh()" class="btn bg-green" style="margin-right: 10px">查询</button>
+	<button type="button" class="btn bg-maroon float_right" style="margin-right: 20px" ng-click="downloadImportTemp()" ng-if="authority.canCreate()">
+</div>
+<div>
+	<pagegridview config="config" 
+	          refresh="refresh()"
+	          list="menuList" 
+		      add="onNew()" 
+		      edit="onEdit(item)" 
+		      remove="onDelete(items)"
+		      pagechange="onPageChange(val)" 
+		      rowcount="{{more.size}}"
+		      totalrowcount="totalCount">
+     </pagegridview>
 </div>
 <menu-edit after-commit="afterCommit(res)"></menu-edit>
 <popup show="showImport" width="300" height="300" title="选择要导入的文件">

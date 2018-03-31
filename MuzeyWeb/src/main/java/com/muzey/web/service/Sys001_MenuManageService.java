@@ -1,95 +1,92 @@
 package com.muzey.web.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.muzey.base.MuzeyService;
 import com.muzey.dto.Sys_menuDto;
 import com.muzey.helper.MuzeyBusinessLogic;
 import com.muzey.until.CheckUtil;
+import com.muzey.until.SqlUtil;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.constant.CommonConst;
 import com.muzey.web.model.CombboxModel;
 import com.muzey.web.model.MenuModel;
+import com.muzey.web.model.req.MenuReqModel;
+import com.muzey.web.model.res.MenuResModel;
 
 public class Sys001_MenuManageService extends MuzeyService {
 
 	@MuzeyAutowired
 	private MuzeyBusinessLogic<Sys_menuDto> menuBL;
 
-	public List<MenuModel> getMenuList() {
-		List<Sys_menuDto> list = menuBL.getDtoList("");
-		List<List<Sys_menuDto>> dicSubMenu = new ArrayList<List<Sys_menuDto>>();
-		Map<Integer, Integer> parentid_seqMap = new HashMap<Integer, Integer>();
-		Map<Integer, Integer> seq_iMap = new HashMap<Integer, Integer>();
-		Map<Integer, List<Sys_menuDto>> parentid_detialMap = new HashMap<Integer, List<Sys_menuDto>>();
-		for (int i = 0; i < list.size(); i++) {
-			Sys_menuDto d = list.get(i);
-			if (list.get(i).getParentid() == 0) {
-				supSetList(dicSubMenu, new ArrayList<Sys_menuDto>(), d.getSeqno());
-				parentid_seqMap.put(d.getMenuid(), d.getSeqno());
-				seq_iMap.put(d.getSeqno(), i);
+	public MenuResModel getMenuList(MenuReqModel reqModel, int offset, int size) {
 
-				if (parentid_detialMap.containsKey(d.getMenuid())) {
+		List<Sys_menuDto> menuAllList = new ArrayList<Sys_menuDto>();
 
-					supSetList(dicSubMenu, parentid_detialMap.get(d.getMenuid()), d.getSeqno());
+		StringBuffer sbSQLParent = new StringBuffer();
+		sbSQLParent.append(" AND parentid=0 ");
+		
+		//父級菜單
+		if(CheckUtil.isNotNullOrEmpty(reqModel.getSelName()))
+		{
+			sbSQLParent.append( "AND menutitle LIKE " + SqlUtil.partAgreeSql(reqModel.getSelName()));	
+		}
+		
+		// 查询所有菜单的父级菜单
+		List<Sys_menuDto> parentList = menuBL.getDtoList(sbSQLParent.toString());
+
+		if (CheckUtil.isNotNullOrEmpty(parentList)) {
+			for (Sys_menuDto parentData : parentList) {
+
+				// 添加父级菜单
+				parentData.setPagename("ROOT");
+				menuAllList.add(parentData);
+
+				StringBuffer sbSQL = new StringBuffer();
+				sbSQL.append(" AND parentid=" + parentData.getMenuid());
+				//子集菜單
+				if(CheckUtil.isNotNullOrEmpty(reqModel.getSelName()))
+				{
+					sbSQL.append( "AND menutitle LIKE " + SqlUtil.partAgreeSql(reqModel.getSelName()));	
 				}
-			} else {
-				if (!parentid_seqMap.containsKey(d.getParentid())) {
-					if (parentid_detialMap.containsKey(d.getParentid())) {
+				
+				// 查询某个父级的所有子菜单
+				List<Sys_menuDto> childenList = menuBL.getDtoList(sbSQL.toString());
 
-						supSetList(parentid_detialMap.get(d.getParentid()), d.getSeqno(), d);
-
-					} else {
-
-						List<Sys_menuDto> ls = new ArrayList<Sys_menuDto>();
-						supSetList(ls, d.getSeqno(), d);
-						parentid_detialMap.put(d.getParentid(), ls);
-					}
-				} else {
-
-					supSetList(dicSubMenu.get(parentid_seqMap.get(d.getParentid())), d.getSeqno(), d);
+				// 添加所有子集菜单
+				if (CheckUtil.isNotNullOrEmpty(childenList)) {
+					menuAllList.addAll(childenList);
 				}
 			}
 		}
 
-		List<MenuModel> menuList = new ArrayList<MenuModel>();
-		for (int i = 0; i < dicSubMenu.size(); i++) {
-			if (CheckUtil.isNotNullOrEmpty(dicSubMenu.get(i))) {
+		List<MenuModel> modelList = new ArrayList<MenuModel>();
+		if (CheckUtil.isNotNullOrEmpty(menuAllList)) {
+			int endIndex = offset + size > menuAllList.size() ? menuAllList.size() - 1 : offset + size - 1;
 
-				MenuModel menuModel = new MenuModel();
-				Sys_menuDto mDto = list.get(seq_iMap.get(i));
-				menuModel.setId(mDto.getId());
-				menuModel.setMenuId(mDto.getMenuid());
-				menuModel.setSeqNo(mDto.getSeqno());
-				menuModel.setParentId(mDto.getParentid());
-				menuModel.setMenuTitle(mDto.getMenutitle());
-				menuModel.setIconName(mDto.getIconname());
-				menuModel.setPageName(mDto.getPagename());
-				menuModel.setDeleteFlag(mDto.getDeleteflag());
-				menuList.add(menuModel);
+			for (int i = offset; i <= endIndex; i++) {
+				{
+					MenuModel menuModel = new MenuModel();
+					Sys_menuDto mDto = menuAllList.get(i);
 
-				List<Sys_menuDto> subList = dicSubMenu.get(i);
-				for (Sys_menuDto subMenuDto : subList) {
-					if (CheckUtil.isNotNullOrEmpty(subMenuDto)) {
-
-						MenuModel subMenuModel = new MenuModel();
-						subMenuModel.setId(subMenuDto.getId());
-						subMenuModel.setMenuId(subMenuDto.getMenuid());
-						subMenuModel.setSeqNo(subMenuDto.getSeqno());
-						subMenuModel.setParentId(subMenuDto.getParentid());
-						subMenuModel.setMenuTitle(subMenuDto.getMenutitle());
-						subMenuModel.setIconName(subMenuDto.getIconname());
-						subMenuModel.setPageName(subMenuDto.getPagename());
-						subMenuModel.setDeleteFlag(subMenuDto.getDeleteflag());
-						menuList.add(subMenuModel);
-					}
+					menuModel.setId(mDto.getId());
+					menuModel.setMenuId(mDto.getMenuid());
+					menuModel.setSeqNo(mDto.getSeqno());
+					menuModel.setParentId(mDto.getParentid());
+					menuModel.setMenuTitle(mDto.getMenutitle());
+					menuModel.setIconName(mDto.getIconname());
+					menuModel.setPageName(mDto.getPagename());
+					menuModel.setDeleteFlag(mDto.getDeleteflag());
+					modelList.add(menuModel);
 				}
 			}
 		}
-		return menuList;
+
+		MenuResModel resModel = new MenuResModel();
+		resModel.setMenuList(modelList);
+		resModel.setTotalCount(menuAllList.size());
+		return resModel;
 	}
 
 	public List<CombboxModel> getParentMenuList() {
@@ -114,14 +111,13 @@ public class Sys001_MenuManageService extends MuzeyService {
 
 	public void add(MenuModel model) {
 		Sys_menuDto dto = new Sys_menuDto();
-		dto.setId(model.getId());
+		// dto.setId(model.getId());
 		dto.setMenuid(model.getMenuId());
 		dto.setSeqno(model.getSeqNo());
 		dto.setParentid(model.getParentId());
 		dto.setMenutitle(model.getMenuTitle());
 		dto.setIconname(model.getIconName());
 		dto.setPagename(model.getPageName());
-		dto.setDeleteflag(0);
 		menuBL.insertDto(dto);
 	}
 
@@ -143,7 +139,7 @@ public class Sys001_MenuManageService extends MuzeyService {
 	}
 
 	public int delete(MenuModel model) {
-		List<Sys_menuDto> list = menuBL.getDtoList("AND ParentId=" + model.getId());
+		List<Sys_menuDto> list = menuBL.getDtoList("AND parentid=" + model.getMenuId());
 		if (list.size() > 0) {
 			return list.size();
 		}

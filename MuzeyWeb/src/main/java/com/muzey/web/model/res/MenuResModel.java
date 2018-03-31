@@ -12,7 +12,8 @@ public class MenuResModel extends ResponseModelBase {
     }
 
     private List<MenuModel> menuList;
-
+    private int totalCount;
+    
     public List<MenuModel> getMenuList() {
 
         return menuList;
@@ -22,5 +23,13 @@ public class MenuResModel extends ResponseModelBase {
 
         this.menuList = menuList;
     }
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
 
 }
