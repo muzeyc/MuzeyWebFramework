@@ -103,7 +103,7 @@ public class Sys001_MenuManageService extends MuzeyService {
 		for (Sys_menuDto dto : dtoList) {
 			if (CommonConst.DELETE_FLAG_0 == dto.getDeleteflag() && 0 == dto.getParentid()) {
 				model = new CombboxModel();
-				model.setSubId(dto.getMenutitle().toString());
+				model.setSubId(dto.getMenuid().toString());
 				model.setName(dto.getMenutitle());
 				list.add(model);
 			}
@@ -115,6 +115,7 @@ public class Sys001_MenuManageService extends MuzeyService {
 	public void add(MenuModel model) {
 		Sys_menuDto dto = new Sys_menuDto();
 		dto.setId(model.getId());
+		dto.setMenuid(model.getMenuId());
 		dto.setSeqno(model.getSeqNo());
 		dto.setParentid(model.getParentId());
 		dto.setMenutitle(model.getMenuTitle());
@@ -132,6 +133,7 @@ public class Sys001_MenuManageService extends MuzeyService {
 			throw new Exception("更新失败,没有对应菜单！");
 		}
 		dto.setSeqno(model.getSeqNo());
+		dto.setMenuid(model.getMenuId());
 		dto.setParentid(model.getParentId());
 		dto.setMenutitle(model.getMenuTitle());
 		dto.setIconname(model.getIconName());
