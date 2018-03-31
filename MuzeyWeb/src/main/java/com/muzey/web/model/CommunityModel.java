@@ -1,7 +1,6 @@
 package com.muzey.web.model;
 
 public class CommunityModel {
-
 	private int id;
 	private String roadid;
 	private String roadName;
