@@ -1,10 +1,14 @@
 <div class="inputBar">
 	<combbox caption="省" ng-model="provinceCode" list="provinceList"
 		width="300" mustinput="true" on-change="onProvinceChange(val)"></combbox>
-	<combbox caption="市" ng-model="cityCode" list="cityList"
-		width="300" mustinput="true" on-change="onCityChange(val)"></combbox>
-	<combbox caption="区" ng-model="areaCode" list="areaList"
-		width="300" mustinput="true" on-change="onAreaChange(val)"></combbox>
-	<combbox caption="街道" ng-model="townsCode" list="townsList"
-		width="300" mustinput="true"></combbox>
+	<combbox caption="市" ng-model="cityCode" list="cityList" width="300"
+		mustinput="true" on-change="onCityChange(val)"></combbox>
+	<combbox caption="区" ng-model="areaCode" list="areaList" width="300"
+		mustinput="true" on-change="onAreaChange(val)"></combbox>
+	<combbox caption="街道" ng-model="townsCode" list="townsList" width="300"
+		mustinput="true"></combbox>
+	<button type="button" class="btn bg-blue float_right"
+		style="margin-right: 20px" ng-click="getAddressNow()">
+		<i class="fa fa-cloud-upload"></i>&nbsp;获取当前位置
+	</button>
 </div>

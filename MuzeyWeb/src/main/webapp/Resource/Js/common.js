@@ -371,13 +371,17 @@ angular.module('myApp')
         }
 
     }])
-    .factory('citys', ['$rootScope', '$state', function ($rootScope, $state) {
+    .factory('cityUtil', ['$rootScope', '$state', function ($rootScope, $state) {
 
     	var datas = {};
         var provinceList = [];
     	var cityList = [];
     	var areaList = [];
     	var townsList = [];
+    	var nowProvince = {};
+    	var nowCity = {};
+    	var nowArea = {};
+    	var nowAddress = {};
     	
         var defaults = {
             dataUrl:'http://passer-by.com/data_location/list.json',     //数据库地址
@@ -406,6 +410,27 @@ angular.module('myApp')
             success:function(data){
             	
             	datas = data;
+            	for(code in datas){
+            		
+            		if(datas[code] == remote_ip_info['province'] 
+            		+ (remote_ip_info['province'] == remote_ip_info['city'] ? '市' : '省')){
+            			nowProvince.code = code;
+            			nowProvince.name = datas[code];
+            			nowAddress.province = nowProvince;
+            		}
+            		
+            		if(datas[code] == remote_ip_info['city'] + '市'){
+            			nowCity.code = code;
+            			nowCity.name = datas[code];
+            			nowAddress.city = nowCity;
+            		}
+            		
+            		if(datas[code] == remote_ip_info['district']){
+            			nowArea.code = code;
+            			nowArea.name = datas[code];
+            			nowAddress.area = nowArea;
+            		}
+            	}
             }
         });
         
@@ -534,7 +559,8 @@ angular.module('myApp')
             	});
         		
         		return townsList;
-        	}
+        	},
+        	nowAddress : nowAddress
         } 
     }])
     .factory('sysMessage', [function () {
