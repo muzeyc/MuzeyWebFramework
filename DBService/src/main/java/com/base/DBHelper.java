@@ -27,10 +27,10 @@ public class DBHelper {
 	 private String password = "123456";
 	 public static String driver = "org.postgresql.Driver";
 
-//	private String url = "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=SOADB_P1000";
-//	private String user = "sa";
-//	private String password = "123456";
-//	public static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+//	 private String url = "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=SOADB_P1000";
+//	 private String user = "sa";
+//	 private String password = "123456";
+//	 public static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
 	public DBHelper() {
 
