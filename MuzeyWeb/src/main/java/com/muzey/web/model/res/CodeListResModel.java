@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.muzey.web.model.CodeListModel;
-import com.muzey.web.model.UMBasicInfoModel;
 
 public class CodeListResModel extends ResponseModelBase {
 

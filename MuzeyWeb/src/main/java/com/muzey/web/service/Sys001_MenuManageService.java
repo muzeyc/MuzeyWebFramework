@@ -148,24 +148,4 @@ public class Sys001_MenuManageService extends MuzeyService {
 		menuBL.deleteDto(deleteDto);
 		return 0;
 	}
-
-	private void supSetList(List<List<Sys_menuDto>> supList, List<Sys_menuDto> list, int seq) {
-
-		while (seq >= supList.size()) {
-
-			supList.add(null);
-		}
-
-		supList.set(seq, list);
-	}
-
-	private void supSetList(List<Sys_menuDto> list, int seq, Sys_menuDto d) {
-
-		while (seq >= list.size()) {
-
-			list.add(null);
-		}
-
-		list.set(seq, d);
-	}
 }

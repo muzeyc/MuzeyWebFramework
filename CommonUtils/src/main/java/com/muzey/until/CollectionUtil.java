@@ -1,8 +1,8 @@
 package com.muzey.until;
 
-import java.util.Collection;  
-import java.util.LinkedList;  
-import java.util.List;  
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;  
   
 /**  
@@ -212,6 +212,38 @@ public class CollectionUtil {
     @SuppressWarnings("rawtypes")
 	public static boolean isEmpty(Map map) {  
         return (map == null || map.isEmpty());  
-    }  
+    }
+    
+    /**
+     * 超级set无视当前数组大小
+     * @param supList
+     * @param list
+     * @param seq
+     */
+    public static <T> void supSetList(List<List<T>> supList, List<T> list, int seq) {
+
+		while (seq >= supList.size()) {
+
+			supList.add(null);
+		}
+
+		supList.set(seq, list);
+	}
+
+/**
+ * 超级set无视当前数组
+ * @param list
+ * @param seq
+ * @param d
+ */
+    public static <T> void supSetList(List<T> list, int seq, T d) {
+
+		while (seq >= list.size()) {
+
+			list.add(null);
+		}
+
+		list.set(seq, d);
+	}
       
 }  

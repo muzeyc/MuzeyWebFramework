@@ -31,7 +31,6 @@ public class Sys006_CommunityService extends MuzeyService {
 	 */
 	public CommunityResModel GetCommunityListInfo(String strWhere, int offset, int size) {
 
-		List<Sys_communityDto> communityDtoList = null;
 		List<CommunityModel> communityList = null;
 
 		StringBuffer sbSQL = new StringBuffer();

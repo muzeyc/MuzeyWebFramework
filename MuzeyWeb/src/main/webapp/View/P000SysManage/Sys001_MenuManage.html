@@ -1,7 +1,7 @@
 ﻿<div class="top_search_bar">
 	<text-box-normal caption="菜单名称" width="200" ng-model="condition.selName"></text-box-normal>
 	<button type="button" ng-click="refresh()" class="btn bg-green" style="margin-right: 10px">查询</button>
-	<button type="button" class="btn bg-maroon float_right" style="margin-right: 20px" ng-click="downloadImportTemp()" ng-if="authority.canCreate()">
+	<button type="button" class="btn bg-maroon float_right" style="margin-right: 20px" ng-click="downloadImportTemp()" ng-if="authority.canCreate()"></button>
 </div>
 <div>
 	<pagegridview config="config" 
