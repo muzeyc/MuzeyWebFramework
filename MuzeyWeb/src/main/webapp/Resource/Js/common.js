@@ -515,8 +515,24 @@ angular.module('myApp')
         	},
         	getTownList:function(areaCode){
         		
+        		areaList = [];
         		options.area = areaCode;
         		updateData();
+        		$.ajax({
+            		url:'http://passer-by.com/data_location/town/'+areaCode+'.json',
+            		dataType:'json',
+            		async:false,
+            		success:function(town){
+            			
+            			for(i in town){
+            				var objTown = {};
+                			objTown.subId = i;
+                			objTown.name = town[i];
+                			townsList.push(objTown);  
+            			}
+            		}
+            	});
+        		
         		return townsList;
         	}
         } 

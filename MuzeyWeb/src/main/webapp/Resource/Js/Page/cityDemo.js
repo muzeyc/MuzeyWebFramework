@@ -12,14 +12,18 @@ angular.module('myApp')
     		
     		$scope.areaList = citys.getAreaList(val);
     		$scope.areaCode = $scope.areaList[0].subId;
+    		$scope.onAreaChange($scope.areaCode);
+    	}
+    	
+    	$scope.onAreaChange = function(val){
+    		
+    		$scope.townsList = citys.getTownList(val);
+    		$scope.townsCode = $scope.townsList[0].subId;
     	}
     	
     	$scope.provinceList = citys.provinceList;
     	$scope.provinceCode = $scope.provinceList[0].subId;
-    	$scope.cityList = citys.cityList;
-    	$scope.cityCode = $scope.cityList[0].subId;
-    	$scope.areaList = citys.areaList;
-    	$scope.areaCode = $scope.areaList[0].subId;
+    	$scope.onProvinceChange($scope.provinceCode);
     	
     })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
