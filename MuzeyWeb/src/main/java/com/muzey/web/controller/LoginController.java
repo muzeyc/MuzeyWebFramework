@@ -11,6 +11,7 @@ import com.muzey.dto.Sys_userinfoDto;
 import com.muzey.until.CookieUtil;
 import com.muzey.until.JsonUtil;
 import com.muzey.until.StringUtil;
+import com.muzey.until.SupFtpUtil;
 import com.muzey.web.base.BaseController;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.constant.CommonConst;
@@ -27,6 +28,9 @@ public class LoginController extends BaseController {
     @Autowired
     public Environment env;
 
+    @MuzeyAutowired
+    private SupFtpUtil ftpCom;
+    
     @MuzeyAutowired
     private LoginService service;
 

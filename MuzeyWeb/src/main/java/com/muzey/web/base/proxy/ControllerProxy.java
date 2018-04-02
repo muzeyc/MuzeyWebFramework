@@ -117,9 +117,12 @@ public class ControllerProxy {
                         @SuppressWarnings("rawtypes")
                         Constructor<MuzeyBusinessLogic> con = cls.getConstructor(Class.class); 
                         obj = con.newInstance(gArgs[0]);
-                    }else{
+                    }else if(f.getType().toString().indexOf("class com.muzey.web.service.") > -1){
                         
                         obj = MuzeyFactory.createService(f.getType());
+                    }else{
+                    	
+                    	obj = f.getType().newInstance();
                     }
                     
                     f.setAccessible(true);

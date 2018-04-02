@@ -41,12 +41,21 @@ public class MuzeyFactory {
                 // 获取字段中包含fieldMeta的注解
                 MuzeyAutowired ma = f.getAnnotation(MuzeyAutowired.class);
                 if (ma != null) {
-                    Type gType = f.getGenericType();
-                    ParameterizedType pType = (ParameterizedType)gType;  
-                    Type[] gArgs = pType.getActualTypeArguments();  
-                    Class<MuzeyBusinessLogic> cls = MuzeyBusinessLogic.class;
-                    Constructor<MuzeyBusinessLogic> con = cls.getConstructor(Class.class, DBHelper.class); 
-                    Object obj = con.newInstance(gArgs[0], dObj);
+                	
+                	Object obj = null;
+                	if(f.getType().toString().equals("class com.muzey.helper.MuzeyBusinessLogic")){
+                		
+                        Type gType = f.getGenericType();
+                        ParameterizedType pType = (ParameterizedType)gType;  
+                        Type[] gArgs = pType.getActualTypeArguments();  
+                        Class<MuzeyBusinessLogic> cls = MuzeyBusinessLogic.class;
+                        Constructor<MuzeyBusinessLogic> con = cls.getConstructor(Class.class, DBHelper.class); 
+                        obj = con.newInstance(gArgs[0], dObj);
+                	}else{
+                		
+                		obj = f.getType().newInstance();
+                	}
+                	
                     f.setAccessible(true);
                     f.set(t, obj);
                 }
