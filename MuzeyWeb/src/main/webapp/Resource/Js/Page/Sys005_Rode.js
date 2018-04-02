@@ -29,10 +29,7 @@
 					};
 
 					// 模型
-					$scope.more = {
-						offset : 0,
-						size : 20
-					};
+					$scope.more = {offset : 0,size : 20};
 					
 					// 事件/方法
 					$scope.onNew = function() {
@@ -107,9 +104,12 @@
 		scope : {
 			afterCommit : "&"
 		},controller : ['$scope',function($scope) {
+			
+			   $scope.cancel = function () {
+                   $scope.show = false;
+               }
+			
 			$scope.basic = {};
-			$scope.cancel = function() {}
-			$scope.show = false;
 			$scope.commit = function() {
 				if (!validate.doValidate("#validate")) {
 					return;
@@ -126,13 +126,13 @@
 								$scope.afterCommit({res : res});
 							}
 						}
-						});
+					});
 					}
 				});
 			}}],templateUrl : 'View/P000SysManage/Sys005_RodeEdit.html?v='+ Math.random(),
 			link : function($scope, iElm, iAttrs, controller) {
 				$scope.$on("showSys005_RodeEdit", function(event, mode, rode, more, selName) {
-					$scope.show = !$scope.show;
+					$scope.show = true;
 					$scope.rode = angular.copy(rode);
 					$scope.more = more;
 					if ("edit" == mode) {
