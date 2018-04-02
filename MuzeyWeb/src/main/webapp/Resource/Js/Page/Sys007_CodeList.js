@@ -1,9 +1,8 @@
 ﻿angular.module('myApp')
-    .controller('Sys007_CodeListInfoCtrl', function ($scope, netRequest, dialog, sysMessage, fileUpLoad, authority, $compile) {
+    .controller('Sys007_CodeListInfoCtrl', function ($scope, netRequest, dialog, sysMessage) {
 
     	$scope.condition = {};
         $scope.totalCount = 0;
-        $scope.authority = authority;
         $scope.selectedIndex;
         $scope.showImport = false;
         $scope.attachList = [];

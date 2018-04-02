@@ -10,7 +10,9 @@
     		}
 		}
     	
-    	$scope.imageClick = function (photo){
+    	$scope.imageClick = function (num,photo){
+    		photo.height = $('#img' + num)[0].naturalHeight;
+    		photo.width =  $('#img' + num)[0].naturalWidth;
     		$scope.$broadcast("showPhotoEdit", photo);
     	}
     	
