@@ -11,6 +11,7 @@ import com.muzey.web.base.BaseController;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.CommodityModel;
 import com.muzey.web.model.req.CommodityReqModel;
+import com.muzey.web.model.res.CombboxResModel;
 import com.muzey.web.model.res.CommodityResModel;
 import com.muzey.web.service.Sys009_CommodityService;
 
@@ -141,22 +142,22 @@ public class Sys009_CommodityController extends BaseController {
 		}
 	}
 
-	// /***
-	// * 取得商户的状态
-	// *
-	// */
-	// @RequestMapping(value = "/getChildenList", method = RequestMethod.POST)
-	// public void getChildenList(CodeListModel model) {
-	//
-	// String resStr = "";
-	// CombboxResModel resModel = new CombboxResModel();
-	// try {
-	// resModel.setList(service.getChildenList(model.getCodename()));
-	// resStr = JsonUtil.serializer(resModel);
-	// } catch (Exception e) {
-	// resStr = this.getFailResult(e.getMessage());
-	// }
-	//
-	// returnData(resStr);
-	// }
+	/***
+	 * 取得图片的List
+	 *
+	 */
+	@RequestMapping(value = "/getPictureList", method = RequestMethod.GET)
+	public void getPictureList() {
+
+		String resStr = "";
+		CombboxResModel resModel = new CombboxResModel();
+		try {
+			resModel.setList(service.getPictureList());
+			resStr = JsonUtil.serializer(resModel);
+		} catch (Exception e) {
+			resStr = this.getFailResult(e.getMessage());
+		}
+
+		returnData(resStr);
+	}
 }

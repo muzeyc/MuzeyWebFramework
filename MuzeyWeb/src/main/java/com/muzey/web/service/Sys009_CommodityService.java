@@ -6,11 +6,14 @@ import java.util.List;
 import com.data.DataRow;
 import com.data.DataTable;
 import com.muzey.base.MuzeyService;
+import com.muzey.dto.Sys_codelistDto;
 import com.muzey.dto.Sys_commodityDto;
+import com.muzey.dto.Sys_pictureinfoDto;
 import com.muzey.helper.MuzeyBusinessLogic;
 import com.muzey.until.CheckUtil;
 import com.muzey.until.StringUtil;
 import com.muzey.web.base.annotation.MuzeyAutowired;
+import com.muzey.web.model.CombboxModel;
 import com.muzey.web.model.CommodityModel;
 import com.muzey.web.model.res.CommodityResModel;
 
@@ -18,6 +21,9 @@ public class Sys009_CommodityService extends MuzeyService {
 
 	@MuzeyAutowired
 	private MuzeyBusinessLogic<Sys_commodityDto> commodityBL;
+
+	@MuzeyAutowired
+	private MuzeyBusinessLogic<Sys_pictureinfoDto> pictureinfoBL;
 
 	public CommodityResModel GetCommodityInfo(String strWhere, int offset, int size) {
 
@@ -43,7 +49,7 @@ public class Sys009_CommodityService extends MuzeyService {
 		sbSql.append(" sys_codelist codeList ");
 		sbSql.append(" ON ");
 		sbSql.append(" codeList.codename = commodity.classify ");
-		sbSql.append(" AND codeList.parentid = '' ");
+		sbSql.append(" AND codeList.parentid = 'Classify' ");
 		sbSql.append(" WHERE 1=1 ");
 		if (strWhere.trim() != "") {
 			sbSql.append(strWhere);
@@ -67,23 +73,19 @@ public class Sys009_CommodityService extends MuzeyService {
 				model.setId(StringUtil.toInt(dataRow.getData("id")));
 				model.setName(dataRow.getData("name"));
 				model.setClassify(dataRow.getData("classify"));
-				if(dataRow.getData("classifyname").equals("-1"))
-				{
+				if (dataRow.getData("classifyname").equals("-1")) {
 					model.setClassifyName("");
-				}else
-				{
-					model.setClassifyName(dataRow.getData("classifyname"));	
+				} else {
+					model.setClassifyName(dataRow.getData("classifyname"));
 				}
-				model.setPictureid(StringUtil.toInt(dataRow.getData("pictureid")));
-				if(dataRow.getData("picturename").equals("-1"))
-				{
+				model.setPictureid(dataRow.getData("pictureid"));
+				if (dataRow.getData("picturename").equals("-1")) {
 					model.setPictureName("");
-				}else
-				{
+				} else {
 					model.setPictureName(dataRow.getData("picturename"));
 				}
 				model.setPrice(StringUtil.toBigDecimal(dataRow.getData("price")));
-				
+
 				commodityList.add(model);
 			}
 		}
@@ -108,7 +110,7 @@ public class Sys009_CommodityService extends MuzeyService {
 
 		commodityDto.setName(model.getName());
 		commodityDto.setClassify(model.getClassify());
-		commodityDto.setPictureid(model.getPictureid());
+		commodityDto.setPictureid(StringUtil.toInt(model.getPictureid()));
 		commodityDto.setPrice(model.getPrice());
 
 		commodityBL.insertDto(commodityDto);
@@ -131,9 +133,9 @@ public class Sys009_CommodityService extends MuzeyService {
 
 		commodityDto.setName(model.getName());
 		commodityDto.setClassify(model.getClassify());
-		commodityDto.setPictureid(model.getPictureid());
+		commodityDto.setPictureid(StringUtil.toInt(model.getPictureid()));
 		commodityDto.setPrice(model.getPrice());
-		
+
 		commodityBL.updateDtoToAll(commodityDto);
 	}
 
@@ -153,5 +155,28 @@ public class Sys009_CommodityService extends MuzeyService {
 		commodityDto.setId(model.getId());
 
 		commodityBL.deleteDto(commodityDto);
+	}
+
+	/***
+	 * 取得图片名称
+	 * 
+	 * @return
+	 */
+	public List<CombboxModel> getPictureList() {
+
+		List<CombboxModel> list = new ArrayList<CombboxModel>();
+
+		List<Sys_pictureinfoDto> dtoList = pictureinfoBL.getDtoList("");
+
+		CombboxModel model = new CombboxModel();
+
+		for (Sys_pictureinfoDto dto : dtoList) {
+			model = new CombboxModel();
+			model.setSubId(StringUtil.toStr(dto.getId()));
+			model.setName(dto.getName());
+			list.add(model);
+		}
+
+		return list;
 	}
 }

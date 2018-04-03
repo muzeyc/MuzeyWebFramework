@@ -8,7 +8,7 @@ public class CommodityModel {
 	private String name;
 	private String classify;
 	private String classifyName;
-	private Integer pictureid;
+	private String pictureid;
 	private String pictureName;
 	private BigDecimal price;
 
@@ -44,11 +44,11 @@ public class CommodityModel {
 		this.classifyName = classifyName;
 	}
 
-	public Integer getPictureid() {
+	public String getPictureid() {
 		return pictureid;
 	}
 
-	public void setPictureid(Integer pictureid) {
+	public void setPictureid(String pictureid) {
 		this.pictureid = pictureid;
 	}
 
