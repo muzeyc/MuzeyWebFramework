@@ -116,14 +116,7 @@
 	    		
 	    		$scope.areaList = cityUtil.getAreaList(val);
 	    		$scope.rode.dmdistrict = $scope.areaList[0].subId;
-	    		$scope.onAreaChange($scope.rode.dmdistrict);
 	    	}
-	    	
-//	    	$scope.onAreaChange = function(val){
-//	    		
-////	    		$scope.townsList = cityUtil.getTownList(val);
-////	    		$scope.townsCode = $scope.townsList[0].subId;
-//	    	}
 	    	
 	    	$scope.getAddressNow = function(){
 	    		
@@ -133,7 +126,6 @@
 	    		$scope.onCityChange(cityUtil.nowAddress.city.code);
 	    		if(cityUtil.nowAddress.area){
 	    			$scope.rode.dmdistrict = cityUtil.nowAddress.area.code;
-	    			$scope.onAreaChange(cityUtil.nowAddress.area.code);
 	    		}
 	    	}
 			
@@ -169,6 +161,8 @@
 					$scope.rode = angular.copy(rode);
 					$scope.more = more;
 					if ("edit" == mode) {
+						$scope.provinceList = cityUtil.provinceList;
+						$scope.rode.province = rode.province;
 						$scope.onProvinceChange($scope.rode.province);
 					}
 					if ("new" == mode) {
