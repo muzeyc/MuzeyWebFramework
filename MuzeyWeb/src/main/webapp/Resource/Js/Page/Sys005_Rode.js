@@ -1,5 +1,5 @@
 ﻿angular.module('myApp')
-.controller('Sys005_RodeInfoCtrl',function($scope, netRequest, dialog, sysMessage, fileUpLoad,authority, $compile) {
+.controller('Sys005_RodeInfoCtrl',function($scope, netRequest, dialog, sysMessage, fileUpLoad,authority, $compile,cityUtil) {
 
 					$scope.condition = {};
 					$scope.totalCount = 0;
@@ -15,11 +15,11 @@
 							width : "25%"
 						}, {
 							label : "省",
-							name : "province",
+							name :  "province",
 							width : "25%"
 						}, {
 							label : "市",
-							name : "city",
+							name :  "city",
 							width : "25%"
 						}, {
 							label : "区",
@@ -99,11 +99,43 @@
 		}}
 	});
 }])
-.directive('rodeEdit',function(netRequest, dialog, validate, sysMessage) {
+.directive('rodeEdit',function(netRequest, dialog, validate, sysMessage,cityUtil) {
 	return {
 		scope : {
 			afterCommit : "&"
 		},controller : ['$scope',function($scope) {
+			
+			$scope.onProvinceChange = function(val){
+	    		
+	    		$scope.cityList = cityUtil.getCityList(val);
+	    		$scope.rode.city = $scope.cityList[0].subId;
+	    		$scope.onCityChange($scope.rode.city);
+	    	}
+	    	
+	    	$scope.onCityChange = function(val){
+	    		
+	    		$scope.areaList = cityUtil.getAreaList(val);
+	    		$scope.rode.dmdistrict = $scope.areaList[0].subId;
+	    		$scope.onAreaChange($scope.rode.dmdistrict);
+	    	}
+	    	
+//	    	$scope.onAreaChange = function(val){
+//	    		
+////	    		$scope.townsList = cityUtil.getTownList(val);
+////	    		$scope.townsCode = $scope.townsList[0].subId;
+//	    	}
+	    	
+	    	$scope.getAddressNow = function(){
+	    		
+	    		$scope.rode.province = cityUtil.nowAddress.province.code;
+	    		$scope.onProvinceChange(cityUtil.nowAddress.province.code);
+	    		$scope.rode.city = cityUtil.nowAddress.city.code;
+	    		$scope.onCityChange(cityUtil.nowAddress.city.code);
+	    		if(cityUtil.nowAddress.area){
+	    			$scope.rode.dmdistrict = cityUtil.nowAddress.area.code;
+	    			$scope.onAreaChange(cityUtil.nowAddress.area.code);
+	    		}
+	    	}
 			
 			   $scope.cancel = function () {
                    $scope.show = false;
@@ -133,14 +165,18 @@
 			link : function($scope, iElm, iAttrs, controller) {
 				$scope.$on("showSys005_RodeEdit", function(event, mode, rode, more, selName) {
 					$scope.show = true;
+					$scope.mode = mode;
 					$scope.rode = angular.copy(rode);
 					$scope.more = more;
 					if ("edit" == mode) {
+						$scope.onProvinceChange($scope.rode.province);
 					}
 					if ("new" == mode) {
 						$scope.more.offset = 0;
+						$scope.provinceList = cityUtil.provinceList;
+				    	$scope.rode.province = $scope.provinceList[0].subId;
+				    	$scope.onProvinceChange($scope.rode.province);
 					}
-					$scope.mode = mode;
 					$scope.selName = selName;
 				});
 			}

@@ -4,17 +4,22 @@
 		<text-box-normal caption="街道名" ng-model="rode.name" width="300"
 			mustinput="true"></text-box-normal>
 	</div>
-		<div class="inputBar">
-		<text-box-normal caption="省" ng-model="rode.province" width="300"
-			mustinput="true"></text-box-normal>
+	<div class="inputBar">
+		<combbox caption="省" ng-model="rode.province" list="provinceList"
+			width="300" mustinput="true" on-change="onProvinceChange(val)"></combbox>
 	</div>
-			<div class="inputBar">
-		<text-box-normal caption="市" ng-model="rode.city" width="300"
-			mustinput="true"></text-box-normal>
+	<div class="inputBar">
+		<combbox caption="市" ng-model="rode.city" list="cityList" width="300"
+			mustinput="true" on-change="onCityChange(val)"></combbox>
 	</div>
-				<div class="inputBar">
-		<text-box-normal caption="区" ng-model="rode.dmdistrict" width="300"
-			mustinput="true"></text-box-normal>
+	<div class="inputBar">
+		<combbox caption="区" ng-model="rode.dmdistrict" list="areaList"
+			width="300" mustinput="true" on-change="onAreaChange(val)"></combbox>
+	</div>
+	<div class="inputBar">
+		<button type="button" class="btn bg-blue" ng-click="getAddressNow()">
+			<i class="fa fa-cloud-upload"></i>&nbsp;获取当前位置
+		</button>
 	</div>
 </div>
 <div class="modal-footer">
