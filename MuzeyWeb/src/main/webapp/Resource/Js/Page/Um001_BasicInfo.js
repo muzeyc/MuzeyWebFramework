@@ -66,15 +66,6 @@
             $scope.onResearch(val.offset, val.size);
         }
 
-        $scope.downloadImportTemp = function () {
-            fileUpLoad.downloadImportTemp("Area");
-        }
-
-        $scope.showImportPop = function () {
-            $scope.attachList = [];
-            $scope.showImport = !$scope.showImport;
-        }
-
         $scope.refresh();
     })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -99,7 +90,7 @@
             controller: ['$scope', function ($scope) {
 
                 $scope.basic = {};
-
+                
                 $scope.cancel = function () {
 
                     $scope.show = false;
@@ -134,7 +125,8 @@
             templateUrl: 'View/P000SysManage/Um001_BasicInfoEdit.html?v=' + Math.random(),
             link: function ($scope, iElm, iAttrs, controller) {
                 $scope.$on("showUm001_BasicEdit", function (event, mode, basic, more,selName) {
-                  
+                	$scope.show =true;
+                	$scope.mode = mode;
                     $scope.basic = angular.copy(basic);
                     $scope.more = more;
                     if ("edit" == mode) {
@@ -142,7 +134,7 @@
                     if ("new" == mode) {
                         $scope.more.offset = 0;
                     }
-                    $scope.mode = mode;
+                  
                     $scope.selName = selName;
                     
                     //用户类型
@@ -155,10 +147,9 @@
                 $scope.initUmType = function () {
                 	
                 	 var reqType = {};
-                	 reqType.codename = "UM_Type";
+                	 reqType.codename = "Um_Type";
                 	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", reqType, function (res) {
                         $scope.UmTypeList = res.list;
-                        $scope.show = !$scope.show;
                     });
                 }
                 
@@ -166,10 +157,9 @@
                 $scope.initUmRoad = function () {
                 	
                 	 var reqRoad = {};
-                	 reqRoad.codename = "Road";
+                	 reqRoad.codename = "Um_Road";
                 	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", reqRoad, function (res) {
                         $scope.UmRoadList = res.list;
-                        $scope.show = !$scope.show;
                     });
                 }
             }
