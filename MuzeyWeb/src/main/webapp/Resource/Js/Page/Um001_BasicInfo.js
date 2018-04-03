@@ -148,7 +148,7 @@
                 	
                 	 var reqType = {};
                 	 reqType.codename = "Um_Type";
-                	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getUmTypeList", reqType, function (res) {
+                	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", reqType, function (res) {
                         $scope.UmTypeList = res.list;
                     });
                 }
@@ -158,7 +158,7 @@
                 	
                 	 var reqRoad = {};
                 	 reqRoad.codename = "Um_Road";
-                	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getUmRoadList", reqRoad, function (res) {
+                	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", reqRoad, function (res) {
                         $scope.UmRoadList = res.list;
                     });
                 }

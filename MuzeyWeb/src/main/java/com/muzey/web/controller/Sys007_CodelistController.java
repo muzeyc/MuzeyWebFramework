@@ -191,34 +191,4 @@ public class Sys007_CodelistController extends BaseController {
 
 		returnData(resStr);
 	}
-	
-	@RequestMapping(value = "/getUmTypeList", method = RequestMethod.POST)
-	public void getUmTypeList(CodeListModel model) {
-
-		String resStr = "";
-		CombboxResModel resModel = new CombboxResModel();
-		try {
-			resModel.setList(service.getChildenList(model.getCodename()));
-			resStr = JsonUtil.serializer(resModel);
-		} catch (Exception e) {
-			resStr = this.getFailResult(e.getMessage());
-		}
-
-		returnData(resStr);
-	}
-	
-	@RequestMapping(value = "/getUmRoadList", method = RequestMethod.POST)
-	public void getUmRoadList(CodeListModel model) {
-
-		String resStr = "";
-		CombboxResModel resModel = new CombboxResModel();
-		try {
-			resModel.setList(service.getChildenList(model.getCodename()));
-			resStr = JsonUtil.serializer(resModel);
-		} catch (Exception e) {
-			resStr = this.getFailResult(e.getMessage());
-		}
-
-		returnData(resStr);
-	}
 }
