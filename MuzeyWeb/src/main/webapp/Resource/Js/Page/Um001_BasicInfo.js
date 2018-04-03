@@ -1,9 +1,8 @@
 ﻿angular.module('myApp')
-    .controller('Um001_BasicInfoCtrl', function ($scope, netRequest, dialog, sysMessage, fileUpLoad, authority, $compile) {
+    .controller('Um001_BasicInfoCtrl', function ($scope, netRequest, dialog, sysMessage) {
 
     	$scope.condition = {};
         $scope.totalCount = 0;
-        $scope.authority = authority;
         $scope.selectedIndex;
         $scope.showImport = false;
         $scope.attachList = [];
@@ -82,7 +81,7 @@
             }
         });
     }])
-    .directive('umbasicEdit', function (netRequest, dialog, validate, sysMessage) {
+    .directive('umbasicEdit', function (netRequest, dialog, validate, sysMessage, codeListUtil) {
         return {
             scope: {
                 afterCommit: "&"
@@ -146,21 +145,25 @@
                 // 初始化用户类型下拉列表
                 $scope.initUmType = function () {
                 	
-                	 var reqType = {};
-                	 reqType.codename = "Um_Type";
-                	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", reqType, function (res) {
-                        $scope.UmTypeList = res.list;
-                    });
+//                	 var reqType = {};
+//                	 reqType.codename = "Um_Type";
+//                	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", reqType, function (res) {
+//                        $scope.UmTypeList = res.list;
+//                    });
+                	
+                	$scope.UmTypeList = codeListUtil.getChildenList('Um_Type').list;
                 }
                 
                 // 初始化用户加入渠道下拉列表
                 $scope.initUmRoad = function () {
                 	
-                	 var reqRoad = {};
-                	 reqRoad.codename = "Um_Road";
-                	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", reqRoad, function (res) {
-                        $scope.UmRoadList = res.list;
-                    });
+//                	 var reqRoad = {};
+//                	 reqRoad.codename = "Um_Road";
+//                	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", reqRoad, function (res) {
+//                        $scope.UmRoadList = res.list;
+//                    });
+                	
+                	$scope.UmRoadList = codeListUtil.getChildenList('Um_Road').list;
                 }
             }
         };

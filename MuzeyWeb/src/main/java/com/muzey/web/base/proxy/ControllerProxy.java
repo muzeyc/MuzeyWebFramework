@@ -81,7 +81,7 @@ public class ControllerProxy {
      * @return
      * @throws Throwable
      */
-    @Around("controllerAspect()")
+    @Around("execution(* *(..)) && controllerAspect()")
     public Object around(ProceedingJoinPoint pjp) throws Throwable {
 
         Object objController = null;

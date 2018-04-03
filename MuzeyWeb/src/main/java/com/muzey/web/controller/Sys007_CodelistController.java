@@ -177,7 +177,7 @@ public class Sys007_CodelistController extends BaseController {
 	 * 取得商户的状态
 	 * 
 	 */
-	@RequestMapping(value = "/getChildenList", method = RequestMethod.POST)
+	@RequestMapping(value = "/getChildenList", method = RequestMethod.GET)
 	public void getChildenList(CodeListModel model) {
 
 		String resStr = "";

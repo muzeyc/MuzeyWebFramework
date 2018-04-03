@@ -563,6 +563,26 @@ angular.module('myApp')
         	nowAddress : nowAddress
         } 
     }])
+    .factory('codeListUtil', [function () {
+
+        return {
+        	getChildenList:function(codename){
+        		
+        		var resData = {};
+        		
+        		$.ajax({
+        		    url: "/MuzeyWeb/Sys007_CodeListInfo/getChildenList?codename=" + codename,
+        		    dataType: "json",
+        		    async: false,
+        		    success: function (data) {
+        		    	resData = data;
+        		    }
+        		});
+        		
+        		return resData;
+        	}
+        }
+    }])
     .factory('sysMessage', [function () {
 
         return {
