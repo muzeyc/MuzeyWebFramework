@@ -382,6 +382,8 @@ angular.module('myApp')
     	var nowCity = {};
     	var nowArea = {};
     	var nowAddress = {};
+    	var codeToNameMap = new Map();
+    	var nameToCodeMap = new Map();
     	
         var defaults = {
             dataUrl:'http://passer-by.com/data_location/list.json',     //数据库地址
@@ -412,6 +414,8 @@ angular.module('myApp')
             	datas = data;
             	for(code in datas){
             		
+            		codeToNameMap.put(code,datas[code]);
+            		nameToCodeMap.put(datas[code],code);
             		if(datas[code] == remote_ip_info['province'] 
             		+ (remote_ip_info['province'] == remote_ip_info['city'] ? '市' : '省')){
             			nowProvince.code = code;
@@ -559,6 +563,14 @@ angular.module('myApp')
             	});
         		
         		return townsList;
+        	},
+        	getCode : function(name){
+        		
+        		return nameToCodeMap.get(name);
+        	},
+        	getName : function(code){
+        		
+        		return codeToNameMap.get(code);
         	},
         	nowAddress : nowAddress
         } 

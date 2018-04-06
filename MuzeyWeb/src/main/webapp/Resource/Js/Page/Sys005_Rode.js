@@ -1,9 +1,8 @@
 ﻿angular.module('myApp')
-.controller('Sys005_RodeInfoCtrl',function($scope, netRequest, dialog, sysMessage, fileUpLoad,authority, $compile,cityUtil) {
+.controller('Sys005_RodeInfoCtrl',function($scope, netRequest, dialog, sysMessage, cityUtil) {
 
 					$scope.condition = {};
 					$scope.totalCount = 0;
-					$scope.authority = authority;
 					$scope.selectedIndex;
 					$scope.showImport = false;
 					$scope.attachList = [];
@@ -15,15 +14,15 @@
 							width : "25%"
 						}, {
 							label : "省",
-							name :  "province",
+							name :  "provinceName",
 							width : "25%"
 						}, {
 							label : "市",
-							name :  "city",
+							name :  "cityName",
 							width : "25%"
 						}, {
 							label : "区",
-							name : "dmdistrict",
+							name : "dmdistrictName",
 							width : "25%"
 						}, ],
 					};
@@ -35,11 +34,15 @@
 					$scope.onNew = function() {
 						$scope.$broadcast("showSys005_RodeEdit", "new", {},
 								$scope.more, $scope.condition.selName);
+						
+						$scope.refresh();
 					}
 
 					$scope.onEdit = function(item) {
 						$scope.$broadcast("showSys005_RodeEdit", "edit", item,
 								$scope.more, $scope.condition.selName);
+						
+						$scope.refresh();
 					}
 
 					$scope.onDelete = function(items) {
@@ -50,11 +53,10 @@
 						};
 						req.rodeList = items;
 						$scope.basic = angular.copy(items);
-						netRequest.post("/MuzeyWeb/Sys005_Rode/delete",
-								$scope.basic[0], function(res) {
-									$scope.rodeList = res.rodeList;
-									$scope.totalCount = res.totalCount;
-								});
+						netRequest.post("/MuzeyWeb/Sys005_Rode/delete",$scope.basic[0], function(res) {
+							$scope.rodeList = res.rodeList;
+							$scope.totalCount = res.totalCount;
+						});
 					}
 
 					$scope.afterCommit = function(res) {
@@ -73,8 +75,13 @@
 							size : size
 						};
 						req.selName = $scope.condition.selName;
-						netRequest.post("/MuzeyWeb/Sys005_Rode", req, function(
-								res) {
+						netRequest.post("/MuzeyWeb/Sys005_Rode", req, function(res) {
+							for(var i=0;i<res.rodeList.length;i++){
+								
+								res.rodeList[i].provinceName = cityUtil.getName(res.rodeList[i].province);
+								res.rodeList[i].cityName = cityUtil.getName(res.rodeList[i].city);
+								res.rodeList[i].dmdistrictName = cityUtil.getName(res.rodeList[i].dmdistrict);
+							}
 							$scope.rodeList = res.rodeList;
 							$scope.totalCount = res.totalCount;
 						});
@@ -105,28 +112,24 @@
 			afterCommit : "&"
 		},controller : ['$scope',function($scope) {
 			
-			$scope.onProvinceChange = function(val){
+	    	$scope.onProvinceChange = function(val){
 	    		
 	    		$scope.cityList = cityUtil.getCityList(val);
-	    		$scope.rode.city = $scope.cityList[0].subId;
-	    		$scope.onCityChange($scope.rode.city);
+	    		$scope.cityCode = $scope.cityList[0].subId;
+	    		$scope.onCityChange($scope.cityCode);
 	    	}
 	    	
 	    	$scope.onCityChange = function(val){
 	    		
 	    		$scope.areaList = cityUtil.getAreaList(val);
-	    		$scope.rode.dmdistrict = $scope.areaList[0].subId;
+	    		$scope.areaCode = $scope.areaList[0].subId;
+	    		$scope.onAreaChange($scope.areaCode);
 	    	}
 	    	
-	    	$scope.getAddressNow = function(){
+	    	$scope.onAreaChange = function(val){
 	    		
-	    		$scope.rode.province = cityUtil.nowAddress.province.code;
-	    		$scope.onProvinceChange(cityUtil.nowAddress.province.code);
-	    		$scope.rode.city = cityUtil.nowAddress.city.code;
-	    		$scope.onCityChange(cityUtil.nowAddress.city.code);
-	    		if(cityUtil.nowAddress.area){
-	    			$scope.rode.dmdistrict = cityUtil.nowAddress.area.code;
-	    		}
+	    		$scope.townsList = cityUtil.getTownList(val);
+	    		$scope.townsCode = $scope.townsList[0].subId;
 	    	}
 			
 			   $scope.cancel = function () {
@@ -164,6 +167,9 @@
 						$scope.provinceList = cityUtil.provinceList;
 						$scope.rode.province = rode.province;
 						$scope.onProvinceChange($scope.rode.province);
+						$scope.rode.city = rode.city;
+						$scope.onCityChange($scope.rode.city);
+						$scope.rode.area = rode.area;
 					}
 					if ("new" == mode) {
 						$scope.more.offset = 0;
