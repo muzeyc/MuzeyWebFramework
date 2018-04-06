@@ -41,7 +41,6 @@ public class DBHelper {
 	 */
 	public void transactionMod() {
 
-		System.out.println("transaction start");
 		transactionFlag = true;
 		try {
 
@@ -59,8 +58,6 @@ public class DBHelper {
 	 * 事物提交
 	 */
 	public void transactionCommit() {
-
-		System.out.println("transaction commit");
 
 		try {
 

@@ -2,6 +2,7 @@
 .controller('pageMainCtrl', function ($scope, $rootScope, netRequest) {
     var init = function () {
         netRequest.get("/MuzeyWeb/Login/setAuthority", function (res) {
+        	
             $("#hidUserId").val(res.loginModel.userId);
             $("#hidUserName").val(res.loginModel.userName);
             $("#hidCanCreate").val(res.loginModel.canCreate);

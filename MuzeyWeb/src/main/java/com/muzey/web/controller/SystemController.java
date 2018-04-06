@@ -13,7 +13,7 @@ import com.muzey.web.service.MenuService;
 
 @RestController
 @RequestMapping("/SystemManage")
-public class SystemController extends BaseController {
+public class SystemController extends BaseController { 
 
     @MuzeyAutowired
     private MenuService service;

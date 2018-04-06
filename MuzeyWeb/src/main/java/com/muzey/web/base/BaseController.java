@@ -24,7 +24,19 @@ public class BaseController {
 
         ResponseModelBase resModel = new ResponseModelBase();
         resModel.result = ResponseModelBase.FAILED;
-        resModel.errMessage = errMessage;
+        resModel.errMessage = errMessage; 
+
+        return JsonUtil.serializer(resModel);
+    }
+    
+    /**
+     * 没有登陆
+     */
+    public String getNoLoginResult() {
+
+        ResponseModelBase resModel = new ResponseModelBase();
+        resModel.result = ResponseModelBase.NOT_LOGIN;
+        resModel.errMessage = "没有登陆或登陆信息过期！";
 
         return JsonUtil.serializer(resModel);
     }

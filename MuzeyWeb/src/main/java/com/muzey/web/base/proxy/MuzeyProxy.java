@@ -20,17 +20,20 @@ public class MuzeyProxy implements MethodInterceptor {
 
         Object o1 = null;
         DBHelper db = (DBHelper) o.getClass().getField("dbHelper").get(o);
+        System.out.println(o.getClass() + "transactionStart");
         db.transactionMod();
         try{
             
             o1 = methodProxy.invokeSuper(o, args);
+            System.out.println(o.getClass() + "transactionCommit");
             db.transactionCommit();
         }
         catch(Exception e){
             
+        	System.out.println(o.getClass() + "transactionRollBack");
             db.transactionRollBack();
             System.err.println(e.getMessage());
-            throw new Exception("Service发生错误:" + e.getMessage());
+            throw new Exception(o.toString() + "-->Throw-->" + e.getMessage());
         }
         
         return o1;

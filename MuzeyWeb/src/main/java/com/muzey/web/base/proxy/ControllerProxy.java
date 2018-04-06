@@ -35,7 +35,6 @@ public class ControllerProxy {
     @Pointcut("execution(* com.muzey.web.controller..*.*(..))")
     private void controllerAspect() {
 
-        System.out.println("controllerAspect................");
     }
 
     /**
@@ -44,7 +43,6 @@ public class ControllerProxy {
     @Before("controllerAspect()")
     public void doBefore() {
 
-        System.out.println("Aspect start");
     }
 
     /**
@@ -53,7 +51,6 @@ public class ControllerProxy {
     @After("controllerAspect()")
     public void after() {
 
-        System.out.println("controllerAspect end");
     }
 
     /**
@@ -62,7 +59,6 @@ public class ControllerProxy {
     @AfterReturning("controllerAspect()")
     public void doAfter() {
 
-        System.out.println("controllerAspect AfterReturning");
     }
 
     /**
@@ -71,7 +67,6 @@ public class ControllerProxy {
     @AfterThrowing("controllerAspect()")
     public void doAfterThrow() {
 
-        System.out.println("Aspect throw-----------------------------------");
     }
 
     /**
@@ -93,11 +88,12 @@ public class ControllerProxy {
         Object[] param = null;
         Object resObj = null;
         // 拦截的方法名称。当前正在执行的方法
-        // String methodName = pjp.getSignature().getName();
+        String methodName = pjp.getSignature().getName();
         // 拦截的方法参数
         param = pjp.getArgs();
         try {
             objController = pjp.getTarget();
+            System.out.println(objController.toString() + "-->" + methodName + "--->Start");
             clazz = objController.getClass();
             clazz.getField("request").set(objController, request);
             clazz.getField("response").set(objController, response);
@@ -168,10 +164,11 @@ public class ControllerProxy {
 
                 param[0] = paramObj;               
                 resObj = pjp.proceed(param);
+                System.out.println(objController.toString() + "-->" + methodName + "--->End");
             }
         } catch (Exception e) {
 
-            System.err.println(e.getMessage());
+        	System.out.println(objController.toString() + "-->" + methodName + "--->Throw--->" + e.getMessage());
             ResponseModelBase resModel = new ResponseModelBase();
             resModel.result = ResponseModelBase.FAILED;
             resModel.errMessage = e.getMessage();

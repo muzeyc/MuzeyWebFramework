@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.muzey.dto.Sys_userinfoDto;
+import com.muzey.until.CheckUtil;
 import com.muzey.until.CookieUtil;
 import com.muzey.until.JsonUtil;
 import com.muzey.until.StringUtil;
-import com.muzey.until.SupFtpUtil;
 import com.muzey.web.base.BaseController;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.constant.CommonConst;
@@ -27,9 +27,6 @@ public class LoginController extends BaseController {
 
     @Autowired
     public Environment env;
-
-    @MuzeyAutowired
-    private SupFtpUtil ftpCom;
     
     @MuzeyAutowired
     private LoginService service;
@@ -93,6 +90,12 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/getLoginInfo", method = RequestMethod.GET)
     public void getLoginInfo() {
 
+    	if(CheckUtil.isNullOrEmpty(request.getCookies())){
+    		
+    		returnData(getNoLoginResult());
+    		return;
+    	}
+    	
         LoginResModel resModel = new LoginResModel();
         resModel.result = ResponseModelBase.SUCCESSED;
         LoginModel model = new LoginModel();
@@ -105,7 +108,13 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "/setAuthority", method = RequestMethod.GET)
     public void setAuthority() {
-
+ 
+    	if(CheckUtil.isNullOrEmpty(request.getCookies())){
+    		
+    		returnData(getNoLoginResult());
+    		return;
+    	}
+    	
         LoginResModel resModel = new LoginResModel();
         resModel.getLoginModel().setUserId(CookieUtil.getCookieValue(request, "UserIdDisp"));
         resModel.getLoginModel().setUserName(CookieUtil.getCookieValue(request, "UserName"));

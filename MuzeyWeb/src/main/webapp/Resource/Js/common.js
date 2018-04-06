@@ -18,7 +18,7 @@ angular.module('myApp')
                 }
                 else if (res.data.result == "no_login") {
                     hideLoading();
-                    //setMap.go("login");
+                    setMap.go("login");
                     $rootScope.$broadcast("showReLogin");
                 }
                 else {
@@ -55,12 +55,18 @@ angular.module('myApp')
                 $("body").find(".serviceLoading").remove();
             }
         }
+        
+        function reqSleep(){
+        	
+        	reqSleepTime += 500;
+        }
 
         var basePath = "../../";
 
         return {
             post: function (url, obj, callbackFunc, isNotShowLoading) {
-                if (isNotShowLoading == "undefined" || !isNotShowLoading) {
+                
+            	if (isNotShowLoading == "undefined" || !isNotShowLoading) {
                     showLoading();
                 }
                 var promise = $http.post(basePath + url, obj, commonConfig.postConfig);
