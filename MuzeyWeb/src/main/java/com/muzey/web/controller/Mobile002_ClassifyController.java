@@ -20,8 +20,8 @@ import com.muzey.web.model.req.Um002_ClassifyReqModel;
 import com.muzey.web.model.res.Um002_ClassifyResModel;
 
 @RestController
-@RequestMapping("/Um002_Classify")
-public class Um002_ClassifyController extends BaseController {
+@RequestMapping("/Mobile002_Classify")
+public class Mobile002_ClassifyController extends BaseController {
 
     @RequestMapping(value = "/getLeftMenu", method = RequestMethod.POST)
     public void getLeftMenu(Um002_ClassifyReqModel reqModel) {

@@ -3,7 +3,7 @@
     	var init = function() {
     		var req = {};
     		req.dmid = $state.dmid;
-    		netRequest.post("/MuzeyWeb/Um002_Classify/getLeftMenu", req, function (res) {
+    		netRequest.post("/MuzeyWeb/Mobile002_Classify/getLeftMenu", req, function (res) {
     			$scope.leftDatas = res.leftDatas;
             });
 		}
@@ -12,7 +12,7 @@
     		var req = {};
     		req.dmid = $state.dmid;
     		req.dmclassify = name;
-    		netRequest.post("/MuzeyWeb/Um002_Classify/getRigthData", req, function (res) {
+    		netRequest.post("/MuzeyWeb/Mobile002_Classify/getRigthData", req, function (res) {
     			$scope.rigthDatas = res.rigthDatas;
             });
 		}
