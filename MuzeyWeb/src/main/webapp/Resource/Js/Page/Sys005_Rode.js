@@ -119,26 +119,31 @@
 			afterCommit : "&"
 		},controller : ['$scope',function($scope) {
 			
-	    	$scope.onProvinceChange = function(val){
+	        $scope.onProvinceChange = function(val){
 	    		
 	    		$scope.cityList = cityUtil.getCityList(val);
-	    		$scope.cityCode = $scope.cityList[0].subId;
-	    		$scope.onCityChange($scope.cityCode);
+	    		$scope.rode.city = $scope.cityList[0].subId;
+	    		$scope.onCityChange($scope.rode.city);
 	    	}
 	    	
 	    	$scope.onCityChange = function(val){
 	    		
 	    		$scope.areaList = cityUtil.getAreaList(val);
-	    		$scope.areaCode = $scope.areaList[0].subId;
-	    		$scope.onAreaChange($scope.areaCode);
+	    		$scope.rode.dmdistrict = $scope.areaList[0].subId;
 	    	}
 	    	
-	    	$scope.onAreaChange = function(val){
+	    	$scope.getAddressNow = function(){
 	    		
-	    		$scope.townsList = cityUtil.getTownList(val);
-	    		$scope.townsCode = $scope.townsList[0].subId;
+	    		$scope.rode.province = cityUtil.nowAddress.province.code;
+	    		$scope.onProvinceChange(cityUtil.nowAddress.province.code);
+	    		$scope.rode.city = cityUtil.nowAddress.city.code;
+	    		$scope.onCityChange(cityUtil.nowAddress.city.code);
+	    		if(cityUtil.nowAddress.area){
+	    			$scope.rode.dmdistrict = cityUtil.nowAddress.area.code;
+	    		}
 	    	}
-			
+	    	
+	    	
 			   $scope.cancel = function () {
                    $scope.show = false;
                }
