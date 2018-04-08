@@ -60,6 +60,13 @@
 					}
 
 					$scope.afterCommit = function(res) {
+						
+						for(var i=0;i<res.rodeList.length;i++){
+							
+							res.rodeList[i].provinceName = cityUtil.getName(res.rodeList[i].province);
+							res.rodeList[i].cityName = cityUtil.getName(res.rodeList[i].city);
+							res.rodeList[i].dmdistrictName = cityUtil.getName(res.rodeList[i].dmdistrict);
+						}
 						$scope.rodeList = res.rodeList;
 						$scope.totalCount = res.totalCount;
 					}
