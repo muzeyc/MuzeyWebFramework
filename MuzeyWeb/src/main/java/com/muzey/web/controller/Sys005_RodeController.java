@@ -44,6 +44,27 @@ public class Sys005_RodeController extends BaseController {
 	}
 
 	/**
+	 * 根据ID取得省市区数据
+	 * 
+	 * @param model
+	 */
+	@RequestMapping(value = "/GetData", method = RequestMethod.POST)
+	public void GetRoidData(RodeModel model) {
+
+		String resStr = "";
+		RodeResModel resModel = new RodeResModel();
+		try {
+
+			resModel = service.GetRoidData(model);
+			resStr = JsonUtil.serializer(resModel);
+		} catch (Exception e) {
+			resStr = this.getFailResult(e.getMessage());
+		}
+
+		returnData(resStr);
+	}
+	
+	/**
 	 * <p>
 	 * 街道信息新增Control
 	 * </p>

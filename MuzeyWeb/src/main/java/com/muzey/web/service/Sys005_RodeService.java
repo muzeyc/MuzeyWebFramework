@@ -52,6 +52,34 @@ public class Sys005_RodeService extends MuzeyService {
 		return resModel;
 	}
 
+	/***
+	 * 根据ID取得省市区数据
+	 * 
+	 * @param model
+	 */
+	public RodeResModel GetRoidData(RodeModel model) {
+
+		Sys_rodeDto pkDto = new Sys_rodeDto();
+		pkDto.setId(model.getId());
+		
+		Sys_rodeDto rodeDto = rodeBL.getDtoByPK(pkDto);
+
+		List<RodeModel> rodeList = new ArrayList<RodeModel>();
+		RodeModel modelReult = new RodeModel();
+
+		modelReult.setId(rodeDto.getId());
+		modelReult.setName(rodeDto.getName());
+		modelReult.setProvince(rodeDto.getProvince());
+		modelReult.setCity(rodeDto.getCity());
+		modelReult.setDmdistrict(rodeDto.getDmdistrict());
+
+		rodeList.add(modelReult);
+		
+		RodeResModel resModel = new RodeResModel();
+		resModel.setRodeList(rodeList);
+		return resModel;
+	}
+
 	/**
 	 * <p>
 	 * 街道信息新增Impl
@@ -114,18 +142,18 @@ public class Sys005_RodeService extends MuzeyService {
 
 		rodeBL.deleteDto(rodeDto);
 	}
-	
+
 	public List<CombboxModel> GetRodeList() {
 
 		List<CombboxModel> list = new ArrayList<CombboxModel>();
 		List<Sys_rodeDto> dtoList = rodeBL.getDtoList("");
 		CombboxModel model;
-	
+
 		for (Sys_rodeDto dto : dtoList) {
-				model = new CombboxModel();
-				model.setSubId(StringUtil.toStr(dto.getId()));
-				model.setName(dto.getName());
-				list.add(model);
+			model = new CombboxModel();
+			model.setSubId(StringUtil.toStr(dto.getId()));
+			model.setName(dto.getName());
+			list.add(model);
 		}
 
 		return list;

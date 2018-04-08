@@ -1,13 +1,25 @@
 ﻿<popup width="600" height="400" title="小区信息" show="show">
 <div class="modal-body" id="validate">
 	<div class="inputBar">
-			 <combbox caption="街道名称" ng-model="community.roadid" list="rodeList" width="300" mustinput="true"></combbox>
+			 <combbox caption="街道名称" ng-model="community.roadid" list="rodeList"  width="300" mustinput="true" on-change="onRoidChange(val)"></combbox>
 	</div>
 		<div class="inputBar">
+		<text-box-normal caption="省" ng-model="community.provinceName" width="300"
+			mustinput="true" readonly="readonly"></text-box-normal>
+	</div>
+		<div class="inputBar">
+		<text-box-normal caption="市" ng-model="community.cityName" width="300"
+			mustinput="true" readonly="readonly"></text-box-normal>
+	</div>
+		<div class="inputBar">
+		<text-box-normal caption="区" ng-model="community.dmdistrictName" width="300"
+			mustinput="true" readonly="readonly"></text-box-normal>
+	</div>
+	<div class="inputBar">
 		<text-box-normal caption="小区名" ng-model="community.name" width="300"
 			mustinput="true"></text-box-normal>
 	</div>
-			<div class="inputBar">
+	<div class="inputBar">
 		<text-box-normal caption="地址" ng-model="community.address" width="300"
 			mustinput="true"></text-box-normal>
 	</div>
