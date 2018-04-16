@@ -91,9 +91,7 @@
 					$scope.refresh();
 				})
 		.config(
-				[
-						'$stateProvider',
-						'$urlRouterProvider',
+				['$stateProvider','$urlRouterProvider',
 						function($stateProvider, $urlRouterProvider) {
 							var pageName = "Sys006_Community";
 							var url = "/" + pageName;
@@ -114,7 +112,7 @@
 						} ])
 		.directive(
 				'communityEdit',
-				function(netRequest, dialog, validate, sysMessage) {
+				function(netRequest, dialog, validate, sysMessage,cityUtil,roidListUtil) {
 					return {
 						scope : {
 							afterCommit : "&"
@@ -123,6 +121,19 @@
 								'$scope',
 								function($scope) {
 
+								  	$scope.onRoidChange = function(val){
+							    		
+										var req = {};
+										req.id = val;
+											req.id = val;
+											netRequest.post("/MuzeyWeb/Sys005_Rode/GetData", req, function(res) {
+												
+												$scope.community.provinceName = cityUtil.getName(res.rodeList[0].province);
+												$scope.community.cityName = cityUtil.getName(res.rodeList[0].city);
+												$scope.community.dmdistrictName = cityUtil.getName(res.rodeList[0].dmdistrict);
+											});
+							    	}
+									
 									$scope.basic = {};
 
 									$scope.cancel = function() {
@@ -176,6 +187,7 @@
 								$scope.community = angular.copy(community);
 								$scope.more = more;
 								if ("edit" == mode) {
+									$scope.onRoidChange($scope.community.roadid);
 								}
 								if ("new" == mode) {
 									$scope.more.offset = 0;
@@ -186,12 +198,9 @@
 							});
 							// 初始化街道名称下拉列表
 							$scope.init = function() {
-								netRequest.get(
-										"/MuzeyWeb/Sys005_Rode/GetRodeList",
-										function(res) {
-											$scope.rodeList = res.list;
-											$scope.show = !$scope.show;
-										});
+								
+								$scope.rodeList = roidListUtil.getRodeList().list;
+								$scope.show = !$scope.show;
 							}
 						}
 					};
