@@ -2,7 +2,7 @@
     .controller('classifyCtrl', function ($scope, setMap, netRequest, $state) {
     	var init = function() {
     		var req = {};
-    		req.dmid = $state.dmid;
+    		req.dmid = $state.params.dmid;
     		netRequest.post("/MuzeyWeb/Mobile002_Classify/getLeftMenu", req, function (res) {
     			$scope.leftDatas = res.leftDatas;
             });
@@ -67,7 +67,7 @@
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $stateProvider
         .state('mobilePage.classify', {
-            url: '/classify',
+            url: '/classify?dmid',
             cache: 'false',
             views: {
                 'mainView': {

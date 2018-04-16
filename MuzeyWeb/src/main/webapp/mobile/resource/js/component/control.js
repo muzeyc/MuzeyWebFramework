@@ -56,7 +56,7 @@ angular.module('myApp')
                     }
             	}
             	
-            	$scope.onItemClick($scope.datas[0].name);
+//            	$scope.onItemClick($scope.datas[0].name);
             }],
             templateUrl: 'view/component/overflowList.html?v=' + Math.random(),
         };
