@@ -19,6 +19,7 @@ import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.PhotoInfoListModel;
 import com.muzey.web.model.PhotoInfoModel;
 import com.muzey.web.model.req.Sys008_PhotoInfoReqModel;
+import com.muzey.web.model.res.ResponseModelBase;
 import com.muzey.web.model.res.Sys008_PhotoInfoResModel;
 
 @RestController
@@ -74,5 +75,14 @@ public class Sys008_PhotoInfoController extends BaseController {
         }
 
         returnData(resStr);
+    }
+    
+    @RequestMapping(value="/newPhoto", method = RequestMethod.POST)
+    public void newPhoto(Sys008_PhotoInfoReqModel reqModel) {
+    	
+    	Sys_pictureinfoDto dto = new Sys_pictureinfoDto();
+    	BeanUtils.copyProperties(reqModel, dto);
+    	pictureinfoBL.insertDto(dto);
+    	returnData(new ResponseModelBase());
     }
 }

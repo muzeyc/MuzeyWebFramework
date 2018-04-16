@@ -13,7 +13,8 @@
     	$scope.imageClick = function (num,photo){
     		photo.height = $('#img' + num)[0].naturalHeight;
     		photo.width =  $('#img' + num)[0].naturalWidth;
-    		$scope.$broadcast("showPhotoEdit", photo);
+    		photo.src = 'http://law02.gotoip55.com/images/csgimg/' + photo.name;
+    		$scope.$broadcast("showPhotoEdit", "new", photo);
     	}
     	
     	var init = function() {
@@ -25,6 +26,11 @@
     			$scope.photoList = res.photoList;
             });
 		}
+    	
+        $scope.afterCommit = function (res) {
+        	init();
+        }
+    	
     	init();
     })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -41,7 +47,7 @@
             }
         });
     }])
-    .directive('photoedit', function (netRequest, dialog, validate) {
+    .directive('photoedit', function (netRequest, dialog, validate, sysMessage) {
         return {
             scope: {
                 afterCommit: "&"
@@ -80,26 +86,34 @@
                     if (!validate.doValidate("#validateEdit")) {
                         return;
                     }
-                    if ($scope.mode == "new") {
-                        if (!$scope.serialNoList || $scope.serialNoList.length <= 0) {
-                            dialog.showDialog("error", "请录入加工序列号！", {});
-                            return;
-                        }
-                    }
 
                     var req = angular.copy($scope.photo);
-                    netRequest.post("/MuzeyWeb/Sys008_PhotoInfo/" + $scope.mode, req, function (res) {
-                        $scope.show = false;
-                        if ($scope.afterCommit) {
-                            $scope.afterCommit({ res: res });
+                    netRequest.post("/MuzeyWeb/Sys008_PhotoInfo/" + $scope.mode + 'Photo', req, function (res) {
+                        if (res.result == "ok") {
+
+                            dialog.showDialog("info", sysMessage.sys0004, {
+                                afterCommit: function () {
+
+                                    $scope.show = false;
+                                    if ($scope.afterCommit) {
+                                        $scope.afterCommit({ res: res });
+                                    }
+                                }
+                            });
                         }
                     });
                 }
             }],
             templateUrl: 'View/P000SysManage/Sys008_PhotoInfoEdit.html?v=' + Math.random(),
             link: function ($scope, iElm, iAttrs, controller) {
-                $scope.$on("showPhotoEdit", function (event, photo) {
+                $scope.$on("showPhotoEdit", function (event, mode, photo) {
                 	$scope.show = true;
+                	$scope.mode = mode;
+                	photo.type = '0';
+                	if(photo.id == 0){
+                		
+                		photo.id = null;
+                	}
                     $scope.photo = angular.copy(photo);
                 });
             }

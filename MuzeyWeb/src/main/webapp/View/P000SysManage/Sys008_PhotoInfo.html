@@ -15,7 +15,7 @@
   <div class="area-border" ng-repeat="type in typeList">
     <div class="box box-danger wip-group">
       <div class="box-header with-border">
-        <h4 class="box-title">{{wip.WIPID}}台/天</h4>
+        <h4 class="box-title">已入库</h4>
       </div>
       <div class="box-body">
         <img src="{{photo.src}}" ng-repeat="photo in type.photoList" />
@@ -38,4 +38,4 @@
     </div>
   </div>
 </div>
-<photoedit />
+<photoedit after-commit="afterCommit(res)"/>
