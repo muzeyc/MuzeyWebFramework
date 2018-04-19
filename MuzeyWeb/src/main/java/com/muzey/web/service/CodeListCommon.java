@@ -1,11 +1,10 @@
-package com.muzey.web.base;
+package com.muzey.web.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.base.DBHelper;
 import com.data.DataRow;
 import com.data.DataTable;
 import com.muzey.base.MuzeyService;
@@ -14,15 +13,13 @@ import com.muzey.web.model.CodeListModel;
 
 public class CodeListCommon extends MuzeyService {
 
-    private static DBHelper dbHelper = new DBHelper();
-
     /**
      * 根据父级查询所有子集数据
      * 
      * @param parentid
      * @return
      */
-    public static List<CodeListModel> GetCodeListChilden(String parentid) {
+    public List<CodeListModel> getCodeListChilden(String parentid) {
 
         List<CodeListModel> codeListRes = new ArrayList<CodeListModel>();
 
@@ -56,7 +53,7 @@ public class CodeListCommon extends MuzeyService {
      * @param parentid
      * @return
      */
-    public static Map<String, CodeListModel> GetCodeMap(String parentid) {
+    public Map<String, CodeListModel> GetCodeMap(String parentid) {
 
         Map<String, CodeListModel> codeListRes = new HashMap<String, CodeListModel>();
 

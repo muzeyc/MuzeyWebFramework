@@ -16,16 +16,20 @@ import com.muzey.until.JsonUtil;
 import com.muzey.until.SqlUtil;
 import com.muzey.until.StringUtil;
 import com.muzey.web.base.BaseController;
-import com.muzey.web.base.CodeListCommon;
+import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.CodeListModel;
 import com.muzey.web.model.Um002_MenuItemModel;
 import com.muzey.web.model.req.Um002_ClassifyReqModel;
 import com.muzey.web.model.res.Um002_ClassifyResModel;
+import com.muzey.web.service.CodeListCommon;
 
 @RestController
 @RequestMapping("/Mobile002_Classify")
 public class Mobile002_ClassifyController extends BaseController {
 
+	@MuzeyAutowired
+	private CodeListCommon cc;
+	
     @RequestMapping(value = "/getLeftMenu", method = RequestMethod.POST)
     public void getLeftMenu(Um002_ClassifyReqModel reqModel) {
 
@@ -71,7 +75,7 @@ public class Mobile002_ClassifyController extends BaseController {
      */
     private String getClassifyNameFromDic(String classify) {
 
-        Map<String, CodeListModel> map = CodeListCommon.GetCodeMap("Commodity_Classify");
+        Map<String, CodeListModel> map = cc.GetCodeMap("Commodity_Classify");
         return map.containsKey(classify) ? map.get(classify).getName() : "";
     }
 

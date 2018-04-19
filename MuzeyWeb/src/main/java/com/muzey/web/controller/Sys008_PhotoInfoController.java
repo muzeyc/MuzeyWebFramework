@@ -16,11 +16,13 @@ import com.muzey.until.FtpUtil;
 import com.muzey.until.JsonUtil;
 import com.muzey.web.base.BaseController;
 import com.muzey.web.base.annotation.MuzeyAutowired;
+import com.muzey.web.model.CodeListModel;
 import com.muzey.web.model.PhotoInfoListModel;
 import com.muzey.web.model.PhotoInfoModel;
 import com.muzey.web.model.req.Sys008_PhotoInfoReqModel;
 import com.muzey.web.model.res.ResponseModelBase;
 import com.muzey.web.model.res.Sys008_PhotoInfoResModel;
+import com.muzey.web.service.CodeListCommon;
 
 @RestController
 @RequestMapping("/Sys008_PhotoInfo")
@@ -28,6 +30,9 @@ public class Sys008_PhotoInfoController extends BaseController {
 
     @MuzeyAutowired
     private MuzeyBusinessLogic<Sys_pictureinfoDto> pictureinfoBL;
+    
+    @MuzeyAutowired
+    private CodeListCommon cc;
 
     @RequestMapping(method = RequestMethod.POST)
     public void onResearch(Sys008_PhotoInfoReqModel reqModel) {
@@ -41,20 +46,22 @@ public class Sys008_PhotoInfoController extends BaseController {
 
             List<Sys_pictureinfoDto> dtoList = pictureinfoBL.getDtoList("");
             for (Sys_pictureinfoDto dto : dtoList) {
-                if (!map.containsKey(dto.getName())) {
+                if (!map.containsKey(dto.getUsetype())) {
                     map.put(dto.getUsetype(), new ArrayList<PhotoInfoModel>());
                 }
                 PhotoInfoModel model = new PhotoInfoModel();
                 BeanUtils.copyProperties(dto, model);
                 map.get(dto.getUsetype()).add(model);
-
                 mapDb.put(dto.getName(), dto);
             }
             if (reqModel.getSearchType() == 1) {
+            	
+            	Map<String,CodeListModel> pictrueTypeMap = cc.GetCodeMap("Picture_Use_Type");
                 for (Map.Entry<String, List<PhotoInfoModel>> entry : map.entrySet()) {
                     PhotoInfoListModel listModel = new PhotoInfoListModel();
                     listModel.setUsetype(entry.getKey());
                     listModel.setphotoList(entry.getValue());
+                    listModel.setUsetypeName(pictrueTypeMap.get(listModel.getUsetype()).getName());
                     resModel.gettypeList().add(listModel);
                 }
             } else if (reqModel.getSearchType() == 2) {

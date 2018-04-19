@@ -62,19 +62,19 @@
 				} ];
             	
             	$scope.usetypeList = [ {
-					subId : "00",
+					subId : "A0",
 					name : "系统"
 				}, {
-					subId : 01,
+					subId : "A1",
 					name : "广告图片"
 				} , {
-					subId : 02,
+					subId : "A2",
 					name : "商品图片"
 				} , {
-					subId : 03,
+					subId : "A3",
 					name : "用户头像"
 				} , {
-					subId : 04,
+					subId : "A4",
 					name : "商户照片"
 				}];
             	
