@@ -92,7 +92,7 @@
             }
         });
     }])
-    .directive('basicEdit', function (netRequest, dialog, validate, sysMessage) {
+    .directive('basicEdit', function (netRequest, dialog, validate, sysMessage,codeListUtil) {
         return {
             scope: {
                 afterCommit: "&"
@@ -151,12 +151,8 @@
                 // 初始化商户状态下拉列表
                 $scope.init = function () {
                 	
-                	 var req = {};
-                	 req.codename = "Dm_State";
-                	 netRequest.post("/MuzeyWeb/Sys007_CodeListInfo/getChildenList", req, function (res) {
-                        $scope.DMStateList = res.list;
-                        $scope.show = !$scope.show;
-                    });
+                	$scope.DMStateList = codeListUtil.getChildenList('Dm_State').list;
+                	$scope.show=true;
                 }
             }
         };
