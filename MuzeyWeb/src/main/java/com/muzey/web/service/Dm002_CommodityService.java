@@ -60,9 +60,9 @@ public class Dm002_CommodityService extends MuzeyService {
 				DataRow dataRow = commodityDataTable.getRow(i);
 				DMCommodityModel model = new DMCommodityModel();
 
-				model.setDmid(StringUtil.toInt(dataRow.getData("dmid")));
+				model.setDmid(StringUtil.toStr(dataRow.getData("dmid")));
 				model.setDmidName(dataRow.getData("dmname"));
-				model.setCommodityid(StringUtil.toInt(dataRow.getData("commodityid")));
+				model.setCommodityid(StringUtil.toStr(dataRow.getData("commodityid")));
 				model.setCommodityNmae(dataRow.getData("commodityname"));
 				model.setDmclassify(dataRow.getData("dmclassify"));
 				modelList.add(model);
@@ -88,8 +88,8 @@ public class Dm002_CommodityService extends MuzeyService {
 
 		Dm_commodityDto dmcommodityDto = new Dm_commodityDto();
 
-		dmcommodityDto.setDmid(model.getDmid());
-		dmcommodityDto.setCommodityid(model.getCommodityid());
+		dmcommodityDto.setDmid(StringUtil.toInt(model.getDmid()));
+		dmcommodityDto.setCommodityid(StringUtil.toInt(model.getCommodityid()));
 		dmcommodityDto.setDmclassify(model.getDmclassify());
 
 		commodityBL.insertDto(dmcommodityDto);
@@ -107,12 +107,12 @@ public class Dm002_CommodityService extends MuzeyService {
 	public void update(DMCommodityModel model) {
 
 		Dm_commodityDto pkDto = new Dm_commodityDto();
-		pkDto.setDmid(model.getDmid());
-		pkDto.setCommodityid(model.getCommodityid());
+		pkDto.setDmid(StringUtil.toInt(model.getDmid()));
+		pkDto.setCommodityid(StringUtil.toInt(model.getCommodityid()));
 		Dm_commodityDto dmcommodityDto = commodityBL.getDtoByPK(pkDto);
 
-		dmcommodityDto.setDmid(model.getDmid());
-		dmcommodityDto.setCommodityid(model.getCommodityid());
+		dmcommodityDto.setDmid(StringUtil.toInt(model.getDmid()));
+		dmcommodityDto.setCommodityid(StringUtil.toInt(model.getCommodityid()));
 		dmcommodityDto.setDmclassify(model.getDmclassify());
 
 		commodityBL.updateDtoToAll(dmcommodityDto);
@@ -131,8 +131,8 @@ public class Dm002_CommodityService extends MuzeyService {
 
 		Dm_commodityDto commodityDto = new Dm_commodityDto();
 
-		commodityDto.setDmid(model.getDmid());
-		commodityDto.setCommodityid(model.getCommodityid());
+		commodityDto.setDmid(StringUtil.toInt(model.getDmid()));
+		commodityDto.setCommodityid(StringUtil.toInt(model.getCommodityid()));
 
 		commodityBL.deleteDto(commodityDto);
 	}

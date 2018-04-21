@@ -6,7 +6,6 @@ import java.util.List;
 import com.data.DataRow;
 import com.data.DataTable;
 import com.muzey.base.MuzeyService;
-import com.muzey.dto.Sys_codelistDto;
 import com.muzey.dto.Sys_commodityDto;
 import com.muzey.dto.Sys_pictureinfoDto;
 import com.muzey.helper.MuzeyBusinessLogic;
@@ -158,11 +157,30 @@ public class Sys009_CommodityService extends MuzeyService {
 	}
 
 	/***
-	 * 取得图片名称
+	 * 取得商品的List impl
 	 * 
-	 * @return
+	 * @author 花嫣染
+	 * @date 2018-04-23
 	 */
 	public List<CombboxModel> getPictureList() {
+
+		List<CombboxModel> list = new ArrayList<CombboxModel>();
+
+		List<Sys_commodityDto> dtoList = commodityBL.getDtoList("");
+
+		CombboxModel model = new CombboxModel();
+
+		for (Sys_commodityDto dto : dtoList) {
+			model = new CombboxModel();
+			model.setSubId(StringUtil.toStr(dto.getId()));
+			model.setName(dto.getName());
+			list.add(model);
+		}
+
+		return list;
+	}
+
+	public List<CombboxModel> getDMCommodityList() {
 
 		List<CombboxModel> list = new ArrayList<CombboxModel>();
 

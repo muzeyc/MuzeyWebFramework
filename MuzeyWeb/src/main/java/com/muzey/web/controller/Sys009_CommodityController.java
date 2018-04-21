@@ -146,6 +146,27 @@ public class Sys009_CommodityController extends BaseController {
 	 * 取得图片的List
 	 *
 	 */
+	@RequestMapping(value = "/getDMCommodityList", method = RequestMethod.GET)
+	public void getDMCommodityList() {
+
+		String resStr = "";
+		CombboxResModel resModel = new CombboxResModel();
+		try {
+			resModel.setList(service.getDMCommodityList());
+			resStr = JsonUtil.serializer(resModel);
+		} catch (Exception e) {
+			resStr = this.getFailResult(e.getMessage());
+		}
+
+		returnData(resStr);
+	}
+	
+	/***
+	 * 取得商品的List
+	 * 
+	 * @author 花嫣染
+	 * @date 2018-04-23
+	 */
 	@RequestMapping(value = "/getPictureList", method = RequestMethod.GET)
 	public void getPictureList() {
 
