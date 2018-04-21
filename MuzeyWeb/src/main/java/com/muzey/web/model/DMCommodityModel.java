@@ -2,17 +2,17 @@ package com.muzey.web.model;
 
 public class DMCommodityModel {
 
-	private int dmid;
+	private String dmid;
 	private String dmidName;
-	private int commodityid;
+	private String commodityid;
 	private String commodityNmae;
 	private String dmclassify;
 
-	public int getDmid() {
+	public String getDmid() {
 		return dmid;
 	}
 
-	public void setDmid(int dmid) {
+	public void setDmid(String dmid) {
 		this.dmid = dmid;
 	}
 
@@ -24,11 +24,11 @@ public class DMCommodityModel {
 		this.dmidName = dmidName;
 	}
 
-	public int getCommodityid() {
+	public String getCommodityid() {
 		return commodityid;
 	}
 
-	public void setCommodityid(int commodityid) {
+	public void setCommodityid(String commodityid) {
 		this.commodityid = commodityid;
 	}
 
