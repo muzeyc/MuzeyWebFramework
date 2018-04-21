@@ -1,0 +1,18 @@
+﻿<div class="top_search_bar">
+	<text-box-normal caption="商户名称" width="200" ng-model="condition.selDmName"></text-box-normal>
+	<text-box-normal caption="商品名称" width="200" ng-model="condition.selDMcommodity"></text-box-normal>
+	<button type="button" ng-click="refresh()" class="btn bg-green" style="margin-right: 10px">查询</button>
+</div>
+<div>
+	<pagegridview config="config" 
+	          refresh="refresh()"
+	          list="commodityList" 
+		      add="onNew()" 
+		      edit="onEdit(item)" 
+		      remove="onDelete(items)"
+		      pagechange="onPageChange(val)" 
+		      rowcount="{{more.size}}"
+		      totalrowcount="totalCount">
+     </pagegridview>
+</div>
+<comm-edit after-commit="afterCommit(res)"></comm-edit>
