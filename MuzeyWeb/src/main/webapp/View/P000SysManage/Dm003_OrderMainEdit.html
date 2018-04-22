@@ -1,0 +1,30 @@
+﻿<popup width="600" height="400" title="商户订单信息" show="show">
+<div class="modal-body" id="validate">
+	<div class="inputBar">
+		<combbox caption="商户名称" ng-model="commodity.dmid" width="300"
+			list="DMBasicInfoList" mustinput="true"></combbox>
+	</div>
+	<div class="inputBar">
+		<combbox caption="小区名称" ng-model="commodity.comid" width="300"
+			list="DMcommodityList" mustinput="true"></combbox>
+	</div>
+	<div class="inputBar">
+		<combbox caption="用户名称" ng-model="commodity.umid" width="300"
+			list="DMcommodityList" mustinput="true"></combbox>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="订单价格" ng-model="commodity.orderprice" width="300"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="备注" ng-model="commodity.remark" width="300"></text-box-normal>
+	</div>	
+	<div class="inputBar">
+		<combbox caption="订单状态" ng-model="commodity.state" width="300"
+			list="DMcommodityList" mustinput="true"></combbox>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+	<button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+</div>
+</popup>
