@@ -6,11 +6,13 @@ import java.util.List;
 import com.data.DataRow;
 import com.data.DataTable;
 import com.muzey.base.MuzeyService;
+import com.muzey.dto.Sys_commodityDto;
 import com.muzey.dto.Sys_communityDto;
 import com.muzey.helper.MuzeyBusinessLogic;
 import com.muzey.until.CheckUtil;
 import com.muzey.until.StringUtil;
 import com.muzey.web.base.annotation.MuzeyAutowired;
+import com.muzey.web.model.CombboxModel;
 import com.muzey.web.model.CommunityModel;
 import com.muzey.web.model.res.CommunityResModel;
 
@@ -139,6 +141,30 @@ public class Sys006_CommunityService extends MuzeyService {
 		communityDto.setId(model.getId());
 
 		communityBL.deleteDto(communityDto);
+	}
+	
+	/***
+	 * 取得小区的List impl
+	 * 
+	 * @author 花嫣染
+	 * @date 2018-04-23
+	 */
+	public List<CombboxModel> GetSYSCommodityList() {
+
+		List<CombboxModel> list = new ArrayList<CombboxModel>();
+
+		List<Sys_communityDto> dtoList = communityBL.getDtoList("");
+
+		CombboxModel model = new CombboxModel();
+
+		for (Sys_communityDto dto : dtoList) {
+			model = new CombboxModel();
+			model.setSubId(StringUtil.toStr(dto.getRoadid()));
+			model.setName(dto.getName());
+			list.add(model);
+		}
+
+		return list;
 	}
 
 }

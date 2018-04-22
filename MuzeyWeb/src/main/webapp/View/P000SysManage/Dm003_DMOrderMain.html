@@ -1,16 +1,15 @@
 ﻿<div class="top_search_bar">
-	<text-box-normal caption="商户名称" width="100" ng-model="condition.selDMName"></text-box-normal>
-	<text-box-normal caption="商户名称" width="100" ng-model="condition.selCommodityName"></text-box-normal>
-	<text-box-normal caption="商户名称" width="100" ng-model="condition.selComName"></text-box-normal>
-	<text-box-normal caption="商品名称" width="100" ng-model="condition.selUMName"></text-box-normal>
-	<text-box-normal caption="商品名称" width="100" ng-model="condition.selState"></text-box-normal>
+	<text-box-normal caption="商户名称" width="300" ng-model="condition.selDMName"></text-box-normal>
+	<text-box-normal caption="小区名称" width="300" ng-model="condition.selComName"></text-box-normal>
+	<text-box-normal caption="用户名称" width="300" ng-model="condition.selUMName"></text-box-normal>
+	<combbox caption="订单状态" width="300" ng-model="condition.selState" width="300" list="codeStateList" ></combbox>
+	
 	<button type="button" ng-click="refresh()" class="btn bg-green" style="margin-right: 10px">查询</button>
 </div>
 <div>
 	<pagegridview config="config" 
 	          refresh="refresh()"
 	          list="orderMainList" 
-		      add="onNew()" 
 		      edit="onEdit(item)" 
 		      remove="onDelete(items)"
 		      pagechange="onPageChange(val)" 

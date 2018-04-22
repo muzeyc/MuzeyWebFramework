@@ -651,6 +651,44 @@ angular.module('myApp')
         		return resData;
         	}
         }
+    }]).factory('SYSCommodityUtil', [function () {
+
+        return {
+        	getSYSCommodityList:function(){
+        		
+        		var resData = {};
+        		
+        		$.ajax({
+        		    url: "/MuzeyWeb/Sys006_Community/GetSYSCommodityList",
+        		    dataType: "json",
+        		    async: false,
+        		    success: function (data) {
+        		    	resData = data;
+        		    }
+        		});
+        		
+        		return resData;
+        	}
+        }
+    }]).factory('UMBasicInfoUtil', [function () {
+
+        return {
+        	getUMBasicInfoList:function(){
+        		
+        		var resData = {};
+        		
+        		$.ajax({
+        		    url: "/MuzeyWeb/Um001_BasicInfo/GetUMBasicInfoList",
+        		    dataType: "json",
+        		    async: false,
+        		    success: function (data) {
+        		    	resData = data;
+        		    }
+        		});
+        		
+        		return resData;
+        	}
+        }
     }])
     .factory('sysMessage', [function () {
 

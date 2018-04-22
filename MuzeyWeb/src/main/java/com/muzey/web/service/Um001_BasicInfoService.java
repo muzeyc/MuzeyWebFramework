@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.muzey.base.MuzeyService;
+import com.muzey.dto.Sys_communityDto;
 import com.muzey.dto.Um_basicinfoDto;
 import com.muzey.helper.MuzeyBusinessLogic;
 import com.muzey.until.StringUtil;
 import com.muzey.web.base.annotation.MuzeyAutowired;
+import com.muzey.web.model.CombboxModel;
 import com.muzey.web.model.UMBasicInfoModel;
 import com.muzey.web.model.res.UMBasicInfoResModel;
 
@@ -106,5 +108,29 @@ public class Um001_BasicInfoService extends MuzeyService {
 		basicDto.setId(model.getId());
 
 		basicBL.deleteDto(basicDto);
+	}
+	
+	/***
+	 * 取得用户的List impl
+	 * 
+	 * @author 花嫣染
+	 * @date 2018-04-23
+	 */
+	public List<CombboxModel> GetUMBasicInfoList() {
+
+		List<CombboxModel> list = new ArrayList<CombboxModel>();
+
+		List<Um_basicinfoDto> dtoList = basicBL.getDtoList("");
+
+		CombboxModel model = new CombboxModel();
+
+		for (Um_basicinfoDto dto : dtoList) {
+			model = new CombboxModel();
+			model.setSubId(StringUtil.toStr(dto.getId()));
+			model.setName(dto.getName());
+			list.add(model);
+		}
+
+		return list;
 	}
 }

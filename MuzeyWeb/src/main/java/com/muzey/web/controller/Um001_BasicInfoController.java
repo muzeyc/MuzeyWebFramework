@@ -11,6 +11,7 @@ import com.muzey.web.base.BaseController;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.UMBasicInfoModel;
 import com.muzey.web.model.req.UMBasicInfoReqModel;
+import com.muzey.web.model.res.CombboxResModel;
 import com.muzey.web.model.res.UMBasicInfoResModel;
 import com.muzey.web.service.Um001_BasicInfoService;
 
@@ -137,5 +138,27 @@ public class Um001_BasicInfoController extends BaseController {
 
 			returnData(resStr);
 		}
+	}
+	
+	
+	/***
+	 * 取得用户的List
+	 * 
+	 * @author 花嫣染
+	 * @date 2018-04-23
+	 */
+	@RequestMapping(value = "/GetUMBasicInfoList", method = RequestMethod.GET)
+	public void GetUMBasicInfoList() {
+
+		String resStr = "";
+		CombboxResModel resModel = new CombboxResModel();
+		try {
+			resModel.setList(service.GetUMBasicInfoList());
+			resStr = JsonUtil.serializer(resModel);
+		} catch (Exception e) {
+			resStr = this.getFailResult(e.getMessage());
+		}
+
+		returnData(resStr);
 	}
 }

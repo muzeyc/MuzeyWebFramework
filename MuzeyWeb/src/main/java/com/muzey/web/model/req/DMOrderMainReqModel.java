@@ -13,8 +13,7 @@ public class DMOrderMainReqModel extends RequestModelBase {
 
 	private List<DMOrderMainModel> orderMainList;
 
-	private String selDMName;
-	private String selCommodityName;
+	private String selDMName;	
 	private String selComName;
 	private String selUMName;
 	private String selState;
@@ -33,14 +32,6 @@ public class DMOrderMainReqModel extends RequestModelBase {
 
 	public void setSelDMName(String selDMName) {
 		this.selDMName = selDMName;
-	}
-
-	public String getSelCommodityName() {
-		return selCommodityName;
-	}
-
-	public void setSelCommodityName(String selCommodityName) {
-		this.selCommodityName = selCommodityName;
 	}
 
 	public String getSelComName() {

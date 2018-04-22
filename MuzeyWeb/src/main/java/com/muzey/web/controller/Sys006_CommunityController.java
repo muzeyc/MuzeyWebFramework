@@ -11,6 +11,7 @@ import com.muzey.web.base.BaseController;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.CommunityModel;
 import com.muzey.web.model.req.CommunityReqModel;
+import com.muzey.web.model.res.CombboxResModel;
 import com.muzey.web.model.res.CommunityResModel;
 import com.muzey.web.service.Sys006_CommunityService;
 
@@ -139,5 +140,26 @@ public class Sys006_CommunityController extends BaseController {
 
 			returnData(resStr);
 		}
+	}
+	
+	/***
+	 * 取得小区的List
+	 * 
+	 * @author 花嫣染
+	 * @date 2018-04-23
+	 */
+	@RequestMapping(value = "/GetSYSCommodityList", method = RequestMethod.GET)
+	public void GetSYSCommodityList() {
+
+		String resStr = "";
+		CombboxResModel resModel = new CombboxResModel();
+		try {
+			resModel.setList(service.GetSYSCommodityList());
+			resStr = JsonUtil.serializer(resModel);
+		} catch (Exception e) {
+			resStr = this.getFailResult(e.getMessage());
+		}
+
+		returnData(resStr);
 	}
 }
