@@ -5,9 +5,11 @@ import java.util.List;
 
 import com.muzey.base.MuzeyService;
 import com.muzey.dto.Dm_basicinfoDto;
+import com.muzey.dto.Sys_pictureinfoDto;
 import com.muzey.helper.MuzeyBusinessLogic;
 import com.muzey.until.StringUtil;
 import com.muzey.web.base.annotation.MuzeyAutowired;
+import com.muzey.web.model.CombboxModel;
 import com.muzey.web.model.DMBasicInfoModel;
 import com.muzey.web.model.res.DMBasicInfoResModel;
 
@@ -119,5 +121,28 @@ public class Dm001_BasicInfoService extends MuzeyService {
 
 		basicBL.deleteDto(basicDto);
 	}
+	
+	/***
+	 * 取得商户的名称List impl
+	 * 
+	 * @author 花嫣染
+	 * @date 2018-04-23
+	 */
+	public List<CombboxModel> getDMBasicList() {
 
+		List<CombboxModel> list = new ArrayList<CombboxModel>();
+
+		List<Dm_basicinfoDto> dtoList = basicBL.getDtoList("");
+
+		CombboxModel model = new CombboxModel();
+
+		for (Dm_basicinfoDto dto : dtoList) {
+			model = new CombboxModel();
+			model.setSubId(StringUtil.toStr(dto.getId()));
+			model.setName(dto.getName());
+			list.add(model);
+		}
+
+		return list;
+	}
 }

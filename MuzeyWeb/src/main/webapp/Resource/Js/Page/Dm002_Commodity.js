@@ -78,7 +78,7 @@
             }
         });
     }])
-    .directive('commEdit', function (netRequest, dialog, validate, sysMessage,codeListUtil) {
+    .directive('commEdit', function (netRequest, dialog, validate, sysMessage,DMBasicUtil,CommodityUtil) {
         return {
             scope: {
                 afterCommit: "&"
@@ -133,15 +133,23 @@
                     $scope.selDmName = selDmName;
                     $scope.selDMcommodity = selDMcommodity;
                     
-                   // $scope.init();
+                    //商户名称
+                    $scope.GetDMBasicList();
+                    //商品名称
+                    $scope.GetDMCommodityList();
                 });
+             
+                $scope.GetDMBasicList = function () {
+                	
+                	$scope.DMBasicInfoList = DMBasicUtil.getDMBasicList().list;
+                }
                 
-                // 初始化商户状态下拉列表
-//                $scope.init = function () {
-//                	
-//                	$scope.DMStateList = codeListUtil.getChildenList('Dm_State').list;
-//                	$scope.show=true;
-//                }
+                $scope.GetDMCommodityList = function () {
+                	
+                	$scope.DMcommodityList = CommodityUtil.getDMCommodityList().list;
+                }
+                
+                
             }
         };
     });

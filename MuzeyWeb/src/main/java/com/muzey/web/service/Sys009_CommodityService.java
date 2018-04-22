@@ -162,7 +162,7 @@ public class Sys009_CommodityService extends MuzeyService {
 	 * @author 花嫣染
 	 * @date 2018-04-23
 	 */
-	public List<CombboxModel> getPictureList() {
+	public List<CombboxModel> getDMCommodityList() {
 
 		List<CombboxModel> list = new ArrayList<CombboxModel>();
 
@@ -180,7 +180,13 @@ public class Sys009_CommodityService extends MuzeyService {
 		return list;
 	}
 
-	public List<CombboxModel> getDMCommodityList() {
+	/***
+	 * 取得商品的圖片List impl
+	 *  
+	 * @author 花嫣染
+	 * @date 2018-04-23
+	 */
+	public List<CombboxModel> getPictureList() {
 
 		List<CombboxModel> list = new ArrayList<CombboxModel>();
 

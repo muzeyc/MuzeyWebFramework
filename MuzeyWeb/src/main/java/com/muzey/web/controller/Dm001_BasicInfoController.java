@@ -11,6 +11,7 @@ import com.muzey.web.base.BaseController;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.DMBasicInfoModel;
 import com.muzey.web.model.req.DMBasicInfoReqModel;
+import com.muzey.web.model.res.CombboxResModel;
 import com.muzey.web.model.res.DMBasicInfoResModel;
 import com.muzey.web.service.Dm001_BasicInfoService;
 
@@ -137,5 +138,25 @@ public class Dm001_BasicInfoController extends BaseController {
 
 			returnData(resStr);
 		}
+	}
+	/***
+	 * 取得商户的名称List
+	 * 
+	 * @author 花嫣染
+	 * @date 2018-04-23
+	 */
+	@RequestMapping(value = "/getDMBasicList", method = RequestMethod.GET)
+	public void getDMBasicList() {
+
+		String resStr = "";
+		CombboxResModel resModel = new CombboxResModel();
+		try {
+			resModel.setList(service.getDMBasicList());
+			resStr = JsonUtil.serializer(resModel);
+		} catch (Exception e) {
+			resStr = this.getFailResult(e.getMessage());
+		}
+
+		returnData(resStr);
 	}
 }

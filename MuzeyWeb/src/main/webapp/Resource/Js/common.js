@@ -594,8 +594,7 @@ angular.module('myApp')
         		return resData;
         	}
         }
-    }])
-     .factory('roidListUtil', [function () {
+    }]).factory('roidListUtil', [function () {
 
         return {
         	getRodeList:function(){
@@ -604,6 +603,44 @@ angular.module('myApp')
         		
         		$.ajax({
         		    url: "/MuzeyWeb/Sys005_Rode/GetRodeList",
+        		    dataType: "json",
+        		    async: false,
+        		    success: function (data) {
+        		    	resData = data;
+        		    }
+        		});
+        		
+        		return resData;
+        	}
+        }
+    }]).factory('DMBasicUtil', [function () {
+
+        return {
+        	getDMBasicList:function(){
+        		
+        		var resData = {};
+        		
+        		$.ajax({
+        		    url: "/MuzeyWeb/Dm001_BasicInfo/GetDMBasicList",
+        		    dataType: "json",
+        		    async: false,
+        		    success: function (data) {
+        		    	resData = data;
+        		    }
+        		});
+        		
+        		return resData;
+        	}
+        }
+    }]).factory('CommodityUtil', [function () {
+
+        return {
+        	getDMCommodityList:function(){
+        		
+        		var resData = {};
+        		
+        		$.ajax({
+        		    url: "/MuzeyWeb/Sys009_CommodityInfo/GetDMCommodityList",
         		    dataType: "json",
         		    async: false,
         		    success: function (data) {
