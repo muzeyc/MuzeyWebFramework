@@ -29,7 +29,7 @@ public class Dm002_CommodityService extends MuzeyService {
 		sbSql.append(" ,commodit.commodityid AS commodityid ");
 		sbSql.append(" ,sysCommodit.name AS commodityName ");
 		sbSql.append(
-				" ,(CASE WHEN commodit.dmclassify IS NOT NULL  THEN commodit.dmclassify    ELSE codelist.name  END) AS dmclassify ");
+				" ,(CASE WHEN commodit.dmclassify ='' THEN codelist.name WHEN commodit.dmclassify IS NOT NULL  THEN commodit.dmclassify    ELSE codelist.name  END) AS dmclassify ");
 		sbSql.append(" FROM ");
 		sbSql.append(" dm_commodity commodit ");
 		sbSql.append(" INNER JOIN ");
@@ -113,8 +113,8 @@ public class Dm002_CommodityService extends MuzeyService {
 
 		dmcommodityDto.setDmid(StringUtil.toInt(model.getDmid()));
 		dmcommodityDto.setCommodityid(StringUtil.toInt(model.getCommodityid()));
-		dmcommodityDto.setDmclassify(model.getDmclassify());
-
+		dmcommodityDto.setDmclassify(model.getDmclassify());			
+		
 		commodityBL.updateDtoToAll(dmcommodityDto);
 	}
 
