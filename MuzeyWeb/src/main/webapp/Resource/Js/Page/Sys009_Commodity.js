@@ -140,7 +140,7 @@
                 // 初始化商品分类下拉列表
                 $scope.GetClassify = function () {
                 	
-                	$scope.ClassifyList = codeListUtil.getChildenList('Classify').list;
+                	$scope.ClassifyList = codeListUtil.getChildenList('Commodity_Classify').list;
                 }
                 
                 // 初始化图片名称下拉列表
