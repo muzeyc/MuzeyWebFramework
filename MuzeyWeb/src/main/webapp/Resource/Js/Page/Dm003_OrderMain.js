@@ -67,7 +67,6 @@
         }
 
         $scope.GetState = function () {
-         	
          	$scope.codeStateList = codeListUtil.getChildenList('Order_State').list;
          }
         
