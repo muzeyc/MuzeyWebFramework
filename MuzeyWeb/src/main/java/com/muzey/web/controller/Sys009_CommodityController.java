@@ -169,7 +169,7 @@ public class Sys009_CommodityController extends BaseController {
 	 * @author 花嫣染
 	 * @date 2018-04-23
 	 */
-	@RequestMapping(value = "/getDMCommodityList", method = RequestMethod.GET)
+	@RequestMapping(value = "/GetDMCommodityList", method = RequestMethod.GET)
 	public void getDMCommodityList() {
 
 		String resStr = "";

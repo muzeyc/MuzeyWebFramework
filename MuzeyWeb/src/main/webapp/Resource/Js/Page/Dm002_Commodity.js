@@ -31,7 +31,7 @@
             var req = { action: "delete", offset: 0, size: $scope.more.size };
             req.commodityList = items;
             $scope.commodity=angular.copy(items);
-            netRequest.post("/MuzeyWeb/Dm001_BasicInfo/delete", $scope.commodity[0], function (res) {
+            netRequest.post("/MuzeyWeb/Dm002_CommodityInfo/delete", $scope.commodity[0], function (res) {
                 $scope.commodityList = res.commodityList;
                 $scope.totalCount = res.totalCount;
             });

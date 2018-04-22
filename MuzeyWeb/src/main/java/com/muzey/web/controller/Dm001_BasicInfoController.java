@@ -145,7 +145,7 @@ public class Dm001_BasicInfoController extends BaseController {
 	 * @author 花嫣染
 	 * @date 2018-04-23
 	 */
-	@RequestMapping(value = "/getDMBasicList", method = RequestMethod.GET)
+	@RequestMapping(value = "/GetDMBasicList", method = RequestMethod.GET)
 	public void getDMBasicList() {
 
 		String resStr = "";
