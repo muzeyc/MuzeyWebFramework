@@ -48,7 +48,7 @@ public class Sys009_CommodityService extends MuzeyService {
 		sbSql.append(" sys_codelist codeList ");
 		sbSql.append(" ON ");
 		sbSql.append(" codeList.codename = commodity.classify ");
-		sbSql.append(" AND codeList.parentid = 'Classify' ");
+		sbSql.append(" AND codeList.parentid = 'Commodity_Classify' ");
 		sbSql.append(" WHERE 1=1 ");
 		if (strWhere.trim() != "") {
 			sbSql.append(strWhere);
