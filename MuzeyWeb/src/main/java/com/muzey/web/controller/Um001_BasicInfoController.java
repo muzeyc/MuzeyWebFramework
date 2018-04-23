@@ -32,7 +32,7 @@ public class Um001_BasicInfoController extends BaseController {
 			String sql = "";
 
 			if (!CheckUtil.isNullOrEmpty(reqModel.getSelName())) {
-				sql += "AND name LIKE " + SqlUtil.partAgreeSql(reqModel.getSelName());
+				sql += "AND umBasic.name LIKE " + SqlUtil.partAgreeSql(reqModel.getSelName());
 			}
 			resModel = service.GetBasicInfoList(sql, reqModel.offset, reqModel.size);
 			resStr = JsonUtil.serializer(resModel);

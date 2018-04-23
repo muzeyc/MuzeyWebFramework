@@ -13,8 +13,8 @@
                         { label: "用户等级", name: "lv", width: "15%" },
                         { label: "用户余额", name: "money", width: "15%" },
                         { label: "用户电话", name: "tel", width: "20%" },
-                        { label: "用户类型", name: "type", width: "20%" },
-                        { label: "渠道", name: "road", width: "15%" },
+                        { label: "用户类型", name: "typeNmae", width: "20%" },
+                        { label: "渠道", name: "roadName", width: "15%" },
                       
             ],
         };

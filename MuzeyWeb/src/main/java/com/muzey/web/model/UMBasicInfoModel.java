@@ -10,7 +10,9 @@ public class UMBasicInfoModel {
 	private BigDecimal money;
 	private int tel;
 	private String type;
+	private String typeNmae;
 	private String road;
+	private String roadName;
 
 	public int getId() {
 		return id;
@@ -60,12 +62,28 @@ public class UMBasicInfoModel {
 		this.type = type;
 	}
 
+	public String getTypeNmae() {
+		return typeNmae;
+	}
+
+	public void setTypeNmae(String typeNmae) {
+		this.typeNmae = typeNmae;
+	}
+
 	public String getRoad() {
 		return road;
 	}
 
 	public void setRoad(String road) {
 		this.road = road;
+	}
+
+	public String getRoadName() {
+		return roadName;
+	}
+
+	public void setRoadName(String roadName) {
+		this.roadName = roadName;
 	}
 
 }
