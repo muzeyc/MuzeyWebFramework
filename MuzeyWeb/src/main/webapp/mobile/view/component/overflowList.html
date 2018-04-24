@@ -2,7 +2,7 @@
 	<div class="weui-cells classify-background">
 		<div class="weui-cell" ng-repeat="data in datas"
 			ng-click="onItemClick(data.name)"
-			ng-class="{'muzey-pitch': data.name == currentname}">
+			ng-class="{'muzey-pitch': data.id == currentid}">
 			<div class="weui-cell__bd">
 				<p>{{data.name}}</p>
 			</div>

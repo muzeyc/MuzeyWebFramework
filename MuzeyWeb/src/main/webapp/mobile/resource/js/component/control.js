@@ -47,12 +47,12 @@ angular.module('myApp')
             		
             		$scope.width = '100%';
             	}
-            	$scope.onItemClick = function (name){
+            	$scope.onItemClick = function (id){
             		
-            		$scope.currentname = name;
+            		$scope.currentname = id;
                 	if ($scope.onclick) {
 
-                        $scope.onclick({name : name});
+                        $scope.onclick({id : id});
                     }
             	}
             	

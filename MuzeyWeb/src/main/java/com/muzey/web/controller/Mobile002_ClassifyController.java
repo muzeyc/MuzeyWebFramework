@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.base.DBHelper;
 import com.data.DataRow;
 import com.data.DataTable;
+import com.muzey.dto.Sys_commodityDto;
+import com.muzey.helper.MuzeyBusinessLogic;
 import com.muzey.until.CheckUtil;
 import com.muzey.until.JsonUtil;
 import com.muzey.until.SqlUtil;
@@ -30,6 +32,12 @@ public class Mobile002_ClassifyController extends BaseController {
 	@MuzeyAutowired
 	private CodeListCommon cc;
 	
+	@MuzeyAutowired
+	private MuzeyBusinessLogic<Sys_commodityDto> commodityBl;
+	
+	@MuzeyAutowired
+	private DBHelper dbHelper;
+	
     @RequestMapping(value = "/getLeftMenu", method = RequestMethod.POST)
     public void getLeftMenu(Um002_ClassifyReqModel reqModel) {
 
@@ -42,7 +50,7 @@ public class Mobile002_ClassifyController extends BaseController {
         sql.append("WHERE t1.dmid=" + SqlUtil.allAgreeSql(StringUtil.toStr(reqModel.getDmid())));
 
         List<String> tempList = new ArrayList<String>();
-        DBHelper dbHelper = new DBHelper();
+        
         DataTable dt = dbHelper.sqlQuery(sql.toString());
         for (int i = 0; i < dt.getRowSize(); i++) {
             DataRow row = dt.getRow(i);
@@ -65,6 +73,25 @@ public class Mobile002_ClassifyController extends BaseController {
 
         String resStr = JsonUtil.serializer(resModel);
         returnData(resStr);
+    }
+    
+    @RequestMapping(value = "/getAllLeftMenu", method = RequestMethod.POST)
+    public void getAllLeftMenu() {
+    	
+    	Um002_ClassifyResModel resModel = new Um002_ClassifyResModel();
+    	Map<String, CodeListModel> map = cc.GetCodeMap("Commodity_Classify");
+    	List<Um002_MenuItemModel> leftDatas = new ArrayList<Um002_MenuItemModel>();
+    	for(Map.Entry<String, CodeListModel> kv : map.entrySet()){
+    		
+    		Um002_MenuItemModel m = new Um002_MenuItemModel();
+    		m.setName(kv.getValue().getName());
+    		m.setId(Integer.parseInt(kv.getValue().getCodename()));
+    		leftDatas.add(m);
+    	}
+    	
+    	resModel.setLeftDatas(leftDatas);
+    	
+    	returnData(resModel);
     }
 
     /**
