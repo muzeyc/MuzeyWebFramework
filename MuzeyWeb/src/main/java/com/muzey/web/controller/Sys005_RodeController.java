@@ -9,6 +9,7 @@ import com.muzey.until.JsonUtil;
 import com.muzey.until.SqlUtil;
 import com.muzey.web.base.BaseController;
 import com.muzey.web.base.annotation.MuzeyAutowired;
+import com.muzey.web.model.CodeListModel;
 import com.muzey.web.model.RodeModel;
 import com.muzey.web.model.req.RodeReqModel;
 import com.muzey.web.model.res.CombboxResModel;
@@ -63,7 +64,7 @@ public class Sys005_RodeController extends BaseController {
 
 		returnData(resStr);
 	}
-	
+
 	/**
 	 * <p>
 	 * 街道信息新增Control
@@ -162,26 +163,46 @@ public class Sys005_RodeController extends BaseController {
 			returnData(resStr);
 		}
 	}
-	
+
 	/***
 	 * 街道名称lis取得
+	 * 
 	 * @author 花嫣染
 	 * @date 2018-03-30
 	 * 
 	 */
-	 @RequestMapping(value = "/GetRodeList", method = RequestMethod.GET)
-	public void GetRodeList()
-	{
-		  String resStr = "";
-	        CombboxResModel resModel = new CombboxResModel();
-	        try {
+	@RequestMapping(value = "/GetRodeList", method = RequestMethod.GET)
+	public void GetRodeList() {
+		String resStr = "";
+		CombboxResModel resModel = new CombboxResModel();
+		try {
 			resModel.setList(service.GetRodeList());
-	            resStr = JsonUtil.serializer(resModel);
-	        } catch (Exception e) {
-	            resStr = this.getFailResult(e.getMessage());
-	        }
+			resStr = JsonUtil.serializer(resModel);
+		} catch (Exception e) {
+			resStr = this.getFailResult(e.getMessage());
+		}
 
-	        returnData(resStr);
-		
+		returnData(resStr);
+	}
+
+	/***
+	 * 取得街道信息通过城市信息
+	 * @author 花嫣染
+	 * @date 2018-04-25
+	 * 
+	 */
+	@RequestMapping(value = "/GetRoadByCityList", method = RequestMethod.GET)
+	public void GetRoadByCityList(RodeModel model) {
+
+		String resStr = "";
+		RodeResModel resModel = new RodeResModel();
+		try {
+			resModel.setRodeList(service.GetRoadByCityList(model));
+			resStr = JsonUtil.serializer(resModel);
+		} catch (Exception e) {
+			resStr = this.getFailResult(e.getMessage());
+		}
+
+		returnData(resStr);
 	}
 }

@@ -8,6 +8,10 @@ public class RodeModel {
 	private String city;
 	private String dmdistrict;
 
+	//移动端取得街道的信息（结构对应）
+	private String title;
+	private String value;
+	
 	public int getId() {
 		return id;
 	}
@@ -46,6 +50,22 @@ public class RodeModel {
 
 	public void setDmdistrict(String dmdistrict) {
 		this.dmdistrict = dmdistrict;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 }

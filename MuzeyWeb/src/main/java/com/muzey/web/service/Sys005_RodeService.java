@@ -61,7 +61,7 @@ public class Sys005_RodeService extends MuzeyService {
 
 		Sys_rodeDto pkDto = new Sys_rodeDto();
 		pkDto.setId(model.getId());
-		
+
 		Sys_rodeDto rodeDto = rodeBL.getDtoByPK(pkDto);
 
 		List<RodeModel> rodeList = new ArrayList<RodeModel>();
@@ -74,7 +74,7 @@ public class Sys005_RodeService extends MuzeyService {
 		modelReult.setDmdistrict(rodeDto.getDmdistrict());
 
 		rodeList.add(modelReult);
-		
+
 		RodeResModel resModel = new RodeResModel();
 		resModel.setRodeList(rodeList);
 		return resModel;
@@ -154,6 +154,37 @@ public class Sys005_RodeService extends MuzeyService {
 			model.setSubId(StringUtil.toStr(dto.getId()));
 			model.setName(dto.getName());
 			list.add(model);
+		}
+
+		return list;
+	}
+
+	/***
+	 * 取得街道信息通过城市信息 impl
+	 * @author 花嫣染
+	 * @date 2018-04-25
+	 * 
+	 * @param model
+	 * @return
+	 */
+	public List<RodeModel> GetRoadByCityList(RodeModel model) {
+
+		List<RodeModel> list = new ArrayList<RodeModel>();
+		
+		StringBuffer sbSql = new StringBuffer();
+		
+		sbSql.append(" AND province='"+model.getProvince()+"'");
+		sbSql.append(" AND city='"+model.getCity()+"'");
+		sbSql.append(" AND dmdistrict='"+model.getDmdistrict()+"'");
+		
+		List<Sys_rodeDto> dtoList = rodeBL.getDtoList(sbSql.toString());
+		RodeModel roadModel = new RodeModel();
+
+		for (Sys_rodeDto dto : dtoList) {
+			roadModel = new RodeModel();
+			roadModel.setValue(StringUtil.toStr(dto.getId()));
+			roadModel.setTitle(dto.getName());
+			list.add(roadModel);
 		}
 
 		return list;

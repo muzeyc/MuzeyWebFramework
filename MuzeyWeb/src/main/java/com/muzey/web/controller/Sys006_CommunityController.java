@@ -162,4 +162,25 @@ public class Sys006_CommunityController extends BaseController {
 
 		returnData(resStr);
 	}
+	
+	/***
+	 * 取得小区的List根据ID
+	 * 
+	 * @author 花嫣染
+	 * @date 2018-04-23
+	 */
+	@RequestMapping(value = "/GetSYSCommodityListById", method = RequestMethod.GET)
+	public void GetSYSCommodityListById(CommunityModel model) {
+
+		String resStr = "";
+		CommunityResModel resModel = new CommunityResModel();
+		try {
+			resModel.setCommunityList(service.GetSYSCommodityListById(model.getSerachId()));
+			resStr = JsonUtil.serializer(resModel);
+		} catch (Exception e) {
+			resStr = this.getFailResult(e.getMessage());
+		}
+
+		returnData(resStr);
+	}
 }

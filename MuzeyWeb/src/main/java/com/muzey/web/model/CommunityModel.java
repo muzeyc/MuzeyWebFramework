@@ -2,10 +2,13 @@ package com.muzey.web.model;
 
 public class CommunityModel {
 	private int id;
+	private String serachId;
 	private String roadid;
 	private String roadName;
 	private String name;
 	private String address;
+	private String value;
+	private String title;
 
 	public int getId() {
 		return id;
@@ -13,6 +16,14 @@ public class CommunityModel {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getSerachId() {
+		return serachId;
+	}
+
+	public void setSerachId(String serachId) {
+		this.serachId = serachId;
 	}
 
 	public String getRoadid() {
@@ -45,6 +56,22 @@ public class CommunityModel {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

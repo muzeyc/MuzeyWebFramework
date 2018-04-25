@@ -205,4 +205,42 @@
         		return resData;
         	}
         }
+    }]).factory('RoadListUtil', [function () {
+
+        return {
+        	getRoadByCityList:function(province,city,dmdistrict){
+        		
+        		var resData = {};
+        		
+        		$.ajax({
+        		    url: "/MuzeyWeb/Sys005_Rode/GetRoadByCityList?province=" +province+ "&city="+city+"&dmdistrict="+dmdistrict,
+        		    dataType: "json",
+        		    async: false,
+        		    success: function (data) {
+        		    	resData = data;
+        		    }
+        		});
+        		
+        		return resData;
+        	}
+        }
+    }]).factory('CommunityListUtil', [function () {
+
+        return {
+        	getSYSCommodityListById:function(id){
+        		
+        		var resData = {};
+        		
+        		$.ajax({
+        		    url: "/MuzeyWeb/Sys006_Community/GetSYSCommodityListById?serachId=" +id,
+        		    dataType: "json",
+        		    async: false,
+        		    success: function (data) {
+        		    	resData = data;
+        		    }
+        		});
+        		
+        		return resData;
+        	}
+        }
     }]);
