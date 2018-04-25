@@ -186,4 +186,23 @@
             sys0006: "是否删除该回答？",
         }
 
+    }]).factory('pictureListUtil', [function () {
+
+        return {
+        	getChildenList:function(type){
+        		
+        		var resData = {};
+        		
+        		$.ajax({
+        		    url: "/MuzeyWeb/Sys008_PhotoInfo/getPictureList?type=" + type,
+        		    dataType: "json",
+        		    async: false,
+        		    success: function (data) {
+        		    	resData = data;
+        		    }
+        		});
+        		
+        		return resData;
+        	}
+        }
     }]);
