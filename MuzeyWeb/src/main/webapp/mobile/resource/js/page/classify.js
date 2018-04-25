@@ -1,11 +1,24 @@
 ﻿angular.module('myApp')
     .controller('classifyCtrl', function ($scope, setMap, netRequest, $state) {
+    	
+    	//0系统所有商品 1商户商品
+    	var comState = 0;
+    	
     	var init = function() {
     		var req = {};
     		req.dmid = $state.params.dmid;
-    		netRequest.post("/MuzeyWeb/Mobile002_Classify/getLeftMenu", req, function (res) {
-    			$scope.leftDatas = res.leftDatas;
-            });
+    		if(req.dmid == undefined || req.dmid == 0){
+    			
+        		netRequest.post("/MuzeyWeb/Mobile002_Classify/getAllLeftMenu", req, function (res) {
+        			$scope.leftDatas = res.leftDatas;
+                });
+    		}else{
+    			
+    			comState = 1;
+        		netRequest.post("/MuzeyWeb/Mobile002_Classify/getLeftMenu", req, function (res) {
+        			$scope.leftDatas = res.leftDatas;
+                });
+    		}
 		}
     	
     	$scope.leftclick = function(name){

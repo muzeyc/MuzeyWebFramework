@@ -12,6 +12,7 @@ public class Um002_MenuItemModel {
 	private int pictureid;
 	private BigDecimal price;
 	private Integer id;
+	private String pictureSrc;
 
 	public String getDmclassify() {
 
@@ -99,6 +100,14 @@ public class Um002_MenuItemModel {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getPictureSrc() {
+		return pictureSrc;
+	}
+
+	public void setPictureSrc(String pictureSrc) {
+		this.pictureSrc = pictureSrc;
 	}
 
 }

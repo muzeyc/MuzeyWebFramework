@@ -1,5 +1,6 @@
 package com.muzey.web.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -110,10 +111,46 @@ public class Mobile002_ClassifyController extends BaseController {
     public void getRigthData(Um002_ClassifyReqModel reqModel) {
 
         Um002_ClassifyResModel resModel = new Um002_ClassifyResModel();
-
+        if(reqModel.getDmid() == 0){
+        	
+        	StringBuffer strBuffer = new StringBuffer();
+        	strBuffer.append(" SELECT ");
+        	strBuffer.append(" t1.id, ");
+        	strBuffer.append(" t1.name, ");
+        	strBuffer.append(" t1.price, ");
+        	strBuffer.append(" t2.src ");
+        	strBuffer.append(" FROM sys_commodity t1 ");
+        	strBuffer.append(" INNER JOIN ");
+        	strBuffer.append(" sys_pictureinfo t2 ");
+        	strBuffer.append(" ON ");
+        	strBuffer.append(" t1.pictureid = t2.id ");
+        	strBuffer.append(" WHERE ");
+        	strBuffer.append(" classify = ");
+        	strBuffer.append(" ( ");
+        	strBuffer.append(" SELECT ");
+        	strBuffer.append(" codename ");
+        	strBuffer.append(" FROM ");
+        	strBuffer.append(" sys_codelist ");
+        	strBuffer.append(" WHERE ");
+        	strBuffer.append(" name = " + SqlUtil.allAgreeSql(reqModel.getDmclassify()));
+        	strBuffer.append(" ) ");
+        	
+        	DataTable dt =  dbHelper.sqlQuery(strBuffer.toString());
+        	List<Um002_MenuItemModel> ms = new ArrayList<Um002_MenuItemModel>();
+        	for(int i=0;i<dt.getRowSize();i++){
+        		
+        		Um002_MenuItemModel m = new Um002_MenuItemModel();
+        		m.setId(Integer.parseInt(dt.getRow(i).getData("id")));
+        		m.setName(dt.getRow(i).getData("name"));
+        		m.setPrice(new BigDecimal(dt.getRow(i).getData("price")));
+        		m.setPictureSrc(dt.getRow(i).getData("src"));
+        		ms.add(m);
+        	}
+        	
+        	resModel.setRigthDatas(ms);
+        }
+        
         String resStr = JsonUtil.serializer(resModel);
-
         returnData(resStr);
-
     }
 }
