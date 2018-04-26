@@ -1,10 +1,14 @@
 ﻿angular.module('myApp')
-    .controller('homeCtrl', function ($scope, setMap, netRequest,pictureListUtil,RoadListUtil,CommunityListUtil) {
+    .controller('homeCtrl', function ($scope, setMap, netRequest,RoadListUtil,CommunityListUtil) {
     	
     	//滚动图片取得数据
-     	$scope.GetPicture = function (type) {
+     	var init = function () {
     		
-     		$scope.slideDatas =  pictureListUtil.getChildenList(type).list;
+     		var req = {};
+            netRequest.post("/MuzeyWeb/Mobile001_Home/getAdList", req, function (res) {
+            	
+            	$scope.slideDatas =  res.adList;
+            });
 	    }
      	
      	var resRoad={};
@@ -71,8 +75,7 @@
     		  ]
     		});
     	
-    	//查询滚动图片
-    	$scope.GetPicture("1");    
+    	init();    
     })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $stateProvider

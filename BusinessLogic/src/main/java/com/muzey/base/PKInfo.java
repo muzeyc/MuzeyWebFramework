@@ -13,7 +13,6 @@ import java.util.Map;public class PKInfo {
         pkMap.put("Sys_menu", new String[] {"id"});
         pkMap.put("Sys_rolemenuforbid", new String[] {"roleid","menuid"});
         pkMap.put("Sys_codelist", new String[] {"id"});
-        pkMap.put("Sys_pictureinfo", new String[] {"id"});
         pkMap.put("Sys_commodity", new String[] {"id"});
         pkMap.put("Sys_rode", new String[] {"id"});
         pkMap.put("Sys_community", new String[] {"id"});
@@ -22,6 +21,9 @@ import java.util.Map;public class PKInfo {
         pkMap.put("Dm_ordermain", new String[] {"id"});
         pkMap.put("Dm_orderdetial", new String[] {"orderid","commodityid"});
         pkMap.put("Um_basicinfo", new String[] {"id"});
+        pkMap.put("Sys_pictureinfo", new String[] {"id"});
+        pkMap.put("Sys_rode_copy", new String[] {"id"});
+        pkMap.put("Dm_admanager", new String[] {"id"});
     }
 
     public static String[] getPK(String tableName){
