@@ -35,7 +35,7 @@ public class Mobile001_HomeController extends BaseController{
     	strBuffer.append(" ON ");
     	strBuffer.append(" t1.pictureid = t2.id ");
     	strBuffer.append(" where ");
-    	strBuffer.append(" And times<= " + SqlUtil.allAgreeSql(timeNow) 
+    	strBuffer.append(" times<= " + SqlUtil.allAgreeSql(timeNow) 
     	+ " And timee >= " + SqlUtil.allAgreeSql(timeNow));
     	
     	Mobile001HomeResModel resModel = new Mobile001HomeResModel();
