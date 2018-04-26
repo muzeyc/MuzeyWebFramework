@@ -169,7 +169,7 @@ public class Sys006_CommunityController extends BaseController {
 	 * @author 花嫣染
 	 * @date 2018-04-23
 	 */
-	@RequestMapping(value = "/GetSYSCommodityListById", method = RequestMethod.GET)
+	@RequestMapping(value = "/GetSYSCommodityListById", method = RequestMethod.POST)
 	public void GetSYSCommodityListById(CommunityModel model) {
 
 		String resStr = "";

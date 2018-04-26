@@ -159,4 +159,25 @@ public class Dm001_BasicInfoController extends BaseController {
 
 		returnData(resStr);
 	}
+	
+	/***
+	 * 取得商户名称通过小区的id List
+	 * 
+	 * @author 花嫣染
+	 * @date 2018-04-26
+	 */
+	@RequestMapping(value = "/GetDMBasicListById", method = RequestMethod.POST)
+	public void GetDMBasicListById(DMBasicInfoModel model) {
+
+		String resStr = "";
+		DMBasicInfoResModel resModel = new DMBasicInfoResModel();
+		try {
+			resModel.setBasicList(service.GetUMBasicInfoByIdList(model));
+			resStr = JsonUtil.serializer(resModel);
+		} catch (Exception e) {
+			resStr = this.getFailResult(e.getMessage());
+		}
+
+		returnData(resStr);
+	}
 }

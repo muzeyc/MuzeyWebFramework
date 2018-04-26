@@ -145,4 +145,31 @@ public class Dm001_BasicInfoService extends MuzeyService {
 
 		return list;
 	}
+	
+	/***
+	 * 取得商户名称通过小区的id List impl
+	 * 
+	 * @author 花嫣染
+	 * @date 2018-04-26
+	 */
+	public List<DMBasicInfoModel> GetUMBasicInfoByIdList(DMBasicInfoModel model) {
+
+		StringBuffer sbSQL = new StringBuffer();
+		sbSQL.append(" AND comid="+model.getComid());
+		
+		List<DMBasicInfoModel> list = new ArrayList<DMBasicInfoModel>();
+
+		List<Dm_basicinfoDto> dtoList = basicBL.getDtoList(sbSQL.toString());
+
+		DMBasicInfoModel dmModel = new DMBasicInfoModel();
+
+		for (Dm_basicinfoDto dto : dtoList) {
+			dmModel = new DMBasicInfoModel();
+			dmModel.setTitle(dto.getName());
+			dmModel.setValue(StringUtil.toStr(dto.getId()));
+			list.add(dmModel);
+		}
+
+		return list;
+	}
 }

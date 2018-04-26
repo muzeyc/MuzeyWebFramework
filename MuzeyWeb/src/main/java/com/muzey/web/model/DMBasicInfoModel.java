@@ -14,6 +14,8 @@ public class DMBasicInfoModel {
 	private Integer pictureid;
 	private BigDecimal startprice;
 	private BigDecimal dispatching;
+	private String title;
+	private String value;
 
 	public int getId() {
 		return id;
@@ -94,4 +96,21 @@ public class DMBasicInfoModel {
 	public void setDispatching(BigDecimal dispatching) {
 		this.dispatching = dispatching;
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 }

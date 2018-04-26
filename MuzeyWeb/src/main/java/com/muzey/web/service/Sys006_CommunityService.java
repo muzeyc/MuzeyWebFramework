@@ -185,7 +185,7 @@ public class Sys006_CommunityService extends MuzeyService {
 
 		for (Sys_communityDto dto : dtoList) {
 			model = new CommunityModel();
-			model.setValue(StringUtil.toStr(dto.getRoadid()));
+			model.setValue(StringUtil.toStr(dto.getId()));
 			model.setTitle(dto.getName());
 			list.add(model);
 		}

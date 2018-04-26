@@ -191,7 +191,7 @@ public class Sys005_RodeController extends BaseController {
 	 * @date 2018-04-25
 	 * 
 	 */
-	@RequestMapping(value = "/GetRoadByCityList", method = RequestMethod.GET)
+	@RequestMapping(value = "/GetRoadByCityList", method = RequestMethod.POST)
 	public void GetRoadByCityList(RodeModel model) {
 
 		String resStr = "";
