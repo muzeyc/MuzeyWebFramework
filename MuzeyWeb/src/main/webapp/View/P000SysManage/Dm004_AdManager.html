@@ -1,0 +1,17 @@
+﻿<div class="top_search_bar">
+	<text-box-normal caption="图片名称" width="300" ng-model="condition.selName"></text-box-normal>
+	<button type="button" ng-click="refresh()" class="btn bg-green" style="margin-right: 10px">查询</button>
+</div>
+<div>
+	<pagegridview config="config" 
+	          refresh="refresh()"
+	          list="admanagerList" 
+	          add="onNew()" 
+		      edit="onEdit(item)" 
+		      remove="onDelete(items)"
+		      pagechange="onPageChange(val)" 
+		      rowcount="{{more.size}}"
+		      totalrowcount="totalCount">
+     </pagegridview>
+</div>
+<ad-edit after-commit="afterCommit(res)"></ad-edit>

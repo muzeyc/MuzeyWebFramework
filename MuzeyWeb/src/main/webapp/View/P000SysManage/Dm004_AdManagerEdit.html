@@ -1,0 +1,26 @@
+﻿<popup width="600" height="400" title="广告管理" show="show">
+<div class="modal-body" id="validate">
+	<div class="inputBar">
+		<combbox caption="图片名称" ng-model="admanager.pictureid" width="300"
+			list="pictureList" mustinput="true" on-change="onChange(val)"></combbox>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="开始时间" ng-model="admanager.times" width="300" mustinput="true"></text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="结束时间" ng-model="admanager.timee" width="300" mustinput="true"></text-box-normal>
+	</div>
+
+	<div class="inputBar">
+		<text-box-number caption="优先级" ng-model="admanager.level" mustinput="true" width="300">
+		</text-box-normal>
+	</div>
+	<div class="inputBar">
+		<text-box-normal caption="广告链接" ng-model="admanager.adsrc" width="300" ng-Disabled=true></text-box-normal>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn bg-green" ng-click="commit()">保存</button>
+	<button type="button" class="btn bg-yellow" ng-click="cancel()">取消</button>
+</div>
+</popup>

@@ -12,15 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.muzey.dto.Sys_pictureinfoDto;
 import com.muzey.helper.MuzeyBusinessLogic;
+import com.muzey.until.CheckUtil;
 import com.muzey.until.FtpUtil;
 import com.muzey.until.JsonUtil;
+import com.muzey.until.StringUtil;
 import com.muzey.web.base.BaseController;
 import com.muzey.web.base.annotation.MuzeyAutowired;
 import com.muzey.web.model.CodeListModel;
+import com.muzey.web.model.CombboxModel;
 import com.muzey.web.model.PhotoInfoListModel;
 import com.muzey.web.model.PhotoInfoModel;
 import com.muzey.web.model.PictureModel;
 import com.muzey.web.model.req.Sys008_PhotoInfoReqModel;
+import com.muzey.web.model.res.CombboxResModel;
 import com.muzey.web.model.res.PictureResModel;
 import com.muzey.web.model.res.ResponseModelBase;
 import com.muzey.web.model.res.Sys008_PhotoInfoResModel;
@@ -122,6 +126,55 @@ public class Sys008_PhotoInfoController extends BaseController {
 				model.setName(dto.getName());
 				model.setPictureSrc(dto.getSrc());
 
+				list.add(model);
+			}
+			resModel.setList(list);
+			resStr = JsonUtil.serializer(resModel);
+		} catch (Exception e) {
+			resStr = this.getFailResult(e.getMessage());
+		}
+
+		returnData(resStr);
+	}
+
+	/***
+	 * 通过图片类型查询图片(combox)
+	 * 
+	 * @author zhouchang
+	 * @param reqModel
+	 * @date 2018-4-27
+	 */
+	@RequestMapping(value = "/getPictureComboxList", method = RequestMethod.POST)
+	public void getPictureComboxList(Sys008_PhotoInfoReqModel reqModel) {
+
+		String resStr = "";
+		CombboxResModel resModel = new CombboxResModel();
+		try {
+			List<CombboxModel> list = new ArrayList<CombboxModel>();
+
+			StringBuilder strSql = new StringBuilder();
+			
+			if(CheckUtil.isNotNullOrEmpty(reqModel.getType()))
+			{
+				strSql.append(" AND type ='" + reqModel.getType() + "'");	
+			}
+			
+			if(CheckUtil.isNotNullOrEmpty(reqModel.getId()))
+			{
+				strSql.append(" AND id ='" + reqModel.getId() + "'");
+			}
+			List<Sys_pictureinfoDto> dtoList = pictureinfoBL.getDtoList(strSql.toString());
+
+			CombboxModel model = new CombboxModel();
+
+			for (Sys_pictureinfoDto dto : dtoList) {
+				model = new CombboxModel();
+				model.setSubId(StringUtil.toStr(dto.getId()));
+				model.setName(dto.getName());
+				if(CheckUtil.isNotNullOrEmpty(reqModel.getId()))
+				{
+					model.setSubId(dto.getSrc());	
+				}
 				list.add(model);
 			}
 			resModel.setList(list);
